@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation=
+               "http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <import resource="classpath*:restaurant-hibernate-context.xml"/>
+
+    <bean class="com.company.restaurant.service.impl.StateGraphRules" id="stateGraphRules">
+        <property name="stateGraphDao" ref="stateGraphDao"/>
+    </bean>
+
+    <bean class="com.company.restaurant.service.impl.MenuServiceImpl" id="menuService">
+        <property name="menuDao" ref="menuDao"/>
+    </bean>
+
+    <bean class="com.company.restaurant.service.impl.TableServiceImpl" id="tableService">
+        <property name="tableDao" ref="tableDao"/>
+    </bean>
+
+    <bean class="com.company.restaurant.service.impl.EmployeeServiceImpl" id="employeeService">
+        <property name="jobPositionDao" ref="jobPositionDao"/>
+        <property name="employeeDao" ref="employeeDao"/>
+    </bean>
+
+    <bean class="com.company.restaurant.service.impl.CourseServiceImpl" id="courseService">
+        <property name="courseCategoryDao" ref="courseCategoryDao"/>
+        <property name="courseDao" ref="courseDao"/>
+    </bean>
+
+    <bean class="com.company.restaurant.service.impl.OrderServiceImpl" id="orderService">
+        <property name="orderDao" ref="orderDao"/>
+        <property name="stateGraphRules" ref="stateGraphRules"/>
+    </bean>
+
+    <bean class="com.company.restaurant.service.impl.WarehouseServiceImpl" id="warehouseService">
+        <property name="ingredientDao" ref="ingredientDao"/>
+        <property name="portionDao" ref="portionDao"/>
+        <property name="warehouseDao" ref="warehouseDao"/>
+    </bean>
+
+    <bean class="com.company.restaurant.service.impl.KitchenServiceImpl" id="kitchenService">
+        <property name="disableCourseWithoutIngredients" value="false"/>
+        <property name="cookedCourseDao" ref="cookedCourseDao"/>
+        <property name="warehouseService" ref="warehouseService"/>
+    </bean>
+
+    <bean class="com.company.restaurant.service.impl.CommonDataServiceImpl" id="commonDataService">
+        <property name="commonDataDao" ref="commonDataDao"/>
+    </bean>
+</beans>

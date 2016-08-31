@@ -1,0 +1,29 @@
+.main-menu {
+    padding: 0;
+    width: 940px;
+    margin: 0 auto;
+    height: 50px;
+}
+.main-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 4px;
+}
+.main-menu li {
+    display: inline
+}
+.main-menu a {
+    float: left;
+    width: 210px;
+    color: #e8f0de;
+    background-color: #87cb25;
+    border-left: 2px solid #ffffff;
+    text-decoration: none;
+    text-align: center;
+    padding: 10px;
+    font-size: 18px;
+}
+.main-menu a:hover {
+    color: #b3ff50;
+    background-color: #538018;
+}

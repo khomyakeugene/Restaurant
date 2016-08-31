@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.company.restaurant.model.Order" table="order" schema="public" catalog="restaurant">
+        <cache usage="read-write"/>
+        <id name="orderId">
+            <column name="order_id" sql-type="integer"/>
+            <generator class="identity"/>
+        </id>
+        <property name="orderNumber">
+            <column name="order_number" sql-type="varchar(100)" length="100"/>
+        </property>
+        <property name="orderDatetime" type="java.sql.Timestamp" generated="insert" not-null="true">
+            <column name="order_datetime" sql-type="timestamp" default="CURRENT_TIMESTAMP"/>
+        </property>
+        <many-to-one name="table" column="table_id"
+                     class="com.company.restaurant.model.Table" not-null="true" lazy="false"/>
+        <many-to-one name="waiter" column="employee_id"
+                     class="com.company.restaurant.model.Employee" not-null="true" lazy="false"/>
+        <many-to-one name="state" column="state_type"
+                     class="com.company.restaurant.model.State" not-null="true" lazy="false"/>
+        <bag name="courses" table="order_course" inverse="false" lazy="false"
+              fetch="select">
+            <key>
+                <column name="order_id" not-null="true"/>
+            </key>
+            <many-to-many entity-name="com.company.restaurant.model.Course">
+                <column name="course_id" not-null="true"/>
+            </many-to-many>
+        </bag>
+    </class>
+</hibernate-mapping>

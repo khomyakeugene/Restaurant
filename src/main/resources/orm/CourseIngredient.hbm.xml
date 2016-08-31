@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.company.restaurant.model.CourseIngredient" table="course_ingredient" schema="public"
+           catalog="restaurant">
+        <cache usage="read-only"/>
+        <composite-id>
+            <key-many-to-one name="course" column="course_id"
+                             class="com.company.restaurant.model.Course"
+                             lazy="false"/>
+            <key-many-to-one name="ingredient" column="ingredient_id"
+                             class="com.company.restaurant.model.Ingredient"
+                             lazy="false"/>
+        </composite-id>
+
+        <many-to-one name="course" column="course_id"
+                     class="com.company.restaurant.model.Course"
+                     insert="false" update="false" lazy="false"/>
+        <many-to-one name="ingredient" column="ingredient_id"
+                     class="com.company.restaurant.model.Ingredient"
+                     insert="false" update="false" lazy="false"/>
+        <many-to-one name="portion" column="portion_id"
+                     class="com.company.restaurant.model.Portion"
+                     lazy="false"/>
+        <property name="amount">
+            <column name="amount" sql-type="double precision" precision="-1" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>

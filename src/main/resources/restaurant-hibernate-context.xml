@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation=
+               "http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="classpath:jdbc.properties"/>
+    </bean>
+    <bean class="com.mchange.v2.c3p0.ComboPooledDataSource" id="dataSource">
+        <property name="driverClass" value="${jdbc.driver.class}"/>
+        <property name="jdbcUrl" value="${jdbc.url}"/>
+        <property name="user" value="${jdbc.user}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="minPoolSize" value="${jdbc.min.connections}"/>
+        <property name="maxPoolSize" value="${jdbc.max.connections}"/>
+        <property name="acquireIncrement" value="${jdc.acquire.increment}"/>
+    </bean>
+
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mappingResources">
+            <list>
+                <value>orm/JobPosition.hbm.xml</value>
+                <value>orm/Menu.hbm.xml</value>
+                <value>orm/Employee.hbm.xml</value>
+                <value>orm/CourseCategory.hbm.xml</value>
+                <value>orm/Course.hbm.xml</value>
+                <value>orm/Table.hbm.xml</value>
+                <value>orm/Order.hbm.xml</value>
+                <value>orm/Ingredient.hbm.xml</value>
+                <value>orm/Portion.hbm.xml</value>
+                <value>orm/Warehouse.hbm.xml</value>
+                <value>orm/StateGraph.hbm.xml</value>
+                <value>orm/State.hbm.xml</value>
+                <value>orm/CookedCourse.hbm.xml</value>
+                <value>orm/MeasuringType.hbm.xml</value>
+                <value>orm/PortionType.hbm.xml</value>
+                <value>orm/CourseIngredient.hbm.xml</value>
+                <value>orm/CommonDataDic.hbm.xml</value>
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <value>
+                hibernate.dialect=org.hibernate.dialect.PostgreSQL9Dialect
+                hibernate.format_sql=true
+                hibernate.show_sql=false
+                hibernate.cache.use_second_level_cache=false
+                hibernate.cache.use_query_cache=false
+                hibernate.generate_statistics=false
+                org.hibernate.cache.ehcache.configurationResourceName=/ehcache.xml
+                hibernate.cache.region.factory_class=org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory
+            </value>
+        </property>
+    </bean>
+
+    <tx:annotation-driven transaction-manager="txManager" proxy-target-class="true"/>
+
+    <bean id="txManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean class="com.company.restaurant.dao.hibernate.HCommonDataDao" id="commonDataDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="useCriteriaQuery" value="true"/>
+    </bean>
+
+    <bean class="com.company.restaurant.dao.hibernate.HJobPositionDao" id="jobPositionDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="useCriteriaQuery" value="true"/>
+    </bean>
+
+    <bean class="com.company.restaurant.dao.hibernate.HMenuDao" id="menuDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="useCriteriaQuery" value="true"/>
+    </bean>
+
+    <bean class="com.company.restaurant.dao.hibernate.HEmployeeDao" id="employeeDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="useCriteriaQuery" value="true"/>
+    </bean>
+
+    <bean class="com.company.restaurant.dao.hibernate.HCourseCategoryDao" id="courseCategoryDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="useCriteriaQuery" value="true"/>
+    </bean>
+
+    <bean class="com.company.restaurant.dao.hibernate.HCourseDao" id="courseDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="useCriteriaQuery" value="true"/>
+    </bean>
+
+    <bean class="com.company.restaurant.dao.hibernate.HTableDao" id="tableDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="useCriteriaQuery" value="true"/>
+    </bean>
+
+    <bean class="com.company.restaurant.dao.hibernate.HStateDao" id="stateDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="useCriteriaQuery" value="true"/>
+    </bean>
+
+    <bean class="com.company.restaurant.dao.hibernate.HOrderDao" id="orderDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="useCriteriaQuery" value="true"/>
+    </bean>
+
+    <bean class="com.company.restaurant.dao.hibernate.HStateGraphDao" id="stateGraphDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="useCriteriaQuery" value="true"/>
+    </bean>
+
+    <bean class="com.company.restaurant.dao.hibernate.HCookedCourseDao" id="cookedCourseDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="useCriteriaQuery" value="true"/>
+    </bean>
+
+    <bean class="com.company.restaurant.dao.hibernate.HIngredientDao" id="ingredientDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="useCriteriaQuery" value="true"/>
+    </bean>
+
+    <bean class="com.company.restaurant.dao.hibernate.HPortionDao" id="portionDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="useCriteriaQuery" value="true"/>
+    </bean>
+
+    <bean class="com.company.restaurant.dao.hibernate.HWarehouseDao" id="warehouseDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="useCriteriaQuery" value="true"/>
+        <property name="ingredientDao" ref="ingredientDao"/>
+    </bean>
+
+    <bean class="com.company.restaurant.dao.hibernate.HCourseIngredientDao" id="courseIngredientDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="useCriteriaQuery" value="true"/>
+    </bean>
+</beans>

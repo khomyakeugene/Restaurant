@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.company.restaurant.model.StateGraph" table="state_graph" schema="public" catalog="restaurant">
+        <cache usage="read-only"/>
+        <composite-id>
+            <key-property name="initStateType">
+                <column name="init_state_type" sql-type="char"/>
+            </key-property>
+            <key-property name="finiteStateType">
+                <column name="finite_state_type" sql-type="char"/>
+            </key-property>
+            <key-property name="actionType">
+                <column name="action_type" sql-type="char"/>
+            </key-property>
+            <key-property name="entityName">
+                <column name="entity_name" sql-type="varchar(256)" length="256"/>
+            </key-property>
+        </composite-id>
+
+        <property name="initStateType" insert="false" update="false">
+            <column name="init_state_type" sql-type="char"/>
+        </property>
+        <property name="finiteStateType" insert="false" update="false">
+            <column name="finite_state_type" sql-type="char"/>
+        </property>
+        <property name="actionType" insert="false" update="false">
+            <column name="action_type" sql-type="char"/>
+        </property>
+        <property name="entityName" insert="false" update="false">
+            <column name="entity_name" sql-type="varchar(256)" length="256"/>
+        </property>
+        <property name="comment">
+            <column name="comment" sql-type="varchar(256)" length="256" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>

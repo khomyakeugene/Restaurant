@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.company.restaurant.model.Portion" table="portion_dic" schema="public" catalog="restaurant">
+        <cache usage="read-only"/>
+        <id name="portionId">
+            <column name="portion_id" sql-type="integer"/>
+            <generator class="identity"/>
+        </id>
+        <property name="amount">
+            <column name="amount" sql-type="double precision" precision="-1" not-null="true"/>
+        </property>
+        <property name="description">
+            <column name="description" sql-type="varchar(256)" length="256"/>
+        </property>
+
+        <many-to-one name="portionType" column="portion_type_id"
+                     class="com.company.restaurant.model.PortionType" not-null="true" lazy="false"/>
+        <many-to-one name="measuringType" column="measuring_type_id"
+                     class="com.company.restaurant.model.MeasuringType" not-null="true" lazy="false"/>
+    </class>
+</hibernate-mapping>

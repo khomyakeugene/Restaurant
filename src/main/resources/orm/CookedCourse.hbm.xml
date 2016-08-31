@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.company.restaurant.model.CookedCourse" table="cooked_course" schema="public" catalog="restaurant">
+        <cache usage="read-write"/>
+        <id name="cookedCourseId">
+            <column name="cooked_course_id" sql-type="integer"/>
+            <generator class="identity"/>
+        </id>
+        <property name="cookDatetime">
+            <column name="cook_datetime" sql-type="timestamp" default="CURRENT_TIMESTAMP"/>
+        </property>
+        <property name="weight">
+            <column name="weight" sql-type="double precision" precision="-1"/>
+        </property>
+
+        <many-to-one name="course" column="course_id"
+                     class="com.company.restaurant.model.Course" not-null="true" lazy="false"/>
+        <many-to-one name="employee" column="employee_id"
+                     class="com.company.restaurant.model.Employee" not-null="true" lazy="false"/>
+    </class>
+</hibernate-mapping>

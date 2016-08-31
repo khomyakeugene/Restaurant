@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.company.restaurant.model.Course" table="course" schema="public" catalog="restaurant">
+        <cache usage="read-write"/>
+        <id name="courseId">
+            <column name="course_id" sql-type="integer"/>
+            <generator class="identity"/>
+        </id>
+        <property name="name">
+            <column name="name" sql-type="varchar(256)" length="256"/>
+        </property>
+        <property name="weight">
+            <column name="weight" sql-type="double precision" precision="-1"/>
+        </property>
+        <property name="cost">
+            <column name="cost" sql-type="double precision" precision="-1"/>
+        </property>
+        <property name="photo">
+            <column name="photo" sql-type="bytea"/>
+        </property>
+        <many-to-one name="courseCategory" column="course_category_id"
+                     class="com.company.restaurant.model.CourseCategory" lazy="false" not-null="true"/>
+
+        <set name="courseIngredients" table="course_ingredient" lazy="false" inverse="true">
+            <key>
+                <column name="course_id" not-null="true"/>
+            </key>
+            <one-to-many class="com.company.restaurant.model.CourseIngredient"/>
+        </set>
+    </class>
+</hibernate-mapping>

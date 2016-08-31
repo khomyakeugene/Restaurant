@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.company.restaurant.model.Employee" table="employee"
+           discriminator-value="Employee"
+           schema="public" catalog="restaurant">
+        <cache usage="read-write"/>
+        <id name="employeeId">
+            <column name="employee_id" sql-type="integer"/>
+            <generator class="identity"/>
+        </id>
+        <discriminator column="dtype" type="java.lang.String"/>
+
+        <property name="firstName">
+            <column name="first_name" sql-type="varchar(256)" length="256"/>
+        </property>
+        <property name="secondName">
+            <column name="second_name" sql-type="varchar(256)" length="256"/>
+        </property>
+        <property name="phoneNumber">
+            <column name="phone_number" sql-type="varchar(100)" length="100" not-null="false"/>
+        </property>
+        <property name="salary">
+            <column name="salary" sql-type="double precision" precision="-1" not-null="false"/>
+        </property>
+        <property name="photo">
+            <column name="photo" sql-type="bytea"/>
+        </property>
+        <many-to-one name="jobPosition" column="job_position_id"
+                     class="com.company.restaurant.model.JobPosition" lazy="false" not-null="true"/>
+
+        <subclass name="com.company.restaurant.model.Waiter"
+                  discriminator-value="Waiter">
+            <set name="orders" table="order" lazy="false" inverse="true">
+                <key>
+                    <column name="employee_id" not-null="true"/>
+                </key>
+                <one-to-many class="com.company.restaurant.model.Order"/>
+            </set>
+        </subclass>
+
+        <subclass name="com.company.restaurant.model.Cook"
+                  discriminator-value="Cook">
+            <set name="cookedCourses" table="cooked_course" lazy="false" inverse="true">
+                <key>
+                    <column name="employee_id" not-null="true"/>
+                </key>
+                <one-to-many class="com.company.restaurant.model.CookedCourse"/>
+            </set>
+        </subclass>
+
+        <subclass name="com.company.restaurant.model.CookAndWaiter"
+                  discriminator-value="CookAndWaiter">
+            <set name="cookedCourses" table="cooked_course" lazy="false" inverse="true">
+                <key>
+                    <column name="employee_id" not-null="true"/>
+                </key>
+                <one-to-many class="com.company.restaurant.model.CookedCourse"/>
+            </set>
+
+            <set name="orders" table="order" lazy="false" inverse="true">
+                <key>
+                    <column name="employee_id" not-null="true"/>
+                </key>
+                <one-to-many class="com.company.restaurant.model.Order"/>
+            </set>
+        </subclass>
+    </class>
+</hibernate-mapping>

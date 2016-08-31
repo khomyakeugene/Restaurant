@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.company.restaurant.model.CommonData" table="common_data_dic" schema="public"
+           catalog="restaurant">
+        <cache usage="read-write"/>
+        <id name="commonDataId">
+            <column name="common_data_id" sql-type="integer"/>
+            <generator class="identity"/>
+        </id>
+        <property name="name">
+            <column name="name" sql-type="varchar(256)" length="256"/>
+        </property>
+        <property name="value">
+            <column name="value" sql-type="varchar(256)" length="256"/>
+        </property>
+        <property name="image">
+            <column name="image" sql-type="bytea"/>
+        </property>
+    </class>
+</hibernate-mapping>
