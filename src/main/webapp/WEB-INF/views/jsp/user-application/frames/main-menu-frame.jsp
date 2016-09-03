@@ -9,7 +9,7 @@
     <link href="<c:url value="/resources/css/common.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/main-menu.css"/>" rel="stylesheet">
 </head>
-<div class="main-menu ordinary-container">
+<div class="main-menu ordinary-container framed-div">
     <ul>
         <li><a href="/user-application-main">Main</a></li>
         <li><a href="/user-restaurant-schema">Restaurant scheme</a></li>
