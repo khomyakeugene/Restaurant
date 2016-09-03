@@ -1,6 +1,6 @@
-package com.company.restaurant.web;
+package com.company.restaurant.web.user.application;
 
-import com.company.restaurant.web.proto.CommonDataController;
+import com.company.restaurant.web.user.application.proto.UserApplicationController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
  * Created by Yevhen on 06.08.2016.
  */
 @Controller
-public class RestaurantSchemaController extends CommonDataController {
+public class RestaurantSchemaController extends UserApplicationController {
     private static final String RESTAURANT_SCHEMA_PAGE_VIEW_NAME = "/restaurant-schema-page";
     private static final String RESTAURANT_RESTAURANT_SCHEMA_IMAGE_MAP_VAR_NAME = "restaurantRestaurantSchema";
 

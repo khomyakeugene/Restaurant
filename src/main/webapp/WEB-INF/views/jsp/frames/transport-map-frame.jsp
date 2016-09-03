@@ -5,7 +5,7 @@
   Time: 17:24
   To change this template use File | Settings | File Templates.
 --%>
-<%--@elvariable id="restaurantTransportMapImage" type="com.company.restaurant.web.ContactsController"--%>
+<%--@elvariable id="restaurantTransportMapImage" type="com.company.restaurant.web.user.application.ContactsController"--%>
 
 
 <div class="ordinary-container" style="max-width: inherit">

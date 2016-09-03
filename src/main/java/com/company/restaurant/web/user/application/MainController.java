@@ -1,7 +1,7 @@
-package com.company.restaurant.web;
+package com.company.restaurant.web.user.application;
 
 import com.company.restaurant.service.CourseService;
-import com.company.restaurant.web.proto.CommonDataController;
+import com.company.restaurant.web.user.application.proto.UserApplicationController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
  * Created by Yevhen on 28.07.2016.
  */
 @Controller
-public class MainController extends CommonDataController {
+public class MainController extends UserApplicationController {
     private static final String MAIN_PAGE_VIEW_NAME = "main-page";
     private static final String COURSE_VIEW_NAME = "course";
 
@@ -29,7 +29,7 @@ public class MainController extends CommonDataController {
         this.courseService = courseService;
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/aaa", method = RequestMethod.GET)
     public ModelAndView mainPage() {
         initData();
 
