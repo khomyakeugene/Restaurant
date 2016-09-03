@@ -13,11 +13,13 @@ import org.springframework.web.servlet.ModelAndView;
 /**
  * Created by Yevhen on 28.07.2016.
  */
-
 @Controller
-public class MainController extends UserApplicationController {
-    private static final String MAIN_PAGE_VIEW_NAME = "main-page";
-    private static final String COURSE_VIEW_NAME = "course";
+public class UserMainController extends UserApplicationController {
+    private static final String MAIN_PAGE_VIEW_NAME = "user-application/main-page";
+    private static final String COURSE_VIEW_NAME = "user-application/course";
+    private static final String USER_APPLICATION_MAIN_REQUEST_MAPPING_VALUE = "/user-application-main";
+    private static final String USER_APPLICATION_COURSE_REQUEST_MAPPING_VALUE = "/course/{courseId}";
+    private static final String SEARCH_REQUEST_MAPPING_VALUE = "/search";
 
     private static final String COURSES_VAR_NAME = "courses";
     private static final String COURSE_VAR_NAME = "course";
@@ -30,7 +32,7 @@ public class MainController extends UserApplicationController {
         this.courseService = courseService;
     }
 
-    @RequestMapping(value = "/user_application_main", method = RequestMethod.GET)
+    @RequestMapping(value = USER_APPLICATION_MAIN_REQUEST_MAPPING_VALUE, method = RequestMethod.GET)
     public ModelAndView mainPage() {
         initData();
 
@@ -40,7 +42,7 @@ public class MainController extends UserApplicationController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/course/{courseId}", method = RequestMethod.GET)
+    @RequestMapping(value = USER_APPLICATION_COURSE_REQUEST_MAPPING_VALUE, method = RequestMethod.GET)
     public ModelAndView course(@PathVariable int courseId) {
 
         modelAndView.addObject(COURSE_VAR_NAME, courseService.findCourseById(courseId));
@@ -49,7 +51,7 @@ public class MainController extends UserApplicationController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/search", method = RequestMethod.GET)
+    @RequestMapping(value = SEARCH_REQUEST_MAPPING_VALUE, method = RequestMethod.GET)
     public ModelAndView search(@RequestParam(COURSE_NAME_VAR_NAME) String courseName) {
         modelAndView.addObject(COURSES_VAR_NAME, courseService.findCoursesByNameFragment(courseName));
         modelAndView.setViewName(MAIN_PAGE_VIEW_NAME);

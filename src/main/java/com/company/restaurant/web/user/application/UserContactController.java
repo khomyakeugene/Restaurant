@@ -10,10 +10,10 @@ import org.springframework.web.servlet.ModelAndView;
  * Created by Yevhen on 06.08.2016.
  */
 @Controller
-public class ContactController extends UserApplicationController {
-    private static final String RESTAURANT_CONTACTS_VIEW_NAME = "/contacts-page";
+public class UserContactController extends UserApplicationController {
+    private static final String RESTAURANT_CONTACTS_VIEW_NAME = "user-application/contacts-page";
     private static final String RESTAURANT_TRANSPORT_IMAGE_MAP_VAR_NAME = "restaurantTransportMapImage";
-    private static final String CONTACTS_REQUEST_MAPPING_VALUE = "/contacts";
+    private static final String CONTACTS_REQUEST_MAPPING_VALUE = "user-contacts";
 
     @RequestMapping(value = CONTACTS_REQUEST_MAPPING_VALUE, method = RequestMethod.GET)
     public ModelAndView contactsPage() {

@@ -1,4 +1,4 @@
-package com.company.restaurant.web.user.application.rest;
+package com.company.restaurant.web.rest;
 
 import com.company.restaurant.model.Menu;
 import com.company.restaurant.service.MenuService;

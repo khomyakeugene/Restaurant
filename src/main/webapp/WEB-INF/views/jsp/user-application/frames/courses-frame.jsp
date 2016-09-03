@@ -5,7 +5,7 @@
   Time: 17:37
   To change this template use File | Settings | File Templates.
 --%>
-<%--@elvariable id="courses" type="com.company.restaurant.web.user.application.MainController"--%>
+<%--@elvariable id="courses" type="com.company.restaurant.web.user.application.UserMainController"--%>
 <%--@elvariable id="course" type="com.company.restaurant.model.Course"--%>
 
 <div>
