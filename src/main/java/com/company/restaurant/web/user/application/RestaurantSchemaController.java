@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 /**
  * Created by Yevhen on 06.08.2016.
  */
+
 @Controller
 public class RestaurantSchemaController extends UserApplicationController {
     private static final String RESTAURANT_SCHEMA_PAGE_VIEW_NAME = "/restaurant-schema-page";
