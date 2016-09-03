@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
  * Created by Yevhen on 06.08.2016.
  */
 @Controller
-public class EmployeeController extends UserApplicationController {
+public class EmployeeController123 extends UserApplicationController {
     private static final String PERSONNEL_PAGE_VIEW_NAME = "/personnel-page";
     private static final String EMPLOYEES_VAR_NAME = "employees";
     private static final String PERSONNEL_REQUEST_MAPPING_VALUE = "/personnel";

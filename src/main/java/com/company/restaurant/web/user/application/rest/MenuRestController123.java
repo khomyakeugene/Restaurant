@@ -1,4 +1,4 @@
-package com.company.restaurant.web.user.application;
+package com.company.restaurant.web.user.application.rest;
 
 import com.company.restaurant.model.Menu;
 import com.company.restaurant.service.MenuService;
@@ -12,7 +12,7 @@ import java.util.List;
  */
 
 @RestController
-public class MenuRestController {
+public class MenuRestController123 {
     private MenuService menuService;
 
     @Autowired

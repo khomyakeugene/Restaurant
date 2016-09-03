@@ -16,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping(value = "/user_application")
-public class MainController extends UserApplicationController {
+public class MainController123 extends UserApplicationController {
     private static final String MAIN_PAGE_VIEW_NAME = "main-page";
     private static final String COURSE_VIEW_NAME = "course";
 
