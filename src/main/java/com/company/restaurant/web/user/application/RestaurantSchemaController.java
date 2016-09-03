@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
  */
 
 @Controller
-public class RestaurantSchemaController123 extends UserApplicationController {
+public class RestaurantSchemaController extends UserApplicationController {
     private static final String RESTAURANT_SCHEMA_PAGE_VIEW_NAME = "/restaurant-schema-page";
     private static final String RESTAURANT_RESTAURANT_SCHEMA_IMAGE_MAP_VAR_NAME = "restaurantRestaurantSchema";
     private static final String RESTAURANT_SCHEMA_REQUEST_MAPPING_VALUE = "/restaurant-schema";

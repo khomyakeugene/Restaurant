@@ -12,7 +12,7 @@ import java.util.List;
  */
 
 @RestController
-public class MenuRestController123 {
+public class MenuRestController {
     private MenuService menuService;
 
     @Autowired

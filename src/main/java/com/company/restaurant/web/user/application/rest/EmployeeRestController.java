@@ -12,7 +12,7 @@ import java.util.List;
  */
 
 @RestController
-public class EmployeeRestController123 {
+public class EmployeeRestController {
     private EmployeeService employeeService;
 
     @Autowired

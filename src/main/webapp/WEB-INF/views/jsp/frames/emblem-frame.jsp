@@ -5,8 +5,8 @@
   Time: 15:29
   To change this template use File | Settings | File Templates.
 --%>
-<%--@elvariable id="restaurantName" type="com.company.restaurant.web.user.application.MainController123"--%>
-<%--@elvariable id="restaurantEmblemImage" type="com.company.restaurant.web.user.application.MainController123"--%>
+<%--@elvariable id="restaurantName" type="com.company.restaurant.web.user.application.MainController"--%>
+<%--@elvariable id="restaurantEmblemImage" type="com.company.restaurant.web.user.application.MainController"--%>
 
 <div class="horizontal-container ordinary-container">
     <div class="horizontal-part-holder">

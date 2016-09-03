@@ -15,8 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
  */
 
 @Controller
-@RequestMapping(value = "/user_application")
-public class MainController123 extends UserApplicationController {
+public class MainController extends UserApplicationController {
     private static final String MAIN_PAGE_VIEW_NAME = "main-page";
     private static final String COURSE_VIEW_NAME = "course";
 
@@ -31,7 +30,7 @@ public class MainController123 extends UserApplicationController {
         this.courseService = courseService;
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "/user_application", method = RequestMethod.GET)
     public ModelAndView mainPage() {
         initData();
 
