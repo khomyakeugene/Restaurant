@@ -30,7 +30,7 @@ public class MainController extends UserApplicationController {
         this.courseService = courseService;
     }
 
-    @RequestMapping(value = "/aaa", method = RequestMethod.GET)
+    @RequestMapping(value = "/user_application", method = RequestMethod.GET)
     public ModelAndView mainPage() {
         initData();
 

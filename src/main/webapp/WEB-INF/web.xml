@@ -15,13 +15,14 @@
     <servlet-mapping>
         <servlet-name>Dispatcher</servlet-name>
         <url-pattern>/</url-pattern>
-        <url-pattern>/aaa</url-pattern>
+        <url-pattern>/user_application</url-pattern>
+        <url-pattern>/admin_application</url-pattern>
     </servlet-mapping>
 
     <welcome-file-list>
-        <welcome-file>/aaa</welcome-file>
+        <welcome-file>user_application</welcome-file>
+        <welcome-file>admin_application</welcome-file>
     </welcome-file-list>
-
 
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
