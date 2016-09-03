@@ -13,8 +13,9 @@ import org.springframework.web.servlet.ModelAndView;
 public class RestaurantSchemaController extends UserApplicationController {
     private static final String RESTAURANT_SCHEMA_PAGE_VIEW_NAME = "/restaurant-schema-page";
     private static final String RESTAURANT_RESTAURANT_SCHEMA_IMAGE_MAP_VAR_NAME = "restaurantRestaurantSchema";
+    private static final String RESTAURANT_SCHEMA_REQUEST_MAPPING_VALUE = "/restaurant-schema";
 
-    @RequestMapping(value = "/restaurant-schema", method = RequestMethod.GET)
+    @RequestMapping(value = RESTAURANT_SCHEMA_REQUEST_MAPPING_VALUE, method = RequestMethod.GET)
     public ModelAndView restaurantSchemaPage() {
         initData();
 

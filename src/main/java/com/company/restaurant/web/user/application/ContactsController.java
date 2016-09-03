@@ -13,8 +13,9 @@ import org.springframework.web.servlet.ModelAndView;
 public class ContactsController extends UserApplicationController {
     private static final String RESTAURANT_CONTACTS_VIEW_NAME = "/contacts-page";
     private static final String RESTAURANT_TRANSPORT_IMAGE_MAP_VAR_NAME = "restaurantTransportMapImage";
+    private static final String CONTACTS_REQUEST_MAPPING_VALUE = "/contacts";
 
-    @RequestMapping(value = "/contacts", method = RequestMethod.GET)
+    @RequestMapping(value = CONTACTS_REQUEST_MAPPING_VALUE, method = RequestMethod.GET)
     public ModelAndView contactsPage() {
         initData();
 

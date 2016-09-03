@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class EmployeeController extends UserApplicationController {
     private static final String PERSONNEL_PAGE_VIEW_NAME = "/personnel-page";
     private static final String EMPLOYEES_VAR_NAME = "employees";
+    private static final String PERSONNEL_REQUEST_MAPPING_VALUE = "/personnel";
 
     private EmployeeService employeeService;
 
@@ -23,7 +24,7 @@ public class EmployeeController extends UserApplicationController {
         this.employeeService = employeeService;
     }
 
-    @RequestMapping(value = "/personnel", method = RequestMethod.GET)
+    @RequestMapping(value = PERSONNEL_REQUEST_MAPPING_VALUE, method = RequestMethod.GET)
     public ModelAndView employeePage() {
         initData();
 

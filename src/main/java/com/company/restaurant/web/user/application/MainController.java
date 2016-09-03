@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 /**
  * Created by Yevhen on 28.07.2016.
  */
+
 @Controller
 public class MainController extends UserApplicationController {
     private static final String MAIN_PAGE_VIEW_NAME = "main-page";
