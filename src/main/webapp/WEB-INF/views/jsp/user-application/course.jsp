@@ -11,8 +11,8 @@
 
 <html>
 <body>
-<%@ include file="/WEB-INF/views/jsp/frames/main-menu-frame.jsp" %>
-<%@ include file="/WEB-INF/views/jsp/frames/course-frame.jsp" %>
+<%@ include file="frames/main-menu-frame.jsp" %>
+<%@ include file="frames/course-frame.jsp" %>
 
 </body>
 </html>

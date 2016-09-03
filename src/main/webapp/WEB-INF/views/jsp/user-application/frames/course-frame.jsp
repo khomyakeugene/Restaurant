@@ -28,7 +28,8 @@
                         <c:forEach items="${course.courseIngredients}" var="courseIngredient">
                             <tr>
                                 <td><b>${courseIngredient.ingredient.name}</b></td>
-                                <td style="text-align: right">${courseIngredient.amount} ${courseIngredient.portion.description}</td>
+                                <td style="text-align: right">${courseIngredient.amount}
+                                                                ${courseIngredient.portion.description}</td>
                             </tr>
                         </c:forEach>
                     </table>

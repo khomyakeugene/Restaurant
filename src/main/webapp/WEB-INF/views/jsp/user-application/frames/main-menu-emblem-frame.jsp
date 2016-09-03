@@ -5,5 +5,5 @@
   Time: 20:16
   To change this template use File | Settings | File Templates.
 --%>
-<%@ include file="/WEB-INF/views/jsp/frames/main-menu-frame.jsp" %>
-<%@ include file="/WEB-INF/views/jsp/frames/emblem-frame.jsp" %>
+<%@ include file="main-menu-frame.jsp" %>
+<%@ include file="emblem-frame.jsp" %>

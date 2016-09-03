@@ -9,7 +9,7 @@
 <%--@elvariable id="course" type="com.company.restaurant.model.Course"--%>
 
 <div>
-    <%@ include file="/WEB-INF/views/jsp/frames/course-search-frame.jsp" %>
+    <%@ include file="course-search-frame.jsp" %>
 
     <div>
         <table class="course-table">

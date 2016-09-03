@@ -11,9 +11,9 @@
 </head>
 <div class="main-menu ordinary-container">
     <ul>
-        <li><a href="user_application_main">Main</a></li>
-        <li><a href="restaurant-schema">Restaurant scheme</a></li>
-        <li><a href="personnel">Our personnel</a></li>
-        <li><a href="contacts">Contacts</a></li>
+        <li><a href="/user_application_main">Main</a></li>
+        <li><a href="/restaurant-schema">Restaurant scheme</a></li>
+        <li><a href="/personnel">Our personnel</a></li>
+        <li><a href="/contacts">Contacts</a></li>
     </ul>
 </div>

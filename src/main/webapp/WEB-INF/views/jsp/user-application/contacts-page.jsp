@@ -9,15 +9,15 @@
 
 <html>
 <body>
-<%@ include file="/WEB-INF/views/jsp/frames/main-menu-frame.jsp" %>
+<%@ include file="/WEB-INF/views/jsp/user-application/frames/main-menu-frame.jsp" %>
 
 <div class="horizontal-container ordinary-container">
     <div class="horizontal-part-holder ordinary-container">
         <div class="two-thirds">
-            <%@ include file="/WEB-INF/views/jsp/frames/transport-map-frame.jsp" %>
+            <%@ include file="/WEB-INF/views/jsp/user-application/frames/transport-map-frame.jsp" %>
         </div>
         <div class="third">
-            <%@ include file="/WEB-INF/views/jsp/frames/contacts-frame.jsp" %>
+            <%@ include file="/WEB-INF/views/jsp/user-application/frames/contacts-frame.jsp" %>
         </div>
     </div>
 </div>
