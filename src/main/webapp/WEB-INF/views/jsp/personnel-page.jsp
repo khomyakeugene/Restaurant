@@ -9,7 +9,8 @@
 
 <html>
 <body>
-<%@ include file="/WEB-INF/views/jsp/frames/main-menu-emblem-frame.jsp" %>
+<%--<%@ include file="/WEB-INF/views/jsp/frames/main-menu-emblem-frame.jsp" %>--%>
+<%@ include file="/WEB-INF/views/jsp/frames/main-menu-frame.jsp" %>
 
 <div class="horizontal-container ordinary-container">
     <div class="horizontal-part-holder ordinary-container">

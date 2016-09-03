@@ -5,6 +5,7 @@
 
     <servlet>
         <servlet-name>Dispatcher</servlet-name>
+        <!--<load-on-startup>2</load-on-startup>-->
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <init-param>
             <param-name>contextConfigLocation</param-name>
@@ -15,13 +16,13 @@
     <servlet-mapping>
         <servlet-name>Dispatcher</servlet-name>
         <url-pattern>/</url-pattern>
-        <url-pattern>/user_application</url-pattern>
-        <url-pattern>/admin_application</url-pattern>
+        <url-pattern>/user_application_main</url-pattern>
+        <url-pattern>/admin_application_main</url-pattern>
     </servlet-mapping>
 
     <welcome-file-list>
-        <welcome-file>user_application</welcome-file>
-        <welcome-file>admin_application</welcome-file>
+        <welcome-file>user_application_main</welcome-file>
+        <welcome-file>admin_application_main</welcome-file>
     </welcome-file-list>
 
     <listener>
