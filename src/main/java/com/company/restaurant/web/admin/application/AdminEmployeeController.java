@@ -20,9 +20,12 @@ import java.util.stream.Collectors;
 public class AdminEmployeeController extends AdminApplicationController {
     private static final String ADMIN_EMPLOYEE_LIST_PAGE_VIEW_NAME = "admin-application/admin-employee-list-page";
     private static final String ADMIN_EMPLOYEE_PAGE_VIEW_NAME = "admin-application/admin-employee-page";
+    private static final String ADMIN_CREATE_EMPLOYEE_PAGE_VIEW_NAME = "admin-application/admin-create-employee-page";
     private static final String ADMIN_EMPLOYEE_LIST_REQUEST_MAPPING_VALUE = "/admin-employee-list";
     private static final String ADMIN_EMPLOYEE_REQUEST_MAPPING_VALUE = "/employee/{employeeId}";
-    private static final String SAVE_EMPLOYEE_REQUEST_MAPPING_VALUE = "/save-employee";
+    private static final String ADMIN_SAVE_OR_DELETE_EMPLOYEE_REQUEST_MAPPING_VALUE = "/save-or-delete-employee";
+    private static final String ADMIN_PREPARE_NEW_EMPLOYEE_REQUEST_MAPPING_VALUE = "/prepare-new-employee";
+    private static final String ADMIN_CREATE_EMPLOYEE_REQUEST_MAPPING_VALUE = "/create-employee";
 
     private static final String EMPLOYEES_VAR_NAME = "employees";
     private static final String EMPLOYEE_VAR_NAME = "employee";
@@ -34,38 +37,28 @@ public class AdminEmployeeController extends AdminApplicationController {
     private static final String EMPLOYEE_JOB_POSITION_NAME_VAR_NAME = "jobPositionName";
     private static final String EMPLOYEE_PHONE_NUMBER_VAR_NAME = "employeePhoneNumber";
     private static final String EMPLOYEE_SALARY_VAR_NAME = "employeeSalary";
-//    private static final String EMPLOYEE_PHOTO_VAR_NAME = "employeePhoto";
+    //    private static final String EMPLOYEE_PHOTO_VAR_NAME = "employeePhoto";
+    private static final String SUBMIT_BUTTON_VAR_NAME = "submitButtonValue";
+    private static final String SUBMIT_BUTTON_SAVE_VALUE = "save";
+    private static final String SUBMIT_BUTTON_DELETE_VALUE = "delete";
 
     private static final String DEFAULT_JOB_POSITION_NAME_VALUE = "Waiter";
 
     private EmployeeService employeeService;
-
-    private Employee newEmployee() {
-        modelAndView.clear();
-
-        Employee result = new Employee();
-        result.setJobPosition(employeeService.findJobPositionByName(DEFAULT_JOB_POSITION_NAME_VALUE));
-
-        return result;
-    }
 
     @Autowired
     public void setEmployeeService(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
 
-    @RequestMapping(value = ADMIN_EMPLOYEE_LIST_REQUEST_MAPPING_VALUE, method = RequestMethod.GET)
-    public ModelAndView employeeListPage() {
-        modelAndView.clear();
+    private Employee newEmployee() {
+        Employee result = new Employee();
+        result.setJobPosition(employeeService.findJobPositionByName(DEFAULT_JOB_POSITION_NAME_VALUE));
 
-        modelAndView.addObject(EMPLOYEES_VAR_NAME, employeeService.findAllEmployees());
-        modelAndView.setViewName(ADMIN_EMPLOYEE_LIST_PAGE_VIEW_NAME);
-
-        return modelAndView;
+        return result;
     }
 
-    @RequestMapping(value = ADMIN_EMPLOYEE_REQUEST_MAPPING_VALUE, method = RequestMethod.GET)
-    public ModelAndView employee(@PathVariable int employeeId) {
+    private void prepareEmployeeEnvironment(int employeeId) {
         modelAndView.clear();
 
         Employee employee;
@@ -87,23 +80,21 @@ public class AdminEmployeeController extends AdminApplicationController {
         // of <form:select> in view
         modelAndView.addObject(JOB_POSITION_NAMES_VAR_NAME, employeeService.findAllJobPositionNames().stream().
                 filter(n -> (!n.equals(jobPositionName))).collect(Collectors.toList()));
-
-        modelAndView.setViewName(ADMIN_EMPLOYEE_PAGE_VIEW_NAME);
-
-        return modelAndView;
     }
 
-    @RequestMapping(value = SAVE_EMPLOYEE_REQUEST_MAPPING_VALUE , method = RequestMethod.POST)
-    public ModelAndView saveEmployee(@RequestParam(EMPLOYEE_ID_VAR_NAME) int employeeId,
-                                     @RequestParam(EMPLOYEE_FIRST_NAME_VAR_NAME) String  employeeFirstName,
-                                     @RequestParam(EMPLOYEE_SECOND_NAME_VAR_NAME) String  employeeSecondName,
-                                     @RequestParam(EMPLOYEE_JOB_POSITION_NAME_VAR_NAME) String jobPositionName,
-                                     @RequestParam(EMPLOYEE_PHONE_NUMBER_VAR_NAME) String employeePhoneNumber,
-                                     @RequestParam(EMPLOYEE_SALARY_VAR_NAME) Float employeeSalary
-//                                     , @RequestParam(EMPLOYEE_PHOTO_VAR_NAME) byte[] employeePhoto
-    ) {
-        modelAndView.clear();
+    private void prepareEmployeeEnvironment() {
+        prepareEmployeeEnvironment(0);
 
+    }
+
+    private Employee saveEmployee(int employeeId,
+                                  String employeeFirstName,
+                                  String employeeSecondName,
+                                  String jobPositionName,
+                                  String employeePhoneNumber,
+                                  Float employeeSalary
+//                              , byte[] employeePhoto
+    ) {
         Employee employee = null;
         // Temporarily: get "old" image from database - because I do not know how to manipulate with image
         if (employeeId > 0) {
@@ -119,10 +110,80 @@ public class AdminEmployeeController extends AdminApplicationController {
         employee.setPhoneNumber(employeePhoneNumber);
         employee.setSalary(employeeSalary);
 //        employee.setPhoto(employeePhoto);
-        employeeService.updEmployee(employee);
+
+        return employeeService.updEmployee(employee);
+    }
+
+    private void deleteEmployee(int employeeId) {
+        employeeService.delEmployee(employeeId);
+    }
+
+    @RequestMapping(value = ADMIN_EMPLOYEE_LIST_REQUEST_MAPPING_VALUE, method = RequestMethod.GET)
+    public ModelAndView employeeListPage() {
+        modelAndView.clear();
+
+        modelAndView.addObject(EMPLOYEES_VAR_NAME, employeeService.findAllEmployees());
+        modelAndView.setViewName(ADMIN_EMPLOYEE_LIST_PAGE_VIEW_NAME);
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = ADMIN_EMPLOYEE_REQUEST_MAPPING_VALUE, method = RequestMethod.GET)
+    public ModelAndView employee(@PathVariable int employeeId) {
+        prepareEmployeeEnvironment(employeeId);
+
+        modelAndView.setViewName(ADMIN_EMPLOYEE_PAGE_VIEW_NAME);
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = ADMIN_SAVE_OR_DELETE_EMPLOYEE_REQUEST_MAPPING_VALUE, method = RequestMethod.POST)
+    public ModelAndView saveEmployee(@RequestParam(EMPLOYEE_ID_VAR_NAME) int employeeId,
+                                     @RequestParam(EMPLOYEE_FIRST_NAME_VAR_NAME) String employeeFirstName,
+                                     @RequestParam(EMPLOYEE_SECOND_NAME_VAR_NAME) String employeeSecondName,
+                                     @RequestParam(EMPLOYEE_JOB_POSITION_NAME_VAR_NAME) String jobPositionName,
+                                     @RequestParam(EMPLOYEE_PHONE_NUMBER_VAR_NAME) String employeePhoneNumber,
+                                     @RequestParam(EMPLOYEE_SALARY_VAR_NAME) Float employeeSalary,
+//                                     @RequestParam(EMPLOYEE_PHOTO_VAR_NAME) byte[] employeePhoto,
+                                     @RequestParam(SUBMIT_BUTTON_VAR_NAME) String submitButtonValue
+    ) {
+        String submitButtonLowerCaseValue = submitButtonValue.toLowerCase();
+        if (submitButtonLowerCaseValue.equals(SUBMIT_BUTTON_SAVE_VALUE.toLowerCase())) {
+            saveEmployee(employeeId, employeeFirstName, employeeSecondName, jobPositionName, employeePhoneNumber,
+                    employeeSalary);
+
+        } else if (submitButtonLowerCaseValue.equals(SUBMIT_BUTTON_DELETE_VALUE.toLowerCase())) {
+            deleteEmployee(employeeId);
+        }
 
         modelAndView.clear();
-        modelAndView.setViewName("redirect:" + ADMIN_EMPLOYEE_LIST_REQUEST_MAPPING_VALUE);
+        modelAndView.setViewName(REDIRECT_PREFIX + ADMIN_EMPLOYEE_LIST_REQUEST_MAPPING_VALUE);
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = ADMIN_PREPARE_NEW_EMPLOYEE_REQUEST_MAPPING_VALUE, method = RequestMethod.POST)
+    public ModelAndView prepareNewEmployee() {
+        prepareEmployeeEnvironment();
+
+        modelAndView.setViewName(ADMIN_CREATE_EMPLOYEE_PAGE_VIEW_NAME);
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = ADMIN_CREATE_EMPLOYEE_REQUEST_MAPPING_VALUE, method = RequestMethod.POST)
+    public ModelAndView createEmployee(@RequestParam(EMPLOYEE_FIRST_NAME_VAR_NAME) String employeeFirstName,
+                                       @RequestParam(EMPLOYEE_SECOND_NAME_VAR_NAME) String employeeSecondName,
+                                       @RequestParam(EMPLOYEE_JOB_POSITION_NAME_VAR_NAME) String jobPositionName,
+                                       @RequestParam(EMPLOYEE_PHONE_NUMBER_VAR_NAME) String employeePhoneNumber,
+                                       @RequestParam(EMPLOYEE_SALARY_VAR_NAME) Float employeeSalary
+//                                     , @RequestParam(EMPLOYEE_PHOTO_VAR_NAME) byte[] employeePhoto
+    ) {
+        saveEmployee(0, employeeFirstName, employeeSecondName, jobPositionName, employeePhoneNumber,
+                employeeSalary);
+
+        modelAndView.clear();
+        modelAndView.setViewName(REDIRECT_PREFIX + ADMIN_EMPLOYEE_LIST_REQUEST_MAPPING_VALUE);
 
         return modelAndView;
     }

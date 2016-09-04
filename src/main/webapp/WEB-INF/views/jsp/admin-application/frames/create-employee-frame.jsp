@@ -2,12 +2,10 @@
   Created by IntelliJ IDEA.
   User: Yevhen
   Date: 04.09.2016
-  Time: 11:08
+  Time: 21:45
   To change this template use File | Settings | File Templates.
 --%>
-<%--<h3>Personnel</h3>--%>
-<form action="/prepare-new-employee" method="post">
+<form action="/create-employee" method="post">
+    <%@ include file="employee-frame.jsp" %>
     <%@ include file="create-employee-button-frame.jsp" %>
-    <%@ include file="employee-table-frame.jsp" %>
 </form>
-
