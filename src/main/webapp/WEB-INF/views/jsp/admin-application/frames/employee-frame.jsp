@@ -8,7 +8,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%--@elvariable id="employee" type="com.company.restaurant.model.Employee"--%>
-<%--@elvariable id="jobPositions" type="List<com.company.restaurant.model.JobPosition>"--%>
 <%--@elvariable id="jobPositionNames" type="List<String>"--%>
 <%--@elvariable id="jobPositionName" type="String"--%>
 
@@ -62,10 +61,10 @@
                     </tr>
                     <tr>
                         <td>
-                            <label class="input-label" for="employeeSalary">Phone number:</label>
+                            <label class="input-label" for="employeeSalary">Salary:</label>
                         </td>
                         <td>
-                            <input type="text" class="input-control" id="employeeSalary"
+                            <input type="number" step="0.01" class="input-control" id="employeeSalary"
                                    name="employeeSalary" placeholder="Enter salary"
                                    value="${employee.salary}">
                         </td>
@@ -81,10 +80,10 @@
             <div class="third">
                 <div class="ordinary-container">
                     <img class="img" style="max-width: 100%; margin-top: 0; margin-left: 15px;"
-                         src="data:image/jpeg;base64,${employee.base64EncodePhoto}" alt="No employee photo"/>
+                         src="data:image/jpeg;base64,${employee.base64EncodePhoto}" alt="No employee photo"
+                        name="employeePhoto"/>
                 </div>
             </div>
         </div>
     </div>
-
 </form>

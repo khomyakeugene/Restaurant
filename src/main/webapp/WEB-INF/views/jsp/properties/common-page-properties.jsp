@@ -13,5 +13,6 @@
 <head>
     <title>Restaurant "${restaurantName}"</title>
     <link href="<c:url value="/resources/css/common.css"/>" rel="stylesheet">
+    <script src="<c:url value="/resources/js/input.masks.js" />"></script>
 </head>
 </html>

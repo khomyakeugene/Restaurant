@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.stream.Collectors;
+
 /**
  * Created by Yevhen on 04.09.2016.
  */
@@ -24,7 +26,6 @@ public class AdminEmployeeController extends AdminApplicationController {
 
     private static final String EMPLOYEES_VAR_NAME = "employees";
     private static final String EMPLOYEE_VAR_NAME = "employee";
-    private static final String JOB_POSITIONS_VAR_NAME = "jobPositions";
     private static final String JOB_POSITION_NAME_VAR_NAME = "jobPositionName";
     private static final String JOB_POSITION_NAMES_VAR_NAME = "jobPositionNames";
     private static final String EMPLOYEE_ID_VAR_NAME = "employeeId";
@@ -33,9 +34,18 @@ public class AdminEmployeeController extends AdminApplicationController {
     private static final String EMPLOYEE_JOB_POSITION_NAME_VAR_NAME = "jobPositionName";
     private static final String EMPLOYEE_PHONE_NUMBER_VAR_NAME = "employeePhoneNumber";
     private static final String EMPLOYEE_SALARY_VAR_NAME = "employeeSalary";
-    private static final String EMPLOYEE_PHOTO_VAR_NAME = "employeePhoto";
+//    private static final String EMPLOYEE_PHOTO_VAR_NAME = "employeePhoto";
+
+    private static final String DEFAULT_JOB_POSITION_NAME_VALUE = "Waiter";
 
     private EmployeeService employeeService;
+
+    private Employee newEmployee() {
+        Employee result = new Employee();
+        result.setJobPosition(employeeService.findJobPositionByName(DEFAULT_JOB_POSITION_NAME_VALUE));
+
+        return result;
+    }
 
     @Autowired
     public void setEmployeeService(EmployeeService employeeService) {
@@ -52,13 +62,26 @@ public class AdminEmployeeController extends AdminApplicationController {
 
     @RequestMapping(value = ADMIN_EMPLOYEE_REQUEST_MAPPING_VALUE, method = RequestMethod.GET)
     public ModelAndView employee(@PathVariable int employeeId) {
-        Employee employee = employeeService.findEmployeeById(employeeId);
+        Employee employee;
+        if (employeeId > 0) {
+            employee = employeeService.findEmployeeById(employeeId);
+            if (employee == null) {
+                employee = newEmployee();
+            }
+        } else {
+            employee = newEmployee();
+        }
 
+        // Current job position name - important to correct work of <form:select> in view
+        String jobPositionName = employee.getJobPosition().getName();
         modelAndView.addObject(EMPLOYEE_VAR_NAME, employee);
-        modelAndView.addObject(JOB_POSITION_NAME_VAR_NAME, employee.getJobPosition().getName());
+        modelAndView.addObject(JOB_POSITION_NAME_VAR_NAME, jobPositionName);
 
-        modelAndView.addObject(JOB_POSITIONS_VAR_NAME, employeeService.findAllJobPositions());
-        modelAndView.addObject(JOB_POSITION_NAMES_VAR_NAME, employeeService.findAllJobPositionNames());
+        // Temporary solution: exclude <jobPositionName> from <jobPositionNames>  - important to correct work
+        // of <form:select> in view
+        modelAndView.addObject(JOB_POSITION_NAMES_VAR_NAME, employeeService.findAllJobPositionNames().stream().
+                filter(n -> (!n.equals(jobPositionName))).collect(Collectors.toList()));
+
         modelAndView.setViewName(ADMIN_EMPLOYEE_PAGE_VIEW_NAME);
 
         return modelAndView;
@@ -71,9 +94,16 @@ public class AdminEmployeeController extends AdminApplicationController {
                                      @RequestParam(EMPLOYEE_JOB_POSITION_NAME_VAR_NAME) String jobPositionName,
                                      @RequestParam(EMPLOYEE_PHONE_NUMBER_VAR_NAME) String employeePhoneNumber,
                                      @RequestParam(EMPLOYEE_SALARY_VAR_NAME) Float employeeSalary
-//                                     @RequestParam(EMPLOYEE_PHOTO_VAR_NAME) byte[] employeePhoto
+//                                     , @RequestParam(EMPLOYEE_PHOTO_VAR_NAME) byte[] employeePhoto
     ) {
-        Employee employee = new Employee();
+        Employee employee = null;
+        // Temporarily: get "old" image from database - because I do not know how to manipulate with image
+        if (employeeId > 0) {
+            employee = employeeService.findEmployeeById(employeeId);
+        }
+        if (employee == null) {
+            employee = new Employee();
+        }
         employee.setEmployeeId(employeeId);
         employee.setFirstName(employeeFirstName);
         employee.setSecondName(employeeSecondName);
@@ -83,7 +113,8 @@ public class AdminEmployeeController extends AdminApplicationController {
 //        employee.setPhoto(employeePhoto);
         employeeService.updEmployee(employee);
 
-        modelAndView.setViewName(ADMIN_EMPLOYEE_LIST_PAGE_VIEW_NAME);
+        modelAndView.clear();
+        modelAndView.setViewName("redirect:" + ADMIN_EMPLOYEE_LIST_REQUEST_MAPPING_VALUE);
 
         return modelAndView;
     }
