@@ -24,7 +24,7 @@
                         <td>
                             <input type="text" class="input-control" id="employeeFirstName"
                                    name="employeeFirstName" placeholder="Enter first name"
-                                   value="${employee.firstName}" required autofocus>
+                                   value="${employee.firstName}" required="required" autofocus>
                         </td>
                     </tr>
                     <tr>
@@ -34,7 +34,7 @@
                         <td>
                             <input type="text" class="input-control" id="employeeSecondName"
                                    name="employeeSecondName" placeholder="Enter last name"
-                                   value="${employee.secondName}" required>
+                                   value="${employee.secondName}" required="required">
                         </td>
                     </tr>
                     <tr>
@@ -56,7 +56,8 @@
                         <td>
                             <input type="text" class="input-control" id="employeePhoneNumber"
                                    name="employeePhoneNumber" placeholder="Enter phone number"
-                                   value="${employee.phoneNumber}">
+                                   value="${employee.phoneNumber}"
+                                   pattern="^\([0-9]{3}\)\s[0-9]{3}-[0-9]{4}$"/>
                         </td>
                     </tr>
                     <tr>
