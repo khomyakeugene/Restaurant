@@ -7,6 +7,6 @@ import java.util.Base64;
  */
 public class ImageObject {
     protected String base64EncodeToString(byte[] data) {
-        return Base64.getEncoder().encodeToString(data);
+        return (data == null) ? null : Base64.getEncoder().encodeToString(data);
     }
 }

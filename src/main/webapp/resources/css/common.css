@@ -26,7 +26,9 @@
 }
 
 .standard-table,
-.employee-table,
+.user-employee-table,
+.admin-employee-table,
+.admin-employee-data-table,
 .course-table,
 .ingredient-table {
     border-spacing: 5px;
@@ -37,8 +39,12 @@
     text-align: left;
     font-family: Arial, serif;
 }
-.employee-table th,
-.employee-table td,
+.user-employee-table th,
+.user-employee-table td,
+.admin-employee-table th,
+.admin-employee-table td,
+.admin-employee-data-table th,
+.admin-employee-data-table td,
 .course-table th,
 .course-table td,
 .ingredient-table th,
@@ -46,20 +52,20 @@
     padding-left: 5px;
     padding-right: 5px;
 }
-.employee-table tr:nth-of-type(odd),
+.user-employee-table tr:nth-of-type(odd),
+.admin-employee-table tr:nth-of-type(odd),
 .course-table tr:nth-of-type(odd),
 .ingredient-table tr:nth-of-type(odd) {
-    /*background-color: rgba(79, 204, 59, 0.2);*/
     background-color: rgba(160, 237, 41, 0.24);
 
 }
-.employee-table th,
+.user-employee-table th,
+.admin-employee-table th,
 .course-table th,
 .ingredient-table th {
     color: darkgreen;
     background-color: rgba(135, 203, 37, 0.38);
 }
-
 .button {
     display: inline-block;
     *display: inline;
@@ -146,16 +152,31 @@
     display: table-cell;
     width: 59%;
 }
+.four-fifths {
+    padding: 0;
+    float: left;
+    display: table-cell;
+    width: 79%;
+}
 .input-label {
     margin: 0;
     font-weight: bold;
 }
+.course-search-input-control,
 .input-control {
-    margin: 15px;
+    margin: 0;
     border-radius: 5px;
     padding: 5px;
+    width: 100%;
+}
+.course-search-input-control {
+    margin: 15px;
     width: 95%;
 }
+.course-search-button {
+    margin: 15px;
+}
+
 .framed-div {
     border: 1px solid #000000;
     border-collapse: collapse;

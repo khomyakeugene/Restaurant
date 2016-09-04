@@ -10,6 +10,8 @@ import java.util.List;
 public interface EmployeeDao {
     Employee addEmployee(Employee employee);
 
+    Employee updEmployee(Employee employee);
+
     void updEmployeePhoto(int employeeId, byte[] photo);
 
     void delEmployee(Employee employee);

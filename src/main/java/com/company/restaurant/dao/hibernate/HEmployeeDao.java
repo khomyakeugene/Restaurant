@@ -22,6 +22,12 @@ public class HEmployeeDao extends HDaoEntity<Employee> implements EmployeeDao {
 
     @Transactional
     @Override
+    public Employee updEmployee(Employee employee) {
+        return saveOrUpdate(employee);
+    }
+
+    @Transactional
+    @Override
     public void updEmployeePhoto(int employeeId, byte[] photo) {
         Employee employee = findEmployeeById(employeeId);
         if (employee != null) {

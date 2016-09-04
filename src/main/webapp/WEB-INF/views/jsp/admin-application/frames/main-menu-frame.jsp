@@ -9,8 +9,10 @@
     <link href="<c:url value="/resources/css/common.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/main-menu.css"/>" rel="stylesheet">
 </head>
+
 <div class="main-menu ordinary-container">
     <ul>
+        <li><a href="/user-application-main">Main</a></li>
         <li><a href="/admin-menu">Menu</a></li>
         <li><a href="/admin-course-list">Course</a></li>
         <li><a href="/admin-employee-list">Personnel</a></li>

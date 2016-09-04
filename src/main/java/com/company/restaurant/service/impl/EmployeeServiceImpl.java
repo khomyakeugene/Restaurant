@@ -56,6 +56,14 @@ public class EmployeeServiceImpl extends Service implements EmployeeService {
     }
 
     @Override
+    public List<String> findAllJobPositionNames() {
+        List<String> result = new ArrayList<>();
+        findAllJobPositions().forEach(jobPosition -> result.add(jobPosition.getName()));
+
+        return result;
+    }
+
+    @Override
     public Employee addEmployee(Employee employee) {
         return employeeDao.addEmployee(employee);
     }
@@ -63,6 +71,11 @@ public class EmployeeServiceImpl extends Service implements EmployeeService {
     @Override
     public void delEmployee(Employee employee) {
         employeeDao.delEmployee(employee);
+    }
+
+    @Override
+    public Employee updEmployee(Employee employee) {
+        return employeeDao.updEmployee(employee);
     }
 
     @Override

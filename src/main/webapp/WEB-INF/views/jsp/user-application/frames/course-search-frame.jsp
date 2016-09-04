@@ -15,7 +15,7 @@
         </div>
 
         <div class="three-fifths">
-            <input type="text" class="input-control" id="courseName"
+            <input type="text" class="course-search-input-control" id="courseName"
                    name="courseName" placeholder="Enter course name" required autofocus>
         </div>
 

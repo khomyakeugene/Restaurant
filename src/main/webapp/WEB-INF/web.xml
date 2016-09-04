@@ -17,10 +17,12 @@
         <servlet-name>Dispatcher</servlet-name>
         <url-pattern>/</url-pattern>
         <!--<url-pattern>/user-application-main</url-pattern>-->
+        <!--<url-pattern>/employee/1</url-pattern>-->
         <url-pattern>/admin-menu</url-pattern>
     </servlet-mapping>
 
     <welcome-file-list>
+        <!--<welcome-file>/employee/1</welcome-file>-->
         <welcome-file>user-application-main</welcome-file>
         <welcome-file>admin-menu</welcome-file>
     </welcome-file-list>

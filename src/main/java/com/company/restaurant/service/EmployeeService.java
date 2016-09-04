@@ -22,9 +22,13 @@ public interface EmployeeService {
 
     List<JobPosition> findAllJobPositions();
 
+    List<String> findAllJobPositionNames();
+
     Employee addEmployee(Employee employee);
 
     void delEmployee(Employee employee);
+
+    Employee updEmployee(Employee employee);
 
     void delEmployee(int employeeId);
 
