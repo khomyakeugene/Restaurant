@@ -11,10 +11,10 @@
 </head>
 <div class="main-menu ordinary-container">
     <ul>
-        <li><a href="/admin_application_main">Menu</a></li>
-        <li><a href="/course_list">Course</a></li>
-        <li><a href="/personnel_list">Personnel</a></li>
-        <li><a href="/warehouse">Warehouse</a></li>
-        <li><a href="/order_history">Order history</a></li>
+        <li><a href="/admin-menu">Menu</a></li>
+        <li><a href="/admin-course-list">Course</a></li>
+        <li><a href="/admin-employee-list">Personnel</a></li>
+        <li><a href="/admin-warehouse">Warehouse</a></li>
+        <li><a href="/admin-order-history">Order history</a></li>
     </ul>
 </div>
