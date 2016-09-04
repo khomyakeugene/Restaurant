@@ -41,6 +41,8 @@ public class AdminEmployeeController extends AdminApplicationController {
     private EmployeeService employeeService;
 
     private Employee newEmployee() {
+        modelAndView.clear();
+
         Employee result = new Employee();
         result.setJobPosition(employeeService.findJobPositionByName(DEFAULT_JOB_POSITION_NAME_VALUE));
 
@@ -54,6 +56,8 @@ public class AdminEmployeeController extends AdminApplicationController {
 
     @RequestMapping(value = ADMIN_EMPLOYEE_LIST_REQUEST_MAPPING_VALUE, method = RequestMethod.GET)
     public ModelAndView employeeListPage() {
+        modelAndView.clear();
+
         modelAndView.addObject(EMPLOYEES_VAR_NAME, employeeService.findAllEmployees());
         modelAndView.setViewName(ADMIN_EMPLOYEE_LIST_PAGE_VIEW_NAME);
 
@@ -62,6 +66,8 @@ public class AdminEmployeeController extends AdminApplicationController {
 
     @RequestMapping(value = ADMIN_EMPLOYEE_REQUEST_MAPPING_VALUE, method = RequestMethod.GET)
     public ModelAndView employee(@PathVariable int employeeId) {
+        modelAndView.clear();
+
         Employee employee;
         if (employeeId > 0) {
             employee = employeeService.findEmployeeById(employeeId);
@@ -96,6 +102,8 @@ public class AdminEmployeeController extends AdminApplicationController {
                                      @RequestParam(EMPLOYEE_SALARY_VAR_NAME) Float employeeSalary
 //                                     , @RequestParam(EMPLOYEE_PHOTO_VAR_NAME) byte[] employeePhoto
     ) {
+        modelAndView.clear();
+
         Employee employee = null;
         // Temporarily: get "old" image from database - because I do not know how to manipulate with image
         if (employeeId > 0) {

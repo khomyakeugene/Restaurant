@@ -44,6 +44,7 @@ public class UserMainController extends UserApplicationController {
 
     @RequestMapping(value = USER_APPLICATION_COURSE_REQUEST_MAPPING_VALUE, method = RequestMethod.GET)
     public ModelAndView course(@PathVariable int courseId) {
+        modelAndView.clear();
 
         modelAndView.addObject(COURSE_VAR_NAME, courseService.findCourseById(courseId));
         modelAndView.setViewName(COURSE_VIEW_NAME);
@@ -53,6 +54,8 @@ public class UserMainController extends UserApplicationController {
 
     @RequestMapping(value = SEARCH_REQUEST_MAPPING_VALUE, method = RequestMethod.GET)
     public ModelAndView search(@RequestParam(COURSE_NAME_VAR_NAME) String courseName) {
+        modelAndView.clear();
+
         modelAndView.addObject(COURSES_VAR_NAME, courseService.findCoursesByNameFragment(courseName));
         modelAndView.setViewName(MAIN_PAGE_VIEW_NAME);
 

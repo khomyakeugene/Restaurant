@@ -26,6 +26,8 @@ public class AdminWarehouseController extends AdminApplicationController {
 
     @RequestMapping(value = ADMIN_WAREHOUSE_REQUEST_MAPPING_VALUE, method = RequestMethod.GET)
     public ModelAndView warehouseContentPage() {
+        modelAndView.clear();
+
         modelAndView.addObject(WAREHOUSE_CONTENT_VAR_NAME, warehouseService.findAllWarehouseIngredients());
         modelAndView.setViewName(ADMIN_WAREHOUSE_PAGE_VIEW_NAME);
 

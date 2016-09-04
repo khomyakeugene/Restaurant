@@ -27,6 +27,8 @@ public class AdminMenuController extends AdminApplicationController {
 
     @RequestMapping(value = ADMIN_MENU_REQUEST_MAPPING_VALUE, method = RequestMethod.GET)
     public ModelAndView menuPage() {
+        modelAndView.clear();
+
         modelAndView.addObject(MENUS_VAR_NAME, menuService.findAllMenus());
         modelAndView.setViewName(ADMIN_MENU_PAGE_VIEW_NAME);
 

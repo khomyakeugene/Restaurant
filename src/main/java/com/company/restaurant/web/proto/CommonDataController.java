@@ -21,6 +21,8 @@ public class CommonDataController extends ControllerProto {
     }
 
     protected void initData() {
+        modelAndView.clear();
+
         modelAndView.addObject(RESTAURANT_NAME_VAR_NAME, commonDataService.getRestaurantName());
         modelAndView.addObject(RESTAURANT_ADDRESS_VAR_NAME, commonDataService.getRestaurantAddress());
         modelAndView.addObject(RESTAURANT_E_MAIL_VAR_NAME, commonDataService.getRestaurantEMail());

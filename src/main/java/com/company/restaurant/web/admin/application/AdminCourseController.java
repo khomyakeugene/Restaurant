@@ -27,6 +27,7 @@ public class AdminCourseController extends AdminApplicationController {
 
     @RequestMapping(value = ADMIN_COURSE_LIST_REQUEST_MAPPING_VALUE, method = RequestMethod.GET)
     public ModelAndView courseListPage() {
+        modelAndView.clear();
 
         modelAndView.addObject(COURSES_VAR_NAME, courseService.findAllCourses());
         modelAndView.setViewName(ADMIN_COURSE_LIST_PAGE_VIEW_NAME);

@@ -71,11 +71,25 @@
                         </td>
                     </tr>
                 </table>
-                <div>
-                    <button type="submit" class="button green" name="save" value="save" formnovalidate>
-                        Save
-                    </button>
-                </div>
+
+                <table>
+                   <tr>
+                       <td>
+                           <div>
+                               <button type="submit" class="button green" name="save" value="save" formnovalidate>
+                                   Save
+                               </button>
+                           </div>
+                       </td>
+                       <td>
+                           <div>
+                               <button type="submit" class="button red" name="delete" value="delete" formnovalidate>
+                                   Delete
+                               </button>
+                           </div>
+                       </td>
+                   </tr>
+                </table>
             </div>
 
             <div class="third">
