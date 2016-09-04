@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class AdminMenuController extends AdminApplicationController {
-    private static final String ADMIN_MENU_PAGE_VIEW_NAME = "admin-application/admin-menu-page";
+    private static final String ADMIN_MENU_PAGE_VIEW_NAME = "admin-application/menu/admin-menu-page";
     private static final String ADMIN_MENU_REQUEST_MAPPING_VALUE = "/admin-menu";
     private static final String MENUS_VAR_NAME = "menus";
     private static final String MENU_VAR_NAME = "menu";

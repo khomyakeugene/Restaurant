@@ -5,7 +5,7 @@
   Time: 21:34
   To change this template use File | Settings | File Templates.
 --%>
-<%--@elvariable id="employees" type="com.company.restaurant.web.user.application.UserEmployeeController"--%>
+<%--@elvariable id="employees" type="com.company.restaurant.web.admin.application.AdminEmployeeController"--%>
 
 <table class="admin-employee-table">
     <tr>
@@ -16,7 +16,7 @@
     </tr>
     <c:forEach items="${employees}" var="employee">
         <tr>
-            <td><b><a href="/employee/${employee.employeeId}">${employee.name}</b></td>
+            <td><b><a href="/employee/${employee.employeeId}"/>${employee.name}</b></td>
             <td>${employee.jobPosition.name}</td>
             <td>${employee.phoneNumber}</td>
             <td style="text-align: right">${employee.salary}</td>

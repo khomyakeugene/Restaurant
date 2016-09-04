@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class AdminWarehouseController extends AdminApplicationController {
-    private static final String ADMIN_WAREHOUSE_PAGE_VIEW_NAME = "admin-application/admin-warehouse-page";
+    private static final String ADMIN_WAREHOUSE_PAGE_VIEW_NAME = "admin-application/warehouse/admin-warehouse-page";
     private static final String ADMIN_WAREHOUSE_REQUEST_MAPPING_VALUE = "/admin-warehouse";
     private static final String WAREHOUSE_CONTENT_VAR_NAME = "warehouse-content";
 

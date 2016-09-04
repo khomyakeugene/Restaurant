@@ -5,6 +5,8 @@
   Time: 21:31
   To change this template use File | Settings | File Templates.
 --%>
-<button type="submit" class="button green" name="submitButtonValue" value="createEmployee">
-    Create employee
-</button>
+<div>
+    <button type="submit" class="button green" name="submitButtonValue" value="createEmployee">
+        Create employee
+    </button>
+</div>

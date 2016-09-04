@@ -18,9 +18,9 @@ import java.util.stream.Collectors;
  */
 @Controller
 public class AdminEmployeeController extends AdminApplicationController {
-    private static final String ADMIN_EMPLOYEE_LIST_PAGE_VIEW_NAME = "admin-application/admin-employee-list-page";
-    private static final String ADMIN_EMPLOYEE_PAGE_VIEW_NAME = "admin-application/admin-employee-page";
-    private static final String ADMIN_CREATE_EMPLOYEE_PAGE_VIEW_NAME = "admin-application/admin-create-employee-page";
+    private static final String ADMIN_EMPLOYEE_LIST_PAGE_VIEW_NAME = "admin-application/employee/admin-employee-list-page";
+    private static final String ADMIN_EMPLOYEE_PAGE_VIEW_NAME = "admin-application/employee/admin-employee-page";
+    private static final String ADMIN_CREATE_EMPLOYEE_PAGE_VIEW_NAME = "admin-application/employee/admin-create-employee-page";
     private static final String ADMIN_EMPLOYEE_LIST_REQUEST_MAPPING_VALUE = "/admin-employee-list";
     private static final String ADMIN_EMPLOYEE_REQUEST_MAPPING_VALUE = "/employee/{employeeId}";
     private static final String ADMIN_SAVE_OR_DELETE_EMPLOYEE_REQUEST_MAPPING_VALUE = "/save-or-delete-employee";
@@ -177,7 +177,7 @@ public class AdminEmployeeController extends AdminApplicationController {
                                        @RequestParam(EMPLOYEE_JOB_POSITION_NAME_VAR_NAME) String jobPositionName,
                                        @RequestParam(EMPLOYEE_PHONE_NUMBER_VAR_NAME) String employeePhoneNumber,
                                        @RequestParam(EMPLOYEE_SALARY_VAR_NAME) Float employeeSalary
-//                                     , @RequestParam(EMPLOYEE_PHOTO_VAR_NAME) byte[] employeePhoto
+//                                     , @RequestParam(EMPLOYEE_PHOTO_VAR_NAME) byte[] employeePhoto,
     ) {
         saveEmployee(0, employeeFirstName, employeeSecondName, jobPositionName, employeePhoneNumber,
                 employeeSalary);

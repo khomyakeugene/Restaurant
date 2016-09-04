@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class AdminOrderHistoryController extends AdminApplicationController {
-    private static final String ADMIN_ORDER_HISTORY_PAGE_VIEW_NAME = "admin-application/admin-order-history-page";
+    private static final String ADMIN_ORDER_HISTORY_PAGE_VIEW_NAME = "admin-application/order-history/admin-order-history-page";
     private static final String ADMIN_ORDER_HISTORY_REQUEST_MAPPING_VALUE = "/admin-order-history";
     private static final String ORDERS_VAR_NAME = "orders";
     private static final String ORDER_VAR_NAME = "order";

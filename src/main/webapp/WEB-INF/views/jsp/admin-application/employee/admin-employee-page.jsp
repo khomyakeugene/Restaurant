@@ -9,7 +9,7 @@
 
 <html>
 <body>
-<%@ include file="frames/main-menu-frame.jsp" %>
+<%@ include file="../frames/main-menu-frame.jsp" %>
 <%@ include file="frames/save-or-delete-employee-frame.jsp" %>
 
 </body>

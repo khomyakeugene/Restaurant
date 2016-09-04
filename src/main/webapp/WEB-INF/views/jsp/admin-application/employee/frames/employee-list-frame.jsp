@@ -7,7 +7,7 @@
 --%>
 <%--<h3>Personnel</h3>--%>
 <form action="/prepare-new-employee" method="post">
-    <%@ include file="create-employee-button-frame.jsp" %>
+    <%@ include file="buttons/create-employee-button.jsp" %>
     <%@ include file="employee-table-frame.jsp" %>
 </form>
 

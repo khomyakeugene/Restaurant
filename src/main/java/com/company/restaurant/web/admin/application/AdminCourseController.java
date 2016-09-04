@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class AdminCourseController extends AdminApplicationController {
-    private static final String ADMIN_COURSE_LIST_PAGE_VIEW_NAME = "admin-application/admin-course-list-page";
+    private static final String ADMIN_COURSE_LIST_PAGE_VIEW_NAME = "admin-application/course/admin-course-list-page";
     private static final String ADMIN_COURSE_LIST_REQUEST_MAPPING_VALUE = "/admin-course-list";
     private static final String COURSES_VAR_NAME = "courses";
     private static final String COURSE_VAR_NAME = "course";
