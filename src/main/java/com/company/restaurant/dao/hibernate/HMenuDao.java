@@ -1,7 +1,7 @@
 package com.company.restaurant.dao.hibernate;
 
 import com.company.restaurant.dao.MenuDao;
-import com.company.restaurant.dao.hibernate.proto.HDaoEntityCourseCollecting;
+import com.company.restaurant.dao.hibernate.common.HDaoEntityCourseCollecting;
 import com.company.restaurant.model.Course;
 import com.company.restaurant.model.Menu;
 import org.springframework.transaction.annotation.Transactional;

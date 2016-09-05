@@ -4,7 +4,7 @@ import com.company.restaurant.dao.MenuDao;
 import com.company.restaurant.model.Course;
 import com.company.restaurant.model.Menu;
 import com.company.restaurant.service.MenuService;
-import com.company.restaurant.service.impl.proto.Service;
+import com.company.restaurant.service.impl.common.Service;
 
 import java.util.ArrayList;
 import java.util.List;

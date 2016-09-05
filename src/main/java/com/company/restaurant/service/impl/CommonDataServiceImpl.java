@@ -2,7 +2,7 @@ package com.company.restaurant.service.impl;
 
 import com.company.restaurant.dao.CommonDataDao;
 import com.company.restaurant.service.CommonDataService;
-import com.company.restaurant.service.impl.proto.Service;
+import com.company.restaurant.service.impl.common.Service;
 
 import java.util.ArrayList;
 import java.util.List;

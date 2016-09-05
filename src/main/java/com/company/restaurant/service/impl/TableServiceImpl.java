@@ -3,7 +3,7 @@ package com.company.restaurant.service.impl;
 import com.company.restaurant.dao.TableDao;
 import com.company.restaurant.model.Table;
 import com.company.restaurant.service.TableService;
-import com.company.restaurant.service.impl.proto.Service;
+import com.company.restaurant.service.impl.common.Service;
 
 import java.util.List;
 

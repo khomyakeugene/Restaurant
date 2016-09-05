@@ -1,6 +1,6 @@
 package com.company.restaurant.model;
 
-import com.company.restaurant.model.proto.CourseCollecting;
+import com.company.restaurant.model.common.CourseCollecting;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;

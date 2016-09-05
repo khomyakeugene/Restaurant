@@ -1,7 +1,6 @@
 package com.company.restaurant.model;
 
-import com.company.restaurant.model.proto.ImageObject;
-import com.company.restaurant.model.proto.PhotoHolderObject;
+import com.company.restaurant.model.common.PhotoHolderObject;
 
 /**
  * Created by Yevhen on 19.05.2016.

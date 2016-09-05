@@ -1,7 +1,7 @@
 package com.company.restaurant.dao.hibernate;
 
 import com.company.restaurant.dao.StateGraphDao;
-import com.company.restaurant.dao.hibernate.proto.HDaoEntity;
+import com.company.restaurant.dao.hibernate.common.HDaoEntity;
 import com.company.restaurant.model.StateGraph;
 import org.springframework.transaction.annotation.Transactional;
 

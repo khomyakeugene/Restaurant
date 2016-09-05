@@ -4,7 +4,7 @@ import com.company.restaurant.dao.EmployeeDao;
 import com.company.restaurant.dao.JobPositionDao;
 import com.company.restaurant.model.*;
 import com.company.restaurant.service.EmployeeService;
-import com.company.restaurant.service.impl.proto.Service;
+import com.company.restaurant.service.impl.common.Service;
 
 import java.util.ArrayList;
 import java.util.List;

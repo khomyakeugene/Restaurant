@@ -1,7 +1,7 @@
 package com.company.restaurant.dao.hibernate;
 
 import com.company.restaurant.dao.CookedCourseDao;
-import com.company.restaurant.dao.hibernate.proto.HDaoEntity;
+import com.company.restaurant.dao.hibernate.common.HDaoEntity;
 import com.company.restaurant.model.CookedCourse;
 import com.company.restaurant.model.Course;
 import com.company.restaurant.model.Employee;

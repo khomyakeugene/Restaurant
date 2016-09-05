@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 @Controller
 public class AdminEmployeeController extends AdminApplicationController {
     private static final String ADMIN_EMPLOYEE_LIST_PAGE_VIEW_NAME = "admin-application/employee/admin-employee-list-page";
-    private static final String ADMIN_EMPLOYEE_PAGE_VIEW_NAME = "admin-application/employee/admin-employee-page";
+    private static final String ADMIN_SAVE_OR_DELETE_EMPLOYEE_PAGE_VIEW_NAME = "admin-application/employee/admin-save-or-delete-employee-page";
     private static final String ADMIN_CREATE_EMPLOYEE_PAGE_VIEW_NAME = "admin-application/employee/admin-create-employee-page";
     private static final String ADMIN_EMPLOYEE_LIST_REQUEST_MAPPING_VALUE = "/admin-employee-list";
     private static final String ADMIN_EMPLOYEE_REQUEST_MAPPING_VALUE = "/employee/{employeeId}";
@@ -87,12 +87,12 @@ public class AdminEmployeeController extends AdminApplicationController {
 
     }
 
-    private Employee saveEmployee(int employeeId,
-                                  String employeeFirstName,
-                                  String employeeSecondName,
-                                  String jobPositionName,
-                                  String employeePhoneNumber,
-                                  Float employeeSalary
+    private Employee saveOrDeleteEmployee(int employeeId,
+                                          String employeeFirstName,
+                                          String employeeSecondName,
+                                          String jobPositionName,
+                                          String employeePhoneNumber,
+                                          Float employeeSalary
 //                              , byte[] employeePhoto
     ) {
         Employee employee = null;
@@ -125,6 +125,9 @@ public class AdminEmployeeController extends AdminApplicationController {
         modelAndView.addObject(EMPLOYEES_VAR_NAME, employeeService.findAllEmployees());
         modelAndView.setViewName(ADMIN_EMPLOYEE_LIST_PAGE_VIEW_NAME);
 
+        // To possible further return from <ExceptionHandler>
+        storeLastNavigationViewName();
+
         return modelAndView;
     }
 
@@ -132,24 +135,27 @@ public class AdminEmployeeController extends AdminApplicationController {
     public ModelAndView employee(@PathVariable int employeeId) {
         prepareEmployeeEnvironment(employeeId);
 
-        modelAndView.setViewName(ADMIN_EMPLOYEE_PAGE_VIEW_NAME);
+        modelAndView.setViewName(ADMIN_SAVE_OR_DELETE_EMPLOYEE_PAGE_VIEW_NAME);
+
+        // To possible further return from <ExceptionHandler>
+        storeLastNavigationViewName();
 
         return modelAndView;
     }
 
     @RequestMapping(value = ADMIN_SAVE_OR_DELETE_EMPLOYEE_REQUEST_MAPPING_VALUE, method = RequestMethod.POST)
-    public ModelAndView saveEmployee(@RequestParam(EMPLOYEE_ID_VAR_NAME) int employeeId,
-                                     @RequestParam(EMPLOYEE_FIRST_NAME_VAR_NAME) String employeeFirstName,
-                                     @RequestParam(EMPLOYEE_SECOND_NAME_VAR_NAME) String employeeSecondName,
-                                     @RequestParam(EMPLOYEE_JOB_POSITION_NAME_VAR_NAME) String jobPositionName,
-                                     @RequestParam(EMPLOYEE_PHONE_NUMBER_VAR_NAME) String employeePhoneNumber,
-                                     @RequestParam(EMPLOYEE_SALARY_VAR_NAME) Float employeeSalary,
+    public ModelAndView saveOrDeleteEmployee(@RequestParam(EMPLOYEE_ID_VAR_NAME) int employeeId,
+                                             @RequestParam(EMPLOYEE_FIRST_NAME_VAR_NAME) String employeeFirstName,
+                                             @RequestParam(EMPLOYEE_SECOND_NAME_VAR_NAME) String employeeSecondName,
+                                             @RequestParam(EMPLOYEE_JOB_POSITION_NAME_VAR_NAME) String jobPositionName,
+                                             @RequestParam(EMPLOYEE_PHONE_NUMBER_VAR_NAME) String employeePhoneNumber,
+                                             @RequestParam(EMPLOYEE_SALARY_VAR_NAME) Float employeeSalary,
 //                                     @RequestParam(EMPLOYEE_PHOTO_VAR_NAME) byte[] employeePhoto,
-                                     @RequestParam(SUBMIT_BUTTON_VAR_NAME) String submitButtonValue
+                                             @RequestParam(SUBMIT_BUTTON_VAR_NAME) String submitButtonValue
     ) {
         String submitButtonLowerCaseValue = submitButtonValue.toLowerCase();
         if (submitButtonLowerCaseValue.equals(SUBMIT_BUTTON_SAVE_VALUE.toLowerCase())) {
-            saveEmployee(employeeId, employeeFirstName, employeeSecondName, jobPositionName, employeePhoneNumber,
+            saveOrDeleteEmployee(employeeId, employeeFirstName, employeeSecondName, jobPositionName, employeePhoneNumber,
                     employeeSalary);
 
         } else if (submitButtonLowerCaseValue.equals(SUBMIT_BUTTON_DELETE_VALUE.toLowerCase())) {
@@ -168,6 +174,9 @@ public class AdminEmployeeController extends AdminApplicationController {
 
         modelAndView.setViewName(ADMIN_CREATE_EMPLOYEE_PAGE_VIEW_NAME);
 
+        // To possible further return from <ExceptionHandler>
+        storeLastNavigationViewName();
+
         return modelAndView;
     }
 
@@ -179,7 +188,7 @@ public class AdminEmployeeController extends AdminApplicationController {
                                        @RequestParam(EMPLOYEE_SALARY_VAR_NAME) Float employeeSalary
 //                                     , @RequestParam(EMPLOYEE_PHOTO_VAR_NAME) byte[] employeePhoto,
     ) {
-        saveEmployee(0, employeeFirstName, employeeSecondName, jobPositionName, employeePhoneNumber,
+        saveOrDeleteEmployee(0, employeeFirstName, employeeSecondName, jobPositionName, employeePhoneNumber,
                 employeeSalary);
 
         modelAndView.clear();

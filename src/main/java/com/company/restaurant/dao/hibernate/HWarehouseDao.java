@@ -2,11 +2,11 @@ package com.company.restaurant.dao.hibernate;
 
 import com.company.restaurant.dao.IngredientDao;
 import com.company.restaurant.dao.WarehouseDao;
-import com.company.restaurant.dao.hibernate.proto.HDaoAmountLinkEntity;
-import com.company.restaurant.dao.proto.SqlExpressions;
+import com.company.restaurant.dao.hibernate.common.HDaoAmountLinkEntity;
 import com.company.restaurant.model.Ingredient;
 import com.company.restaurant.model.Portion;
 import com.company.restaurant.model.Warehouse;
+import com.company.util.sql.SqlExpressions;
 import org.hibernate.query.Query;
 import org.springframework.transaction.annotation.Transactional;
 

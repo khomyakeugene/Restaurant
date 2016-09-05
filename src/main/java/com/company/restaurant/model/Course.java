@@ -1,6 +1,6 @@
 package com.company.restaurant.model;
 
-import com.company.restaurant.model.proto.PhotoHolderObject;
+import com.company.restaurant.model.common.PhotoHolderObject;
 
 import java.io.Serializable;
 import java.util.HashSet;

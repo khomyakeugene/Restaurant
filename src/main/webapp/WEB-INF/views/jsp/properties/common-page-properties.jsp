@@ -5,7 +5,7 @@
   Time: 20:47
   To change this template use File | Settings | File Templates.
 --%>
-<%--@elvariable id="restaurantName" type="com.company.restaurant.web.proto.CommonDataController"--%>
+<%--@elvariable id="restaurantName" type="com.company.restaurant.web.common.CommonDataController"--%>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>

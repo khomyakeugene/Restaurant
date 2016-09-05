@@ -4,8 +4,8 @@ import com.company.restaurant.dao.OrderDao;
 import com.company.restaurant.model.Course;
 import com.company.restaurant.model.Order;
 import com.company.restaurant.service.OrderService;
-import com.company.restaurant.service.impl.proto.Service;
-import com.company.util.DataIntegrityException;
+import com.company.restaurant.service.impl.common.Service;
+import com.company.util.exception.DataIntegrityException;
 
 import java.util.Date;
 import java.util.List;

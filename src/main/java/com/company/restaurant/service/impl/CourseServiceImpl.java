@@ -5,7 +5,7 @@ import com.company.restaurant.dao.CourseDao;
 import com.company.restaurant.model.Course;
 import com.company.restaurant.model.CourseCategory;
 import com.company.restaurant.service.CourseService;
-import com.company.restaurant.service.impl.proto.Service;
+import com.company.restaurant.service.impl.common.Service;
 
 import java.util.List;
 

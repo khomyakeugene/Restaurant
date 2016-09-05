@@ -1,7 +1,7 @@
 package com.company.restaurant.dao.hibernate;
 
 import com.company.restaurant.dao.OrderDao;
-import com.company.restaurant.dao.hibernate.proto.HDaoEntityCourseCollecting;
+import com.company.restaurant.dao.hibernate.common.HDaoEntityCourseCollecting;
 import com.company.restaurant.model.Course;
 import com.company.restaurant.model.Order;
 import com.company.restaurant.model.State;

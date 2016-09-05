@@ -1,6 +1,6 @@
 package com.company.restaurant.model;
 
-import com.company.restaurant.model.proto.SimpleDic;
+import com.company.restaurant.model.common.SimpleDic;
 
 import java.io.Serializable;
 

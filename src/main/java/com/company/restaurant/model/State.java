@@ -1,6 +1,6 @@
 package com.company.restaurant.model;
 
-import com.company.restaurant.model.proto.SimpleTypeDic;
+import com.company.restaurant.model.common.SimpleTypeDic;
 
 /**
  * Created by Yevhen on 25.06.2016.

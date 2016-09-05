@@ -2,7 +2,7 @@ package com.company.restaurant.service.impl;
 
 import com.company.restaurant.dao.StateGraphDao;
 import com.company.restaurant.model.StateGraph;
-import com.company.util.DataIntegrityException;
+import com.company.util.exception.DataIntegrityException;
 
 import java.util.HashMap;
 import java.util.List;

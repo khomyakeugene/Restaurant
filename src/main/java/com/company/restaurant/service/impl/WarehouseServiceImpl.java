@@ -7,7 +7,7 @@ import com.company.restaurant.model.Ingredient;
 import com.company.restaurant.model.Portion;
 import com.company.restaurant.model.Warehouse;
 import com.company.restaurant.service.WarehouseService;
-import com.company.restaurant.service.impl.proto.Service;
+import com.company.restaurant.service.impl.common.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;

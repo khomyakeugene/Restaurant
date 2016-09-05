@@ -13,5 +13,9 @@
         <td>
             <%@ include file="../../../frames/buttons/cancel-button.jsp" %>
         </td>
+        <td>
+            <%@ include file="../../../../frames/error-mesage-frame.jsp" %>
+        </td>
+
     </tr>
 </table>

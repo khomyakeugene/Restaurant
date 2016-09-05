@@ -54,7 +54,6 @@
     background: -moz-linear-gradient(top, #6b6b6b, #c7c7c7);
 }
 
-
 .standard-table,
 .user-employee-table,
 .admin-employee-table,
@@ -210,4 +209,10 @@
 .framed-div {
     border: 1px solid #000000;
     border-collapse: collapse;
+}
+.error-message {
+    color: red;
+    font-size: 22px;
+    font-weight: bold;
+    margin-left: 15px;
 }

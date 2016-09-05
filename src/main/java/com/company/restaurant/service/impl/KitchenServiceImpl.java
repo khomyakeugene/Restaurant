@@ -4,7 +4,7 @@ import com.company.restaurant.dao.CookedCourseDao;
 import com.company.restaurant.model.*;
 import com.company.restaurant.service.KitchenService;
 import com.company.restaurant.service.WarehouseService;
-import com.company.restaurant.service.impl.proto.Service;
+import com.company.restaurant.service.impl.common.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
