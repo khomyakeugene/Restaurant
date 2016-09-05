@@ -8,13 +8,13 @@
 <table>
     <tr>
         <td>
-            <%@ include file="create-employee-button.jsp" %>
+            <%@ include file="create-button.jsp" %>
         </td>
         <td>
-            <%@ include file="../../../frames/buttons/cancel-button.jsp" %>
+            <%@ include file="cancel-button.jsp" %>
         </td>
         <td>
-            <%@ include file="../../../../frames/error-mesage-frame.jsp" %>
+            <%@ include file="../../../frames/error-mesage-frame.jsp" %>
         </td>
 
     </tr>

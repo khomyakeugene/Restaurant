@@ -7,6 +7,6 @@
 --%>
 <div>
     <button type="submit" class="button green" name="submitButtonValue" value="createEmployee">
-        Create employee
+        Create
     </button>
 </div>

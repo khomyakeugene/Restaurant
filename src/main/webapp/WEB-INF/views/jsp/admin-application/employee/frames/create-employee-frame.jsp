@@ -7,5 +7,5 @@
 --%>
 <form action="/create-employee" method="post">
     <%@ include file="employee-frame.jsp" %>
-    <%@ include file="buttons/create-employee-buttons-frame.jsp" %>
+    <%@ include file="../../frames/buttons/create-buttons-frame.jsp" %>
 </form>
