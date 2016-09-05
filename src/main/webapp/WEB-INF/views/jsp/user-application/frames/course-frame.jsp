@@ -33,14 +33,15 @@
                             </tr>
                         </c:forEach>
                     </table>
-
                 </div>
             </div>
         </div>
 
         <div class="third">
             <div class="ordinary-container">
-                <img class="img" style="max-width: 100%" src="data:image/jpeg;base64,${course.base64EncodePhoto}"/>
+                <img class="img" style="max-width: 100%"
+                     src="data:image/jpeg;base64,${course.base64EncodePhoto}" alt="No course photo"
+                    name="coursePhoto"/>
             </div>
         </div>
     </div>
