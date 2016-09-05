@@ -1,13 +1,11 @@
 <%--
   Created by IntelliJ IDEA.
   User: Yevhen
-  Date: 04.09.2016
-  Time: 11:08
+  Date: 06.09.2016
+  Time: 0:49
   To change this template use File | Settings | File Templates.
 --%>
-<%--<h3>Personnel</h3>--%>
-<form action="/prepare-new-employee" method="post">
+<form action="/prepare-new-course" method="post">
     <%@ include file="../../frames/buttons/create-button-frame.jsp" %>
-    <%@ include file="employee-table-frame.jsp" %>
+    <%@ include file="course-table-frame.jsp" %>
 </form>
-

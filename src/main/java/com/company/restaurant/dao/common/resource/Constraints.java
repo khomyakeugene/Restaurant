@@ -15,13 +15,13 @@ public class Constraints {
     private static final String CONSTRAINT_NAME_COOKED_COURSE_COURSE_ID = "fk_cooked_c_ckd_crs_c_course";
 
     private static final String EMPLOYEE_CANNOT_BE_DELETED_BECAUSE_OF_ORDER =
-            "It is impossible to delete employee because there are orders served by him/her";
+            "It is impossible to delete this employee because there are orders served by him/her";
     private static final String TABLE_CANNOT_BE_DELETED_BECAUSE_OF_ORDER =
-            "It is impossible to delete table because there are orders in which this table takes place";
+            "It is impossible to delete this table because there are orders in which this table takes place";
     private static final String EMPLOYEE_CANNOT_BE_DELETED_BECAUSE_OF_COOKED_COURSE =
-            "It is impossible to delete employee because there is at least one course cooked by him/her";
+            "It is impossible to delete this employee because there is at least one course cooked by him/her";
     private static final String COURSE_CANNOT_BE_DELETED_BECAUSE_OF_COOKED_COURSE =
-            "It is impossible to delete course because is was cooked at least once";
+            "It is impossible to delete this course because is was cooked at least once";
 
     private static final HashMap<String, String> constraintMessageMap = new HashMap<String, String>() {
         {
