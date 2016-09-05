@@ -7,6 +7,7 @@ import com.company.restaurant.service.OrderService;
 import com.company.restaurant.service.impl.proto.Service;
 import com.company.util.DataIntegrityException;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -159,5 +160,10 @@ public class OrderServiceImpl extends Service implements OrderService {
     @Override
     public Order updOrderState(Order order, String stateType) {
         return orderDao.updOrderState(order, stateType);
+    }
+
+    @Override
+    public List<Date> getOrderDates() {
+        return orderDao.getOrderDates();
     }
 }

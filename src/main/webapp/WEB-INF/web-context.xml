@@ -19,7 +19,8 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
-    <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" id="messageConverter"/>
+    <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"
+          id="messageConverter"/>
 
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter" id="requestMappingHandlerAdapter">
         <property name="messageConverters">
@@ -28,7 +29,6 @@
             </list>
         </property>
     </bean>
-
 
     <mvc:annotation-driven/>
     <mvc:resources mapping="/resources/**" location="/resources/"/>

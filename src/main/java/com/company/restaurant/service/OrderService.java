@@ -3,6 +3,7 @@ package com.company.restaurant.service;
 import com.company.restaurant.model.Course;
 import com.company.restaurant.model.Order;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -38,4 +39,6 @@ public interface OrderService {
     Course findOrderCourseByCourseId(Order order, int courseId);
 
     Order updOrderState(Order order, String stateType);
+
+    List<Date> getOrderDates();
 }

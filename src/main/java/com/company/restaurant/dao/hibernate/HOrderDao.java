@@ -8,6 +8,7 @@ import com.company.restaurant.model.State;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -100,5 +101,11 @@ public class HOrderDao extends HDaoEntityCourseCollecting<Order> implements Orde
     @Override
     public Course findOrderCourseByCourseId(Order order, int courseId) {
         return findCourseByCourseId(order, courseId);
+    }
+
+    @Transactional
+    @Override
+    public List<Date> getOrderDates() {
+        return null;
     }
 }
