@@ -18,6 +18,9 @@
                     <td>
                         <label class="input-label" for="courseName">Title (name)</label>
                     </td>
+                    <td>
+                        <label class="input-label" for="courseCategory">Category</label>
+                    </td>
                     <td style="text-align: right">
                         <label class="input-label" for="courseWeight">Weight (kg)</label>
                     </td>
@@ -30,6 +33,9 @@
                         <input type="text" class="input-control" id="courseName"
                                name="courseName" placeholder="Enter course name"
                                value="${course.name}" required="required" autofocus>
+                    </td>
+                    <td>
+                        <%@ include file="../../frames/combo-box/course-category-combo.jsp" %>
                     </td>
                     <td>
                         <input type="number" step="0.001" class="input-control" style="text-align: right"

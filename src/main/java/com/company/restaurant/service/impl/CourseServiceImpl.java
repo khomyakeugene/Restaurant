@@ -7,6 +7,7 @@ import com.company.restaurant.model.CourseCategory;
 import com.company.restaurant.service.CourseService;
 import com.company.restaurant.service.impl.common.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CourseServiceImpl extends Service implements CourseService {
@@ -44,6 +45,14 @@ public class CourseServiceImpl extends Service implements CourseService {
     @Override
     public List<CourseCategory> findAllCourseCategories() {
         return courseCategoryDao.findAllCourseCategories();
+    }
+
+    @Override
+    public List<String> findAllCourseCategoryNames() {
+        List<String> result = new ArrayList<>();
+        findAllCourseCategories().forEach(courseCategory -> result.add(courseCategory.getName()));
+
+        return result;
     }
 
     @Override

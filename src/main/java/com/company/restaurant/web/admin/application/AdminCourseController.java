@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.stream.Collectors;
+
 /**
  * Created by Yevhen on 04.09.2016.
  */
@@ -22,6 +24,8 @@ public class AdminCourseController extends AdminApplicationController {
     private static final String ADMIN_SAVE_OR_DELETE_COURSE_PAGE_VIEW_NAME =
             "admin-application/course/admin-save-or-delete-course-page";
     private static final String ADMIN_SAVE_OR_DELETE_COURSE_REQUEST_MAPPING_VALUE = "/save-or-delete-course";
+    private static final String ADMIN_CREATE_COURSE_PAGE_VIEW_NAME = "admin-application/course/admin-create-course-page";
+    private static final String ADMIN_PREPARE_NEW_COURSE_REQUEST_MAPPING_VALUE = "/prepare-new-couse";
 
     private static final String COURSES_VAR_NAME = "courses";
     private static final String COURSE_VAR_NAME = "course";
@@ -29,12 +33,53 @@ public class AdminCourseController extends AdminApplicationController {
     private static final String COURSE_NAME_VAR_NAME = "courseName";
     private static final String COURSE_WEIGHT_VAR_NAME = "courseWeight";
     private static final String COURSE_COST_VAR_NAME = "courseCost";
+    private static final String COURSE_CATEGORY_NAME_VAR_NAME = "courseCategoryName";
+    private static final String COURSE_CATEGORY_NAMES_VAR_NAME = "courseCategoryNames";
+
+    private static final String DEFAULT_COURSE_CATEGORY_NAME_VALUE = "Salads";
 
     private CourseService courseService;
 
     @Autowired
     public void setCourseService(CourseService courseService) {
         this.courseService = courseService;
+    }
+
+    private Course newCourse() {
+        Course result = new Course();
+        result.setCourseCategory(courseService.findCourseCategoryByName(DEFAULT_COURSE_CATEGORY_NAME_VALUE));
+
+        return result;
+    }
+
+
+    private void prepareCourseEnvironment(int courseId) {
+        modelAndView.clear();
+
+        Course course;
+        if (courseId > 0) {
+            course = courseService.findCourseById(courseId);
+            if (course == null) {
+                course = newCourse();
+            }
+        } else {
+            course = newCourse();
+        }
+
+        // Current job position name - important to correct work of <form:select> in view
+        String courseCategoryName = course.getCourseCategory().getName();
+        modelAndView.addObject(COURSE_VAR_NAME, course);
+        modelAndView.addObject(COURSE_CATEGORY_NAME_VAR_NAME, courseCategoryName);
+
+        // Temporary solution: exclude <jobPositionName> from <jobPositionNames>  - important to correct work
+        // of <form:select> in view
+        modelAndView.addObject(COURSE_CATEGORY_NAMES_VAR_NAME, courseService.findAllCourseCategoryNames().stream().
+                filter(n -> (!n.equals(courseCategoryName))).collect(Collectors.toList()));
+    }
+
+    private void prepareCourseEnvironment() {
+        prepareCourseEnvironment(0);
+
     }
 
     private Course saveCourse(int courseId,
@@ -77,7 +122,7 @@ public class AdminCourseController extends AdminApplicationController {
 
     @RequestMapping(value = ADMIN_APPLICATION_COURSE_REQUEST_MAPPING_VALUE, method = RequestMethod.GET)
     public ModelAndView course(@PathVariable int courseId) {
-        modelAndView.clear();
+        prepareCourseEnvironment(courseId);
 
         modelAndView.addObject(COURSE_VAR_NAME, courseService.findCourseById(courseId));
         modelAndView.setViewName(ADMIN_SAVE_OR_DELETE_COURSE_PAGE_VIEW_NAME);
@@ -106,4 +151,17 @@ public class AdminCourseController extends AdminApplicationController {
 
         return modelAndView;
     }
+
+    @RequestMapping(value = ADMIN_PREPARE_NEW_COURSE_REQUEST_MAPPING_VALUE, method = RequestMethod.POST)
+    public ModelAndView prepareNewCourse() {
+        prepareCourseEnvironment();
+
+        modelAndView.setViewName(ADMIN_CREATE_COURSE_PAGE_VIEW_NAME);
+
+        // To possible further return from <ExceptionHandler>
+        storeLastNavigationViewName();
+
+        return modelAndView;
+    }
+
 }

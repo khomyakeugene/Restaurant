@@ -19,6 +19,8 @@ public interface CourseService {
 
     List<CourseCategory> findAllCourseCategories();
 
+    List<String> findAllCourseCategoryNames();
+
     Course addCourse(Course course);
 
     Course updCourse(Course course);
