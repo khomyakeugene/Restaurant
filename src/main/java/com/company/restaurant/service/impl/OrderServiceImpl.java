@@ -9,9 +9,9 @@ import com.company.util.common.Util;
 import com.company.util.exception.DataIntegrityException;
 
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Created by Yevhen on 22.05.2016.
@@ -167,9 +167,8 @@ public class OrderServiceImpl extends Service implements OrderService {
 
     @Override
     public Set<Date> getOrderDates() {
-        HashSet<Date> result = new HashSet<>();
-
-        orderDao.findAllOrders().forEach(o -> {result.add(Util.getDateOnly(o.getOrderDatetime()));});
+        TreeSet<Date> result = new TreeSet<>();
+        orderDao.findAllOrders().forEach(o -> result.add(Util.getDateOnly(o.getOrderDatetime())));
 
         return result;
     }
