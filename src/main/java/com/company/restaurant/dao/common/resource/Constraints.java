@@ -15,6 +15,8 @@ public class Constraints {
     private static final String CONSTRAINT_NAME_COOKED_COURSE_COURSE_ID = "fk_cooked_c_ckd_crs_c_course";
     // order_course
     private static final String CONSTRAINT_NAME_ORDER_COURSE_COURSE_ID = "fk_order_co_ord_crs_c_course";
+    // menu_course
+    private static final String CONSTRAINT_NAME_MENU_COURSE_COURSE_ID = "fk_menu_cou_mmu_crs_c_course";
 
     private static final String EMPLOYEE_CANNOT_BE_DELETED_BECAUSE_OF_ORDER =
             "It is impossible to delete this employee because there are orders served by him/her";
@@ -26,6 +28,8 @@ public class Constraints {
             "It is impossible to delete this course because it was cooked at least once";
     private static final String COURSE_CANNOT_BE_DELETED_BECAUSE_OF_ORDER =
             "It is impossible to delete this course because it is included in order at least once";
+    private static final String COURSE_CANNOT_BE_DELETED_BECAUSE_OF_MENU =
+            "It is impossible to delete this course because it is included at least in one menu";
 
     private static final HashMap<String, String> constraintMessageMap = new HashMap<String, String>() {
         {
@@ -34,6 +38,7 @@ public class Constraints {
             put (CONSTRAINT_NAME_COOKED_COURSE_EMPLOYEE_ID, EMPLOYEE_CANNOT_BE_DELETED_BECAUSE_OF_COOKED_COURSE);
             put (CONSTRAINT_NAME_COOKED_COURSE_COURSE_ID, COURSE_CANNOT_BE_DELETED_BECAUSE_OF_COOKED_COURSE);
             put (CONSTRAINT_NAME_ORDER_COURSE_COURSE_ID, COURSE_CANNOT_BE_DELETED_BECAUSE_OF_ORDER);
+            put (CONSTRAINT_NAME_MENU_COURSE_COURSE_ID, COURSE_CANNOT_BE_DELETED_BECAUSE_OF_MENU);
         }
     };
 

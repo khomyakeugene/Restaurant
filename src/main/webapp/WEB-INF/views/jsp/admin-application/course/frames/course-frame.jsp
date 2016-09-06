@@ -38,7 +38,7 @@
                     </td>
                     <td>
                         <input type="number" step="0.01" class="input-control" style="text-align: right"
-                               id="courseCost" name="courseWeight" placeholder="Enter course cost"
+                               id="courseCost" name="courseCost" placeholder="Enter course cost"
                                value="${course.cost}">
                     </td>
                 </tr>
