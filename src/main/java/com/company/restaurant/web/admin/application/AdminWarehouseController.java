@@ -1,7 +1,7 @@
 package com.company.restaurant.web.admin.application;
 
 import com.company.restaurant.service.WarehouseService;
-import com.company.restaurant.web.admin.application.proto.AdminApplicationController;
+import com.company.restaurant.web.admin.application.common.AdminApplicationController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

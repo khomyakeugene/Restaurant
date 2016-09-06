@@ -2,7 +2,7 @@ package com.company.restaurant.web.admin.application;
 
 import com.company.restaurant.model.Employee;
 import com.company.restaurant.service.EmployeeService;
-import com.company.restaurant.web.admin.application.proto.AdminApplicationController;
+import com.company.restaurant.web.admin.application.common.AdminApplicationController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,9 +38,6 @@ public class AdminEmployeeController extends AdminApplicationController {
     private static final String EMPLOYEE_PHONE_NUMBER_VAR_NAME = "employeePhoneNumber";
     private static final String EMPLOYEE_SALARY_VAR_NAME = "employeeSalary";
     //    private static final String EMPLOYEE_PHOTO_VAR_NAME = "employeePhoto";
-    private static final String SUBMIT_BUTTON_VAR_NAME = "submitButtonValue";
-    private static final String SUBMIT_BUTTON_SAVE_VALUE = "save";
-    private static final String SUBMIT_BUTTON_DELETE_VALUE = "delete";
 
     private static final String DEFAULT_JOB_POSITION_NAME_VALUE = "Waiter";
 
@@ -87,18 +84,19 @@ public class AdminEmployeeController extends AdminApplicationController {
 
     }
 
-    private Employee saveOrDeleteEmployee(int employeeId,
-                                          String employeeFirstName,
-                                          String employeeSecondName,
-                                          String jobPositionName,
-                                          String employeePhoneNumber,
-                                          Float employeeSalary
+    private Employee saveEmployee(int employeeId,
+                                  String employeeFirstName,
+                                  String employeeSecondName,
+                                  String jobPositionName,
+                                  String employeePhoneNumber,
+                                  Float employeeSalary
 //                              , byte[] employeePhoto
     ) {
         Employee employee = null;
         // Temporarily: get "old" image from database - because I do not know how to manipulate with image
         if (employeeId > 0) {
             employee = employeeService.findEmployeeById(employeeId);
+
         }
         if (employee == null) {
             employee = new Employee();
@@ -153,12 +151,11 @@ public class AdminEmployeeController extends AdminApplicationController {
 //                                     @RequestParam(EMPLOYEE_PHOTO_VAR_NAME) byte[] employeePhoto,
                                              @RequestParam(SUBMIT_BUTTON_VAR_NAME) String submitButtonValue
     ) {
-        String submitButtonLowerCaseValue = submitButtonValue.toLowerCase();
-        if (submitButtonLowerCaseValue.equals(SUBMIT_BUTTON_SAVE_VALUE.toLowerCase())) {
-            saveOrDeleteEmployee(employeeId, employeeFirstName, employeeSecondName, jobPositionName, employeePhoneNumber,
+        if (isSubmitSave(submitButtonValue)) {
+            saveEmployee(employeeId, employeeFirstName, employeeSecondName, jobPositionName, employeePhoneNumber,
                     employeeSalary);
 
-        } else if (submitButtonLowerCaseValue.equals(SUBMIT_BUTTON_DELETE_VALUE.toLowerCase())) {
+        } else if (isSubmitDelete(submitButtonValue)) {
             deleteEmployee(employeeId);
         }
 
@@ -188,7 +185,7 @@ public class AdminEmployeeController extends AdminApplicationController {
                                        @RequestParam(EMPLOYEE_SALARY_VAR_NAME) Float employeeSalary
 //                                     , @RequestParam(EMPLOYEE_PHOTO_VAR_NAME) byte[] employeePhoto,
     ) {
-        saveOrDeleteEmployee(0, employeeFirstName, employeeSecondName, jobPositionName, employeePhoneNumber,
+        saveEmployee(0, employeeFirstName, employeeSecondName, jobPositionName, employeePhoneNumber,
                 employeeSalary);
 
         modelAndView.clear();

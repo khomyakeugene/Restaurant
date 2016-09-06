@@ -21,7 +21,11 @@ public interface CourseService {
 
     Course addCourse(Course course);
 
+    Course updCourse(Course course);
+
     void delCourse(Course course);
+
+    void delCourse(int courseId);
 
     void delCourse(String name);
 

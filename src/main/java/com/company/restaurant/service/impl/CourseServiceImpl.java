@@ -52,8 +52,18 @@ public class CourseServiceImpl extends Service implements CourseService {
     }
 
     @Override
+    public Course updCourse(Course course) {
+        return courseDao.updCourse(course);
+    }
+
+    @Override
     public void delCourse(Course course) {
         courseDao.delCourse(course);
+    }
+
+    @Override
+    public void delCourse(int courseId) {
+        courseDao.delCourse(courseId);
     }
 
     @Override

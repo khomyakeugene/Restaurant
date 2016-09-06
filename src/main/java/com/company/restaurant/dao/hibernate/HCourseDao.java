@@ -19,6 +19,12 @@ public class HCourseDao extends HDaoEntity<Course> implements CourseDao {
 
     @Transactional
     @Override
+    public Course updCourse(Course course) {
+        return saveOrUpdate(course);
+    }
+
+    @Transactional
+    @Override
     public void updCoursePhoto(int courseId, byte[] photo) {
         Course course = findCourseById(courseId);
         if (course != null) {
@@ -31,6 +37,12 @@ public class HCourseDao extends HDaoEntity<Course> implements CourseDao {
     @Override
     public void delCourse(Course course) {
         delete(course);
+    }
+
+    @Transactional
+    @Override
+    public void delCourse(int courseId) {
+        delete(courseId);
     }
 
     @Transactional

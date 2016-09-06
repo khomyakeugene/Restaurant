@@ -10,9 +10,13 @@ import java.util.List;
 public interface CourseDao {
     Course addCourse(Course course);
 
+    Course updCourse(Course course);
+
     void updCoursePhoto(int courseId, byte[] photo);
 
     void delCourse(Course course);
+
+    void delCourse(int courseId);
 
     void delCourse(String name);
 

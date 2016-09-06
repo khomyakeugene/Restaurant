@@ -12,6 +12,7 @@
 <div class="horizontal-container ordinary-container">
     <div class="horizontal-part-holder ordinary-container">
         <div class="two-thirds">
+            <input type="hidden" name="courseId" value="${course.courseId}"/>
             <table style="width: 100%; padding-left: 10px; padding-right: 10px;">
                 <tr>
                     <td>
