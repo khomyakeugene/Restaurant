@@ -13,6 +13,8 @@ public interface OrderDao {
 
     Order addOrder(Order order);
 
+    Order updOrder(Order order);
+
     void delOrder(Order order);
 
     void delAllOrders();

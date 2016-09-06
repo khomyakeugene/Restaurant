@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Random;
 
+import static restaurant.Util.addDays;
 import static restaurant.Util.getCurrentTimestamp;
 
 /**
@@ -13,7 +14,8 @@ import static restaurant.Util.getCurrentTimestamp;
  */
 public class RestaurantPrepareTestOrderData extends RestaurantService {
     private final static int MAX_COURSER_COUNT = 5;
-    private final static int ORDER_COUNT = 10;
+    private final static int ORDER_COUNT = 20;
+    private final static int MAX_DAY_DELTA = 10;
 
     static private Random random = new Random();
 
@@ -23,9 +25,12 @@ public class RestaurantPrepareTestOrderData extends RestaurantService {
         order.setOrderNumber(orderNumber.toString());
         order.setWaiter(RestaurantDataGenerator.getRandomEmployee());
         order.setTable(RestaurantDataGenerator.getRandomTable());
-        order.setOrderDatetime(getCurrentTimestamp());
         order.setState(stateDao.findStateByType("A"));
         order = orderDao.addOrder(order);
+
+        // Only through update it is possible to change "default-current" field value
+        order.setOrderDatetime(addDays(getCurrentTimestamp(), random.nextInt(MAX_DAY_DELTA)));
+        order = orderDao.updOrder(order);
 
         int courseCount = random.nextInt(MAX_COURSER_COUNT) + 1;
         for (int i = 0; i < courseCount; i++) {

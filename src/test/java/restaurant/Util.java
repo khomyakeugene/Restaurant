@@ -101,7 +101,7 @@ public class Util {
         return zonedDateTime.toLocalDate();
     }
 
-    public static Date dateAdd(Date date, int days) {
+    public static Date addDays(Date date, int days) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         calendar.add(Calendar.DATE, days);
@@ -109,11 +109,20 @@ public class Util {
         return calendar.getTime();
     }
 
-    public static long dateSub(Date date1, Date date2) {
+    public static long subDays(Date date1, Date date2) {
         return Util.DateToLocalDate(date2).until(Util.DateToLocalDate(date1), DAYS);
     }
 
+
     public static Timestamp getCurrentTimestamp() {
         return new Timestamp((new Date()).getTime());
+    }
+
+    public static Long dayToMiliseconds(int days){
+        return (long) (days * 24 * 60 * 60 * 1000);
+    }
+
+    public static Timestamp addDays(Timestamp timestamp, int days) {
+        return new Timestamp(timestamp.getTime() + dayToMiliseconds(days));
     }
 }
