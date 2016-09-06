@@ -5,6 +5,7 @@ import com.company.restaurant.model.Order;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Yevhen on 17.06.2016.
@@ -40,5 +41,5 @@ public interface OrderService {
 
     Order updOrderState(Order order, String stateType);
 
-    List<Date> getOrderDates();
+    Set<Date> getOrderDates();
 }

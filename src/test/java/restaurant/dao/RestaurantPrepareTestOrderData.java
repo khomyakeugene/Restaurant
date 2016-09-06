@@ -14,7 +14,7 @@ import static restaurant.Util.getCurrentTimestamp;
  */
 public class RestaurantPrepareTestOrderData extends RestaurantService {
     private final static int MAX_COURSER_COUNT = 5;
-    private final static int ORDER_COUNT = 20;
+    private final static int ORDER_COUNT = 30;
     private final static int MAX_DAY_DELTA = 10;
 
     static private Random random = new Random();
@@ -49,5 +49,7 @@ public class RestaurantPrepareTestOrderData extends RestaurantService {
         for (int i = 0; i < ORDER_COUNT; i++) {
             prepareOrder(i + 1);
         }
+
+        orderService.getOrderDates().forEach(System.out::println);
     }
 }

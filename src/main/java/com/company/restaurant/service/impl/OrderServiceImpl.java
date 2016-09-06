@@ -5,11 +5,13 @@ import com.company.restaurant.model.Course;
 import com.company.restaurant.model.Order;
 import com.company.restaurant.service.OrderService;
 import com.company.restaurant.service.impl.common.Service;
+import com.company.util.common.Util;
 import com.company.util.exception.DataIntegrityException;
 
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Yevhen on 22.05.2016.
@@ -164,10 +166,10 @@ public class OrderServiceImpl extends Service implements OrderService {
     }
 
     @Override
-    public List<Date> getOrderDates() {
-        ArrayList<Date> result = new ArrayList<>();
+    public Set<Date> getOrderDates() {
+        HashSet<Date> result = new HashSet<>();
 
-        List<Order> orders = orderDao.findAllOrders();
+        orderDao.findAllOrders().forEach(o -> {result.add(Util.getDateOnly(o.getOrderDatetime()));});
 
         return result;
     }
