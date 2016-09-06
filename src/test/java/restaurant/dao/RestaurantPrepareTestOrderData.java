@@ -6,6 +6,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Random;
 
+import static restaurant.Util.getCurrentTimestamp;
+
 /**
  * Created by Yevhen on 18.08.2016.
  */
@@ -21,6 +23,7 @@ public class RestaurantPrepareTestOrderData extends RestaurantService {
         order.setOrderNumber(orderNumber.toString());
         order.setWaiter(RestaurantDataGenerator.getRandomEmployee());
         order.setTable(RestaurantDataGenerator.getRandomTable());
+        order.setOrderDatetime(getCurrentTimestamp());
         order.setState(stateDao.findStateByType("A"));
         order = orderDao.addOrder(order);
 
