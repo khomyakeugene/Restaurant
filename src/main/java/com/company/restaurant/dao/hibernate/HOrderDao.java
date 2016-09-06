@@ -5,18 +5,28 @@ import com.company.restaurant.dao.hibernate.common.HDaoEntityCourseCollecting;
 import com.company.restaurant.model.Course;
 import com.company.restaurant.model.Order;
 import com.company.restaurant.model.State;
+import com.company.util.sql.SqlExpressions;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
  * Created by Yevhen on 13.06.2016.
  */
 public class HOrderDao extends HDaoEntityCourseCollecting<Order> implements OrderDao {
+    private static final String ORDER_ID_ATTRIBUTE_NAME = "orderId";
     private static final String STATE_ATTRIBUTE_NAME = "state";
     private static final String ORDER_NUMBER_ATTRIBUTE_NAME = "orderNumber";
+
+    @Override
+    protected void initMetadata() {
+        super.initMetadata();
+
+        orderByExpression = String.format(SqlExpressions.SQL_ORDER_BY_CONDITION_PATTERN_DESC,
+                ORDER_ID_ATTRIBUTE_NAME);
+
+    }
 
     @Override
     public String orderEntityName() {
@@ -101,11 +111,5 @@ public class HOrderDao extends HDaoEntityCourseCollecting<Order> implements Orde
     @Override
     public Course findOrderCourseByCourseId(Order order, int courseId) {
         return findCourseByCourseId(order, courseId);
-    }
-
-    @Transactional
-    @Override
-    public List<Date> getOrderDates() {
-        return null;
     }
 }

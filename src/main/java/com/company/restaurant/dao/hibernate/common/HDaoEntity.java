@@ -24,7 +24,6 @@ import java.util.*;
  * Created by Yevhen on 09.06.2016.
  */
 public abstract class HDaoEntity<T> extends GenericHolder<T> {
-    private static final String SQL_ORDER_BY_CONDITION_PATTERN = "ORDER BY %s";
     private static final String NAME_ATTRIBUTE_NAME = "name";
 
     private SessionFactory sessionFactory;
@@ -32,6 +31,7 @@ public abstract class HDaoEntity<T> extends GenericHolder<T> {
 
     protected String nameAttributeName = NAME_ATTRIBUTE_NAME;
     protected String orderByAttributeName;
+    protected String orderByExpression;
 
     public HDaoEntity() {
         initMetadata();
@@ -129,11 +129,12 @@ public abstract class HDaoEntity<T> extends GenericHolder<T> {
 
     private String getOrderByCondition(String attributeName) {
         return (attributeName == null || attributeName.isEmpty()) ? "" :
-                String.format(SQL_ORDER_BY_CONDITION_PATTERN, attributeName);
+                String.format(SqlExpressions.SQL_ORDER_BY_CONDITION_PATTERN_ASC, attributeName);
     }
 
     protected String getDefaultOrderByCondition() {
-        return getOrderByCondition(getOrderByAttributeName());
+        return (orderByExpression == null) ? getOrderByCondition(getOrderByAttributeName()) :
+                orderByExpression;
     }
 
     protected EntityType<T> getEntityType() {

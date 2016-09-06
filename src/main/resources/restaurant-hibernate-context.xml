@@ -103,7 +103,7 @@
 
     <bean class="com.company.restaurant.dao.hibernate.HOrderDao" id="orderDao">
         <property name="sessionFactory" ref="sessionFactory"/>
-        <property name="useCriteriaQuery" value="true"/>
+        <property name="useCriteriaQuery" value="false"/>
     </bean>
 
     <bean class="com.company.restaurant.dao.hibernate.HStateGraphDao" id="stateGraphDao">

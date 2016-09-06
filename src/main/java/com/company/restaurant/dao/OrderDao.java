@@ -3,7 +3,6 @@ package com.company.restaurant.dao;
 import com.company.restaurant.model.Course;
 import com.company.restaurant.model.Order;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -35,6 +34,4 @@ public interface OrderDao {
     List<Course> findOrderCourses(Order order);
 
     Course findOrderCourseByCourseId(Order order, int courseId);
-
-    List<Date> getOrderDates();
 }
