@@ -37,14 +37,10 @@
                 </tr>
                 <tr>
                     <td>
-                        <label class="input-label" for="jobPositionName">Job position:</label>
+                        <label class="input-label">Job position:</label>
                     </td>
                     <td>
-                        <form:select multiple="sigle" path="jobPositionName" id="jobPositionName"
-                                     name="jobPositionName" cssClass="input-control">
-                            <form:option selected="true" value="${jobPositionName}" />
-                            <form:options items="${jobPositionNames}"/>
-                        </form:select>
+                        <%@ include file="../../frames/combo-box/job-position-combo.jsp" %>
                     </td>
                 </tr>
                 <tr>

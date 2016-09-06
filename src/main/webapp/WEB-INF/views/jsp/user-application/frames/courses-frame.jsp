@@ -12,7 +12,7 @@
     <%@ include file="course-search-frame.jsp" %>
 
     <div>
-        <table class="course-table">
+        <table class="user-course-table">
             <tr>
                 <th>Title</th>
                 <th style="text-align: right">Weight</th>
