@@ -20,7 +20,7 @@ public class HEmployeeDao extends HDaoEntity<Employee> implements EmployeeDao {
         super.initMetadata();
 
         orderByExpression = String.format(SqlExpressions.SQL_ORDER_BY_TWO_FIELDS_CONDITION_PATTERN_ASC,
-                FIRST_NAME_ATTRIBUTE_NAME, SECOND_NAME_ATTRIBUTE_NAME);
+                SECOND_NAME_ATTRIBUTE_NAME, FIRST_NAME_ATTRIBUTE_NAME);
     }
 
     @Transactional
