@@ -54,8 +54,6 @@ public class AdminCourseController extends AdminApplicationController {
 
 
     private void prepareCourseEnvironment(int courseId) {
-        modelAndView.clear();
-
         Course course;
         if (courseId > 0) {
             course = courseService.findCourseById(courseId);
@@ -111,8 +109,6 @@ public class AdminCourseController extends AdminApplicationController {
 
     @RequestMapping(value = ADMIN_COURSE_LIST_REQUEST_MAPPING_VALUE, method = RequestMethod.GET)
     public ModelAndView courseListPage() {
-        modelAndView.clear();
-
         modelAndView.addObject(COURSES_VAR_NAME, courseService.findAllCourses());
         modelAndView.setViewName(ADMIN_COURSE_LIST_PAGE_VIEW_NAME);
 
@@ -149,7 +145,6 @@ public class AdminCourseController extends AdminApplicationController {
             deleteCourse(courseId);
         }
 
-        modelAndView.clear();
         modelAndView.setViewName(REDIRECT_PREFIX + ADMIN_COURSE_LIST_REQUEST_MAPPING_VALUE);
 
         return modelAndView;

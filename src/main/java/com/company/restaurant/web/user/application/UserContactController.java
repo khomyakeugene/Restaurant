@@ -17,8 +17,6 @@ public class UserContactController extends UserApplicationController {
 
     @RequestMapping(value = CONTACTS_REQUEST_MAPPING_VALUE, method = RequestMethod.GET)
     public ModelAndView contactsPage() {
-        initData();
-
         modelAndView.addObject(RESTAURANT_TRANSPORT_IMAGE_MAP_VAR_NAME,
                 base64EncodeToString(commonDataService.getTransportMapImage()));
         modelAndView.setViewName(RESTAURANT_CONTACTS_VIEW_NAME);

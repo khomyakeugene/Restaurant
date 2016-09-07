@@ -20,14 +20,19 @@ public class CommonDataController extends ControllerProto {
         this.commonDataService = commonDataService;
     }
 
-    protected void initData() {
-        modelAndView.clear();
-
+    private void initCommonModelAndViewData() {
         modelAndView.addObject(RESTAURANT_NAME_VAR_NAME, commonDataService.getRestaurantName());
         modelAndView.addObject(RESTAURANT_ADDRESS_VAR_NAME, commonDataService.getRestaurantAddress());
         modelAndView.addObject(RESTAURANT_E_MAIL_VAR_NAME, commonDataService.getRestaurantEMail());
         modelAndView.addObject(RESTAURANT_PHONE_NUMBERS_VAR_NAME, commonDataService.getPhoneNumbers());
         modelAndView.addObject(RESTAURANT_EMBLEM_IMAGE_VAR_NAME,
                 base64EncodeToString(commonDataService.getEmblemImage()));
+    }
+
+    @Override
+    protected void initModelAndViewData() {
+        super.initModelAndViewData();
+
+        initCommonModelAndViewData();
     }
 }

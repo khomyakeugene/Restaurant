@@ -4,6 +4,7 @@ import com.company.restaurant.dao.common.ErrorHandlingService;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Base64;
 
@@ -24,6 +25,12 @@ public class ControllerProto {
         this.lastNavigationViewName = lastNavigationViewName;
     }
 
+    @PostConstruct
+    protected void initModelAndViewData() {
+        // To be override in child classes ....
+
+    }
+
     protected String base64EncodeToString(byte[] data) {
         return Base64.getEncoder().encodeToString(data);
     }
@@ -40,7 +47,6 @@ public class ControllerProto {
 
     @ExceptionHandler(Exception.class)
     public ModelAndView handleError(HttpServletRequest req, Exception ex) {
-
         modelAndView.addObject(ERROR_MESSAGE_VAR_NAME, ErrorHandlingService.getErrorMessage(ex));
         modelAndView.setViewName(getErrorViewName());
 

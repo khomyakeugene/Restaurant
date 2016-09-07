@@ -22,4 +22,11 @@ public class AdminApplicationController extends CommonDataController {
     protected boolean isSubmitDelete(String submitButtonValue) {
         return submitButtonValue.toLowerCase().equals(SUBMIT_BUTTON_DELETE_VALUE.toLowerCase());
     }
+
+    @Override
+    protected void initModelAndViewData() {
+        super.initModelAndViewData();
+
+
+    }
 }

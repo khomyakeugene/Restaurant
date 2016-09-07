@@ -56,8 +56,6 @@ public class AdminEmployeeController extends AdminApplicationController {
     }
 
     private void prepareEmployeeEnvironment(int employeeId) {
-        modelAndView.clear();
-
         Employee employee;
         if (employeeId > 0) {
             employee = employeeService.findEmployeeById(employeeId);
@@ -118,8 +116,6 @@ public class AdminEmployeeController extends AdminApplicationController {
 
     @RequestMapping(value = ADMIN_EMPLOYEE_LIST_REQUEST_MAPPING_VALUE, method = RequestMethod.GET)
     public ModelAndView employeeListPage() {
-        modelAndView.clear();
-
         modelAndView.addObject(EMPLOYEES_VAR_NAME, employeeService.findAllEmployees());
         modelAndView.setViewName(ADMIN_EMPLOYEE_LIST_PAGE_VIEW_NAME);
 
@@ -159,7 +155,6 @@ public class AdminEmployeeController extends AdminApplicationController {
             deleteEmployee(employeeId);
         }
 
-        modelAndView.clear();
         modelAndView.setViewName(REDIRECT_PREFIX + ADMIN_EMPLOYEE_LIST_REQUEST_MAPPING_VALUE);
 
         return modelAndView;
@@ -188,7 +183,6 @@ public class AdminEmployeeController extends AdminApplicationController {
         saveEmployee(0, employeeFirstName, employeeSecondName, jobPositionName, employeePhoneNumber,
                 employeeSalary);
 
-        modelAndView.clear();
         modelAndView.setViewName(REDIRECT_PREFIX + ADMIN_EMPLOYEE_LIST_REQUEST_MAPPING_VALUE);
 
         return modelAndView;

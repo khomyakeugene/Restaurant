@@ -18,8 +18,6 @@ public class UserRestaurantSchemaController extends UserApplicationController {
 
     @RequestMapping(value = RESTAURANT_SCHEMA_REQUEST_MAPPING_VALUE, method = RequestMethod.GET)
     public ModelAndView restaurantSchemaPage() {
-        initData();
-
         modelAndView.addObject(RESTAURANT_RESTAURANT_SCHEMA_IMAGE_MAP_VAR_NAME,
                 base64EncodeToString(commonDataService.getRestaurantSchemeImage()));
         modelAndView.setViewName(RESTAURANT_SCHEMA_PAGE_VIEW_NAME);

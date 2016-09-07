@@ -26,8 +26,6 @@ public class UserEmployeeController extends UserApplicationController {
 
     @RequestMapping(value = PERSONNEL_REQUEST_MAPPING_VALUE, method = RequestMethod.GET)
     public ModelAndView employeePage() {
-        initData();
-
         modelAndView.addObject(EMPLOYEES_VAR_NAME, employeeService.findAllEmployees());
         modelAndView.setViewName(PERSONNEL_PAGE_VIEW_NAME);
 
