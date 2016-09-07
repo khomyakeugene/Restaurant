@@ -10,16 +10,16 @@
 <div>
     <table style="width: 100%; padding-left: 10px; padding-right: 10px;">
         <tr>
-            <td style="width: 40%">
+            <td style="width: 50%">
                 <label class="input-label" for="courseName">Title (name)</label>
             </td>
             <td>
                 <label class="input-label">Category</label>
             </td>
-            <td style="text-align: right; width: 15%">
+            <td style="text-align: right; width: 13%">
                 <label class="input-label" for="courseWeight">Weight (kg)</label>
             </td>
-            <td style="text-align: right; width: 15%">
+            <td style="text-align: right; width: 13%">
                 <label class="input-label" for="courseCost">Cost (hrn)</label>
             </td>
         </tr>

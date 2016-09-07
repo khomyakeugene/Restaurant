@@ -68,11 +68,7 @@
         </div>
 
         <div class="third">
-            <div class="ordinary-container">
-                <img class="img" style="max-width: 100%; margin-top: 0; margin-left: 15px;"
-                     src="data:image/jpeg;base64,${employee.base64EncodePhoto}" alt="No employee photo"
-                     name="employeePhoto"/>
-            </div>
+            <%@ include file="../../frames/photo/employee-photo.jsp" %>
         </div>
     </div>
 </div>
