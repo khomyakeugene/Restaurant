@@ -3,6 +3,7 @@ package com.company.restaurant.dao.hibernate;
 import com.company.restaurant.dao.EmployeeDao;
 import com.company.restaurant.dao.hibernate.common.HDaoEntity;
 import com.company.restaurant.model.Employee;
+import com.company.util.sql.SqlExpressions;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -13,6 +14,14 @@ import java.util.List;
 public class HEmployeeDao extends HDaoEntity<Employee> implements EmployeeDao {
     private static final String FIRST_NAME_ATTRIBUTE_NAME = "firstName";
     private static final String SECOND_NAME_ATTRIBUTE_NAME = "secondName";
+
+    @Override
+    protected void initMetadata() {
+        super.initMetadata();
+
+        orderByExpression = String.format(SqlExpressions.SQL_ORDER_BY_TWO_FIELDS_CONDITION_PATTERN_ASC,
+                FIRST_NAME_ATTRIBUTE_NAME, SECOND_NAME_ATTRIBUTE_NAME);
+    }
 
     @Transactional
     @Override

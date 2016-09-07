@@ -11,8 +11,9 @@ public class SqlExpressions {
     private static final String SQL_UPDATE_EXPRESSION_PATTERN = "UPDATE %s SET %s %s";
     private static final String SQL_UPDATE_SET_SECTION_PART_PATTERN = "%s = %s";
 
-    public static final String SQL_ORDER_BY_CONDITION_PATTERN_ASC = "ORDER BY %s ASC";
-    public static final String SQL_ORDER_BY_CONDITION_PATTERN_DESC = "ORDER BY %s DESC";
+    public static final String SQL_ORDER_BY_ONE_FIELD_CONDITION_PATTERN_ASC = "ORDER BY %s ASC";
+    public static final String SQL_ORDER_BY_TWO_FIELDS_CONDITION_PATTERN_ASC = "ORDER BY %s, %s ASC";
+    public static final String SQL_ORDER_BY_ONE_FIELD_CONDITION_PATTERN_DESC = "ORDER BY %s DESC";
 
     public static String selectExpression(String selectFields) {
         return String.format(SQL_SELECT_PATTERN, selectFields);

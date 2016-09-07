@@ -23,7 +23,7 @@ public class HOrderDao extends HDaoEntityCourseCollecting<Order> implements Orde
     protected void initMetadata() {
         super.initMetadata();
 
-        orderByExpression = String.format(SqlExpressions.SQL_ORDER_BY_CONDITION_PATTERN_DESC,
+        orderByExpression = String.format(SqlExpressions.SQL_ORDER_BY_ONE_FIELD_CONDITION_PATTERN_DESC,
                 ORDER_ID_ATTRIBUTE_NAME);
 
     }
