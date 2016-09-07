@@ -5,6 +5,8 @@
   Time: 22:34
   To change this template use File | Settings | File Templates.
 --%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <form action="/create-course" method="post">
     <%@ include file="../../frames/buttons/create-cancel-buttons-frame.jsp" %>
     <div class="horizontal-container ordinary-container">

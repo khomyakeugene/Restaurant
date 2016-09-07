@@ -8,6 +8,7 @@
 --%>
 <%--@elvariable id="jobPositionNames" type="List<String>"--%>
 <%--@elvariable id="jobPositionName" type="String"--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <form:select multiple="sigle" path="jobPositionNames" id="jobPositionName"
              name="jobPositionName" cssClass="input-control">

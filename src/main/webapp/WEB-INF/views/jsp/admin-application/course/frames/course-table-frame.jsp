@@ -7,6 +7,7 @@
 --%>
 <%--@elvariable id="courses" type="com.company.restaurant.web.admin.application.AdminCourseController"--%>
 <%--@elvariable id="course" type="com.company.restaurant.model.Course"--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <div>
     <table class="course-table">

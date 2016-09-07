@@ -8,6 +8,7 @@
 --%>
 <%--@elvariable id="courseCategoryNames" type="List<String>"--%>
 <%--@elvariable id="courseCategoryName" type="String"--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <form:select multiple="sigle" path="courseCategoryName" id="courseCategoryName"
              name="courseCategoryName" cssClass="input-control">

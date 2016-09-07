@@ -8,6 +8,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%--@elvariable id="course" type="com.company.restaurant.model.Course"--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <div class="horizontal-container ordinary-container">
     <div class="horizontal-part-holder ordinary-container">

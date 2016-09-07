@@ -9,6 +9,7 @@
 <%--@elvariable id="employee" type="com.company.restaurant.model.Employee"--%>
 <%--@elvariable id="jobPositionNames" type="List<String>"--%>
 <%--@elvariable id="jobPositionName" type="String"--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <div class="horizontal-container ordinary-container">
     <div class="horizontal-part-holder ordinary-container">

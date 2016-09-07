@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%--@elvariable id="employees" type="com.company.restaurant.web.admin.application.AdminEmployeeController"--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <table class="admin-employee-table">
     <tr>
