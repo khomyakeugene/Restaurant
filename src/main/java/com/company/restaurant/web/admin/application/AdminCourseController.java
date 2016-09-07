@@ -52,7 +52,6 @@ public class AdminCourseController extends AdminApplicationController {
         return result;
     }
 
-
     private void prepareCourseEnvironment(int courseId) {
         Course course;
         if (courseId > 0) {
@@ -109,24 +108,22 @@ public class AdminCourseController extends AdminApplicationController {
 
     @RequestMapping(value = ADMIN_COURSE_LIST_REQUEST_MAPPING_VALUE, method = RequestMethod.GET)
     public ModelAndView courseListPage() {
+        clearErrorMessage();
+
         modelAndView.addObject(COURSES_VAR_NAME, courseService.findAllCourses());
         modelAndView.setViewName(ADMIN_COURSE_LIST_PAGE_VIEW_NAME);
-
-        // To possible further return from <ExceptionHandler>
-        storeLastNavigationViewName();
 
         return modelAndView;
     }
 
     @RequestMapping(value = ADMIN_APPLICATION_COURSE_REQUEST_MAPPING_VALUE, method = RequestMethod.GET)
     public ModelAndView course(@PathVariable int courseId) {
+        clearErrorMessage();
+
         prepareCourseEnvironment(courseId);
 
         modelAndView.addObject(COURSE_VAR_NAME, courseService.findCourseById(courseId));
         modelAndView.setViewName(ADMIN_SAVE_OR_DELETE_COURSE_PAGE_VIEW_NAME);
-
-        // To possible further return from <ExceptionHandler>
-        storeLastNavigationViewName();
 
         return modelAndView;
     }
@@ -145,19 +142,16 @@ public class AdminCourseController extends AdminApplicationController {
             deleteCourse(courseId);
         }
 
-        modelAndView.setViewName(REDIRECT_PREFIX + ADMIN_COURSE_LIST_REQUEST_MAPPING_VALUE);
-
-        return modelAndView;
+        return new ModelAndView(REDIRECT_PREFIX + ADMIN_COURSE_LIST_REQUEST_MAPPING_VALUE);
     }
 
     @RequestMapping(value = ADMIN_PREPARE_NEW_COURSE_REQUEST_MAPPING_VALUE, method = RequestMethod.POST)
     public ModelAndView prepareNewCourse() {
+        clearErrorMessage();
+
         prepareCourseEnvironment();
 
         modelAndView.setViewName(ADMIN_CREATE_COURSE_PAGE_VIEW_NAME);
-
-        // To possible further return from <ExceptionHandler>
-        storeLastNavigationViewName();
 
         return modelAndView;
     }

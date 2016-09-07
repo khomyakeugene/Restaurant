@@ -73,6 +73,7 @@ public class AdminEmployeeController extends AdminApplicationController {
 
         // Temporary solution: exclude <jobPositionName> from <jobPositionNames>  - important to correct work
         // of <form:select> in view
+        modelAndView.addObject(JOB_POSITION_NAMES_VAR_NAME, employeeService.findAllJobPositionNames());
         modelAndView.addObject(JOB_POSITION_NAMES_VAR_NAME, employeeService.findAllJobPositionNames().stream().
                 filter(n -> (!n.equals(jobPositionName))).collect(Collectors.toList()));
     }
@@ -116,23 +117,21 @@ public class AdminEmployeeController extends AdminApplicationController {
 
     @RequestMapping(value = ADMIN_EMPLOYEE_LIST_REQUEST_MAPPING_VALUE, method = RequestMethod.GET)
     public ModelAndView employeeListPage() {
+        clearErrorMessage();
+
         modelAndView.addObject(EMPLOYEES_VAR_NAME, employeeService.findAllEmployees());
         modelAndView.setViewName(ADMIN_EMPLOYEE_LIST_PAGE_VIEW_NAME);
-
-        // To possible further return from <ExceptionHandler>
-        storeLastNavigationViewName();
 
         return modelAndView;
     }
 
     @RequestMapping(value = ADMIN_EMPLOYEE_REQUEST_MAPPING_VALUE, method = RequestMethod.GET)
     public ModelAndView employee(@PathVariable int employeeId) {
+        clearErrorMessage();
+
         prepareEmployeeEnvironment(employeeId);
 
         modelAndView.setViewName(ADMIN_SAVE_OR_DELETE_EMPLOYEE_PAGE_VIEW_NAME);
-
-        // To possible further return from <ExceptionHandler>
-        storeLastNavigationViewName();
 
         return modelAndView;
     }
@@ -155,19 +154,16 @@ public class AdminEmployeeController extends AdminApplicationController {
             deleteEmployee(employeeId);
         }
 
-        modelAndView.setViewName(REDIRECT_PREFIX + ADMIN_EMPLOYEE_LIST_REQUEST_MAPPING_VALUE);
-
-        return modelAndView;
+        return new ModelAndView(REDIRECT_PREFIX + ADMIN_EMPLOYEE_LIST_REQUEST_MAPPING_VALUE);
     }
 
     @RequestMapping(value = ADMIN_PREPARE_NEW_EMPLOYEE_REQUEST_MAPPING_VALUE, method = RequestMethod.POST)
     public ModelAndView prepareNewEmployee() {
+        clearErrorMessage();
+
         prepareEmployeeEnvironment();
 
         modelAndView.setViewName(ADMIN_CREATE_EMPLOYEE_PAGE_VIEW_NAME);
-
-        // To possible further return from <ExceptionHandler>
-        storeLastNavigationViewName();
 
         return modelAndView;
     }
@@ -183,8 +179,6 @@ public class AdminEmployeeController extends AdminApplicationController {
         saveEmployee(0, employeeFirstName, employeeSecondName, jobPositionName, employeePhoneNumber,
                 employeeSalary);
 
-        modelAndView.setViewName(REDIRECT_PREFIX + ADMIN_EMPLOYEE_LIST_REQUEST_MAPPING_VALUE);
-
-        return modelAndView;
+        return new ModelAndView(REDIRECT_PREFIX + ADMIN_EMPLOYEE_LIST_REQUEST_MAPPING_VALUE);
     }
 }

@@ -19,30 +19,23 @@ public class ControllerProto {
 
     protected ModelAndView modelAndView = new ModelAndView();
 
-    private String lastNavigationViewName;
-
-    protected void setLastNavigationViewName(String lastNavigationViewName) {
-        this.lastNavigationViewName = lastNavigationViewName;
-    }
-
     @PostConstruct
     protected void initModelAndViewData() {
         // To be override in child classes ....
+    }
 
+    protected void clearErrorMessage()  {
+        modelAndView.addObject(ERROR_MESSAGE_VAR_NAME, "");
     }
 
     protected String base64EncodeToString(byte[] data) {
         return Base64.getEncoder().encodeToString(data);
     }
 
-    protected void storeLastNavigationViewName() {
-        // To possible further return from <ExceptionHandler>
-        setLastNavigationViewName(modelAndView.getViewName());
-    }
-
     protected String getErrorViewName() {
-        // To possible return to <lastNavigationViewName> when error occurred
-        return (lastNavigationViewName == null) ? ERROR_PAGE_VIEW_NAME : lastNavigationViewName;
+        String currentViewName = modelAndView.getViewName();
+
+        return (currentViewName == null) ? ERROR_PAGE_VIEW_NAME : currentViewName;
     }
 
     @ExceptionHandler(Exception.class)
@@ -52,5 +45,4 @@ public class ControllerProto {
 
         return modelAndView;
     }
-
 }

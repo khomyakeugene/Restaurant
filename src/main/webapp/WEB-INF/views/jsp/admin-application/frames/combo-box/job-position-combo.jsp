@@ -9,7 +9,7 @@
 <%--@elvariable id="jobPositionNames" type="List<String>"--%>
 <%--@elvariable id="jobPositionName" type="String"--%>
 
-<form:select multiple="sigle" path="jobPositionName" id="jobPositionName"
+<form:select multiple="sigle" path="jobPositionNames" id="jobPositionName"
              name="jobPositionName" cssClass="input-control">
     <form:option selected="true" value="${jobPositionName}" />
     <form:options items="${jobPositionNames}"/>
