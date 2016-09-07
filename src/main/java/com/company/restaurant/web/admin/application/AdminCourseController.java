@@ -20,12 +20,14 @@ import java.util.stream.Collectors;
 public class AdminCourseController extends AdminApplicationController {
     private static final String ADMIN_COURSE_LIST_PAGE_VIEW_NAME = "admin-application/course/admin-course-list-page";
     private static final String ADMIN_COURSE_LIST_REQUEST_MAPPING_VALUE = "/admin-course-list";
+    private static final String ADMIN_APPLICATION_COURSE_REQUEST_MAPPING_PATTERN = "/admin-course/%d";
     private static final String ADMIN_APPLICATION_COURSE_REQUEST_MAPPING_VALUE = "/admin-course/{courseId}";
     private static final String ADMIN_SAVE_OR_DELETE_COURSE_PAGE_VIEW_NAME =
             "admin-application/course/admin-save-or-delete-course-page";
     private static final String ADMIN_SAVE_OR_DELETE_COURSE_REQUEST_MAPPING_VALUE = "/save-or-delete-course";
     private static final String ADMIN_CREATE_COURSE_PAGE_VIEW_NAME = "admin-application/course/admin-create-course-page";
-    private static final String ADMIN_PREPARE_NEW_COURSE_REQUEST_MAPPING_VALUE = "/prepare-new-couse";
+    private static final String ADMIN_PREPARE_NEW_COURSE_REQUEST_MAPPING_VALUE = "/prepare-new-course";
+    private static final String ADMIN_CREATE_EMPLOYEE_REQUEST_MAPPING_VALUE = "/create-course";
 
     private static final String COURSES_VAR_NAME = "courses";
     private static final String COURSE_VAR_NAME = "course";
@@ -156,4 +158,14 @@ public class AdminCourseController extends AdminApplicationController {
         return modelAndView;
     }
 
+    @RequestMapping(value = ADMIN_CREATE_EMPLOYEE_REQUEST_MAPPING_VALUE, method = RequestMethod.POST)
+    public ModelAndView createEmployee(@RequestParam(COURSE_NAME_VAR_NAME) String courseName,
+                                       @RequestParam(COURSE_CATEGORY_NAME_VAR_NAME) String courseCategoryName,
+                                       @RequestParam(COURSE_WEIGHT_VAR_NAME) Float courseWeight,
+                                       @RequestParam(COURSE_COST_VAR_NAME) Float courseCost) {
+        Course course = saveCourse(0, courseName, courseCategoryName, courseWeight, courseCost);
+
+        return new ModelAndView(REDIRECT_PREFIX +
+                String.format(ADMIN_APPLICATION_COURSE_REQUEST_MAPPING_PATTERN, course.getCourseId()));
+    }
 }

@@ -12,11 +12,11 @@
     <%@ include file="course-search-frame.jsp" %>
 
     <div>
-        <table class="user-course-table">
+        <table class="course-table">
             <tr>
                 <th>Title</th>
-                <th style="text-align: right">Weight</th>
-                <th style="text-align: right">Cost</th>
+                <th style="text-align: right">Weight (kg)</th>
+                <th style="text-align: right">Cost (hrn)</th>
             </tr>
             <c:forEach items="${courses}" var="course">
                 <tr>

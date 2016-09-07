@@ -26,7 +26,7 @@
         <tr>
             <td>
                 <input type="text" class="input-control" id="courseName"
-                       name="courseName" placeholder="Enter course name"
+                       name="courseName" placeholder="Enter name"
                        value="${course.name}" required="required" autofocus>
             </td>
             <td>
@@ -34,13 +34,13 @@
             </td>
             <td>
                 <input type="number" step="0.001" class="input-control" style="text-align: right"
-                       id="courseWeight" name="courseWeight" placeholder="Enter course weight"
-                       value="${course.weight}">
+                       id="courseWeight" name="courseWeight" placeholder="Enter weight"
+                       value="${course.weight}" required="required">
             </td>
             <td>
                 <input type="number" step="0.01" class="input-control" style="text-align: right"
-                       id="courseCost" name="courseCost" placeholder="Enter course cost"
-                       value="${course.cost}">
+                       id="courseCost" name="courseCost" placeholder="Enter cost"
+                       value="${course.cost}" required="required">
             </td>
         </tr>
     </table>

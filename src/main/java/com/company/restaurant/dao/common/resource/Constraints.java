@@ -1,5 +1,7 @@
 package com.company.restaurant.dao.common.resource;
 
+import org.hibernate.exception.ConstraintViolationException;
+
 import java.util.HashMap;
 import java.util.Optional;
 
@@ -10,6 +12,8 @@ public class Constraints {
     // Order
     private static final String CONSTRAINT_NAME_ORDER_EMPLOYEE_ID = "fk_order_order_emp_employee";
     private static final String CONSTRAINT_NAME_ORDER_TABLE_ID = "fk_order_order_tab_table";
+    // Course
+    private static final String CONSTRAINT_NAME_COURSE_NAME_UNIQUE = "ak_u_course_course";
     // Cooked course
     private static final String CONSTRAINT_NAME_COOKED_COURSE_EMPLOYEE_ID = "fk_cooked_c_ckd_crs_e_employee";
     private static final String CONSTRAINT_NAME_COOKED_COURSE_COURSE_ID = "fk_cooked_c_ckd_crs_c_course";
@@ -30,6 +34,8 @@ public class Constraints {
             "It is impossible to delete this course because it is included in order at least once";
     private static final String COURSE_CANNOT_BE_DELETED_BECAUSE_OF_MENU =
             "It is impossible to delete this course because it is included at least in one menu";
+    private static final String COURSE_CANNOT_BE_ADDED_BECAUSE_OF_NON_UNIQUE_NAME =
+            "It is impossible to add this course because its name is non-unique";
 
     private static final HashMap<String, String> constraintMessageMap = new HashMap<String, String>() {
         {
@@ -39,6 +45,8 @@ public class Constraints {
             put (CONSTRAINT_NAME_COOKED_COURSE_COURSE_ID, COURSE_CANNOT_BE_DELETED_BECAUSE_OF_COOKED_COURSE);
             put (CONSTRAINT_NAME_ORDER_COURSE_COURSE_ID, COURSE_CANNOT_BE_DELETED_BECAUSE_OF_ORDER);
             put (CONSTRAINT_NAME_MENU_COURSE_COURSE_ID, COURSE_CANNOT_BE_DELETED_BECAUSE_OF_MENU);
+            put (CONSTRAINT_NAME_COURSE_NAME_UNIQUE, COURSE_CANNOT_BE_ADDED_BECAUSE_OF_NON_UNIQUE_NAME);
+
         }
     };
 
@@ -64,8 +72,19 @@ public class Constraints {
         return result;
     }
 
-
     public static String transferExceptionToMessage(Exception e) {
-        return transferExceptionToMessage(e.getMessage());
+        String result;
+
+        if (e instanceof ConstraintViolationException) {
+            String constraintName = ((ConstraintViolationException)e).getConstraintName();
+            result = findMessageByConstraintName(constraintName);
+            if (result== null) {
+                result = constraintName;
+            }
+        } else {
+            result = transferExceptionToMessage(e.getMessage());
+        }
+
+        return result;
     }
 }
