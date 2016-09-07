@@ -7,5 +7,5 @@
 --%>
 <form action="/save-or-delete-course" method="post">
     <%@ include file="../../frames/buttons/save-and-delete-buttons-frame.jsp" %>
-    <%@ include file="course-frame.jsp" %>
+    <%@ include file="detail-course-frame.jsp" %>
 </form>

@@ -12,12 +12,14 @@
     <table class="course-table">
         <tr>
             <th>Title</th>
+            <th>Category</th>
             <th style="text-align: right">Weight</th>
             <th style="text-align: right">Cost</th>
         </tr>
         <c:forEach items="${courses}" var="course">
             <tr>
                 <td><b><a href="/admin-course/${course.courseId}">${course.name}</a></b></td>
+                <td >${course.courseCategory.name}</td>
                 <td style="text-align: right">${course.weight}</td>
                 <td style="text-align: right">${course.cost}</td>
             </tr>

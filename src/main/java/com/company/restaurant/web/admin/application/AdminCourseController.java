@@ -84,6 +84,7 @@ public class AdminCourseController extends AdminApplicationController {
 
     private Course saveCourse(int courseId,
                               String courseName,
+                              String courseCategoryName,
                               Float courseWeight,
                               Float courseCost) {
         Course course = null;
@@ -97,6 +98,7 @@ public class AdminCourseController extends AdminApplicationController {
 
         course.setCourseId(courseId);
         course.setName(courseName);
+        course.setCourseCategory(courseService.findCourseCategoryByName(courseCategoryName));
         course.setWeight(courseWeight);
         course.setCost(courseCost);
 
@@ -136,12 +138,13 @@ public class AdminCourseController extends AdminApplicationController {
     @RequestMapping(value = ADMIN_SAVE_OR_DELETE_COURSE_REQUEST_MAPPING_VALUE, method = RequestMethod.POST)
     public ModelAndView saveOrDeleteCourse(@RequestParam(COURSE_ID_VAR_NAME) int courseId,
                                            @RequestParam(COURSE_NAME_VAR_NAME) String courseName,
+                                           @RequestParam(COURSE_CATEGORY_NAME_VAR_NAME) String courseCategoryName,
                                            @RequestParam(COURSE_WEIGHT_VAR_NAME) Float courseWeight,
                                            @RequestParam(COURSE_COST_VAR_NAME) Float courseCost,
                                            @RequestParam(SUBMIT_BUTTON_VAR_NAME) String submitButtonValue
     ) {
         if (isSubmitSave(submitButtonValue)) {
-            saveCourse(courseId, courseName, courseWeight, courseCost);
+            saveCourse(courseId, courseName, courseCategoryName, courseWeight, courseCost);
         } else if (isSubmitDelete(submitButtonValue)) {
             deleteCourse(courseId);
         }
