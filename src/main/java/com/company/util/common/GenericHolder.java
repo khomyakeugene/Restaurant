@@ -29,6 +29,10 @@ public class GenericHolder<T> {
         return getEntityClass().getName();
     }
 
+    protected String getEntitySimpleName() {
+        return getEntityClass().getSimpleName();
+    }
+
     protected T newObject() {
         Class<? extends T> entityClass = getEntityClass();
 

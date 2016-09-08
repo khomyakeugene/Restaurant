@@ -23,4 +23,11 @@ public class Util {
     public static Date getDateOnly(Timestamp timestamp) {
         return getDateOnly(new Date(timestamp.getTime()));
     }
+
+    public static String decapitalize(String data){
+        StringBuilder sb = new StringBuilder(data);
+        sb.setCharAt(0, Character.toLowerCase(sb.charAt(0)));
+
+        return sb.toString();
+    }
 }

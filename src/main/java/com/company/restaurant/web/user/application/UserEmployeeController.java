@@ -1,7 +1,7 @@
 package com.company.restaurant.web.user.application;
 
 import com.company.restaurant.service.EmployeeService;
-import com.company.restaurant.web.user.application.proto.UserApplicationController;
+import com.company.restaurant.web.user.application.common.UserApplicationController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

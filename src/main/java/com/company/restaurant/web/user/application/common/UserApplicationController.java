@@ -1,4 +1,4 @@
-package com.company.restaurant.web.user.application.proto;
+package com.company.restaurant.web.user.application.common;
 
 import com.company.restaurant.web.common.CommonDataController;
 
