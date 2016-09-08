@@ -2,8 +2,7 @@ package com.company.restaurant.web.admin.application;
 
 import com.company.restaurant.model.Course;
 import com.company.restaurant.service.CourseService;
-import com.company.restaurant.web.admin.application.common.AdminApplicationController;
-import com.company.restaurant.web.common.CRUDModelHandler;
+import com.company.restaurant.web.admin.application.common.AdminCRUDController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +17,7 @@ import java.util.stream.Collectors;
  * Created by Yevhen on 04.09.2016.
  */
 @Controller
-public class AdminCourseController extends AdminApplicationController {
+public class AdminCourseController extends AdminCRUDController<Course> {
     private static final String ADMIN_COURSE_LIST_PAGE_VIEW_NAME = "admin-application/course/admin-course-list-page";
     private static final String ADMIN_COURSE_LIST_REQUEST_MAPPING_VALUE = "/admin-course-list";
     private static final String ADMIN_APPLICATION_COURSE_REQUEST_MAPPING_PATTERN = "/admin-course/%d";
@@ -42,18 +41,10 @@ public class AdminCourseController extends AdminApplicationController {
     private static final String DEFAULT_COURSE_CATEGORY_NAME_VALUE = "Salads";
 
     private CourseService courseService;
-    private CRUDModelHandler courseModelHandler;
 
     @Autowired
     public void setCourseService(CourseService courseService) {
         this.courseService = courseService;
-    }
-
-    @Override
-    protected void initModelAndViewData() {
-        super.initModelAndViewData();
-
-        courseModelHandler = new CRUDModelHandler<Course>(modelAndView);
     }
 
     private Course newCourse() {

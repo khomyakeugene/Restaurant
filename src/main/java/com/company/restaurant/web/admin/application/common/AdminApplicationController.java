@@ -26,7 +26,5 @@ public class AdminApplicationController extends CommonDataController {
     @Override
     protected void initModelAndViewData() {
         super.initModelAndViewData();
-
-
     }
 }
