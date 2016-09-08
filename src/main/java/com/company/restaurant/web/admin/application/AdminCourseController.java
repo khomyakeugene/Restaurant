@@ -97,8 +97,9 @@ public class AdminCourseController extends AdminCRUDController<Course> {
             course = new Course();
         }
 
-        // Important to possibly called <ErrorHandler> that next redirect to "current course JSP-page" to show
-        // error message and to have the possibility to correct editing parameters of "current object"
+        // Important to return to current object page (see method <toCurrentObjectPage>) and after possibly
+        // called <ErrorHandler> that next redirect to "current course JSP-page" to show error message and to have
+        // the possibility to correct editing parameters of "current object"
         setCurrentObject(course);
 
         course.setCourseId(courseId);
