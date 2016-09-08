@@ -34,15 +34,17 @@ public class CRUDModelHandler<T> extends GenericHolder<T> {
         addCurrentObject(currentObject);
     }
 
-    public String getCurrentObjectVarName(T currentObject) {
+    public String getCurrentObjectVarName() {
         if (currentObjectVarName == null) {
-            currentObjectVarName = Util.decapitalize(currentObject.getClass().getSimpleName());
+            Class cl = (currentObject == null) ? getEntityClass() : currentObject.getClass();
+            currentObjectVarName = Util.decapitalize(cl.getSimpleName());
         }
+
         return currentObjectVarName;
     }
 
     protected void addCurrentObject(T currentObject) {
-        modelAndView.addObject(getCurrentObjectVarName(currentObject), currentObject);
+        modelAndView.addObject(getCurrentObjectVarName(), currentObject);
     }
 
     public void newCurrentObject() {
