@@ -216,3 +216,7 @@
     font-weight: bold;
     margin-left: 15px;
 }
+.table-action {
+    font-weight: bold;
+    font-size: 5px;
+}

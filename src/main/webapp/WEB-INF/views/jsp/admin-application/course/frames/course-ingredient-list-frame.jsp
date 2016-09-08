@@ -12,13 +12,19 @@
     <table class="ingredient-table">
         <tr>
             <th>Ingredient</th>
-            <th style="text-align: right">Amount</th>
+            <th style="text-align: right" width="15%">Amount</th>
+            <th style="text-align: left" width="5%">Measure</th>
+            <th class="table-action" style="text-align: center" width="5%">action</th>
         </tr>
         <c:forEach items="${course.courseIngredients}" var="courseIngredient">
             <tr>
                 <td><b>${courseIngredient.ingredient.name}</b></td>
-                <td style="text-align: right">${courseIngredient.amount}
-                        ${courseIngredient.portion.description}</td>
+                <td style="text-align: right">${courseIngredient.amount}</td>
+                <td style="text-align: left">${courseIngredient.portion.description}</td>
+                <td class="table-action">
+                    <a class="table-action" methods="post" href="/admin-course/delete_course_ingredient/${course.courseId}/${courseIngredient.ingredient.ingredientId}">
+                        delete
+                </td>
             </tr>
         </c:forEach>
     </table>

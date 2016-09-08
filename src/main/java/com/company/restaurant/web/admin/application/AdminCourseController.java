@@ -22,6 +22,8 @@ public class AdminCourseController extends AdminCRUDController<Course> {
     private static final String ADMIN_COURSE_LIST_REQUEST_MAPPING_VALUE = "/admin-course-list";
     private static final String ADMIN_APPLICATION_COURSE_REQUEST_MAPPING_PATTERN = "/admin-course/%d";
     private static final String ADMIN_APPLICATION_COURSE_REQUEST_MAPPING_VALUE = "/admin-course/{courseId}";
+    private static final String ADMIN_APPLICATION_DELETE_COURSE_INGREDIENT_REQUEST_MAPPING_VALUE =
+            "/admin-course/delete_course_ingredient/{courseId}/{ingredientId}";
     private static final String ADMIN_SAVE_OR_DELETE_COURSE_PAGE_VIEW_NAME =
             "admin-application/course/admin-save-or-delete-course-page";
     private static final String ADMIN_SAVE_OR_DELETE_COURSE_REQUEST_MAPPING_VALUE = "/save-or-delete-course";
@@ -120,6 +122,11 @@ public class AdminCourseController extends AdminCRUDController<Course> {
         courseService.delCourse(courseId);
     }
 
+    private ModelAndView toCurrentObjectPage() {
+        return new ModelAndView(REDIRECT_PREFIX + String.format(ADMIN_APPLICATION_COURSE_REQUEST_MAPPING_PATTERN,
+                getCurrentObject().getCourseId()));
+    }
+
     @RequestMapping(value = ADMIN_COURSE_LIST_REQUEST_MAPPING_VALUE, method = RequestMethod.GET)
     public ModelAndView courseListPage() {
         clearErrorMessage();
@@ -136,7 +143,7 @@ public class AdminCourseController extends AdminCRUDController<Course> {
 
         prepareCourseEnvironment(courseId);
 
-        modelAndView.addObject(COURSE_VAR_NAME, courseService.findCourseById(courseId));
+        setCurrentObject(courseService.findCourseById(courseId));
         modelAndView.setViewName(ADMIN_SAVE_OR_DELETE_COURSE_PAGE_VIEW_NAME);
 
         return modelAndView;
@@ -175,9 +182,14 @@ public class AdminCourseController extends AdminCRUDController<Course> {
                                        @RequestParam(COURSE_CATEGORY_NAME_VAR_NAME) String courseCategoryName,
                                        @RequestParam(COURSE_WEIGHT_VAR_NAME) Float courseWeight,
                                        @RequestParam(COURSE_COST_VAR_NAME) Float courseCost) {
-        Course course = createCourse(courseName, courseCategoryName, courseWeight, courseCost);
+        createCourse(courseName, courseCategoryName, courseWeight, courseCost);
 
-        return new ModelAndView(REDIRECT_PREFIX +
-                String.format(ADMIN_APPLICATION_COURSE_REQUEST_MAPPING_PATTERN, course.getCourseId()));
+        return toCurrentObjectPage();
+    }
+
+    @RequestMapping(value = ADMIN_APPLICATION_DELETE_COURSE_INGREDIENT_REQUEST_MAPPING_VALUE, method = RequestMethod.GET)
+    public ModelAndView deleteCourseIngredient(@PathVariable int courseId, @PathVariable int ingredientId) {
+
+        return toCurrentObjectPage();
     }
 }
