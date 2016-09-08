@@ -86,6 +86,7 @@ public class AdminCourseController extends AdminCRUDController<Course> {
                               Float courseWeight,
                               Float courseCost) {
         Course course = null;
+
         // Temporarily: get "old" image from database - because I do not know how to manipulate with image
         if (courseId > 0) {
             course = courseService.findCourseById(courseId);
@@ -93,6 +94,10 @@ public class AdminCourseController extends AdminCRUDController<Course> {
         if (course == null) {
             course = new Course();
         }
+
+        // Important to possibly called <ErrorHandler> that next redirect to "current course JSP-page" to show
+        // error message and to have the possibility to correct editing parameters
+        setCurrentObject(course);
 
         course.setCourseId(courseId);
         course.setName(courseName);
