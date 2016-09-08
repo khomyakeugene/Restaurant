@@ -15,6 +15,8 @@ public class AdminApplicationController extends CommonDataController {
         ERROR_PAGE_VIEW_NAME = "admin-application/error";
     }
 
+
+
     protected boolean isSubmitSave(String submitButtonValue) {
         return submitButtonValue.toLowerCase().equals(SUBMIT_BUTTON_SAVE_VALUE.toLowerCase());
     }

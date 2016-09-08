@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.stream.Collectors;
-
 /**
  * Created by Yevhen on 04.09.2016.
  */
@@ -30,7 +28,7 @@ public class AdminEmployeeController extends AdminCRUDController<Employee> {
     private static final String EMPLOYEES_VAR_NAME = "employees";
     private static final String EMPLOYEE_VAR_NAME = "employee";
     private static final String JOB_POSITION_NAME_VAR_NAME = "jobPositionName";
-    private static final String JOB_POSITION_NAMES_VAR_NAME = "jobPositionNames";
+    private static final String JOB_POSITIONS_VAR_NAME = "jobPositions";
     private static final String EMPLOYEE_ID_VAR_NAME = "employeeId";
     private static final String EMPLOYEE_FIRST_NAME_VAR_NAME = "employeeFirstName";
     private static final String EMPLOYEE_SECOND_NAME_VAR_NAME = "employeeSecondName";
@@ -66,16 +64,22 @@ public class AdminEmployeeController extends AdminCRUDController<Employee> {
             employee = newEmployee();
         }
 
+        setCurrentObject(employee);
+
+
+        modelAndView.addObject("jobPosition", employee.getJobPosition());
+
+
         // Current job position name - important to correct work of <form:select> in view
-        String jobPositionName = employee.getJobPosition().getName();
-        modelAndView.addObject(EMPLOYEE_VAR_NAME, employee);
-        modelAndView.addObject(JOB_POSITION_NAME_VAR_NAME, jobPositionName);
+       // String jobPositionName = employee.getJobPosition().getName();
+        //modelAndView.addObject(JOB_POSITION_NAME_VAR_NAME, jobPositionName);
 
         // Temporary solution: exclude <jobPositionName> from <jobPositionNames>  - important to correct work
         // of <form:select> in view
-        modelAndView.addObject(JOB_POSITION_NAMES_VAR_NAME, employeeService.findAllJobPositionNames());
-        modelAndView.addObject(JOB_POSITION_NAMES_VAR_NAME, employeeService.findAllJobPositionNames().stream().
-                filter(n -> (!n.equals(jobPositionName))).collect(Collectors.toList()));
+//        modelAndView.addObject(JOB_POSITIONS_VAR_NAME, employeeService.findAllJobPositions().stream().
+//                filter(jP -> (!jP.getName().equals(jobPositionName))).collect(Collectors.toList()));
+
+        modelAndView.addObject(JOB_POSITIONS_VAR_NAME, employeeService.findAllJobPositions());
     }
 
     private void prepareEmployeeEnvironment() {
