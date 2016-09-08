@@ -35,7 +35,7 @@ public class Constraints {
     private static final String COURSE_CANNOT_BE_DELETED_BECAUSE_OF_MENU =
             "It is impossible to delete this course because it is included at least in one menu";
     private static final String COURSE_CANNOT_BE_ADDED_BECAUSE_OF_NON_UNIQUE_NAME =
-            "It is impossible to add this course because its name is non-unique";
+            "It is impossible to save this course because its name is non-unique";
 
     private static final HashMap<String, String> constraintMessageMap = new HashMap<String, String>() {
         {

@@ -2,7 +2,7 @@ package com.company.restaurant.web.admin.application;
 
 import com.company.restaurant.model.Employee;
 import com.company.restaurant.service.EmployeeService;
-import com.company.restaurant.web.admin.application.common.AdminApplicationController;
+import com.company.restaurant.web.admin.application.common.AdminCRUDController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
  * Created by Yevhen on 04.09.2016.
  */
 @Controller
-public class AdminEmployeeController extends AdminApplicationController {
+public class AdminEmployeeController extends AdminCRUDController<Employee> {
     private static final String ADMIN_EMPLOYEE_LIST_PAGE_VIEW_NAME = "admin-application/employee/admin-employee-list-page";
     private static final String ADMIN_SAVE_OR_DELETE_EMPLOYEE_PAGE_VIEW_NAME = "admin-application/employee/admin-save-or-delete-employee-page";
     private static final String ADMIN_CREATE_EMPLOYEE_PAGE_VIEW_NAME = "admin-application/employee/admin-create-employee-page";
@@ -100,6 +100,11 @@ public class AdminEmployeeController extends AdminApplicationController {
         if (employee == null) {
             employee = new Employee();
         }
+
+        // Important to possibly called <ErrorHandler> that next redirect to "current course JSP-page" to show
+        // error message and to have the possibility to correct editing parameters of "current object"
+        setCurrentObject(employee);
+
         employee.setEmployeeId(employeeId);
         employee.setFirstName(employeeFirstName);
         employee.setSecondName(employeeSecondName);

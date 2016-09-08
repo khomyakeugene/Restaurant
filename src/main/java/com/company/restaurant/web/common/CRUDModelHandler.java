@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class CRUDModelHandler<T> extends GenericHolder<T> {
     protected ModelAndView modelAndView;
     private T currentObject;
+    private String currentObjectVarName;
 
     public CRUDModelHandler(ModelAndView modelAndView) {
         this.modelAndView = modelAndView;
@@ -34,7 +35,10 @@ public class CRUDModelHandler<T> extends GenericHolder<T> {
     }
 
     public String getCurrentObjectVarName(T currentObject) {
-        return Util.decapitalize(currentObject.getClass().getSimpleName());
+        if (currentObjectVarName == null) {
+            currentObjectVarName = Util.decapitalize(currentObject.getClass().getSimpleName());
+        }
+        return currentObjectVarName;
     }
 
     protected void addCurrentObject(T currentObject) {
