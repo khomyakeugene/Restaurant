@@ -40,4 +40,8 @@ public class CRUDModelHandler<T> extends GenericHolder<T> {
     protected void addCurrentObjectAttribute(T currentObject) {
         modelAndView.addObject(getCurrentObjectVarName(), currentObject);
     }
+
+    public void addNewCurrentObjectAttribute() {
+        addCurrentObjectAttribute(newObject());
+    }
 }

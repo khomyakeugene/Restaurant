@@ -3,6 +3,7 @@ package com.company.restaurant.web.admin.application;
 import com.company.restaurant.model.Course;
 import com.company.restaurant.service.CourseService;
 import com.company.restaurant.web.admin.application.common.AdminApplicationController;
+import com.company.restaurant.web.common.CRUDModelHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,10 +42,18 @@ public class AdminCourseController extends AdminApplicationController {
     private static final String DEFAULT_COURSE_CATEGORY_NAME_VALUE = "Salads";
 
     private CourseService courseService;
+    private CRUDModelHandler courseModelHandler;
 
     @Autowired
     public void setCourseService(CourseService courseService) {
         this.courseService = courseService;
+    }
+
+    @Override
+    protected void initModelAndViewData() {
+        super.initModelAndViewData();
+
+        courseModelHandler = new CRUDModelHandler<Course>(modelAndView);
     }
 
     private Course newCourse() {
@@ -78,7 +87,6 @@ public class AdminCourseController extends AdminApplicationController {
 
     private void prepareCourseEnvironment() {
         prepareCourseEnvironment(0);
-
     }
 
     private Course saveCourse(int courseId,
@@ -103,6 +111,14 @@ public class AdminCourseController extends AdminApplicationController {
 
         return courseService.updCourse(course);
     }
+
+    private Course createCourse(String courseName,
+                                String courseCategoryName,
+                                Float courseWeight,
+                                Float courseCost) {
+        return saveCourse(0, courseName, courseCategoryName, courseWeight, courseCost);
+    }
+
 
     private void deleteCourse(int courseId) {
         courseService.delCourse(courseId);
@@ -163,7 +179,7 @@ public class AdminCourseController extends AdminApplicationController {
                                        @RequestParam(COURSE_CATEGORY_NAME_VAR_NAME) String courseCategoryName,
                                        @RequestParam(COURSE_WEIGHT_VAR_NAME) Float courseWeight,
                                        @RequestParam(COURSE_COST_VAR_NAME) Float courseCost) {
-        Course course = saveCourse(0, courseName, courseCategoryName, courseWeight, courseCost);
+        Course course = createCourse(courseName, courseCategoryName, courseWeight, courseCost);
 
         return new ModelAndView(REDIRECT_PREFIX +
                 String.format(ADMIN_APPLICATION_COURSE_REQUEST_MAPPING_PATTERN, course.getCourseId()));
