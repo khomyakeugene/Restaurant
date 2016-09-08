@@ -11,7 +11,6 @@ public class CRUDModelHandler<T> extends GenericHolder<T> {
     protected ModelAndView modelAndView;
     private T currentObject;
 
-
     public CRUDModelHandler(ModelAndView modelAndView) {
         this.modelAndView = modelAndView;
     }
