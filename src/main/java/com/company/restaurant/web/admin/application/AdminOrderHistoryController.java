@@ -26,7 +26,7 @@ public class AdminOrderHistoryController extends AdminApplicationController {
     }
 
     @RequestMapping(value = ADMIN_ORDER_HISTORY_REQUEST_MAPPING_VALUE, method = RequestMethod.GET)
-    public ModelAndView menuPage() {
+    public ModelAndView ordersPage() {
         modelAndView.addObject(ORDERS_VAR_NAME, orderService.findAllOrders());
         modelAndView.setViewName(ADMIN_ORDER_HISTORY_PAGE_VIEW_NAME);
 

@@ -59,6 +59,7 @@
 .admin-employee-table,
 .admin-employee-data-table,
 .course-table,
+.admin-order-history-table,
 .ingredient-table {
     border-spacing: 5px;
     padding: 7px;
@@ -76,6 +77,8 @@
 .admin-employee-data-table td,
 .course-table th,
 .course-table td,
+.admin-order-history-table th,
+.admin-order-history-table td,
 .ingredient-table th,
 .ingredient-table td {
     padding-left: 5px;
@@ -84,6 +87,7 @@
 .user-employee-table tr:nth-of-type(odd),
 .admin-employee-table tr:nth-of-type(odd),
 .course-table tr:nth-of-type(odd),
+.admin-order-history-table tr:nth-of-type(odd),
 .ingredient-table tr:nth-of-type(odd) {
     background-color: rgba(160, 237, 41, 0.24);
 
@@ -91,6 +95,7 @@
 .user-employee-table th,
 .admin-employee-table th,
 .course-table th,
+.admin-order-history-table th,
 .ingredient-table th {
     color: darkgreen;
     background-color: rgba(135, 203, 37, 0.38);

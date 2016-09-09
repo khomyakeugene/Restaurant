@@ -10,6 +10,7 @@
 <html>
 <body>
 <%@ include file="../frames/main-menu-frame.jsp" %>
+<%@ include file="frames/order-history-list-frame.jsp" %>
 
 </body>
 </html>
