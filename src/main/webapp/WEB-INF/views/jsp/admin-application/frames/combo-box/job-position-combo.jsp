@@ -11,9 +11,8 @@
 <%--@elvariable id="jobPositionName" type="String"--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<form:select multiple="sigle" path="jobPosition" id="jobPositionName"
+<form:select multiple="sigle" path="jobPositions" id="jobPositionName"
              name="jobPositionName" cssClass="input-control">
-    <%--<form:option selected="true" value="${jobPositionName}"/>--%>
-    <form:options items="${jobPositions}" itemValue="name" itemLabel="name"
-                  value="${jobPositionName}"/>
+    <form:option selected="true" value="${jobPositionName}"/>
+    <form:options items="${jobPositions}" itemValue="name" itemLabel="name"/>
 </form:select>

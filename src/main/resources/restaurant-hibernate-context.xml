@@ -134,6 +134,9 @@
 
     <bean class="com.company.restaurant.dao.hibernate.HCourseIngredientDao" id="courseIngredientDao">
         <property name="sessionFactory" ref="sessionFactory"/>
-        <property name="useCriteriaQuery" value="true"/>
+        <property name="courseDao" ref="courseDao"/>
+        <property name="ingredientDao" ref="ingredientDao"/>
+        <property name="portionDao" ref="portionDao"/>
+        <property name="useCriteriaQuery" value="false"/>
     </bean>
 </beans>

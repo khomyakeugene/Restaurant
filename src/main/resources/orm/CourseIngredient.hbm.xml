@@ -26,7 +26,7 @@
                      class="com.company.restaurant.model.Portion"
                      lazy="false"/>
         <property name="amount">
-            <column name="amount" sql-type="double precision" precision="-1" not-null="true"/>
+            <column name="amount" sql-type="double precision" precision="-1"/>
         </property>
     </class>
 </hibernate-mapping>

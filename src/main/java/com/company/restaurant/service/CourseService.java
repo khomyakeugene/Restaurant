@@ -1,7 +1,6 @@
 package com.company.restaurant.service;
 
-import com.company.restaurant.model.Course;
-import com.company.restaurant.model.CourseCategory;
+import com.company.restaurant.model.*;
 
 import java.util.List;
 
@@ -38,4 +37,10 @@ public interface CourseService {
     List<Course> findAllCourses();
 
     List<Course> findCoursesByNameFragment(String nameFragment);
+
+    CourseIngredient addCourseIngredient(Course course, Ingredient ingredient, Portion portion, Float amount);
+
+    void delCourseIngredient(Course course, Ingredient ingredient);
+
+    void delCourseIngredient(int courseId, int ingredientId);
 }

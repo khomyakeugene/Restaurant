@@ -21,6 +21,10 @@ public class Constraints {
     private static final String CONSTRAINT_NAME_ORDER_COURSE_COURSE_ID = "fk_order_co_ord_crs_c_course";
     // menu_course
     private static final String CONSTRAINT_NAME_MENU_COURSE_COURSE_ID = "fk_menu_cou_mmu_crs_c_course";
+    // Ingredient
+    private static final String FIELD_NAME_INGREDIENT_ID = "ingredient_id";
+    // course_ingredient
+    private static final String CONSTRAINT_NAME_PK_COURSE_INGREDIENT = "pk_course_ingredient";
 
     private static final String EMPLOYEE_CANNOT_BE_DELETED_BECAUSE_OF_ORDER =
             "It is impossible to delete this employee because there are orders served by him/her";
@@ -36,6 +40,10 @@ public class Constraints {
             "It is impossible to delete this course because it is included at least in one menu";
     private static final String COURSE_CANNOT_BE_ADDED_BECAUSE_OF_NON_UNIQUE_NAME =
             "It is impossible to save this course because its name is non-unique";
+    private static final String PLEASE_SELECT_AN_INGREDIENT =
+            "Please, select an ingredient";
+    private static final String THIS_INGREDIENT_IS_ALREADY_PRESENTED_IN_THIS_COURSE =
+            "This ingredient is already presented in this course";
 
     private static final HashMap<String, String> constraintMessageMap = new HashMap<String, String>() {
         {
@@ -46,6 +54,8 @@ public class Constraints {
             put (CONSTRAINT_NAME_ORDER_COURSE_COURSE_ID, COURSE_CANNOT_BE_DELETED_BECAUSE_OF_ORDER);
             put (CONSTRAINT_NAME_MENU_COURSE_COURSE_ID, COURSE_CANNOT_BE_DELETED_BECAUSE_OF_MENU);
             put (CONSTRAINT_NAME_COURSE_NAME_UNIQUE, COURSE_CANNOT_BE_ADDED_BECAUSE_OF_NON_UNIQUE_NAME);
+            put (FIELD_NAME_INGREDIENT_ID, PLEASE_SELECT_AN_INGREDIENT);
+            put (CONSTRAINT_NAME_PK_COURSE_INGREDIENT, THIS_INGREDIENT_IS_ALREADY_PRESENTED_IN_THIS_COURSE);
 
         }
     };

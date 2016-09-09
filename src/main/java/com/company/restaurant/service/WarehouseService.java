@@ -28,9 +28,13 @@ public interface WarehouseService {
 
     Ingredient findIngredientById(int ingredientId);
 
+    Ingredient findIngredientByName(String name);
+
     List<Portion> findAllPortions();
 
     Portion findPortionById(int portionId);
+
+    Portion findPortionByDescription(String description);
 
     void clearWarehouse();
 }

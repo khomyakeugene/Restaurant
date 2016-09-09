@@ -2,8 +2,8 @@ package com.company.restaurant.service.impl;
 
 import com.company.restaurant.dao.CourseCategoryDao;
 import com.company.restaurant.dao.CourseDao;
-import com.company.restaurant.model.Course;
-import com.company.restaurant.model.CourseCategory;
+import com.company.restaurant.dao.CourseIngredientDao;
+import com.company.restaurant.model.*;
 import com.company.restaurant.service.CourseService;
 import com.company.restaurant.service.impl.common.Service;
 
@@ -13,6 +13,7 @@ import java.util.List;
 public class CourseServiceImpl extends Service implements CourseService {
     private CourseCategoryDao courseCategoryDao;
     private CourseDao courseDao;
+    private CourseIngredientDao courseIngredientDao;
 
     public void setCourseCategoryDao(CourseCategoryDao courseCategoryDao) {
         this.courseCategoryDao = courseCategoryDao;
@@ -20,6 +21,10 @@ public class CourseServiceImpl extends Service implements CourseService {
 
     public void setCourseDao(CourseDao courseDao) {
         this.courseDao = courseDao;
+    }
+
+    public void setCourseIngredientDao(CourseIngredientDao courseIngredientDao) {
+        this.courseIngredientDao = courseIngredientDao;
     }
 
     @Override
@@ -98,5 +103,20 @@ public class CourseServiceImpl extends Service implements CourseService {
     @Override
     public List<Course> findCoursesByNameFragment(String nameFragment) {
         return courseDao.findCoursesByNameFragment(nameFragment);
+    }
+
+    @Override
+    public CourseIngredient addCourseIngredient(Course course, Ingredient ingredient, Portion portion, Float amount) {
+        return courseIngredientDao.addCourseIngredient(course, ingredient, portion, amount);
+    }
+
+    @Override
+    public void delCourseIngredient(Course course, Ingredient ingredient) {
+        courseIngredientDao.delCourseIngredient(course, ingredient);
+    }
+
+    @Override
+    public void delCourseIngredient(int courseId, int ingredientId) {
+        courseIngredientDao.delCourseIngredient(courseId, ingredientId);
     }
 }

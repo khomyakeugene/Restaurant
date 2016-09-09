@@ -79,6 +79,11 @@ public class WarehouseServiceImpl extends Service implements WarehouseService {
     }
 
     @Override
+    public Ingredient findIngredientByName(String name) {
+        return ingredientDao.findIngredientByName(name);
+    }
+
+    @Override
     public List<Portion> findAllPortions() {
         return portionDao.findAllPortions();
     }
@@ -86,6 +91,11 @@ public class WarehouseServiceImpl extends Service implements WarehouseService {
     @Override
     public Portion findPortionById(int portionId) {
         return portionDao.findPortionById(portionId);
+    }
+
+    @Override
+    public Portion findPortionByDescription(String description) {
+        return portionDao.findPortionByDescription(description);
     }
 
     @Override

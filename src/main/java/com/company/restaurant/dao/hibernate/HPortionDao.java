@@ -11,6 +11,8 @@ import java.util.List;
  * Created by Yevhen on 15.06.2016.
  */
 public class HPortionDao extends HDaoEntity<Portion> implements PortionDao {
+    private static final String DESCRIPTION_ATTRIBUTE_NAME = "description";
+
     @Transactional
     @Override
     public Portion addPortion(Portion portion) {
@@ -33,5 +35,11 @@ public class HPortionDao extends HDaoEntity<Portion> implements PortionDao {
     @Override
     public Portion findPortionById(int portionId) {
         return findObjectById(portionId);
+    }
+
+    @Transactional
+    @Override
+    public Portion findPortionByDescription(String description) {
+        return findObjectByAttributeValue(DESCRIPTION_ATTRIBUTE_NAME, description);
     }
 }

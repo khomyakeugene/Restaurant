@@ -38,7 +38,10 @@ public class AdminCourseController extends AdminCRUDController<Course> {
     private static final String COURSE_WEIGHT_VAR_NAME = "courseWeight";
     private static final String COURSE_COST_VAR_NAME = "courseCost";
     private static final String COURSE_CATEGORY_NAME_VAR_NAME = "courseCategoryName";
-    private static final String COURSE_CATEGORY_NAMES_VAR_NAME = "courseCategoryNames";
+    private static final String COURSE_CATEGORIES_VAR_NAME = "courseCategories";
+    private static final String COURSE_INGREDIENT_NAME_VAR_NAME = "courseIngredientName";
+    private static final String COURSE_PORTION_DESCRIPTION_VAR_NAME = "coursePortionDescription";
+    private static final String COURSE_INGREDIENT_AMOUNT_VAR_NAME = "courseIngredientAmount";
 
     private static final String DEFAULT_COURSE_CATEGORY_NAME_VALUE = "Salads";
 
@@ -74,8 +77,9 @@ public class AdminCourseController extends AdminCRUDController<Course> {
 
         // Temporary solution: exclude <jobPositionName> from <jobPositionNames>  - important to correct work
         // of <form:select> in view
-        modelAndView.addObject(COURSE_CATEGORY_NAMES_VAR_NAME, courseService.findAllCourseCategoryNames().stream().
-                filter(n -> (!n.equals(courseCategoryName))).collect(Collectors.toList()));
+        modelAndView.addObject(COURSE_CATEGORIES_VAR_NAME, courseService.findAllCourseCategories().stream().
+                filter(courseCategory -> (!courseCategory.getName().equals(courseCategoryName))).
+                collect(Collectors.toList()));
     }
 
     private void prepareCourseEnvironment() {
@@ -156,15 +160,25 @@ public class AdminCourseController extends AdminCRUDController<Course> {
                                            @RequestParam(COURSE_CATEGORY_NAME_VAR_NAME) String courseCategoryName,
                                            @RequestParam(COURSE_WEIGHT_VAR_NAME) Float courseWeight,
                                            @RequestParam(COURSE_COST_VAR_NAME) Float courseCost,
+                                           @RequestParam(COURSE_INGREDIENT_NAME_VAR_NAME) String courseIngredientName,
+                                           @RequestParam(COURSE_PORTION_DESCRIPTION_VAR_NAME) String coursePortionDEscription,
+                                           @RequestParam(COURSE_INGREDIENT_AMOUNT_VAR_NAME) Float courseIngredientAmount,
                                            @RequestParam(SUBMIT_BUTTON_VAR_NAME) String submitButtonValue
     ) {
         if (isSubmitSave(submitButtonValue)) {
             saveCourse(courseId, courseName, courseCategoryName, courseWeight, courseCost);
         } else if (isSubmitDelete(submitButtonValue)) {
             deleteCourse(courseId);
+        } else if (isSubmitAdd(submitButtonValue)) {
+            courseService.addCourseIngredient(getCurrentObject(),
+                    warehouseService.findIngredientByName(courseIngredientName),
+                    warehouseService.findPortionByDescription(coursePortionDEscription),
+                    courseIngredientAmount);
         }
 
-        return new ModelAndView(REDIRECT_PREFIX + ADMIN_COURSE_LIST_REQUEST_MAPPING_VALUE);
+        return (isSubmitSave(submitButtonValue) || isSubmitDelete(submitButtonValue)) ?
+                new ModelAndView(REDIRECT_PREFIX + ADMIN_COURSE_LIST_REQUEST_MAPPING_VALUE) :
+                toCurrentObjectPage();
     }
 
     @RequestMapping(value = ADMIN_PREPARE_NEW_COURSE_REQUEST_MAPPING_VALUE, method = RequestMethod.POST)
@@ -190,6 +204,7 @@ public class AdminCourseController extends AdminCRUDController<Course> {
 
     @RequestMapping(value = ADMIN_APPLICATION_DELETE_COURSE_INGREDIENT_REQUEST_MAPPING_VALUE, method = RequestMethod.GET)
     public ModelAndView deleteCourseIngredient(@PathVariable int courseId, @PathVariable int ingredientId) {
+        courseService.delCourseIngredient(courseId, ingredientId);
 
         return toCurrentObjectPage();
     }

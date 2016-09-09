@@ -15,4 +15,6 @@ public interface PortionDao {
     List<Portion> findAllPortions();
 
     Portion findPortionById(int portionId);
+
+    Portion findPortionByDescription(String description);
 }
