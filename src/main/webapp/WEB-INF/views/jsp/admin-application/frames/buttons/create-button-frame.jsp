@@ -13,7 +13,7 @@
             <%@ include file="create-button.jsp" %>
         </td>
         <td>
-            <%@ include file="../../../frames/error-mesage-frame.jsp" %>
+            <%@ include file="../../../frames/error/error-mesage-frame.jsp" %>
         </td>
     </tr>
 </table>

@@ -10,7 +10,7 @@
 <html>
 <body>
 <%@ include file="frames/main-menu-frame.jsp" %>
-<%@ include file="../frames/error-mesage-frame.jsp" %>
+<%@ include file="../frames/error/error-mesage-frame.jsp" %>
 <div style="padding: 15px">
     <%@ include file="frames/buttons/cancel-button.jsp" %>
 </div>

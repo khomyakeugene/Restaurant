@@ -132,6 +132,16 @@ public class AdminCourseController extends AdminCRUDController<Course> {
                 getCurrentObject().getCourseId()));
     }
 
+    private void addCourseIngredient(
+            String courseIngredientName,
+            String coursePortionDescription,
+            Float courseIngredientAmount) {
+        courseService.addCourseIngredient(getCurrentObject(),
+                warehouseService.findIngredientByName(courseIngredientName),
+                warehouseService.findPortionByDescription(coursePortionDescription),
+                courseIngredientAmount);
+    }
+
     @RequestMapping(value = ADMIN_COURSE_LIST_REQUEST_MAPPING_VALUE, method = RequestMethod.GET)
     public ModelAndView courseListPage() {
         clearErrorMessage();
@@ -161,7 +171,7 @@ public class AdminCourseController extends AdminCRUDController<Course> {
                                            @RequestParam(COURSE_WEIGHT_VAR_NAME) Float courseWeight,
                                            @RequestParam(COURSE_COST_VAR_NAME) Float courseCost,
                                            @RequestParam(COURSE_INGREDIENT_NAME_VAR_NAME) String courseIngredientName,
-                                           @RequestParam(COURSE_PORTION_DESCRIPTION_VAR_NAME) String coursePortionDEscription,
+                                           @RequestParam(COURSE_PORTION_DESCRIPTION_VAR_NAME) String coursePortionDescription,
                                            @RequestParam(COURSE_INGREDIENT_AMOUNT_VAR_NAME) Float courseIngredientAmount,
                                            @RequestParam(SUBMIT_BUTTON_VAR_NAME) String submitButtonValue
     ) {
@@ -170,10 +180,7 @@ public class AdminCourseController extends AdminCRUDController<Course> {
         } else if (isSubmitDelete(submitButtonValue)) {
             deleteCourse(courseId);
         } else if (isSubmitAdd(submitButtonValue)) {
-            courseService.addCourseIngredient(getCurrentObject(),
-                    warehouseService.findIngredientByName(courseIngredientName),
-                    warehouseService.findPortionByDescription(coursePortionDEscription),
-                    courseIngredientAmount);
+            addCourseIngredient(courseIngredientName, coursePortionDescription, courseIngredientAmount);
         }
 
         return (isSubmitSave(submitButtonValue) || isSubmitDelete(submitButtonValue)) ?
