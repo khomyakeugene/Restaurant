@@ -39,6 +39,7 @@ public class AdminCourseController extends AdminCRUDController<Course> {
     private static final String COURSE_COST_VAR_NAME = "courseCost";
     private static final String COURSE_CATEGORY_NAME_VAR_NAME = "courseCategoryName";
     private static final String COURSE_CATEGORIES_VAR_NAME = "courseCategories";
+    private static final String NEW_INGREDIENTS_VAR_NAME = "newIngredients";
     private static final String COURSE_INGREDIENT_NAME_VAR_NAME = "courseIngredientName";
     private static final String COURSE_PORTION_DESCRIPTION_VAR_NAME = "coursePortionDescription";
     private static final String COURSE_INGREDIENT_AMOUNT_VAR_NAME = "courseIngredientAmount";
@@ -80,6 +81,13 @@ public class AdminCourseController extends AdminCRUDController<Course> {
         modelAndView.addObject(COURSE_CATEGORIES_VAR_NAME, courseService.findAllCourseCategories().stream().
                 filter(courseCategory -> (!courseCategory.getName().equals(courseCategoryName))).
                 collect(Collectors.toList()));
+
+        // Ingredients which are new for this course
+        Course thisCourse = course;   // Variable used in lambda expression should be final or effectively final
+        modelAndView.addObject(NEW_INGREDIENTS_VAR_NAME, warehouseService.findAllIngredients().stream().
+                filter(ingredient -> !thisCourse.getCourseIngredients().stream().
+                        filter(courseIngredient -> courseIngredient.getIngredient().equals(ingredient)).
+                        findAny().isPresent()).collect(Collectors.toList()));
     }
 
     private void prepareCourseEnvironment() {
