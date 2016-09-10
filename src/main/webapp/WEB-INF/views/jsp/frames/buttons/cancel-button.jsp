@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <div>
-    <button class="button green" onclick="goBack()" value="cancel">
+    <button class="button green" onclick="goBack()" name="submitButtonValue" value="cancel">
         Cancel
     </button>
 

@@ -8,6 +8,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <form action="/prepare-new-employee" method="post">
-    <%@ include file="order-history-filter-frame.jsp" %>
+    <%@ include file="order-history-search-frame.jsp" %>
     <%@ include file="order-history-table-frame.jsp" %>
 </form>

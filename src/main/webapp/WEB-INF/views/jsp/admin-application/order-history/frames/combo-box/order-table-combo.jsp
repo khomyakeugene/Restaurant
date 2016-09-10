@@ -6,11 +6,11 @@
   Time: 10:14
   To change this template use File | Settings | File Templates.
 --%>
-<%--@elvariable id="tables" type="java.util.Collection<com.company.restaurant.model.Table>"--%>
+<%--@elvariable id="orderTables" type="java.util.TreeMap<java.lang.Integer,java.lang.String>"--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <form:select multiple="sigle" path="tables" id="tableId"
              name="tableId" cssClass="input-control" cssStyle="font-weight: bold">
-    <form:option selected="true" value="--- table ---"/>
-    <form:options items="${tables}" itemLabel="name" itemValue="employeeId"/>
+    <form:option selected="true" value="--- Select table ---"/>
+    <form:options items="${orderTables}" />
 </form:select>

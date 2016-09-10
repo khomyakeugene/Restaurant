@@ -6,11 +6,11 @@
   Time: 23:20
   To change this template use File | Settings | File Templates.
 --%>
-<%--@elvariable id="waiters" type="java.util.TreeMap<java.lang.Integer,java.lang.String>"--%>
+<%--@elvariable id="orderWaiters" type="java.util.TreeMap<java.lang.Integer,java.lang.String>"--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<form:select multiple="sigle" path="waiters" id="waiterId"
+<form:select multiple="sigle" path="orderWaiters" id="waiterId"
              name="waiterId" cssClass="input-control" cssStyle="font-weight: bold">
     <form:option selected="true" value="--- Select waiter ---"/>
-    <form:options items="${waiters}" />
+    <form:options items="${orderWaiters}" />
 </form:select>
