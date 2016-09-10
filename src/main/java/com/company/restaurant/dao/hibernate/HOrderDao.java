@@ -18,13 +18,14 @@ public class HOrderDao extends HDaoEntityCourseCollecting<Order> implements Orde
     private static final String ORDER_ID_ATTRIBUTE_NAME = "orderId";
     private static final String STATE_ATTRIBUTE_NAME = "state";
     private static final String ORDER_NUMBER_ATTRIBUTE_NAME = "orderNumber";
+    private static final String ORDER_DATETIME_ATTRIBUTE_NAME = "orderDatetime";
 
     @Override
     protected void initMetadata() {
         super.initMetadata();
 
         orderByExpression = String.format(SqlExpressions.SQL_ORDER_BY_ONE_FIELD_CONDITION_PATTERN_DESC,
-                ORDER_ID_ATTRIBUTE_NAME);
+                ORDER_DATETIME_ATTRIBUTE_NAME);
 
     }
 

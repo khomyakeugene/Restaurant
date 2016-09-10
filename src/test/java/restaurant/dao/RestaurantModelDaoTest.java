@@ -4,6 +4,7 @@ import com.company.restaurant.model.*;
 import org.junit.Test;
 import restaurant.ObjectService;
 import restaurant.Util;
+import restaurant.dao.common.RestaurantDao;
 
 import java.util.List;
 import java.util.Set;

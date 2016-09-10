@@ -1,4 +1,4 @@
-package restaurant.dao;
+package restaurant.dao.common;
 
 import com.company.restaurant.service.CourseService;
 import com.company.restaurant.service.OrderService;
