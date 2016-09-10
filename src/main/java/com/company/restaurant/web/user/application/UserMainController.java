@@ -55,5 +55,4 @@ public class UserMainController extends UserApplicationController {
 
         return modelAndView;
     }
-
 }

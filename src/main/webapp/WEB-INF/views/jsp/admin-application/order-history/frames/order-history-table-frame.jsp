@@ -15,7 +15,7 @@
         <th style="width: 5%">State</th>
         <th style="width: 10%">Order number</th>
         <th style="width: 5%">Table</th>
-        <th>Waiter</th>
+        <th style="width: 30%">Waiter</th>
     </tr>
     <c:forEach items="${orders}" var="order">
         <tr>

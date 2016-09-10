@@ -7,7 +7,15 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<form action="/prepare-new-employee" method="post">
+<form action="/search_orders" method="post">
     <%@ include file="order-history-search-frame.jsp" %>
-    <%@ include file="order-history-table-frame.jsp" %>
+    <div class="horizontal-container ordinary-container">
+        <div class="horizontal-part-holder ordinary-container">
+            <div class="two-thirds">
+                <%@ include file="order-history-table-frame.jsp" %>
+            </div>
+            <div class="third">
+            </div>
+        </div>
+    </div>
 </form>

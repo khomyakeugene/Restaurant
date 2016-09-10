@@ -6,9 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<table>
+<table style="border-spacing: 10px">
     <tr>
-        <td>
+        <td >
             <%@ include file="combo-box/order-date-combo.jsp" %>
         </td>
         <td>
