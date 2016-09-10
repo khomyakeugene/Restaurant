@@ -28,7 +28,7 @@
             </tr>
         </c:forEach>
         <tr>
-            <td><%@ include file="../../frames/combo-box/course-ingredient-combo.jsp" %></td>
+            <td><%@ include file="combo-box/course-ingredient-combo.jsp" %></td>
             <td>
                 <input type="number" step="0.001" class="input-control" style="text-align: right"
                        id="courseIngredientAmount" name="courseIngredientAmount"

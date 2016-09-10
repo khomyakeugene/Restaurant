@@ -60,6 +60,27 @@ public class AdminCourseController extends AdminCRUDController<Course> {
         return result;
     }
 
+    private void initCourseCategoryEnvironment(Course course) {
+        // Current job position name - important to correct work of <form:select> in view
+        String courseCategoryName = course.getCourseCategory().getName();
+        modelAndView.addObject(COURSE_VAR_NAME, course);
+        modelAndView.addObject(COURSE_CATEGORY_NAME_VAR_NAME, courseCategoryName);
+
+        // Temporary solution: exclude <jobPositionName> from <jobPositionNames>  - important to correct work
+        // of <form:select> in view
+        modelAndView.addObject(COURSE_CATEGORIES_VAR_NAME, courseService.findAllCourseCategories().stream().
+                filter(courseCategory -> (!courseCategory.getName().equals(courseCategoryName))).
+                collect(Collectors.toList()));
+    }
+
+    private void initNewIngredientList(Course course) {
+        // Ingredients which are new for this course
+        modelAndView.addObject(NEW_INGREDIENTS_VAR_NAME, warehouseService.findAllIngredients().stream().
+                filter(ingredient -> !course.getCourseIngredients().stream().
+                        filter(courseIngredient -> courseIngredient.getIngredient().equals(ingredient)).
+                        findAny().isPresent()).collect(Collectors.toList()));
+    }
+
     private void prepareCourseEnvironment(int courseId) {
         Course course;
         if (courseId > 0) {
@@ -71,23 +92,10 @@ public class AdminCourseController extends AdminCRUDController<Course> {
             course = newCourse();
         }
 
-        // Current job position name - important to correct work of <form:select> in view
-        String courseCategoryName = course.getCourseCategory().getName();
-        modelAndView.addObject(COURSE_VAR_NAME, course);
-        modelAndView.addObject(COURSE_CATEGORY_NAME_VAR_NAME, courseCategoryName);
-
-        // Temporary solution: exclude <jobPositionName> from <jobPositionNames>  - important to correct work
-        // of <form:select> in view
-        modelAndView.addObject(COURSE_CATEGORIES_VAR_NAME, courseService.findAllCourseCategories().stream().
-                filter(courseCategory -> (!courseCategory.getName().equals(courseCategoryName))).
-                collect(Collectors.toList()));
-
-        // Ingredients which are new for this course
-        Course thisCourse = course;   // Variable used in lambda expression should be final or effectively final
-        modelAndView.addObject(NEW_INGREDIENTS_VAR_NAME, warehouseService.findAllIngredients().stream().
-                filter(ingredient -> !thisCourse.getCourseIngredients().stream().
-                        filter(courseIngredient -> courseIngredient.getIngredient().equals(ingredient)).
-                        findAny().isPresent()).collect(Collectors.toList()));
+        // Course category combo box list
+        initCourseCategoryEnvironment(course);
+        // Ingredient combo box list: ingredients which are new for this course
+        initNewIngredientList(course);
     }
 
     private void prepareCourseEnvironment() {
