@@ -11,11 +11,11 @@
 
 <table class="admin-order-history-table">
     <tr>
-        <th style="width: 15%">Order datetime</th>
+        <th style="width: 20%">Order datetime</th>
         <th style="width: 5%">State</th>
         <th style="width: 10%">Order number</th>
         <th style="width: 5%">Table</th>
-        <th style="width: 30%">Waiter</th>
+        <th style="width: 20%">Waiter</th>
     </tr>
     <c:forEach items="${orders}" var="order">
         <tr>

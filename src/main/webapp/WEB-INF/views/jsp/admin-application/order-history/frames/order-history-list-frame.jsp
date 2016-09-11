@@ -11,10 +11,10 @@
     <%@ include file="order-history-search-frame.jsp" %>
     <div class="horizontal-container ordinary-container">
         <div class="horizontal-part-holder ordinary-container">
-            <div class="two-thirds">
+            <div class="three-fifths">
                 <%@ include file="order-history-table-frame.jsp" %>
             </div>
-            <div class="third">
+            <div>
             </div>
         </div>
     </div>
