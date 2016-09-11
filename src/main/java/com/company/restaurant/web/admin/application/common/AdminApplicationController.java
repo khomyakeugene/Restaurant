@@ -20,7 +20,6 @@ public class AdminApplicationController extends CommonDataController {
     private static final String TABLES_VAR_NAME = "tables";
     private static final String PORTIONS_VAR_NAME = "portions";
     private static final String JOB_POSITIONS_VAR_NAME = "jobPositions";
-    private static final String CURRENT_JOB_POSITION_ID_VAR_NAME = "currentJobPositionId";
 
     protected static final String SUBMIT_BUTTON_VAR_NAME = "submitButtonValue";
     private static final String SUBMIT_BUTTON_SAVE_VALUE = "save";
@@ -90,10 +89,6 @@ public class AdminApplicationController extends CommonDataController {
         initTableList();
         initPortionList();
         initJobPositionList();
-    }
-
-    protected void setCurrentJobPositionId(int currentJobPositionId) {
-        modelAndView.addObject(CURRENT_JOB_POSITION_ID_VAR_NAME, currentJobPositionId);
     }
 
     @Override

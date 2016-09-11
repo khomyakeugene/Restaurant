@@ -52,9 +52,6 @@ public class AdminEmployeeController extends AdminCRUDController<Employee> {
             employee = newEmployee();
         }
         setCurrentObject(employee);
-
-        // Current job position name - important to correct work of <form:select> in view
-        setCurrentJobPositionId(employee.getJobPosition().getId());
     }
 
     private void prepareEmployeeEnvironment() {
