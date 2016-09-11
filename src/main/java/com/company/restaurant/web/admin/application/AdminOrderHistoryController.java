@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.TreeMap;
 
 /**
@@ -93,19 +92,11 @@ public class AdminOrderHistoryController extends AdminApplicationController {
                                      @RequestParam(ORDER_TABLE_ID_VAR_NAME) int tableId) {
         clearErrorMessage();
 
-        Date orderDate;
-        try {
-            orderDate = parseDateFromDefaultStringPresentation(orderDateString);
-        } catch (Exception e) {
-            orderDate = null;
-        }
-
         // Filter the data
-        modelAndView.addObject(ORDERS_VAR_NAME, orderService.findOrdersByFilter(orderDate, waiterId, tableId));
+        modelAndView.addObject(ORDERS_VAR_NAME, orderService.findOrdersByFilter(
+                parseDateFromDefaultStringPresentation(orderDateString), waiterId, tableId));
 
-        // Return to the order history page
-        modelAndView.setViewName(ADMIN_ORDER_HISTORY_PAGE_VIEW_NAME);
-
+        // Return to the current page (order history page)
         return modelAndView;
     }
 }

@@ -11,6 +11,6 @@
 
 <form:select multiple="sigle" path="orderDates" id="orderDate"
              name="orderDate" cssClass="input-control" cssStyle="font-weight: bold">
-    <form:option selected="true" value="--- Select order date ---"/>
+    <form:option selected="true" value="" label="--- Select order date ---"/>
     <form:options items="${orderDates}" />
 </form:select>

@@ -116,7 +116,8 @@ public class AdminApplicationController extends CommonDataController {
 
     protected Date parseDateFromDefaultStringPresentation(String datePresentation) {
         try {
-            return defaultDateFormat.parse(datePresentation);
+            return (datePresentation == null || datePresentation.trim().isEmpty()) ? null :
+                    defaultDateFormat.parse(datePresentation);
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
