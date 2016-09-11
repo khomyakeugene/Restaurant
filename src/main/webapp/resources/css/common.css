@@ -180,6 +180,12 @@
     display: table-cell;
     width: 20%;
 }
+.two-fifths {
+    padding: 0;
+    float: left;
+    display: table-cell;
+    width: 39%;
+}
 .three-fifths {
     padding: 0;
     float: left;

@@ -11,6 +11,7 @@ public class CRUDModelHandler<T> extends GenericHolder<T> {
     protected ModelAndView modelAndView;
     private T currentObject;
     private String currentObjectVarName;
+    private Class currentObjectClass;
 
     public CRUDModelHandler(ModelAndView modelAndView) {
         this.modelAndView = modelAndView;
@@ -34,10 +35,18 @@ public class CRUDModelHandler<T> extends GenericHolder<T> {
         addCurrentObject(currentObject);
     }
 
+    public Class getCurrentObjectClass() {
+        if (currentObjectClass == null) {
+            currentObjectClass = (currentObject == null) ? getEntityClass() : currentObject.getClass();
+            setEntityClass(currentObjectClass);
+        }
+
+        return currentObjectClass;
+    }
+
     public String getCurrentObjectVarName() {
         if (currentObjectVarName == null) {
-            Class cl = (currentObject == null) ? getEntityClass() : currentObject.getClass();
-            currentObjectVarName = Util.decapitalize(cl.getSimpleName());
+            currentObjectVarName = Util.decapitalize(getCurrentObjectClass().getSimpleName());
         }
 
         return currentObjectVarName;
@@ -52,6 +61,8 @@ public class CRUDModelHandler<T> extends GenericHolder<T> {
     }
 
     public void clearCurrentObject() {
-        newCurrentObject();
+        if (currentObject != null) {
+            newCurrentObject();
+        }
     }
 }

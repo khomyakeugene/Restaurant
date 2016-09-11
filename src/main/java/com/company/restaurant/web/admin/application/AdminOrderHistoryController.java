@@ -1,10 +1,12 @@
 package com.company.restaurant.web.admin.application;
 
+import com.company.restaurant.model.Order;
 import com.company.restaurant.model.Table;
 import com.company.restaurant.service.OrderService;
-import com.company.restaurant.web.admin.application.common.AdminApplicationController;
+import com.company.restaurant.web.admin.application.common.AdminCRUDController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,10 +19,11 @@ import java.util.TreeMap;
  * Created by Yevhen on 04.09.2016.
  */
 @Controller
-public class AdminOrderHistoryController extends AdminApplicationController {
-    private static final String ADMIN_ORDER_HISTORY_PAGE_VIEW_NAME = "admin-application/order-history/admin-order-history-page";
+public class AdminOrderHistoryController extends AdminCRUDController<Order> {
     private static final String ADMIN_ORDER_HISTORY_REQUEST_MAPPING_VALUE = "/admin-order-history";
-    private static final String ADMIN_SEARCH_ORDERS_REQUEST_MAPPING_VALUE = "/search_orders";
+    private static final String ADMIN_APPLICATION_COURSE_REQUEST_MAPPING_VALUE = "/admin-order/{orderId}";
+    private static final String ADMIN_SEARCH_ORDERS_REQUEST_MAPPING_VALUE = "/admin-search-orders";
+    private static final String ADMIN_ORDER_HISTORY_PAGE_VIEW_NAME = "admin-application/order-history/admin-order-history-page";
 
     private static final String ORDERS_VAR_NAME = "orders";
     private static final String ORDER_VAR_NAME = "order";
@@ -91,10 +94,23 @@ public class AdminOrderHistoryController extends AdminApplicationController {
                                      @RequestParam(ORDER_WAITER_ID_VAR_NAME) int waiterId,
                                      @RequestParam(ORDER_TABLE_ID_VAR_NAME) int tableId) {
         clearErrorMessage();
+        // clearCurrentObject();
 
         // Filter the data
         modelAndView.addObject(ORDERS_VAR_NAME, orderService.findOrdersByFilter(
                 parseDateFromDefaultStringPresentation(orderDateString), waiterId, tableId));
+
+        // Return to the current page (order history page)
+        return modelAndView;
+    }
+
+    @RequestMapping(value = ADMIN_APPLICATION_COURSE_REQUEST_MAPPING_VALUE, method = RequestMethod.GET)
+    public ModelAndView course(@PathVariable int orderId) {
+        clearErrorMessage();
+
+        Order order = orderService.findOrderById(orderId);
+        setCurrentObject(order);
+        modelAndView.addObject(COURSES_VAR_NAME, order.getCourses());
 
         // Return to the current page (order history page)
         return modelAndView;

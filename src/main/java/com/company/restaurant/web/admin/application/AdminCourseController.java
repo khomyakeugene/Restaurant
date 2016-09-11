@@ -29,7 +29,6 @@ public class AdminCourseController extends AdminCRUDController<Course> {
     private static final String ADMIN_PREPARE_NEW_COURSE_REQUEST_MAPPING_VALUE = "/prepare-new-course";
     private static final String ADMIN_CREATE_EMPLOYEE_REQUEST_MAPPING_VALUE = "/create-course";
 
-    private static final String COURSES_VAR_NAME = "courses";
     private static final String COURSE_VAR_NAME = "course";
     private static final String COURSE_ID_VAR_NAME = "courseId";
     private static final String COURSE_NAME_VAR_NAME = "courseName";

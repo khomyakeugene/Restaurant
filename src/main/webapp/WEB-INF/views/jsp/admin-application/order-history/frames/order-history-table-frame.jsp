@@ -21,7 +21,7 @@
         <tr>
             <td><time datetime="YYYY-MM-DD hh:mm:ss">${order.orderDatetime}</time></td>
             <td>${order.state.name}</td>
-            <td><b><a href="/order/${order.orderId}"/>${order.orderNumber}</b></td>
+            <td><b><a href="/admin-order/${order.orderId}"/>${order.orderNumber}</b></td>
             <td>${order.table.number}</td>
             <td>${order.waiter.name}</td>
         </tr>

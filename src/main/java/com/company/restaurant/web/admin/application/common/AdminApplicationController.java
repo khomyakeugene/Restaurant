@@ -22,6 +22,7 @@ public class AdminApplicationController extends CommonDataController {
     private static final String PORTIONS_VAR_NAME = "portions";
     private static final String JOB_POSITIONS_VAR_NAME = "jobPositions";
     private static final String COURSE_CATEGORIES_VAR_NAME = "courseCategories";
+    protected static final String COURSES_VAR_NAME = "courses";
 
     protected static final String SUBMIT_BUTTON_VAR_NAME = "submitButtonValue";
     private static final String SUBMIT_BUTTON_SAVE_VALUE = "save";
