@@ -95,6 +95,9 @@ public class AdminOrderHistoryController extends AdminApplicationController {
 
         Date orderDate = parseDateFromDefaultStringPresentation(orderDateString);
 
+        // Filter the data
+
+        // Return to the order history page
         modelAndView.setViewName(ADMIN_ORDER_HISTORY_PAGE_VIEW_NAME);
 
         return modelAndView;

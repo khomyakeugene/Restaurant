@@ -30,8 +30,12 @@ public class AdminApplicationController extends CommonDataController {
     private SimpleDateFormat defaultDateFormat = new SimpleDateFormat(DEFAULT_DATE_FORMAT);
 
     protected EmployeeService employeeService;
-    protected TableService tableService;
+    private TableService tableService;
     protected WarehouseService warehouseService;
+
+    static {
+        ERROR_PAGE_VIEW_NAME = "admin-application/error";
+    }
 
     @Autowired
     public void setEmployeeService(EmployeeService employeeService) {
@@ -46,10 +50,6 @@ public class AdminApplicationController extends CommonDataController {
     @Autowired
     public void setTableService(TableService tableService) {
         this.tableService = tableService;
-    }
-
-    static {
-        ERROR_PAGE_VIEW_NAME = "admin-application/error";
     }
 
     protected boolean isSubmitSave(String submitButtonValue) {
