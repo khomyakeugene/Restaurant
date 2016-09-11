@@ -11,6 +11,6 @@
 
 <form:select multiple="sigle" path="tables" id="tableId"
              name="tableId" cssClass="input-control" cssStyle="font-weight: bold">
-    <form:option selected="true" value="--- Select table ---"/>
+    <form:option selected="true" value="-1" label="--- Select table ---"/>
     <form:options items="${orderTables}" />
 </form:select>

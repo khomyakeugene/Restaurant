@@ -89,13 +89,19 @@ public class AdminOrderHistoryController extends AdminApplicationController {
 
     @RequestMapping(value = ADMIN_SEARCH_ORDERS_REQUEST_MAPPING_VALUE, method = RequestMethod.POST)
     public ModelAndView searchOrders(@RequestParam(ORDER_DATE_VAR_NAME) String orderDateString,
-                                     @RequestParam(ORDER_WAITER_ID_VAR_NAME) int waiterName,
+                                     @RequestParam(ORDER_WAITER_ID_VAR_NAME) int waiterId,
                                      @RequestParam(ORDER_TABLE_ID_VAR_NAME) int tableId) {
         clearErrorMessage();
 
-        Date orderDate = parseDateFromDefaultStringPresentation(orderDateString);
+        Date orderDate;
+        try {
+            orderDate = parseDateFromDefaultStringPresentation(orderDateString);
+        } catch (Exception e) {
+            orderDate = null;
+        }
 
         // Filter the data
+        modelAndView.addObject(ORDERS_VAR_NAME, orderService.findOrdersByFilter(orderDate, waiterId, tableId));
 
         // Return to the order history page
         modelAndView.setViewName(ADMIN_ORDER_HISTORY_PAGE_VIEW_NAME);

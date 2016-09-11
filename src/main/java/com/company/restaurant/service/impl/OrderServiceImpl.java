@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 /**
  * Created by Yevhen on 22.05.2016.
@@ -153,6 +154,15 @@ public class OrderServiceImpl extends Service implements OrderService {
     @Override
     public List<Order> findOrderByNumber(String orderNumber) {
         return orderDao.findOrderByNumber(orderNumber);
+    }
+
+    @Override
+    public List<Order> findOrdersByFilter(Date orderDate, int waiterId, int tableId) {
+        return findAllOrders().stream().filter(order ->
+                (((orderDate == null) || (Util.getDateOnly(order.getOrderDatetime()).equals(orderDate))) &&
+                        ((waiterId <= 0) || (order.getWaiter().getEmployeeId() == waiterId)) &&
+                        ((tableId <= 0) || (order.getTable().getTableId() == tableId)))).
+                collect(Collectors.toList());
     }
 
     @Override

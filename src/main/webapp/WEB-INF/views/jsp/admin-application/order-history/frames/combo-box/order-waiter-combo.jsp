@@ -11,6 +11,6 @@
 
 <form:select multiple="sigle" path="orderWaiters" id="waiterId"
              name="waiterId" cssClass="input-control" cssStyle="font-weight: bold">
-    <form:option selected="true" value="--- Select waiter ---"/>
+    <form:option selected="true" value="-1" label="--- Select waiter ---" />
     <form:options items="${orderWaiters}" />
 </form:select>

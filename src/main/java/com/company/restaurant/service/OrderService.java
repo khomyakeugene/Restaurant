@@ -31,6 +31,8 @@ public interface OrderService {
 
     List<Order> findOrderByNumber(String orderNumber);
 
+    List<Order> findOrdersByFilter(Date orderDate, int waiterId, int tableId);
+
     String addCourseToOrder(Order order, Course course);
 
     String takeCourseFromOrder(Order order, Course course);
