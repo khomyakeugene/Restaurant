@@ -27,16 +27,17 @@ public class AdminMenuController extends AdminCRUDController<Menu> {
     private static final String ADMIN_APPLICATION_MENU_REQUEST_MAPPING_VALUE = "/admin-menu/{menuId}";
     private static final String ADMIN_DELETE_MENU_REQUEST_MAPPING_VALUE = "/admin-menu/delete-menu/{menuId}";
     private static final String ADMIN_EDIT_MENUS_REQUEST_MAPPING_VALUE = "/edit-menus";
+    private static final String ADMIN_DELETE_MENU_COURSE_REQUEST_MAPPING_VALUE =
+            "/admin-menu/delete-menu-course/{menuId}/{courseId}";
 
     private static final String ADMIN_MENU_PAGE_VIEW_NAME = "admin-application/menu/admin-menu-page";
 
     private static final String MENUS_VAR_NAME = "menus";
-    private static final String MENU_VAR_NAME = "menu";
     private static final String MENU_NAME_VAR_NAME = "menuName";
     private static final String COURSE_ID_VAR_NAME = "courseId";
     private static final String NEW_COURSES_VAR_NAME = "newCourses";
 
-    private static final String FILL_MENU_NAME_MESSAGE = "Please, fill menu name field";
+    private static final String FILL_MENU_NAME_MESSAGE = "Please, fill the menu name field";
 
     private MenuService menuService;
 
@@ -77,11 +78,19 @@ public class AdminMenuController extends AdminCRUDController<Menu> {
             throw new DataIntegrityException(FILL_MENU_NAME_MESSAGE);
         }
 
-        return menuService.addMenu(menuName);
+        return setCurrentObject(menuService.addMenu(menuName));
     }
 
-    private void addCourse(int courseId) {
+    private void addCourseToMenu(int courseId) {
+        Menu menu = getCurrentObject();
 
+        if (menu != null) {
+            menuService.addCourseToMenu(menu, courseService.findCourseById(courseId));
+        }
+    }
+
+    private void deleteCourseFromMenu(int menuId, int courseId) {
+        menuService.delCourseFromMenu(menuService.findMenuById(menuId), courseService.findCourseById(courseId));
     }
 
     @RequestMapping(value = ADMIN_MENU_REQUEST_MAPPING_VALUE, method = RequestMethod.GET)
@@ -89,7 +98,7 @@ public class AdminMenuController extends AdminCRUDController<Menu> {
         clearErrorMessage();
 
         initMenuList();
-        initNewCourseList(null);
+        initNewCourseList(getCurrentObject());
 
         modelAndView.setViewName(ADMIN_MENU_PAGE_VIEW_NAME);
 
@@ -102,12 +111,10 @@ public class AdminMenuController extends AdminCRUDController<Menu> {
             @RequestParam(COURSE_ID_VAR_NAME) int courseId,
             @RequestParam(SUBMIT_BUTTON_VAR_NAME) String submitButtonValue
     ) {
-        if (isSubmitSave(submitButtonValue)) {
-        } else if (isSubmitDelete(submitButtonValue)) {
-        } else if (isSubmitAddMenu(submitButtonValue)) {
+        if (isSubmitAddMenu(submitButtonValue)) {
             addMenu(menuName);
         } else if (isSubmitAddCourse(submitButtonValue)) {
-            addCourse(courseId);
+            addCourseToMenu(courseId);
         }
 
         return returnToMenuListPage();
@@ -117,20 +124,28 @@ public class AdminMenuController extends AdminCRUDController<Menu> {
     public ModelAndView deleteMenu(@PathVariable int menuId) {
         menuService.delMenu(menuId);
 
+        Menu currentMenu = getCurrentObject();
+        if (currentMenu != null && menuService.findMenuById(currentMenu.getMenuId()) == null) {
+            setCurrentObject(null);
+        }
+
         return returnToMenuListPage();
     }
 
     @RequestMapping(value = ADMIN_APPLICATION_MENU_REQUEST_MAPPING_VALUE, method = RequestMethod.GET)
     public ModelAndView menu(@PathVariable int menuId) {
-        clearErrorMessage();
+        setCurrentObject(menuService.findMenuById(menuId));
 
-        Menu menu = menuService.findMenuById(menuId);
-        setCurrentObject(menu);
-
-        initNewCourseList(menu);
-
-        // Return to the current page (order history page)
-        return modelAndView;
+        return returnToMenuListPage();
     }
 
+    @RequestMapping(value = ADMIN_DELETE_MENU_COURSE_REQUEST_MAPPING_VALUE, method = RequestMethod.GET)
+    public ModelAndView deleteMenuCourse(@PathVariable int menuId, @PathVariable int courseId) {
+        deleteCourseFromMenu(menuId, courseId);
+
+        // Re-read current menu to renew course list
+        setCurrentObject(menuService.findMenuById(menuId));
+
+        return returnToMenuListPage();
+    }
 }

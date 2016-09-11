@@ -14,6 +14,7 @@ public class Constraints {
     private static final String CONSTRAINT_NAME_ORDER_TABLE_ID = "fk_order_order_tab_table";
     // Course
     private static final String CONSTRAINT_NAME_COURSE_NAME_UNIQUE = "ak_u_course_course";
+    private static final String FIELD_NAME_COURSE_ID = "course_id";
     // Cooked course
     private static final String CONSTRAINT_NAME_COOKED_COURSE_EMPLOYEE_ID = "fk_cooked_c_ckd_crs_e_employee";
     private static final String CONSTRAINT_NAME_COOKED_COURSE_COURSE_ID = "fk_cooked_c_ckd_crs_c_course";
@@ -42,6 +43,8 @@ public class Constraints {
             "It is impossible to save this course because its name is non-unique";
     private static final String PLEASE_SELECT_AN_INGREDIENT =
             "Please, select an ingredient";
+    private static final String PLEASE_SELECT_A_COURSE =
+            "Please, select a course";
     private static final String THIS_INGREDIENT_IS_ALREADY_PRESENTED_IN_THIS_COURSE =
             "This ingredient is already presented in this course";
 
@@ -55,6 +58,7 @@ public class Constraints {
             put (CONSTRAINT_NAME_MENU_COURSE_COURSE_ID, COURSE_CANNOT_BE_DELETED_BECAUSE_OF_MENU);
             put (CONSTRAINT_NAME_COURSE_NAME_UNIQUE, COURSE_CANNOT_BE_ADDED_BECAUSE_OF_NON_UNIQUE_NAME);
             put (FIELD_NAME_INGREDIENT_ID, PLEASE_SELECT_AN_INGREDIENT);
+            put (FIELD_NAME_COURSE_ID, PLEASE_SELECT_A_COURSE);
             put (CONSTRAINT_NAME_PK_COURSE_INGREDIENT, THIS_INGREDIENT_IS_ALREADY_PRESENTED_IN_THIS_COURSE);
 
         }

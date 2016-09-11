@@ -12,7 +12,7 @@ public class AdminCRUDController<T> extends AdminApplicationController {
     protected void initModelAndViewData() {
         super.initModelAndViewData();
 
-        crudModelHandler = new CRUDModelHandler<T>(modelAndView);
+        crudModelHandler = new CRUDModelHandler<>(modelAndView);
     }
 
     protected void clearCurrentObject() {
@@ -23,8 +23,9 @@ public class AdminCRUDController<T> extends AdminApplicationController {
         return crudModelHandler.getCurrentObject();
     }
 
-    public void setCurrentObject(T currentObject) {
+    public T setCurrentObject(T currentObject) {
         crudModelHandler.setCurrentObject(currentObject);
-    }
 
+        return currentObject;
+    }
 }
