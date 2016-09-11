@@ -5,17 +5,8 @@ import java.io.Serializable;
 /**
  * Created by Yevhen on 21.05.2016.
  */
-public class SimpleDic implements Serializable {
-    private int id;
+public class SimpleDic extends SimpleObject implements Serializable {
     private String name;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -29,16 +20,17 @@ public class SimpleDic implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof SimpleDic)) return false;
+        if (!super.equals(o)) return false;
 
         SimpleDic simpleDic = (SimpleDic) o;
 
-        return id == simpleDic.id && (name != null ? name.equals(simpleDic.name) : simpleDic.name == null);
+        return name != null ? name.equals(simpleDic.name) : simpleDic.name == null;
 
     }
 
     @Override
     public int hashCode() {
-        int result = id;
+        int result = super.hashCode();
         result = 31 * result + (name != null ? name.hashCode() : 0);
         return result;
     }
@@ -46,8 +38,8 @@ public class SimpleDic implements Serializable {
     @Override
     public String toString() {
         return "SimpleDic{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
+                super.toString() + "\n" +
+                "name='" + name + '\'' +
                 '}';
     }
 }
