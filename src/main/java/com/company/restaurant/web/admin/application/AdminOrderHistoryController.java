@@ -78,6 +78,7 @@ public class AdminOrderHistoryController extends AdminCRUDController<Order> {
     @RequestMapping(value = ADMIN_ORDER_HISTORY_REQUEST_MAPPING_VALUE, method = RequestMethod.GET)
     public ModelAndView ordersPage() {
         clearErrorMessage();
+        setCurrentObject(new Order());
 
         initOrderList();
         initOrderDatesList();
@@ -94,7 +95,7 @@ public class AdminOrderHistoryController extends AdminCRUDController<Order> {
                                      @RequestParam(ORDER_WAITER_ID_VAR_NAME) int waiterId,
                                      @RequestParam(ORDER_TABLE_ID_VAR_NAME) int tableId) {
         clearErrorMessage();
-        // clearCurrentObject();
+        setCurrentObject(new Order());
 
         // Filter the data
         modelAndView.addObject(ORDERS_VAR_NAME, orderService.findOrdersByFilter(
@@ -107,10 +108,7 @@ public class AdminOrderHistoryController extends AdminCRUDController<Order> {
     @RequestMapping(value = ADMIN_APPLICATION_COURSE_REQUEST_MAPPING_VALUE, method = RequestMethod.GET)
     public ModelAndView course(@PathVariable int orderId) {
         clearErrorMessage();
-
-        Order order = orderService.findOrderById(orderId);
-        setCurrentObject(order);
-        modelAndView.addObject(COURSES_VAR_NAME, order.getCourses());
+        setCurrentObject(orderService.findOrderById(orderId));
 
         // Return to the current page (order history page)
         return modelAndView;
