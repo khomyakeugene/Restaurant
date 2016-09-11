@@ -61,16 +61,20 @@ public class AdminApplicationController extends CommonDataController {
         this.courseService = courseService;
     }
 
+    protected boolean isSubmitValue(String submitButtonValue, String value) {
+        return submitButtonValue.toLowerCase().equals(value.toLowerCase());
+    }
+
     protected boolean isSubmitSave(String submitButtonValue) {
-        return submitButtonValue.toLowerCase().equals(SUBMIT_BUTTON_SAVE_VALUE.toLowerCase());
+        return isSubmitValue(submitButtonValue, SUBMIT_BUTTON_SAVE_VALUE);
     }
 
     protected boolean isSubmitDelete(String submitButtonValue) {
-        return submitButtonValue.toLowerCase().equals(SUBMIT_BUTTON_DELETE_VALUE.toLowerCase());
+        return isSubmitValue(submitButtonValue, SUBMIT_BUTTON_DELETE_VALUE);
     }
 
     protected boolean isSubmitAdd(String submitButtonValue) {
-        return submitButtonValue.toLowerCase().equals(SUBMIT_BUTTON_ADD_VALUE.toLowerCase());
+        return isSubmitValue(submitButtonValue, SUBMIT_BUTTON_ADD_VALUE);
     }
 
     protected boolean isSubmitSearch(String submitButtonValue) {

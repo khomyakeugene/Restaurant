@@ -16,6 +16,8 @@ public interface MenuDao {
 
     void delMenu(Menu menu);
 
+    void delMenu(int menuId);
+
     Menu findMenuById(int menuId);
 
     Menu findMenuByName(String name);

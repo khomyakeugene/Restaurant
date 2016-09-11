@@ -12,7 +12,7 @@
 <div>
     <table class="course-table">
         <tr>
-            <th>Title</th>
+            <th>Course</th>
             <th style="text-align: right">Cost (hrn)</th>
         </tr>
         <c:forEach items="${order.courses}" var="course">

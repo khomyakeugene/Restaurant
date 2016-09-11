@@ -31,6 +31,11 @@ public class MenuServiceImpl extends Service implements MenuService {
     }
 
     @Override
+    public void delMenu(int menuId) {
+        menuDao.delMenu(menuId);
+    }
+
+    @Override
     public void delMenu(Menu menu) {
         menuDao.delMenu(menu);
     }

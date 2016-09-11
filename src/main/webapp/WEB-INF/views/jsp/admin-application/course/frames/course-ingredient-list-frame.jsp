@@ -35,7 +35,9 @@
                        placeholder="Enter amount">
             </td>
             <td><%@ include file="../../frames/combo-box/portion-combo.jsp" %></td>
-            <td class="table-action"><%@ include file="../../frames/buttons/add-button.jsp" %></td>
+            <td class="table-action" style="text-align: center">
+                <%@ include file="../../frames/buttons/add-button.jsp" %>
+            </td>
         </tr>
     </table>
 </div>

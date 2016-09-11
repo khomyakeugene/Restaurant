@@ -12,7 +12,7 @@
 <div>
     <table class="course-table">
         <tr>
-            <th>Title</th>
+            <th>Course</th>
             <th>Category</th>
             <th style="text-align: right">Weight (kg)</th>
             <th style="text-align: right">Cost (hrn)</th>

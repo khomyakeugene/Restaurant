@@ -14,6 +14,8 @@ public interface MenuService {
 
     void delMenu(String name);
 
+    void delMenu(int menuId);
+
     void delMenu(Menu menu);
 
     Menu findMenuByName(String name);

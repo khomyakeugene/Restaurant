@@ -18,9 +18,9 @@ import java.util.stream.Collectors;
 public class AdminCourseController extends AdminCRUDController<Course> {
     private static final String ADMIN_COURSE_LIST_PAGE_VIEW_NAME = "admin-application/course/admin-course-list-page";
     private static final String ADMIN_COURSE_LIST_REQUEST_MAPPING_VALUE = "/admin-course-list";
-    private static final String ADMIN_APPLICATION_COURSE_REQUEST_MAPPING_PATTERN = "/admin-course/%d";
-    private static final String ADMIN_APPLICATION_COURSE_REQUEST_MAPPING_VALUE = "/admin-course/{courseId}";
-    private static final String ADMIN_APPLICATION_DELETE_COURSE_INGREDIENT_REQUEST_MAPPING_VALUE =
+    private static final String ADMIN_COURSE_REQUEST_MAPPING_PATTERN = "/admin-course/%d";
+    private static final String ADMIN_COURSE_REQUEST_MAPPING_VALUE = "/admin-course/{courseId}";
+    private static final String ADMIN_DELETE_COURSE_INGREDIENT_REQUEST_MAPPING_VALUE =
             "/admin-course/delete_course_ingredient/{courseId}/{ingredientId}";
     private static final String ADMIN_SAVE_OR_DELETE_COURSE_PAGE_VIEW_NAME =
             "admin-application/course/admin-save-or-delete-course-page";
@@ -126,7 +126,7 @@ public class AdminCourseController extends AdminCRUDController<Course> {
     }
 
     private ModelAndView toCurrentObjectPage() {
-        return new ModelAndView(REDIRECT_PREFIX + String.format(ADMIN_APPLICATION_COURSE_REQUEST_MAPPING_PATTERN,
+        return new ModelAndView(REDIRECT_PREFIX + String.format(ADMIN_COURSE_REQUEST_MAPPING_PATTERN,
                 getCurrentObject().getCourseId()));
     }
 
@@ -150,7 +150,7 @@ public class AdminCourseController extends AdminCRUDController<Course> {
         return modelAndView;
     }
 
-    @RequestMapping(value = ADMIN_APPLICATION_COURSE_REQUEST_MAPPING_VALUE, method = RequestMethod.GET)
+    @RequestMapping(value = ADMIN_COURSE_REQUEST_MAPPING_VALUE, method = RequestMethod.GET)
     public ModelAndView course(@PathVariable int courseId) {
         clearErrorMessage();
 
@@ -207,7 +207,7 @@ public class AdminCourseController extends AdminCRUDController<Course> {
         return toCurrentObjectPage();
     }
 
-    @RequestMapping(value = ADMIN_APPLICATION_DELETE_COURSE_INGREDIENT_REQUEST_MAPPING_VALUE, method = RequestMethod.GET)
+    @RequestMapping(value = ADMIN_DELETE_COURSE_INGREDIENT_REQUEST_MAPPING_VALUE, method = RequestMethod.GET)
     public ModelAndView deleteCourseIngredient(@PathVariable int courseId, @PathVariable int ingredientId) {
         courseService.delCourseIngredient(courseId, ingredientId);
 

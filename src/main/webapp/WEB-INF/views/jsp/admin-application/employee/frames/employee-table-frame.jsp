@@ -10,7 +10,7 @@
 
 <table class="admin-employee-table">
     <tr>
-        <th>Name</th>
+        <th>Employee name</th>
         <th>Job position</th>
         <th>Phone number</th>
         <th style="text-align: right">Salary</th>
