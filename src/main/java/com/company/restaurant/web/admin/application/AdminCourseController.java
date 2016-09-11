@@ -1,9 +1,7 @@
 package com.company.restaurant.web.admin.application;
 
 import com.company.restaurant.model.Course;
-import com.company.restaurant.service.CourseService;
 import com.company.restaurant.web.admin.application.common.AdminCRUDController;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,21 +35,13 @@ public class AdminCourseController extends AdminCRUDController<Course> {
     private static final String COURSE_NAME_VAR_NAME = "courseName";
     private static final String COURSE_WEIGHT_VAR_NAME = "courseWeight";
     private static final String COURSE_COST_VAR_NAME = "courseCost";
-    private static final String COURSE_CATEGORY_NAME_VAR_NAME = "courseCategoryName";
-    private static final String COURSE_CATEGORIES_VAR_NAME = "courseCategories";
+    private static final String COURSE_CATEGORY_ID_VAR_NAME = "courseCategoryId";
     private static final String NEW_INGREDIENTS_VAR_NAME = "newIngredients";
     private static final String COURSE_INGREDIENT_NAME_VAR_NAME = "courseIngredientName";
     private static final String COURSE_PORTION_DESCRIPTION_VAR_NAME = "coursePortionDescription";
     private static final String COURSE_INGREDIENT_AMOUNT_VAR_NAME = "courseIngredientAmount";
 
     private static final String DEFAULT_COURSE_CATEGORY_NAME_VALUE = "Salads";
-
-    private CourseService courseService;
-
-    @Autowired
-    public void setCourseService(CourseService courseService) {
-        this.courseService = courseService;
-    }
 
     private Course newCourse() {
         Course result = new Course();
@@ -64,13 +54,6 @@ public class AdminCourseController extends AdminCRUDController<Course> {
         // Current job position name - important to correct work of <form:select> in view
         String courseCategoryName = course.getCourseCategory().getName();
         modelAndView.addObject(COURSE_VAR_NAME, course);
-        modelAndView.addObject(COURSE_CATEGORY_NAME_VAR_NAME, courseCategoryName);
-
-        // Temporary solution: exclude <jobPositionName> from <jobPositionNames>  - important to correct work
-        // of <form:select> in view
-        modelAndView.addObject(COURSE_CATEGORIES_VAR_NAME, courseService.findAllCourseCategories().stream().
-                filter(courseCategory -> (!courseCategory.getName().equals(courseCategoryName))).
-                collect(Collectors.toList()));
     }
 
     private void initNewIngredientList(Course course) {
@@ -104,7 +87,7 @@ public class AdminCourseController extends AdminCRUDController<Course> {
 
     private Course saveCourse(int courseId,
                               String courseName,
-                              String courseCategoryName,
+                              int courseCategoryId,
                               Float courseWeight,
                               Float courseCost) {
         Course course = null;
@@ -124,7 +107,7 @@ public class AdminCourseController extends AdminCRUDController<Course> {
 
         course.setCourseId(courseId);
         course.setName(courseName);
-        course.setCourseCategory(courseService.findCourseCategoryByName(courseCategoryName));
+        course.setCourseCategory(courseService.findCourseCategoryById(courseCategoryId));
         course.setWeight(courseWeight);
         course.setCost(courseCost);
 
@@ -132,10 +115,10 @@ public class AdminCourseController extends AdminCRUDController<Course> {
     }
 
     private Course createCourse(String courseName,
-                                String courseCategoryName,
+                                int courseCategoryId,
                                 Float courseWeight,
                                 Float courseCost) {
-        return saveCourse(0, courseName, courseCategoryName, courseWeight, courseCost);
+        return saveCourse(0, courseName, courseCategoryId, courseWeight, courseCost);
     }
 
 
@@ -183,7 +166,7 @@ public class AdminCourseController extends AdminCRUDController<Course> {
     @RequestMapping(value = ADMIN_SAVE_OR_DELETE_COURSE_REQUEST_MAPPING_VALUE, method = RequestMethod.POST)
     public ModelAndView saveOrDeleteCourse(@RequestParam(COURSE_ID_VAR_NAME) int courseId,
                                            @RequestParam(COURSE_NAME_VAR_NAME) String courseName,
-                                           @RequestParam(COURSE_CATEGORY_NAME_VAR_NAME) String courseCategoryName,
+                                           @RequestParam(COURSE_CATEGORY_ID_VAR_NAME) int courseCategoryId,
                                            @RequestParam(COURSE_WEIGHT_VAR_NAME) Float courseWeight,
                                            @RequestParam(COURSE_COST_VAR_NAME) Float courseCost,
                                            @RequestParam(COURSE_INGREDIENT_NAME_VAR_NAME) String courseIngredientName,
@@ -192,7 +175,7 @@ public class AdminCourseController extends AdminCRUDController<Course> {
                                            @RequestParam(SUBMIT_BUTTON_VAR_NAME) String submitButtonValue
     ) {
         if (isSubmitSave(submitButtonValue)) {
-            saveCourse(courseId, courseName, courseCategoryName, courseWeight, courseCost);
+            saveCourse(courseId, courseName, courseCategoryId, courseWeight, courseCost);
         } else if (isSubmitDelete(submitButtonValue)) {
             deleteCourse(courseId);
         } else if (isSubmitAdd(submitButtonValue)) {
@@ -217,10 +200,10 @@ public class AdminCourseController extends AdminCRUDController<Course> {
 
     @RequestMapping(value = ADMIN_CREATE_EMPLOYEE_REQUEST_MAPPING_VALUE, method = RequestMethod.POST)
     public ModelAndView createEmployee(@RequestParam(COURSE_NAME_VAR_NAME) String courseName,
-                                       @RequestParam(COURSE_CATEGORY_NAME_VAR_NAME) String courseCategoryName,
+                                       @RequestParam(COURSE_CATEGORY_ID_VAR_NAME) int courseCategoryId,
                                        @RequestParam(COURSE_WEIGHT_VAR_NAME) Float courseWeight,
                                        @RequestParam(COURSE_COST_VAR_NAME) Float courseCost) {
-        createCourse(courseName, courseCategoryName, courseWeight, courseCost);
+        createCourse(courseName, courseCategoryId, courseWeight, courseCost);
 
         return toCurrentObjectPage();
     }

@@ -1,5 +1,6 @@
 package com.company.restaurant.web.admin.application.common;
 
+import com.company.restaurant.service.CourseService;
 import com.company.restaurant.service.EmployeeService;
 import com.company.restaurant.service.TableService;
 import com.company.restaurant.service.WarehouseService;
@@ -20,6 +21,7 @@ public class AdminApplicationController extends CommonDataController {
     private static final String TABLES_VAR_NAME = "tables";
     private static final String PORTIONS_VAR_NAME = "portions";
     private static final String JOB_POSITIONS_VAR_NAME = "jobPositions";
+    private static final String COURSE_CATEGORIES_VAR_NAME = "courseCategories";
 
     protected static final String SUBMIT_BUTTON_VAR_NAME = "submitButtonValue";
     private static final String SUBMIT_BUTTON_SAVE_VALUE = "save";
@@ -32,6 +34,7 @@ public class AdminApplicationController extends CommonDataController {
     protected EmployeeService employeeService;
     private TableService tableService;
     protected WarehouseService warehouseService;
+    protected CourseService courseService;
 
     static {
         ERROR_PAGE_VIEW_NAME = "admin-application/error";
@@ -50,6 +53,11 @@ public class AdminApplicationController extends CommonDataController {
     @Autowired
     public void setTableService(TableService tableService) {
         this.tableService = tableService;
+    }
+
+    @Autowired
+    public void setCourseService(CourseService courseService) {
+        this.courseService = courseService;
     }
 
     protected boolean isSubmitSave(String submitButtonValue) {
@@ -84,11 +92,15 @@ public class AdminApplicationController extends CommonDataController {
         modelAndView.addObject(JOB_POSITIONS_VAR_NAME, employeeService.findAllJobPositions());
     }
 
+    private void initCourseCategoryList() {
+        modelAndView.addObject(COURSE_CATEGORIES_VAR_NAME, courseService.findAllCourseCategories());
+    }
     private void initDictionaryLists() {
+        initCourseCategoryList();
         initIngredientsList();
-        initTableList();
-        initPortionList();
         initJobPositionList();
+        initPortionList();
+        initTableList();
     }
 
     @Override
