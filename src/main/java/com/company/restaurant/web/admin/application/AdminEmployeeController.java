@@ -1,17 +1,13 @@
 package com.company.restaurant.web.admin.application;
 
 import com.company.restaurant.model.Employee;
-import com.company.restaurant.service.EmployeeService;
 import com.company.restaurant.web.admin.application.common.AdminCRUDController;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.stream.Collectors;
 
 /**
  * Created by Yevhen on 04.09.2016.
@@ -28,8 +24,6 @@ public class AdminEmployeeController extends AdminCRUDController<Employee> {
     private static final String ADMIN_CREATE_EMPLOYEE_REQUEST_MAPPING_VALUE = "/create-employee";
 
     private static final String EMPLOYEES_VAR_NAME = "employees";
-    private static final String JOB_POSITION_NAME_VAR_NAME = "jobPositionName";
-    private static final String JOB_POSITIONS_VAR_NAME = "jobPositions";
     private static final String EMPLOYEE_ID_VAR_NAME = "employeeId";
     private static final String EMPLOYEE_FIRST_NAME_VAR_NAME = "employeeFirstName";
     private static final String EMPLOYEE_SECOND_NAME_VAR_NAME = "employeeSecondName";
@@ -39,13 +33,6 @@ public class AdminEmployeeController extends AdminCRUDController<Employee> {
     //    private static final String EMPLOYEE_PHOTO_VAR_NAME = "employeePhoto";
 
     private static final String DEFAULT_JOB_POSITION_NAME_VALUE = "Waiter";
-
-    private EmployeeService employeeService;
-
-    @Autowired
-    public void setEmployeeService(EmployeeService employeeService) {
-        this.employeeService = employeeService;
-    }
 
     private Employee newEmployee() {
         Employee result = new Employee();
@@ -64,16 +51,10 @@ public class AdminEmployeeController extends AdminCRUDController<Employee> {
         } else {
             employee = newEmployee();
         }
-
         setCurrentObject(employee);
 
         // Current job position name - important to correct work of <form:select> in view
-        String jobPositionName = employee.getJobPosition().getName();
-        modelAndView.addObject(JOB_POSITION_NAME_VAR_NAME, jobPositionName);
-        // Temporary solution: exclude <jobPositionName> from <jobPositionNames>  - important to correct work
-        // of <form:select> in view
-        modelAndView.addObject(JOB_POSITIONS_VAR_NAME, employeeService.findAllJobPositions().stream().
-                filter(jP -> (!jP.getName().equals(jobPositionName))).collect(Collectors.toList()));
+        setCurrentJobPositionId(employee.getJobPosition().getId());
     }
 
     private void prepareEmployeeEnvironment() {
