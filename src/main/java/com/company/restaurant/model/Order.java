@@ -1,6 +1,7 @@
 package com.company.restaurant.model;
 
 import com.company.restaurant.model.common.CourseCollecting;
+import com.company.restaurant.model.common.SimpleObject;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -9,8 +10,7 @@ import java.util.List;
 /**
  * Created by Yevhen on 12.06.2016.
  */
-public class Order implements CourseCollecting {
-    private int orderId;
+public class Order extends SimpleObject implements CourseCollecting {
     private String orderNumber;
     private Timestamp orderDatetime;
 
@@ -20,11 +20,11 @@ public class Order implements CourseCollecting {
     private List<Course> courses = new ArrayList<>();
 
     public int getOrderId() {
-        return orderId;
+        return getId();
     }
 
     public void setOrderId(int orderId) {
-        this.orderId = orderId;
+        setId(orderId);
     }
 
     public String getOrderNumber() {
@@ -79,38 +79,36 @@ public class Order implements CourseCollecting {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Order)) return false;
+        if (!super.equals(o)) return false;
 
         Order order = (Order) o;
 
-        return orderId == order.orderId && (orderNumber != null ?
-                orderNumber.equals(order.orderNumber) :
-                order.orderNumber == null && (orderDatetime != null ?
-                        orderDatetime.equals(order.orderDatetime) :
-                        order.orderDatetime == null && (state != null ?
-                                state.equals(order.state) :
-                                order.state == null && (waiter != null ?
-                                        waiter.equals(order.waiter) :
-                                        order.waiter == null && (table != null ?
-                                                table.equals(order.table) :
-                                                order.table == null)))));
+        return orderNumber != null ? orderNumber.equals(order.orderNumber) :
+                order.orderNumber == null && (orderDatetime != null ? orderDatetime.equals(order.orderDatetime) :
+                        order.orderDatetime == null && (state != null ? state.equals(order.state) :
+                                order.state == null && (waiter != null ? waiter.equals(order.waiter) :
+                                        order.waiter == null && (table != null ? table.equals(order.table) :
+                                                order.table == null && (courses != null ?
+                                                        courses.equals(order.courses) : order.courses == null)))));
 
     }
 
     @Override
     public int hashCode() {
-        int result = orderId;
+        int result = super.hashCode();
         result = 31 * result + (orderNumber != null ? orderNumber.hashCode() : 0);
         result = 31 * result + (orderDatetime != null ? orderDatetime.hashCode() : 0);
         result = 31 * result + (state != null ? state.hashCode() : 0);
         result = 31 * result + (waiter != null ? waiter.hashCode() : 0);
         result = 31 * result + (table != null ? table.hashCode() : 0);
+        result = 31 * result + (courses != null ? courses.hashCode() : 0);
         return result;
     }
 
     @Override
     public String toString() {
         return "Order{" +
-                "orderId=" + orderId +
+                "orderId=" + getOrderId() +
                 ", orderNumber='" + orderNumber + '\'' +
                 ", orderDatetime=" + orderDatetime +
                 ", state=" + state +
