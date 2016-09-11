@@ -10,7 +10,7 @@
 <%--@elvariable id="employee" type="com.company.restaurant.model.Employee"--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<form:select multiple="sigle" path="jobPositions" id="jobPositionId"
+<form:select multiple="single" path="jobPositions" id="jobPositionId"
              name="jobPositionId" cssClass="input-control">
     <c:forEach items="${jobPositions}" var="jobPosition">
         <c:choose>

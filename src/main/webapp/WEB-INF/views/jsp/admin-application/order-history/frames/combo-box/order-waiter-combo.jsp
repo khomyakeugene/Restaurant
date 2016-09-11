@@ -9,7 +9,7 @@
 <%--@elvariable id="orderWaiters" type="java.util.TreeMap<java.lang.Integer,java.lang.String>"--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<form:select multiple="sigle" path="orderWaiters" id="waiterId"
+<form:select multiple="single" path="orderWaiters" id="waiterId"
              name="waiterId" cssClass="input-control" cssStyle="font-weight: bold">
     <form:option selected="true" value="-1" label="--- Select waiter ---" />
     <form:options items="${orderWaiters}" />

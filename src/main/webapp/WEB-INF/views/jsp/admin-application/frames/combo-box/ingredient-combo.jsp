@@ -10,7 +10,7 @@
 <%--@elvariable id="ingredientName" type="String"--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<form:select multiple="sigle" path="ingredients" id="ingredientName"
+<form:select multiple="single" path="ingredients" id="ingredientName"
              name="ingredientName" cssClass="input-control">
     <form:option selected="true" value="--- Select ingredient ---"/>
     <form:options items="${ingredients}" itemLabel="name" itemValue="name"/>

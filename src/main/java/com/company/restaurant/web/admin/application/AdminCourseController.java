@@ -36,7 +36,7 @@ public class AdminCourseController extends AdminCRUDController<Course> {
     private static final String COURSE_COST_VAR_NAME = "courseCost";
     private static final String COURSE_CATEGORY_ID_VAR_NAME = "courseCategoryId";
     private static final String NEW_INGREDIENTS_VAR_NAME = "newIngredients";
-    private static final String COURSE_INGREDIENT_NAME_VAR_NAME = "courseIngredientName";
+    private static final String COURSE_INGREDIENT_ID_VAR_NAME = "courseIngredientId";
     private static final String COURSE_PORTION_DESCRIPTION_VAR_NAME = "coursePortionDescription";
     private static final String COURSE_INGREDIENT_AMOUNT_VAR_NAME = "courseIngredientAmount";
 
@@ -131,11 +131,11 @@ public class AdminCourseController extends AdminCRUDController<Course> {
     }
 
     private void addCourseIngredient(
-            String courseIngredientName,
+            int courseIngredientId,
             String coursePortionDescription,
             Float courseIngredientAmount) {
         courseService.addCourseIngredient(getCurrentObject(),
-                warehouseService.findIngredientByName(courseIngredientName),
+                warehouseService.findIngredientById(courseIngredientId),
                 warehouseService.findPortionByDescription(coursePortionDescription),
                 courseIngredientAmount);
     }
@@ -168,7 +168,7 @@ public class AdminCourseController extends AdminCRUDController<Course> {
                                            @RequestParam(COURSE_CATEGORY_ID_VAR_NAME) int courseCategoryId,
                                            @RequestParam(COURSE_WEIGHT_VAR_NAME) Float courseWeight,
                                            @RequestParam(COURSE_COST_VAR_NAME) Float courseCost,
-                                           @RequestParam(COURSE_INGREDIENT_NAME_VAR_NAME) String courseIngredientName,
+                                           @RequestParam(COURSE_INGREDIENT_ID_VAR_NAME) int courseIngredientId,
                                            @RequestParam(COURSE_PORTION_DESCRIPTION_VAR_NAME) String coursePortionDescription,
                                            @RequestParam(COURSE_INGREDIENT_AMOUNT_VAR_NAME) Float courseIngredientAmount,
                                            @RequestParam(SUBMIT_BUTTON_VAR_NAME) String submitButtonValue
@@ -178,7 +178,7 @@ public class AdminCourseController extends AdminCRUDController<Course> {
         } else if (isSubmitDelete(submitButtonValue)) {
             deleteCourse(courseId);
         } else if (isSubmitAdd(submitButtonValue)) {
-            addCourseIngredient(courseIngredientName, coursePortionDescription, courseIngredientAmount);
+            addCourseIngredient(courseIngredientId, coursePortionDescription, courseIngredientAmount);
         }
 
         return (isSubmitSave(submitButtonValue) || isSubmitDelete(submitButtonValue)) ?

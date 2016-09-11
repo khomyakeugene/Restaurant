@@ -10,7 +10,7 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<form:select multiple="sigle" path="portions" id="coursePortionDescription"
+<form:select multiple="single" path="portions" id="coursePortionDescription"
              name="coursePortionDescription" cssStyle="font-weight: bold">
     <form:option selected="true" value="- portion -"/>
     <form:options items="${portions}" itemLabel="description" itemValue="description"/>

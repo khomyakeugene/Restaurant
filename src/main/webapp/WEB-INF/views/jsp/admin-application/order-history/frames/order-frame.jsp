@@ -6,8 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%--@elvariable id="order" type="com.company.restaurant.model.Order"--%>
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <table>
     <tr>
         <td>Order time: </td>

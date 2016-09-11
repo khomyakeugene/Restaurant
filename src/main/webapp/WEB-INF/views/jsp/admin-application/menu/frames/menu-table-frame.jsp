@@ -13,16 +13,16 @@
     <table class="menu-table">
         <tr>
             <th>Menu name</th>
-            <th class="table-action" style="text-align: center" width="8%">action</th>
+            <th class="table-action" style="text-align: center; width: 17%">action</th>
         </tr>
         <tr>
             <td>
                 <input type="text" class="input-control" id="menuName"
                        name="menuName" placeholder="Enter menu name"
-                       required="required" autofocus>
+                       autofocus>
             </td>
             <td class="table-action" style="text-align: center" >
-                <%@ include file="buttons/menu-add-button.jsp" %>
+                <%@ include file="buttons/add-menu-button.jsp" %>
             </td>
         </tr>
         <c:forEach items="${menus}" var="menu">

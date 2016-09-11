@@ -147,6 +147,12 @@
     width: 100%;
     display: table-cell;
 }
+.half {
+    padding: 0;
+    float: left;
+    display: table-cell;
+    width: 50%;
+}
 .third {
     padding: 0;
     float: left;

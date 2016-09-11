@@ -9,5 +9,14 @@
 
 <form action="/edit-menus" method="post">
     <%@ include file="../../../frames/error/error-mesage-frame.jsp" %>
-    <%@ include file="menu-table-frame.jsp" %>
+    <div class="horizontal-container ordinary-container">
+        <div class="horizontal-part-holder ordinary-container">
+            <div class="half">
+                <%@ include file="menu-table-frame.jsp" %>
+            </div>
+            <div class="half">
+                 <%@ include file="menu-courses-list-frame.jsp" %>
+           </div>
+        </div>
+    </div>
 </form>
