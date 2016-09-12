@@ -105,6 +105,7 @@
     color: darkgreen;
     background-color: rgba(135, 203, 37, 0.38);
 }
+
 .button {
     display: inline-block;
     *display: inline;

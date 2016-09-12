@@ -10,9 +10,9 @@ import java.util.List;
  * Created by Yevhen on 16.06.2016.
  */
 public interface WarehouseDao {
-    void addIngredientToWarehouse(Ingredient ingredient, Portion portion, float amount);
+    void addIngredientToWarehouse(Ingredient ingredient, Portion portion, Float amount);
 
-    void takeIngredientFromWarehouse(Ingredient ingredient, Portion portion, float amount);
+    void takeIngredientFromWarehouse(Ingredient ingredient, Portion portion, Float amount);
 
     Warehouse findIngredientInWarehouse(Ingredient ingredient, Portion portion);
 

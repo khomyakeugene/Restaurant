@@ -67,7 +67,7 @@ public class HWarehouseDao extends HDaoAmountLinkEntity<Warehouse> implements Wa
 
     @Transactional
     @Override
-    public void addIngredientToWarehouse(Ingredient ingredient, Portion portion, float amount) {
+    public void addIngredientToWarehouse(Ingredient ingredient, Portion portion, Float amount) {
         if (amount > 0.0) {
             increaseAmount(ingredient.getIngredientId(), portion.getPortionId(), amount);
         }
@@ -75,7 +75,7 @@ public class HWarehouseDao extends HDaoAmountLinkEntity<Warehouse> implements Wa
 
     @Transactional
     @Override
-    public void takeIngredientFromWarehouse(Ingredient ingredient, Portion portion, float amount) {
+    public void takeIngredientFromWarehouse(Ingredient ingredient, Portion portion, Float amount) {
         if (amount > 0.0) {
             decreaseAmount(ingredient.getIngredientId(), portion.getPortionId(), amount);
         }

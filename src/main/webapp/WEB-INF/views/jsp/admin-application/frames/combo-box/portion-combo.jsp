@@ -10,8 +10,8 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<form:select multiple="single" path="portions" id="coursePortionDescription"
-             name="coursePortionDescription" cssStyle="font-weight: bold">
-    <form:option selected="true" value="- portion -"/>
-    <form:options items="${portions}" itemLabel="description" itemValue="description"/>
+<form:select multiple="single" path="portions" id="portionId"
+             name="portionId" cssStyle="font-weight: bold">
+    <form:option selected="true" value="-1" label="- portion -"/>
+    <form:options items="${portions}" itemValue="portionId" itemLabel="description"/>
 </form:select>

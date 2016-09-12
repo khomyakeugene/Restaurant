@@ -14,11 +14,11 @@ public abstract class HDaoQuantityLinkEntity <T extends LinkObject> extends HDao
         return String.valueOf(Math.round(amount));
     }
 
-    protected void increaseQuantity(int firstId, int secondId, int increasePortion) {
-        increaseAmount(firstId, secondId, increasePortion);
+    protected void increaseQuantity(int firstId, int secondId, Integer increasePortion) {
+        increaseAmount(firstId, secondId, new Float(increasePortion));
     }
 
-    protected void decreaseQuantity(int firstId, int secondId, int decreasePortion) {
-        decreaseAmount(firstId, secondId, decreasePortion);
+    protected void decreaseQuantity(int firstId, int secondId, Integer decreasePortion) {
+        decreaseAmount(firstId, secondId, new Float(decreasePortion));
     }
 }

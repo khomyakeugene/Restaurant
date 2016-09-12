@@ -9,7 +9,9 @@
 
 <html>
 <body>
+
 <%@ include file="../frames/main-menu-frame.jsp" %>
+<%@ include file="frames/warehouse-list-frame.jsp" %>
 
 </body>
 </html>

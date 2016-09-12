@@ -30,15 +30,15 @@ public class WarehouseServiceImpl extends Service implements WarehouseService {
     }
 
     @Override
-    public void addIngredientToWarehouse(Ingredient ingredient, Portion portion, float amount) {
+    public void addIngredientToWarehouse(Ingredient ingredient, Portion portion, Float amount) {
         if (amount > 0.0) {
             warehouseDao.addIngredientToWarehouse(ingredient, portion, amount);
         }
     }
 
     @Override
-    public void takeIngredientFromWarehouse(Ingredient ingredient, Portion portion, float amount) {
-        if (amount > 0.0) {
+    public void takeIngredientFromWarehouse(Ingredient ingredient, Portion portion, Float amount) {
+        if (amount  == null || amount > 0.0) {
             warehouseDao.takeIngredientFromWarehouse(ingredient, portion, amount);
         }
     }

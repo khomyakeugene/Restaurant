@@ -17,7 +17,7 @@ public abstract class HDaoAmountLinkEntity<T extends LinkObject> extends HDaoLin
         return String.valueOf(amount);
     }
 
-    protected void increaseAmount(int firstId, int secondId, float increasePortion) {
+    protected void increaseAmount(int firstId, int secondId, Float increasePortion) {
         Float currentAmount = selectCurrentAmount(firstId, secondId);
         if (currentAmount == null) {
             if (increasePortion > 0.0) {
@@ -33,7 +33,10 @@ public abstract class HDaoAmountLinkEntity<T extends LinkObject> extends HDaoLin
         }
     }
 
-    protected void decreaseAmount(int firstId, int secondId, float decreasePortion) {
+    protected void decreaseAmount(int firstId, int secondId, Float decreasePortion) {
+        if (decreasePortion == null) {
+            decreasePortion = selectCurrentAmount(firstId, secondId);
+        }
         increaseAmount(firstId, secondId, -decreasePortion);
     }
 }
