@@ -24,12 +24,13 @@ public class AdminEmployeeController extends AdminCRUDController<Employee> {
     private static final String ADMIN_CREATE_EMPLOYEE_REQUEST_MAPPING_VALUE = "/create-employee";
 
     private static final String EMPLOYEES_VAR_NAME = "employees";
-    private static final String EMPLOYEE_ID_VAR_NAME = "employeeId";
-    private static final String EMPLOYEE_FIRST_NAME_VAR_NAME = "employeeFirstName";
-    private static final String EMPLOYEE_SECOND_NAME_VAR_NAME = "employeeSecondName";
-    private static final String EMPLOYEE_JOB_POSITION_ID_VAR_NAME = "jobPositionId";
-    private static final String EMPLOYEE_PHONE_NUMBER_VAR_NAME = "employeePhoneNumber";
-    private static final String EMPLOYEE_SALARY_VAR_NAME = "employeeSalary";
+
+    private static final String EMPLOYEE_ID_PAR_NAME = "employeeId";
+    private static final String EMPLOYEE_FIRST_NAME_PAR_NAME = "employeeFirstName";
+    private static final String EMPLOYEE_SECOND_NAME_PAR_NAME = "employeeSecondName";
+    private static final String EMPLOYEE_JOB_POSITION_ID_PAR_NAME = "jobPositionId";
+    private static final String EMPLOYEE_PHONE_NUMBER_PAR_NAME = "employeePhoneNumber";
+    private static final String EMPLOYEE_SALARY_PAR_NAME = "employeeSalary";
     //    private static final String EMPLOYEE_PHOTO_VAR_NAME = "employeePhoto";
 
     private static final String DEFAULT_JOB_POSITION_NAME_VALUE = "Waiter";
@@ -118,14 +119,14 @@ public class AdminEmployeeController extends AdminCRUDController<Employee> {
     }
 
     @RequestMapping(value = ADMIN_SAVE_OR_DELETE_EMPLOYEE_REQUEST_MAPPING_VALUE, method = RequestMethod.POST)
-    public ModelAndView saveOrDeleteEmployee(@RequestParam(EMPLOYEE_ID_VAR_NAME) int employeeId,
-                                             @RequestParam(EMPLOYEE_FIRST_NAME_VAR_NAME) String employeeFirstName,
-                                             @RequestParam(EMPLOYEE_SECOND_NAME_VAR_NAME) String employeeSecondName,
-                                             @RequestParam(EMPLOYEE_JOB_POSITION_ID_VAR_NAME) int jobPositionId,
-                                             @RequestParam(EMPLOYEE_PHONE_NUMBER_VAR_NAME) String employeePhoneNumber,
-                                             @RequestParam(EMPLOYEE_SALARY_VAR_NAME) Float employeeSalary,
+    public ModelAndView saveOrDeleteEmployee(@RequestParam(EMPLOYEE_ID_PAR_NAME) int employeeId,
+                                             @RequestParam(EMPLOYEE_FIRST_NAME_PAR_NAME) String employeeFirstName,
+                                             @RequestParam(EMPLOYEE_SECOND_NAME_PAR_NAME) String employeeSecondName,
+                                             @RequestParam(EMPLOYEE_JOB_POSITION_ID_PAR_NAME) int jobPositionId,
+                                             @RequestParam(EMPLOYEE_PHONE_NUMBER_PAR_NAME) String employeePhoneNumber,
+                                             @RequestParam(EMPLOYEE_SALARY_PAR_NAME) Float employeeSalary,
 //                                     @RequestParam(EMPLOYEE_PHOTO_VAR_NAME) byte[] employeePhoto,
-                                             @RequestParam(SUBMIT_BUTTON_VAR_NAME) String submitButtonValue
+                                             @RequestParam(SUBMIT_BUTTON_PAR_NAME) String submitButtonValue
     ) {
         if (isSubmitSave(submitButtonValue)) {
             saveEmployee(employeeId, employeeFirstName, employeeSecondName, jobPositionId, employeePhoneNumber,
@@ -150,11 +151,11 @@ public class AdminEmployeeController extends AdminCRUDController<Employee> {
     }
 
     @RequestMapping(value = ADMIN_CREATE_EMPLOYEE_REQUEST_MAPPING_VALUE, method = RequestMethod.POST)
-    public ModelAndView createEmployee(@RequestParam(EMPLOYEE_FIRST_NAME_VAR_NAME) String employeeFirstName,
-                                       @RequestParam(EMPLOYEE_SECOND_NAME_VAR_NAME) String employeeSecondName,
-                                       @RequestParam(EMPLOYEE_JOB_POSITION_ID_VAR_NAME) int jobPositionId,
-                                       @RequestParam(EMPLOYEE_PHONE_NUMBER_VAR_NAME) String employeePhoneNumber,
-                                       @RequestParam(EMPLOYEE_SALARY_VAR_NAME) Float employeeSalary
+    public ModelAndView createEmployee(@RequestParam(EMPLOYEE_FIRST_NAME_PAR_NAME) String employeeFirstName,
+                                       @RequestParam(EMPLOYEE_SECOND_NAME_PAR_NAME) String employeeSecondName,
+                                       @RequestParam(EMPLOYEE_JOB_POSITION_ID_PAR_NAME) int jobPositionId,
+                                       @RequestParam(EMPLOYEE_PHONE_NUMBER_PAR_NAME) String employeePhoneNumber,
+                                       @RequestParam(EMPLOYEE_SALARY_PAR_NAME) Float employeeSalary
 //                                     , @RequestParam(EMPLOYEE_PHOTO_VAR_NAME) byte[] employeePhoto,
     ) {
         saveEmployee(0, employeeFirstName, employeeSecondName, jobPositionId, employeePhoneNumber,

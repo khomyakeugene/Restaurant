@@ -24,7 +24,7 @@ public class AdminApplicationController extends CommonDataController {
     private static final String COURSE_CATEGORIES_VAR_NAME = "courseCategories";
     protected static final String COURSES_VAR_NAME = "courses";
 
-    protected static final String SUBMIT_BUTTON_VAR_NAME = "submitButtonValue";
+    protected static final String SUBMIT_BUTTON_PAR_NAME = "submitButtonValue";
     private static final String SUBMIT_BUTTON_SAVE_VALUE = "save";
     private static final String SUBMIT_BUTTON_DELETE_VALUE = "delete";
     private static final String SUBMIT_BUTTON_ADD_VALUE = "add";

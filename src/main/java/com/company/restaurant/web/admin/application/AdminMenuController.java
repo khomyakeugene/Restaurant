@@ -33,9 +33,10 @@ public class AdminMenuController extends AdminCRUDController<Menu> {
     private static final String ADMIN_MENU_PAGE_VIEW_NAME = "admin-application/menu/admin-menu-page";
 
     private static final String MENUS_VAR_NAME = "menus";
-    private static final String MENU_NAME_VAR_NAME = "menuName";
-    private static final String COURSE_ID_VAR_NAME = "courseId";
     private static final String NEW_COURSES_VAR_NAME = "newCourses";
+
+    private static final String MENU_NAME_PAR_NAME = "menuName";
+    private static final String COURSE_ID_PAR_NAME = "courseId";
 
     private static final String FILL_MENU_NAME_MESSAGE = "Please, fill the menu name field";
 
@@ -107,9 +108,9 @@ public class AdminMenuController extends AdminCRUDController<Menu> {
 
     @RequestMapping(value = ADMIN_EDIT_MENUS_REQUEST_MAPPING_VALUE, method = RequestMethod.POST)
     public ModelAndView editMenus(
-            @RequestParam(MENU_NAME_VAR_NAME) String menuName,
-            @RequestParam(COURSE_ID_VAR_NAME) int courseId,
-            @RequestParam(SUBMIT_BUTTON_VAR_NAME) String submitButtonValue
+            @RequestParam(MENU_NAME_PAR_NAME) String menuName,
+            @RequestParam(COURSE_ID_PAR_NAME) int courseId,
+            @RequestParam(SUBMIT_BUTTON_PAR_NAME) String submitButtonValue
     ) {
         if (isSubmitAddMenu(submitButtonValue)) {
             addMenu(menuName);

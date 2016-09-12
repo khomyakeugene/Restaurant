@@ -29,16 +29,16 @@ public class AdminCourseController extends AdminCRUDController<Course> {
     private static final String ADMIN_PREPARE_NEW_COURSE_REQUEST_MAPPING_VALUE = "/prepare-new-course";
     private static final String ADMIN_CREATE_EMPLOYEE_REQUEST_MAPPING_VALUE = "/create-course";
 
-    private static final String COURSE_VAR_NAME = "course";
-    private static final String COURSE_ID_VAR_NAME = "courseId";
-    private static final String COURSE_NAME_VAR_NAME = "courseName";
-    private static final String COURSE_WEIGHT_VAR_NAME = "courseWeight";
-    private static final String COURSE_COST_VAR_NAME = "courseCost";
-    private static final String COURSE_CATEGORY_ID_VAR_NAME = "courseCategoryId";
     private static final String NEW_INGREDIENTS_VAR_NAME = "newIngredients";
-    private static final String COURSE_INGREDIENT_ID_VAR_NAME = "courseIngredientId";
-    private static final String COURSE_PORTION_DESCRIPTION_VAR_NAME = "coursePortionDescription";
-    private static final String COURSE_INGREDIENT_AMOUNT_VAR_NAME = "courseIngredientAmount";
+
+    private static final String COURSE_ID_PAR_NAME = "courseId";
+    private static final String COURSE_NAME_PAR_NAME = "courseName";
+    private static final String COURSE_WEIGHT_PAR_NAME = "courseWeight";
+    private static final String COURSE_COST_PAR_NAME = "courseCost";
+    private static final String COURSE_CATEGORY_ID_PAR_NAME = "courseCategoryId";
+    private static final String COURSE_INGREDIENT_ID_PAR_NAME = "courseIngredientId";
+    private static final String COURSE_PORTION_DESCRIPTION_PAR_NAME = "coursePortionDescription";
+    private static final String COURSE_INGREDIENT_AMOUNT_PAR_NAME = "courseIngredientAmount";
 
     private static final String DEFAULT_COURSE_CATEGORY_NAME_VALUE = "Salads";
 
@@ -52,7 +52,7 @@ public class AdminCourseController extends AdminCRUDController<Course> {
     private void initCourseCategoryEnvironment(Course course) {
         // Current job position name - important to correct work of <form:select> in view
         String courseCategoryName = course.getCourseCategory().getName();
-        modelAndView.addObject(COURSE_VAR_NAME, course);
+        setCurrentObject(course);
     }
 
     private void initNewIngredientList(Course course) {
@@ -163,15 +163,15 @@ public class AdminCourseController extends AdminCRUDController<Course> {
     }
 
     @RequestMapping(value = ADMIN_SAVE_OR_DELETE_COURSE_REQUEST_MAPPING_VALUE, method = RequestMethod.POST)
-    public ModelAndView saveOrDeleteCourse(@RequestParam(COURSE_ID_VAR_NAME) int courseId,
-                                           @RequestParam(COURSE_NAME_VAR_NAME) String courseName,
-                                           @RequestParam(COURSE_CATEGORY_ID_VAR_NAME) int courseCategoryId,
-                                           @RequestParam(COURSE_WEIGHT_VAR_NAME) Float courseWeight,
-                                           @RequestParam(COURSE_COST_VAR_NAME) Float courseCost,
-                                           @RequestParam(COURSE_INGREDIENT_ID_VAR_NAME) int courseIngredientId,
-                                           @RequestParam(COURSE_PORTION_DESCRIPTION_VAR_NAME) String coursePortionDescription,
-                                           @RequestParam(COURSE_INGREDIENT_AMOUNT_VAR_NAME) Float courseIngredientAmount,
-                                           @RequestParam(SUBMIT_BUTTON_VAR_NAME) String submitButtonValue
+    public ModelAndView saveOrDeleteCourse(@RequestParam(COURSE_ID_PAR_NAME) int courseId,
+                                           @RequestParam(COURSE_NAME_PAR_NAME) String courseName,
+                                           @RequestParam(COURSE_CATEGORY_ID_PAR_NAME) int courseCategoryId,
+                                           @RequestParam(COURSE_WEIGHT_PAR_NAME) Float courseWeight,
+                                           @RequestParam(COURSE_COST_PAR_NAME) Float courseCost,
+                                           @RequestParam(COURSE_INGREDIENT_ID_PAR_NAME) int courseIngredientId,
+                                           @RequestParam(COURSE_PORTION_DESCRIPTION_PAR_NAME) String coursePortionDescription,
+                                           @RequestParam(COURSE_INGREDIENT_AMOUNT_PAR_NAME) Float courseIngredientAmount,
+                                           @RequestParam(SUBMIT_BUTTON_PAR_NAME) String submitButtonValue
     ) {
         if (isSubmitSave(submitButtonValue)) {
             saveCourse(courseId, courseName, courseCategoryId, courseWeight, courseCost);
@@ -198,10 +198,10 @@ public class AdminCourseController extends AdminCRUDController<Course> {
     }
 
     @RequestMapping(value = ADMIN_CREATE_EMPLOYEE_REQUEST_MAPPING_VALUE, method = RequestMethod.POST)
-    public ModelAndView createEmployee(@RequestParam(COURSE_NAME_VAR_NAME) String courseName,
-                                       @RequestParam(COURSE_CATEGORY_ID_VAR_NAME) int courseCategoryId,
-                                       @RequestParam(COURSE_WEIGHT_VAR_NAME) Float courseWeight,
-                                       @RequestParam(COURSE_COST_VAR_NAME) Float courseCost) {
+    public ModelAndView createEmployee(@RequestParam(COURSE_NAME_PAR_NAME) String courseName,
+                                       @RequestParam(COURSE_CATEGORY_ID_PAR_NAME) int courseCategoryId,
+                                       @RequestParam(COURSE_WEIGHT_PAR_NAME) Float courseWeight,
+                                       @RequestParam(COURSE_COST_PAR_NAME) Float courseCost) {
         createCourse(courseName, courseCategoryId, courseWeight, courseCost);
 
         return toCurrentObjectPage();

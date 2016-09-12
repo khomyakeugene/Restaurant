@@ -26,13 +26,13 @@ public class AdminOrderHistoryController extends AdminCRUDController<Order> {
     private static final String ADMIN_ORDER_HISTORY_PAGE_VIEW_NAME = "admin-application/order-history/admin-order-history-page";
 
     private static final String ORDERS_VAR_NAME = "orders";
-    private static final String ORDER_VAR_NAME = "order";
-    private static final String ORDER_DATE_VAR_NAME = "orderDate";
     private static final String ORDER_WAITERS_VAR_NAME = "orderWaiters";
     private static final String ORDER_TABLES_VAR_NAME = "orderTables";
     private static final String ORDER_DATES_VAR_NAME = "orderDates";
-    private static final String ORDER_WAITER_ID_VAR_NAME = "waiterId";
-    private static final String ORDER_TABLE_ID_VAR_NAME = "tableId";
+
+    private static final String ORDER_DATE_PAR_NAME = "orderDate";
+    private static final String ORDER_WAITER_ID_PAR_NAME = "waiterId";
+    private static final String ORDER_TABLE_ID_PAR_NAME = "tableId";
 
     private OrderService orderService;
 
@@ -91,9 +91,9 @@ public class AdminOrderHistoryController extends AdminCRUDController<Order> {
     }
 
     @RequestMapping(value = ADMIN_SEARCH_ORDERS_REQUEST_MAPPING_VALUE, method = RequestMethod.POST)
-    public ModelAndView searchOrders(@RequestParam(ORDER_DATE_VAR_NAME) String orderDateString,
-                                     @RequestParam(ORDER_WAITER_ID_VAR_NAME) int waiterId,
-                                     @RequestParam(ORDER_TABLE_ID_VAR_NAME) int tableId) {
+    public ModelAndView searchOrders(@RequestParam(ORDER_DATE_PAR_NAME) String orderDateString,
+                                     @RequestParam(ORDER_WAITER_ID_PAR_NAME) int waiterId,
+                                     @RequestParam(ORDER_TABLE_ID_PAR_NAME) int tableId) {
         clearErrorMessage();
         setCurrentObject(new Order());
 

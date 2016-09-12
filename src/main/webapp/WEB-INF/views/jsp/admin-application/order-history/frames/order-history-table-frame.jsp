@@ -6,12 +6,13 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%--@elvariable id="orders" type="List<com.company.restaurant.model.Order>"--%>
+<%--@elvariable id="orderDate" type="String"--%>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <table class="admin-order-history-table">
     <tr>
-        <th style="width: 20%">Order datetime</th>
+        <th style="width: 20%">Order datetime ${orderDate}</th>
         <th style="width: 5%">State</th>
         <th style="width: 10%">Order number</th>
         <th style="width: 5%">Table</th>
