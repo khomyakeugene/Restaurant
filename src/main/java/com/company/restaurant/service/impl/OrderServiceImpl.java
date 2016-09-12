@@ -5,7 +5,7 @@ import com.company.restaurant.model.Course;
 import com.company.restaurant.model.Order;
 import com.company.restaurant.service.OrderService;
 import com.company.restaurant.service.impl.common.Service;
-import com.company.util.common.Util;
+import com.company.util.common.DatetimeFormatter;
 import com.company.util.exception.DataIntegrityException;
 
 import java.util.Date;
@@ -159,7 +159,7 @@ public class OrderServiceImpl extends Service implements OrderService {
     @Override
     public List<Order> findOrdersByFilter(Date orderDate, int waiterId, int tableId) {
         return findAllOrders().stream().filter(order ->
-                (((orderDate == null) || (Util.getDateOnly(order.getOrderDatetime()).equals(orderDate))) &&
+                (((orderDate == null) || (DatetimeFormatter.getDateOnly(order.getOrderDatetime()).equals(orderDate))) &&
                         ((waiterId <= 0) || (order.getWaiter().getEmployeeId() == waiterId)) &&
                         ((tableId <= 0) || (order.getTable().getTableId() == tableId)))).
                 collect(Collectors.toList());
@@ -178,7 +178,7 @@ public class OrderServiceImpl extends Service implements OrderService {
     @Override
     public Set<Date> getOrderDates() {
         TreeSet<Date> result = new TreeSet<>();
-        orderDao.findAllOrders().forEach(o -> result.add(Util.getDateOnly(o.getOrderDatetime())));
+        orderDao.findAllOrders().forEach(o -> result.add(DatetimeFormatter.getDateOnly(o.getOrderDatetime())));
 
         return result;
     }

@@ -1,3 +1,4 @@
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: Yevhen
@@ -13,15 +14,15 @@
 
 <table class="admin-order-history-table">
     <tr>
-        <th style="width: 20%">Date&Time ${orderDatePresentation}</th>
-        <th style="width: 5%">State</th>
+        <th style="width: 23%">Date&Time ${orderDatePresentation}</th>
+        <th style="width: 3%">State</th>
         <th style="width: 10%">Number</th>
         <th style="width: 5%">Table ${orderTableNumberPresentation}</th>
-        <th style="width: 20%">Waiter ${orderWaiterNamePresentation}</th>
+        <th>Waiter ${orderWaiterNamePresentation}</th>
     </tr>
     <c:forEach items="${orders}" var="order">
         <tr>
-            <td><time datetime="YYYY-MM-DD hh:mm:ss">${order.orderDatetime}</time></td>
+            <td><fmt:formatDate pattern="dd/MM/yyyy HH:mm:ss" value="${order.orderDatetime}"/></td>
             <td>${order.state.name}</td>
             <td><b><a href="/admin-order/${order.orderId}"/>${order.orderNumber}</b></td>
             <td>${order.table.number}</td>

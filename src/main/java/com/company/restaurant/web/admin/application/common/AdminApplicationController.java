@@ -5,18 +5,15 @@ import com.company.restaurant.service.EmployeeService;
 import com.company.restaurant.service.TableService;
 import com.company.restaurant.service.WarehouseService;
 import com.company.restaurant.web.common.CommonDataController;
+import com.company.util.common.DatetimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
  * Created by Yevhen on 03.09.2016.
  */
 public class AdminApplicationController extends CommonDataController {
-    private static final String DEFAULT_DATE_FORMAT = "dd-MM-yyyy";
-
     private static final String INGREDIENTS_VAR_NAME = "ingredients";
     private static final String TABLES_VAR_NAME = "tables";
     private static final String PORTIONS_VAR_NAME = "portions";
@@ -29,8 +26,6 @@ public class AdminApplicationController extends CommonDataController {
     private static final String SUBMIT_BUTTON_DELETE_VALUE = "delete";
     private static final String SUBMIT_BUTTON_ADD_VALUE = "add";
     private static final String SUBMIT_BUTTON_SEARCH_VALUE = "search";
-
-    private SimpleDateFormat defaultDateFormat = new SimpleDateFormat(DEFAULT_DATE_FORMAT);
 
     protected EmployeeService employeeService;
     protected TableService tableService;
@@ -115,16 +110,11 @@ public class AdminApplicationController extends CommonDataController {
         initDictionaryLists();
     }
 
-    protected String DateToDefaultStringPresentation(Date date) {
-        return defaultDateFormat.format(date);
+    protected String DateToStringPresentation(Date date) {
+        return DatetimeFormatter.DateToStringPresentation(date);
     }
 
-    protected Date parseDateFromDefaultStringPresentation(String datePresentation) {
-        try {
-            return (datePresentation == null || datePresentation.trim().isEmpty()) ? null :
-                    defaultDateFormat.parse(datePresentation);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
+    protected Date parseDateFromStringPresentation(String datePresentation) {
+        return DatetimeFormatter.parseDateFromStringPresentation(datePresentation);
     }
 }

@@ -52,7 +52,7 @@ public class AdminOrderHistoryController extends AdminCRUDController<Order> {
     private void initOrderDatesList() {
         ArrayList<String> dateList = new ArrayList<>();
 
-        orderService.getOrderDates().forEach(date -> dateList.add(DateToDefaultStringPresentation(date)));
+        orderService.getOrderDates().forEach(date -> dateList.add(DateToStringPresentation(date)));
         modelAndView.addObject(ORDER_DATES_VAR_NAME, dateList);
     }
 
@@ -115,7 +115,7 @@ public class AdminOrderHistoryController extends AdminCRUDController<Order> {
 
         // Filter the data
         modelAndView.addObject(ORDERS_VAR_NAME, orderService.findOrdersByFilter(
-                parseDateFromDefaultStringPresentation(orderDateString), waiterId, tableId));
+                parseDateFromStringPresentation(orderDateString), waiterId, tableId));
 
         // Add variables to show filter conditions on the view (jsp-page)
         modelAndView.addObject(ORDER_DATE_PRESENTATION_VAR_NAME, buildPresentationImage(orderDateString));
