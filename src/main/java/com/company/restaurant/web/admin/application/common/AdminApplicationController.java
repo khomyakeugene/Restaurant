@@ -33,7 +33,7 @@ public class AdminApplicationController extends CommonDataController {
     private SimpleDateFormat defaultDateFormat = new SimpleDateFormat(DEFAULT_DATE_FORMAT);
 
     protected EmployeeService employeeService;
-    private TableService tableService;
+    protected TableService tableService;
     protected WarehouseService warehouseService;
     protected CourseService courseService;
 

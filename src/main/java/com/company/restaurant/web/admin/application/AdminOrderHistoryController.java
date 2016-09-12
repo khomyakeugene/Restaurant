@@ -1,5 +1,6 @@
 package com.company.restaurant.web.admin.application;
 
+import com.company.restaurant.model.Employee;
 import com.company.restaurant.model.Order;
 import com.company.restaurant.model.Table;
 import com.company.restaurant.service.OrderService;
@@ -29,6 +30,9 @@ public class AdminOrderHistoryController extends AdminCRUDController<Order> {
     private static final String ORDER_WAITERS_VAR_NAME = "orderWaiters";
     private static final String ORDER_TABLES_VAR_NAME = "orderTables";
     private static final String ORDER_DATES_VAR_NAME = "orderDates";
+    private static final String ORDER_DATE_PRESENTATION_VAR_NAME = "orderDatePresentation";
+    private static final String ORDER_WAITER_NAME_PRESENTATION_VAR_NAME = "orderWaiterNamePresentation";
+    private static final String ORDER_TABLE_NUMBER_PRESENTATION_VAR_NAME = "orderTableNumberPresentation";
 
     private static final String ORDER_DATE_PAR_NAME = "orderDate";
     private static final String ORDER_WAITER_ID_PAR_NAME = "waiterId";
@@ -60,19 +64,31 @@ public class AdminOrderHistoryController extends AdminCRUDController<Order> {
         modelAndView.addObject(ORDER_WAITERS_VAR_NAME, waiters);
     }
 
+    private String getTableDescription(Table table) {
+        String tableName = String.valueOf(table.getNumber());
+        String description = table.getDescription();
+        if (description != null && !description.isEmpty()) {
+            tableName = String.format("%s (%s)", tableName, description);
+        }
+
+        return tableName;
+    }
+
     private void initOrderTableList() {
         TreeMap<Integer, String> orderTables = new TreeMap<>();
         orderService.findAllOrders().forEach(order -> {
             Table table = order.getTable();
-            String tableName = String.valueOf(table.getNumber());
-            String description = table.getDescription();
-            if (description != null && !description.isEmpty()) {
-                tableName = String.format("%s (%s)", tableName, description);
-            }
-            orderTables.put(table.getTableId(), tableName);
+            orderTables.put(table.getTableId(), getTableDescription(table));
         });
 
         modelAndView.addObject(ORDER_TABLES_VAR_NAME, orderTables);
+    }
+
+    private String buildPresentationImage(String value) {
+        if (value != null) {
+            value = value.trim();
+        }
+        return (value == null || value.isEmpty()) ? value : String.format("(%s)", value);
     }
 
     @RequestMapping(value = ADMIN_ORDER_HISTORY_REQUEST_MAPPING_VALUE, method = RequestMethod.GET)
@@ -100,6 +116,13 @@ public class AdminOrderHistoryController extends AdminCRUDController<Order> {
         // Filter the data
         modelAndView.addObject(ORDERS_VAR_NAME, orderService.findOrdersByFilter(
                 parseDateFromDefaultStringPresentation(orderDateString), waiterId, tableId));
+
+        // Add variables to show filter conditions on the view (jsp-page)
+        modelAndView.addObject(ORDER_DATE_PRESENTATION_VAR_NAME, buildPresentationImage(orderDateString));
+        Employee waiter = employeeService.findEmployeeById(waiterId);
+        modelAndView.addObject(ORDER_WAITER_NAME_PRESENTATION_VAR_NAME, (waiter == null) ? "" : buildPresentationImage(waiter.getName()));
+        Table table = tableService.findTableById(tableId);
+        modelAndView.addObject(ORDER_TABLE_NUMBER_PRESENTATION_VAR_NAME, (table == null) ? "" : buildPresentationImage(getTableDescription(table)));
 
         // Return to the current page (order history page)
         return modelAndView;
