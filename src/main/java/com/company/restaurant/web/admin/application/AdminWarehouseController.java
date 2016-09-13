@@ -85,7 +85,7 @@ public class AdminWarehouseController extends AdminCRUDController<Warehouse> {
         Warehouse warehouse = getCurrentObject();
 
         if (amount == null) {
-            warehouse.setAmount(null);
+            warehouse.setAmount(null); // important for presentation empty value by JSP-view
             throw new DataIntegrityException(PLEASE_ENTER_AMOUNT_MSG);
         }
 

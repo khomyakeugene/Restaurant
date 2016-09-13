@@ -40,12 +40,12 @@
             <tr>
                 <c:choose>
                     <c:when test="${thisWarehouse.ingredient eq warehouse.ingredient and thisWarehouse.portion eq warehouse.portion}">
-                        <td><b>${thisWarehouse.ingredient.name}</b></td>
-                        <td style="text-align: right">
+                        <td><b>${warehouse.ingredient.name}</b></td>
+                        <td>
                             <input type="number" step="0.001" class="input-control" style="text-align: right"
-                                   id="amount" name="amount" value="${thisWarehouse.amount}" autofocus>
+                                   id="amount" name="amount" value="${warehouse.amount}" autofocus>
                         </td>
-                        <td style="text-align: left">${thisWarehouse.portion.description}</td>
+                        <td style="text-align: left">${warehouse.portion.description}</td>
                         <td class="table-action" style="text-align: center">
                             <%@ include file="../../frames/buttons/table-action-save-button.jsp" %>
                         </td>
