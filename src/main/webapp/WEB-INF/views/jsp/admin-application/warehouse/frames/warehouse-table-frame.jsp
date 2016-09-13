@@ -7,6 +7,7 @@
 --%>
 <%--@elvariable id="warehouseContent" type="List<com.company.restaurant.model.Warehouse>"--%>
 <%--@elvariable id="warehouse" type="com.company.restaurant.model.Warehouse"--%>
+<%--@elvariable id="newAmount" type="Float"--%>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
@@ -22,7 +23,7 @@
             <td><%@ include file="combo-box/new-warehouse-ingredient-combo.jsp" %></td>
             <td>
                 <input type="number" step="0.001" class="input-control" style="text-align: right"
-                       id="amount" name="amount"
+                       id="amount" name="amount" value="${newAmount}"
                        placeholder="Enter amount">
             </td>
             <td><%@ include file="../../frames/combo-box/portion-combo.jsp" %></td>

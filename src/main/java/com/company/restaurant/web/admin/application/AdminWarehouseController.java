@@ -28,46 +28,15 @@ public class AdminWarehouseController extends AdminCRUDController<Warehouse> {
 
     private static final String WAREHOUSE_CONTENT_VAR_NAME = "warehouseContent";
     private static final String WAREHOUSE_INGREDIENTS_VAR_NAME = "warehouseIngredients";
-    private static final String NEW_INGREDIENT_ID_VAR_NAME = "newIngredientId";
-    private static final String NEW_INGREDIENT_NAME_VAR_NAME = "newIngredientName";
-    private static final String NEW_PORTION_ID_VAR_NAME = "newPortionId";
-    private static final String NEW_PORTION_NAME_VAR_NAME = "newPortionName";
-    private static final String NEW_AMOUNT_VAR_NAME = "newAmount";
-
-    private static final Integer NEW_INGREDIENT_ID_EMPTY_VALUE = -1;
-    private static final String NEW_INGREDIENT_NAME_EMPTY_VALUE = "--- Select ingredient ---";
-    private static final Integer NEW_PORTION_ID_EMPTY_VALUE = -1;
-    private static final String NEW_PORTION_NAME_EMPTY_VALUE = "- portion -";
-    private static final String NEW_AMOUNT_EMPTY_VALUE = "";
 
     private static final String INGREDIENT_ID_PAR_NAME = "ingredientId";
     private static final String NEW_INGREDIENT_ID_PAR_NAME = "newIngredientId";
     private static final String AMOUNT_PAR_NAME = "amount";
 
-    private void storeNewIngredientId(Integer ingredientId) {
-        modelAndView.addObject(NEW_INGREDIENT_ID_VAR_NAME, ingredientId);
-
-        Ingredient ingredient = warehouseService.findIngredientById(ingredientId);
-        modelAndView.addObject(NEW_INGREDIENT_NAME_VAR_NAME,
-                (ingredient == null) ? NEW_INGREDIENT_NAME_EMPTY_VALUE : ingredient.getName());
-    }
-
-    private void storeNewPortionId(Integer portionId) {
-        modelAndView.addObject(NEW_PORTION_ID_VAR_NAME, portionId);
-
-        Portion portion = warehouseService.findPortionById(portionId);
-        modelAndView.addObject(NEW_PORTION_NAME_VAR_NAME,
-                (portion == null) ? NEW_PORTION_NAME_EMPTY_VALUE : portion.getDescription());
-    }
-
-    private void storeNewAmount(Float amount) {
-        modelAndView.addObject(NEW_AMOUNT_VAR_NAME, amount);
-    }
-
     private void clearNewWarehouseRecord() {
-        storeNewIngredientId(NEW_INGREDIENT_ID_EMPTY_VALUE);
-        storeNewPortionId(NEW_PORTION_ID_EMPTY_VALUE);
-        modelAndView.addObject(NEW_AMOUNT_VAR_NAME, NEW_AMOUNT_EMPTY_VALUE);
+        clearNewIngredientId();
+        clearNewPortionId();
+        clearNewAmount();
     }
 
     private void initWarehouseIngredientList() {
@@ -87,6 +56,7 @@ public class AdminWarehouseController extends AdminCRUDController<Warehouse> {
         // Important for the possible next attempt to add new warehouse record
         storeNewIngredientId(ingredientId);
         storeNewPortionId(portionId);
+        storeNewAmount(amount);
 
         Ingredient ingredient = warehouseService.findIngredientById(ingredientId);
         if (ingredient == null) {
@@ -103,7 +73,6 @@ public class AdminWarehouseController extends AdminCRUDController<Warehouse> {
 
         return warehouseService.findIngredientInWarehouse(ingredient, portion);
     }
-
 
     @RequestMapping(value = ADMIN_WAREHOUSE_REQUEST_MAPPING_VALUE, method = RequestMethod.GET)
     public ModelAndView warehouseContentPage() {

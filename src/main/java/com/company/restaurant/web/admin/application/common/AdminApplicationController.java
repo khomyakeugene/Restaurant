@@ -1,5 +1,7 @@
 package com.company.restaurant.web.admin.application.common;
 
+import com.company.restaurant.model.Ingredient;
+import com.company.restaurant.model.Portion;
 import com.company.restaurant.service.CourseService;
 import com.company.restaurant.service.EmployeeService;
 import com.company.restaurant.service.TableService;
@@ -20,6 +22,18 @@ public class AdminApplicationController extends CommonDataController {
     private static final String JOB_POSITIONS_VAR_NAME = "jobPositions";
     private static final String COURSE_CATEGORIES_VAR_NAME = "courseCategories";
     protected static final String COURSES_VAR_NAME = "courses";
+
+    private static final String NEW_INGREDIENT_ID_VAR_NAME = "newIngredientId";
+    private static final String NEW_INGREDIENT_NAME_VAR_NAME = "newIngredientName";
+    private static final String NEW_PORTION_ID_VAR_NAME = "newPortionId";
+    private static final String NEW_PORTION_NAME_VAR_NAME = "newPortionName";
+    private static final String NEW_AMOUNT_VAR_NAME = "newAmount";
+
+    private static final Integer NEW_INGREDIENT_ID_EMPTY_VALUE = -1;
+    private static final String NEW_INGREDIENT_NAME_EMPTY_VALUE = "--- Select ingredient ---";
+    private static final Integer NEW_PORTION_ID_EMPTY_VALUE = -1;
+    private static final String NEW_PORTION_NAME_EMPTY_VALUE = "- portion -";
+    private static final Float NEW_AMOUNT_EMPTY_VALUE = null;
 
     protected static final String SUBMIT_BUTTON_PAR_NAME = "submitButtonValue";
     protected static final String PORTION_ID_PAR_NAME = "portionId";
@@ -82,8 +96,42 @@ public class AdminApplicationController extends CommonDataController {
         return submitButtonValue.toLowerCase().equals(SUBMIT_BUTTON_SEARCH_VALUE.toLowerCase());
     }
 
+    protected void storeNewIngredientId(Integer ingredientId) {
+        modelAndView.addObject(NEW_INGREDIENT_ID_VAR_NAME, ingredientId);
+
+        Ingredient ingredient = warehouseService.findIngredientById(ingredientId);
+        modelAndView.addObject(NEW_INGREDIENT_NAME_VAR_NAME,
+                (ingredient == null) ? NEW_INGREDIENT_NAME_EMPTY_VALUE : ingredient.getName());
+    }
+
+    protected void clearNewIngredientId() {
+        storeNewIngredientId(NEW_INGREDIENT_ID_EMPTY_VALUE);
+    }
+
+    protected void storeNewPortionId(Integer portionId) {
+        modelAndView.addObject(NEW_PORTION_ID_VAR_NAME, portionId);
+
+        Portion portion = warehouseService.findPortionById(portionId);
+        modelAndView.addObject(NEW_PORTION_NAME_VAR_NAME,
+                (portion == null) ? NEW_PORTION_NAME_EMPTY_VALUE : portion.getDescription());
+    }
+
+    protected void clearNewPortionId() {
+        storeNewPortionId(NEW_PORTION_ID_EMPTY_VALUE);
+    }
+
+    protected void storeNewAmount(Float amount) {
+        modelAndView.addObject(NEW_AMOUNT_VAR_NAME, amount);
+    }
+
+    protected void clearNewAmount() {
+        storeNewAmount(NEW_AMOUNT_EMPTY_VALUE);
+    }
+
     private void initIngredientsList() {
         modelAndView.addObject(INGREDIENTS_VAR_NAME, warehouseService.findAllIngredients());
+
+        clearNewIngredientId();
     }
 
     private void initTableList() {
@@ -92,6 +140,8 @@ public class AdminApplicationController extends CommonDataController {
 
     private void initPortionList() {
         modelAndView.addObject(PORTIONS_VAR_NAME, warehouseService.findAllPortions());
+
+        clearNewPortionId();
     }
 
     private void initJobPositionList() {
@@ -101,6 +151,7 @@ public class AdminApplicationController extends CommonDataController {
     private void initCourseCategoryList() {
         modelAndView.addObject(COURSE_CATEGORIES_VAR_NAME, courseService.findAllCourseCategories());
     }
+
     private void initDictionaryLists() {
         initCourseCategoryList();
         initIngredientsList();
@@ -114,6 +165,7 @@ public class AdminApplicationController extends CommonDataController {
         super.initModelAndViewData();
 
         initDictionaryLists();
+        clearNewAmount();
     }
 
     protected String DateToStringPresentation(Date date) {
