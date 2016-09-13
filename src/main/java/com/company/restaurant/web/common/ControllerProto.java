@@ -38,7 +38,7 @@ public class ControllerProto {
         return (currentViewName == null) ? ERROR_PAGE_VIEW_NAME : currentViewName;
     }
 
-    @ExceptionHandler(Exception.class)
+    @ExceptionHandler(Throwable.class)
     public ModelAndView handleError(HttpServletRequest req, Exception ex) {
         modelAndView.addObject(ERROR_MESSAGE_VAR_NAME, ErrorHandlingService.getErrorMessage(ex));
         modelAndView.setViewName(getErrorViewName());

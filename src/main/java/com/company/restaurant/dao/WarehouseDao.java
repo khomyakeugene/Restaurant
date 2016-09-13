@@ -12,7 +12,11 @@ import java.util.List;
 public interface WarehouseDao {
     void addIngredientToWarehouse(Ingredient ingredient, Portion portion, Float amount);
 
+    void addIngredientToWarehouse(int ingredientId, int portionId, Float amount);
+
     void takeIngredientFromWarehouse(Ingredient ingredient, Portion portion, Float amount);
+
+    void takeIngredientFromWarehouse(int ingredientId, int portionId, Float amount);
 
     Warehouse findIngredientInWarehouse(Ingredient ingredient, Portion portion);
 

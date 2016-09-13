@@ -3,7 +3,7 @@ package com.company.restaurant.web.admin.application;
 import com.company.restaurant.model.Ingredient;
 import com.company.restaurant.model.Portion;
 import com.company.restaurant.model.Warehouse;
-import com.company.restaurant.web.admin.application.common.AdminApplicationController;
+import com.company.restaurant.web.admin.application.common.AdminCRUDController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
  * Created by Yevhen on 04.09.2016.
  */
 @Controller
-public class AdminWarehouseController extends AdminApplicationController {
+public class AdminWarehouseController extends AdminCRUDController<Warehouse> {
     private static final String ADMIN_WAREHOUSE_PAGE_VIEW_NAME = "admin-application/warehouse/admin-warehouse-page";
     private static final String ADMIN_WAREHOUSE_REQUEST_MAPPING_VALUE = "/admin-warehouse";
     private static final String ADMIN_WAREHOUSE_ACTION_REQUEST_MAPPING_VALUE = "/warehouse-action";
@@ -27,7 +27,6 @@ public class AdminWarehouseController extends AdminApplicationController {
 
     private static final String WAREHOUSE_CONTENT_VAR_NAME = "warehouseContent";
     private static final String WAREHOUSE_INGREDIENTS_VAR_NAME = "warehouseIngredients";
-    private static final String NEW_INGREDIENTS_VAR_NAME = "newIngredients";
 
     private static final String INGREDIENT_ID_PAR_NAME = "ingredientId";
     private static final String NEW_INGREDIENT_ID_PAR_NAME = "newIngredientId";
@@ -38,15 +37,6 @@ public class AdminWarehouseController extends AdminApplicationController {
 
         modelAndView.addObject(WAREHOUSE_INGREDIENTS_VAR_NAME, warehouseService.findAllIngredients().stream().
                 filter(ingredient -> allWarehouseIngredients.stream().
-                        filter(warehouse -> warehouse.getIngredient().equals(ingredient)).
-                        findAny().isPresent()).collect(Collectors.toList()));
-    }
-
-    private void initNewIngredientList() {
-        List<Warehouse> allWarehouseIngredients = warehouseService.findAllWarehouseIngredients();
-
-        modelAndView.addObject(NEW_INGREDIENTS_VAR_NAME, warehouseService.findAllIngredients().stream().
-                filter(ingredient -> !allWarehouseIngredients.stream().
                         filter(warehouse -> warehouse.getIngredient().equals(ingredient)).
                         findAny().isPresent()).collect(Collectors.toList()));
     }
@@ -69,7 +59,6 @@ public class AdminWarehouseController extends AdminApplicationController {
         clearErrorMessage();
 
         initWarehouseIngredientList();
-        initNewIngredientList();
 
         modelAndView.addObject(WAREHOUSE_CONTENT_VAR_NAME, warehouseService.findAllWarehouseIngredients());
         modelAndView.setViewName(ADMIN_WAREHOUSE_PAGE_VIEW_NAME);
@@ -100,8 +89,7 @@ public class AdminWarehouseController extends AdminApplicationController {
     @RequestMapping(value = ADMIN_DELETE_WAREHOUSE_INGREDIENT_REQUEST_MAPPING_VALUE, method = RequestMethod.GET)
     public ModelAndView deleteWarehouseIngredient(@PathVariable int ingredientId,
                                                   @PathVariable int portionId) {
-        warehouseService.takeIngredientFromWarehouse(warehouseService.findIngredientById(ingredientId),
-                warehouseService.findPortionById(portionId), null);
+        warehouseService.takeIngredientFromWarehouse(ingredientId, portionId, null);
 
         return returnToWarehouseContentPage();
     }

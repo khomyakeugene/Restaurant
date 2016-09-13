@@ -30,17 +30,23 @@ public class WarehouseServiceImpl extends Service implements WarehouseService {
     }
 
     @Override
+    public void addIngredientToWarehouse(int ingredientId, int portionId, Float amount) {
+        warehouseDao.addIngredientToWarehouse(ingredientId, portionId, amount);
+    }
+
+    @Override
     public void addIngredientToWarehouse(Ingredient ingredient, Portion portion, Float amount) {
-        if (amount > 0.0) {
-            warehouseDao.addIngredientToWarehouse(ingredient, portion, amount);
-        }
+        addIngredientToWarehouse(ingredient.getIngredientId(), portion.getPortionId(), amount);
+    }
+
+    @Override
+    public void takeIngredientFromWarehouse(int ingredientId, int portionId, Float amount) {
+        warehouseDao.takeIngredientFromWarehouse(ingredientId, portionId, amount);
     }
 
     @Override
     public void takeIngredientFromWarehouse(Ingredient ingredient, Portion portion, Float amount) {
-        if (amount  == null || amount > 0.0) {
-            warehouseDao.takeIngredientFromWarehouse(ingredient, portion, amount);
-        }
+        takeIngredientFromWarehouse(ingredient.getIngredientId(), portion.getPortionId(), amount);
     }
 
     @Override
@@ -104,7 +110,6 @@ public class WarehouseServiceImpl extends Service implements WarehouseService {
         for (Warehouse warehouse : findAllWarehouseIngredients()) {
             takeIngredientFromWarehouse(warehouse.getIngredient(), warehouse.getPortion(),
                     warehouse.getAmount());
-
         }
     }
 }

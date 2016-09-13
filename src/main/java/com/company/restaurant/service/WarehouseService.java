@@ -10,7 +10,11 @@ import java.util.List;
  * Created by Yevhen on 17.06.2016.
  */
 public interface WarehouseService {
+    void addIngredientToWarehouse(int ingredientId, int portionId, Float amount);
+
     void addIngredientToWarehouse(Ingredient ingredient, Portion portion, Float amount);
+
+    void takeIngredientFromWarehouse(int ingredientId, int portionId, Float amount);
 
     void takeIngredientFromWarehouse(Ingredient ingredient, Portion portion, Float amount);
 

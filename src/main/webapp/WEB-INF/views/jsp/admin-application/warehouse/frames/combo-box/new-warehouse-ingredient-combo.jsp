@@ -6,11 +6,11 @@
   Time: 23:11
   To change this template use File | Settings | File Templates.
 --%>
-<%--@elvariable id="newIngredients" type="Set<com.company.restaurant.model.Ingredient>"--%>
+<%--@elvariable id="ingredients" type="Set<com.company.restaurant.model.Ingredient>"--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<form:select multiple="single" path="newIngredients" id="newIngredientId"
+<form:select multiple="single" path="ingredients" id="newIngredientId"
              name="newIngredientId" cssClass="input-control" cssStyle="font-weight: bold">
     <form:option selected="true" value="-1" label="--- Select ingredient ---"/>
-    <form:options items="${newIngredients}" itemValue="ingredientId" itemLabel="name"/>
+    <form:options items="${ingredients}" itemValue="ingredientId" itemLabel="name"/>
 </form:select>
