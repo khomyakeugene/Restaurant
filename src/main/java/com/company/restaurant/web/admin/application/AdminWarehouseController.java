@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.text.Collator;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 /**
@@ -74,14 +76,23 @@ public class AdminWarehouseController extends AdminCRUDController<Warehouse> {
         return warehouseService.findIngredientInWarehouse(ingredient, portion);
     }
 
+    private void initWarehouseContentList() {
+        Collator uaCollator = Collator.getInstance(Locale.US);
+
+        modelAndView.addObject(WAREHOUSE_CONTENT_VAR_NAME,
+                warehouseService.findAllWarehouseIngredients().stream().
+                        sorted((w1, w2) -> uaCollator.compare(w1.getIngredient().getName(),
+                                w2.getIngredient().getName())).collect(Collectors.toList()));
+    }
+
     @RequestMapping(value = ADMIN_WAREHOUSE_REQUEST_MAPPING_VALUE, method = RequestMethod.GET)
     public ModelAndView warehouseContentPage() {
         clearErrorMessage();
 
-        clearNewWarehouseRecord();
+        initWarehouseContentList();
         initWarehouseIngredientList();
+        clearNewWarehouseRecord();
 
-        modelAndView.addObject(WAREHOUSE_CONTENT_VAR_NAME, warehouseService.findAllWarehouseIngredients());
         modelAndView.setViewName(ADMIN_WAREHOUSE_PAGE_VIEW_NAME);
 
         return modelAndView;
