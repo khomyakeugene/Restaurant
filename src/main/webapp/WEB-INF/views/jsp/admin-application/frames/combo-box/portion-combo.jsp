@@ -13,5 +13,5 @@
 <form:select multiple="single" path="portions" id="portionId"
              name="portionId" cssStyle="font-weight: bold">
     <form:option selected="true" value="-1" label="- portion -"/>
-    <form:options items="${portions}" itemValue="portionId" itemLabel="description"/>
+    <form:options items="${portions}"  itemValue="portionId" itemLabel="description"/>
 </form:select>
