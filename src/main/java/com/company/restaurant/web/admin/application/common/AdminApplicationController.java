@@ -38,6 +38,10 @@ public class AdminApplicationController extends CommonDataController {
         ERROR_PAGE_VIEW_NAME = "admin-application/error";
     }
 
+    protected static final String PLEASE_SELECT_AN_INGREDIENT_MSG = "Please, select an ingredient";
+    protected static final String PLEASE_SELECT_A_MEASURE_MSG = "Please, select a measure";
+    protected static final String PLEASE_ENTER_AMOUNT_MSG = "Please, enter amount";
+
     @Autowired
     public void setEmployeeService(EmployeeService employeeService) {
         this.employeeService = employeeService;

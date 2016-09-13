@@ -4,6 +4,7 @@ import com.company.restaurant.model.Ingredient;
 import com.company.restaurant.model.Portion;
 import com.company.restaurant.model.Warehouse;
 import com.company.restaurant.web.admin.application.common.AdminCRUDController;
+import com.company.util.exception.DataIntegrityException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,7 +48,16 @@ public class AdminWarehouseController extends AdminCRUDController<Warehouse> {
 
     private Warehouse addWarehouseIngredient(int ingredientId, int portionId, Float amount) {
         Ingredient ingredient = warehouseService.findIngredientById(ingredientId);
+        if (ingredient == null) {
+            throw new DataIntegrityException(PLEASE_SELECT_AN_INGREDIENT_MSG);
+        }
         Portion portion = warehouseService.findPortionById(portionId);
+        if (portion == null) {
+            throw new DataIntegrityException(PLEASE_SELECT_A_MEASURE_MSG);
+        }
+        if (amount == null) {
+            throw new DataIntegrityException(PLEASE_ENTER_AMOUNT_MSG);
+        }
         warehouseService.addIngredientToWarehouse(ingredient, portion, amount);
 
         return warehouseService.findIngredientInWarehouse(ingredient, portion);
