@@ -27,12 +27,15 @@ public class AdminWarehouseController extends AdminCRUDController<Warehouse> {
     private static final String ADMIN_WAREHOUSE_ACTION_REQUEST_MAPPING_VALUE = "/warehouse-action";
     private static final String ADMIN_DELETE_WAREHOUSE_INGREDIENT_REQUEST_MAPPING_VALUE =
             "/warehouse/delete-warehouse-ingredient/{ingredientId}/{portionId}";
+    private static final String ADMIN_EDIT_WAREHOUSE_INGREDIENT_REQUEST_MAPPING_VALUE =
+            "/warehouse/edit-warehouse-ingredient/{ingredientId}/{portionId}";
 
     private static final String WAREHOUSE_CONTENT_VAR_NAME = "warehouseContent";
     private static final String WAREHOUSE_INGREDIENTS_VAR_NAME = "warehouseIngredients";
 
     private static final String INGREDIENT_ID_PAR_NAME = "ingredientId";
     private static final String NEW_INGREDIENT_ID_PAR_NAME = "newIngredientId";
+    private static final String NEW_AMOUNT_PAR_NAME = "newAmount";
     private static final String AMOUNT_PAR_NAME = "amount";
 
     private void clearNewWarehouseRecord() {
@@ -51,6 +54,8 @@ public class AdminWarehouseController extends AdminCRUDController<Warehouse> {
     }
 
     private ModelAndView returnToWarehouseContentPage() {
+        clearCurrentObject();
+
         return new ModelAndView(REDIRECT_PREFIX + ADMIN_WAREHOUSE_REQUEST_MAPPING_VALUE);
     }
 
@@ -76,13 +81,30 @@ public class AdminWarehouseController extends AdminCRUDController<Warehouse> {
         return warehouseService.findIngredientInWarehouse(ingredient, portion);
     }
 
-    private void initWarehouseContentList() {
+    private void saveWarehouseIngredient(Float amount) {
+        Warehouse warehouse = getCurrentObject();
+
+        if (amount == null) {
+            warehouse.setAmount(null);
+            throw new DataIntegrityException(PLEASE_ENTER_AMOUNT_MSG);
+        }
+
+        warehouseService.setAmountInWarehouse(warehouse, amount);
+    }
+
+    private List<Warehouse> sortWarehouseContent(List<Warehouse> warehouseContent) {
         Collator uaCollator = Collator.getInstance(Locale.US);
 
-        modelAndView.addObject(WAREHOUSE_CONTENT_VAR_NAME,
-                warehouseService.findAllWarehouseIngredients().stream().
-                        sorted((w1, w2) -> uaCollator.compare(w1.getIngredient().getName(),
-                                w2.getIngredient().getName())).collect(Collectors.toList()));
+        return warehouseContent.stream().sorted((w1, w2) -> uaCollator.compare(w1.getIngredient().getName(),
+                w2.getIngredient().getName())).collect(Collectors.toList());
+    }
+
+    private void setWarehouseContent(List<Warehouse> warehouseContent) {
+        modelAndView.addObject(WAREHOUSE_CONTENT_VAR_NAME, sortWarehouseContent(warehouseContent));
+    }
+
+    private void initWarehouseContentList() {
+        setWarehouseContent(warehouseService.findAllWarehouseIngredients());
     }
 
     @RequestMapping(value = ADMIN_WAREHOUSE_REQUEST_MAPPING_VALUE, method = RequestMethod.GET)
@@ -102,18 +124,22 @@ public class AdminWarehouseController extends AdminCRUDController<Warehouse> {
     public ModelAndView searchIngredient(@RequestParam(INGREDIENT_ID_PAR_NAME) int ingredientId,
                                          @RequestParam(NEW_INGREDIENT_ID_PAR_NAME) int newIngredientId,
                                          @RequestParam(PORTION_ID_PAR_NAME) int portionId,
-                                         @RequestParam(AMOUNT_PAR_NAME) Float amount,
+                                         @RequestParam(value = AMOUNT_PAR_NAME, required = false) Float amount,
+                                         @RequestParam(NEW_AMOUNT_PAR_NAME) Float newAmount,
                                          @RequestParam(SUBMIT_BUTTON_PAR_NAME) String submitButtonValue) {
         clearErrorMessage();
 
         if (isSubmitSearch(submitButtonValue)) {
-            // Filter the data
-            modelAndView.addObject(WAREHOUSE_CONTENT_VAR_NAME,
-                    (ingredientId > 0) ? warehouseService.findIngredientInWarehouseById(ingredientId) :
+            setWarehouseContent((ingredientId > 0) ?
+                            warehouseService.findIngredientInWarehouseById(ingredientId) :
                             warehouseService.findAllWarehouseIngredients());
         } else if (isSubmitAdd(submitButtonValue)) {
-            addWarehouseIngredient(newIngredientId, portionId, amount);
+            addWarehouseIngredient(newIngredientId, portionId, newAmount);
+        } else if (isSubmitSave(submitButtonValue)) {
+            saveWarehouseIngredient(amount);
         }
+
+        clearCurrentObject();
 
         return isSubmitSearch(submitButtonValue) ? modelAndView : returnToWarehouseContentPage();
     }
@@ -126,4 +152,12 @@ public class AdminWarehouseController extends AdminCRUDController<Warehouse> {
         return returnToWarehouseContentPage();
     }
 
+    @RequestMapping(value = ADMIN_EDIT_WAREHOUSE_INGREDIENT_REQUEST_MAPPING_VALUE, method = RequestMethod.GET)
+    public ModelAndView editWarehouseIngredient(@PathVariable int ingredientId,
+                                                  @PathVariable int portionId) {
+        setCurrentObject(warehouseService.findIngredientInWarehouse(warehouseService.findIngredientById(ingredientId),
+                warehouseService.findPortionById(portionId)));
+
+        return modelAndView;
+    }
 }

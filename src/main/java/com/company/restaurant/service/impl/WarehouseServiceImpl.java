@@ -55,6 +55,16 @@ public class WarehouseServiceImpl extends Service implements WarehouseService {
     }
 
     @Override
+    public void setIngredientInWarehouse(Ingredient ingredient, Portion portion, Float amount) {
+        warehouseDao.setIngredientInWarehouse(ingredient, portion, amount);
+    }
+
+    @Override
+    public void setAmountInWarehouse(Warehouse warehouse, Float amount) {
+        warehouseDao.setAmountInWarehouse(warehouse, amount);
+    }
+
+    @Override
     public List<Warehouse> findIngredientInWarehouseByName(String name) {
         return warehouseDao.findIngredientInWarehouseByName(name);
     }

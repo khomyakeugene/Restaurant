@@ -74,7 +74,7 @@ public class HWarehouseDao extends HDaoAmountLinkEntity<Warehouse> implements Wa
     @Transactional
     @Override
     public void addIngredientToWarehouse(int ingredientId, int portionId, Float amount) {
-        if (amount != null && amount > 0.0) {
+        if (amount != null) {
             increaseAmount(ingredientId, portionId, amount);
         }
     }
@@ -88,9 +88,7 @@ public class HWarehouseDao extends HDaoAmountLinkEntity<Warehouse> implements Wa
     @Transactional
     @Override
     public void takeIngredientFromWarehouse(int ingredientId, int portionId, Float amount) {
-        if (amount == null || amount > 0.0) {
-            decreaseAmount(ingredientId, portionId, amount);
-        }
+        decreaseAmount(ingredientId, portionId, amount);
     }
 
     @Transactional
@@ -98,6 +96,24 @@ public class HWarehouseDao extends HDaoAmountLinkEntity<Warehouse> implements Wa
     public Warehouse findIngredientInWarehouse(Ingredient ingredient, Portion portion) {
         return findObjectByTwoAttributeValues(INGREDIENT_ATTRIBUTE_NAME, ingredient,
                 PORTION_ATTRIBUTE_NAME, portion);
+    }
+
+    @Transactional
+    @Override
+    public void setIngredientInWarehouse(Ingredient ingredient, Portion portion, Float amount) {
+        Float additionalAmount = amount;
+        Warehouse warehouse = findIngredientInWarehouse(ingredient, portion);
+        if (warehouse != null) {
+            additionalAmount -= warehouse.getAmount();
+        }
+        addIngredientToWarehouse(ingredient, portion, additionalAmount);
+    }
+
+    @Transactional
+    @Override
+    public void setAmountInWarehouse(Warehouse warehouse, Float amount) {
+        warehouse.setAmount(amount);
+        saveOrUpdate(warehouse);
     }
 
     @Transactional
