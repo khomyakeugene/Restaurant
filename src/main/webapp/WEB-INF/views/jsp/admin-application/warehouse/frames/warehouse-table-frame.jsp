@@ -68,7 +68,9 @@
                         <td style="text-align: right">${thisWarehouse.amount}</td>
                         <td style="text-align: left">${thisWarehouse.portion.description}</td>
                         <td class="table-action" style="text-align: center">
-                            <a href="/warehouse/delete-warehouse-ingredient/${thisWarehouse.ingredient.id}/${thisWarehouse.portion.id}"/>
+                            <a href="/warehouse/delete-warehouse-ingredient/${thisWarehouse.ingredient.id}/${thisWarehouse.portion.id}"
+                               onclick="return confirm('Are you sure you want to delete the data?')"
+                            />
                             delete
                         </td>
                     </c:otherwise>

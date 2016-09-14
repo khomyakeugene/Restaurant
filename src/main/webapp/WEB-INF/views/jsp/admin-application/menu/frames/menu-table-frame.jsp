@@ -29,7 +29,9 @@
             <tr>
                 <td><b><a href="/admin-menu/${menu.menuId}">${menu.name}</a></b></td>
                 <td class="table-action" style="text-align: center">
-                    <a href="/admin-menu/delete-menu/${menu.menuId}"/>
+                    <a href="/admin-menu/delete-menu/${menu.menuId}"
+                       onclick="return confirm('Are you sure you want to delete the data?')"
+                    />
                     delete
                 </td>
             </tr>

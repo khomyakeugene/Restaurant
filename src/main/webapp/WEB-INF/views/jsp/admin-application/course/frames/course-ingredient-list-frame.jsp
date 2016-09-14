@@ -25,7 +25,9 @@
                 <td style="text-align: right">${courseIngredient.amount}</td>
                 <td style="text-align: left">${courseIngredient.portion.description}</td>
                 <td class="table-action" style="text-align: center">
-                    <a href="/admin-course/delete-course-ingredient/${course.courseId}/${courseIngredient.ingredient.ingredientId}"/>
+                    <a href="/admin-course/delete-course-ingredient/${course.courseId}/${courseIngredient.ingredient.ingredientId}"
+                       onclick="return confirm('Are you sure you want to delete the data?')"
+                    />
                         delete
                 </td>
             </tr>
