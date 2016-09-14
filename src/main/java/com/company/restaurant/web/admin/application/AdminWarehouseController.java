@@ -66,7 +66,8 @@ public class AdminWarehouseController extends AdminCRUDController<Warehouse> {
     }
 
     private ModelAndView returnToWarehouseContentPage() {
-        clearCurrentObject();
+        // Point that there should be not ingredient amount editing process at all
+        stopIngredientAmountEditing();
 
         return new ModelAndView(REDIRECT_PREFIX + ADMIN_WAREHOUSE_REQUEST_MAPPING_VALUE);
     }
@@ -133,10 +134,9 @@ public class AdminWarehouseController extends AdminCRUDController<Warehouse> {
         return (warehouse != null) && (warehouse.getIngredient() != null);
     }
 
-    private void finishIngredientAmountEditing() {
+    private void stopIngredientAmountEditing() {
         clearCurrentObject();
     }
-
 
     @RequestMapping(value = ADMIN_WAREHOUSE_REQUEST_MAPPING_VALUE, method = RequestMethod.GET)
     public ModelAndView warehouseContentPage() {
@@ -172,9 +172,6 @@ public class AdminWarehouseController extends AdminCRUDController<Warehouse> {
                 addWarehouseIngredient(newIngredientId, portionId, newAmount);
             }
         }
-
-        // Now there should be not ingredient amount editing process at all
-        finishIngredientAmountEditing();
 
         return returnToWarehouseContentPage();
     }
