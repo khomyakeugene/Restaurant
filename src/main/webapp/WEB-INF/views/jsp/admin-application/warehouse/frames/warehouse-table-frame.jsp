@@ -10,12 +10,22 @@
 <%--@elvariable id="thisWarehouse" type="com.company.restaurant.model.Warehouse"--%>
 <%--@elvariable id="newAmount" type="Float"--%>
 <%--@elvariable id="warehouse" type="com.company.restaurant.model.Warehouse"--%>
+<%--@elvariable id="filterIngredientName" type="java.lang.String"--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <div>
     <table class="ingredient-table">
         <tr>
-            <th>Ingredient</th>
+            <th>
+                <c:choose>
+                    <c:when test="${empty filterIngredientName}">
+                        Ingredient
+                    </c:when>
+                    <c:otherwise>
+                        Ingredient (${filterIngredientName})
+                    </c:otherwise>
+                </c:choose>
+            </th>
             <th style="text-align: right" width="15%">Amount</th>
             <th style="text-align: left" width="10%">Measure</th>
             <th class="table-action" style="text-align: center" width="5%">action</th>

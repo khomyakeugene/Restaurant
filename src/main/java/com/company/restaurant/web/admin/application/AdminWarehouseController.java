@@ -32,6 +32,8 @@ public class AdminWarehouseController extends AdminCRUDController<Warehouse> {
 
     private static final String WAREHOUSE_CONTENT_VAR_NAME = "warehouseContent";
     private static final String WAREHOUSE_INGREDIENTS_VAR_NAME = "warehouseIngredients";
+    private static final String FILTER_INGREDIENT_ID_VAR_NAME = "filterIngredientId";
+    private static final String FILTER_INGREDIENT_NAME_VAR_NAME = "filterIngredientName";
 
     private static final String INGREDIENT_ID_PAR_NAME = "ingredientId";
     private static final String NEW_INGREDIENT_ID_PAR_NAME = "newIngredientId";
@@ -44,6 +46,11 @@ public class AdminWarehouseController extends AdminCRUDController<Warehouse> {
 
     private void setFilterIngredientId(int filterIngredientId) {
         this.filterIngredientId = filterIngredientId;
+
+        modelAndView.addObject(FILTER_INGREDIENT_ID_VAR_NAME, filterIngredientId);
+
+        Ingredient ingredient = warehouseService.findIngredientById(filterIngredientId);
+        modelAndView.addObject(FILTER_INGREDIENT_NAME_VAR_NAME, (ingredient == null) ? null : ingredient.getName());
     }
 
     private void clearFilterIngredientId() {
