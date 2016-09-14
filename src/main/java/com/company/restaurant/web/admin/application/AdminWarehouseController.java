@@ -38,6 +38,18 @@ public class AdminWarehouseController extends AdminCRUDController<Warehouse> {
     private static final String NEW_AMOUNT_PAR_NAME = "newAmount";
     private static final String AMOUNT_PAR_NAME = "amount";
 
+    private static final int NO_INGREDIENT_FILTER_VALUE = -1;
+
+    private int filterIngredientId = NO_INGREDIENT_FILTER_VALUE;
+
+    private void setFilterIngredientId(int filterIngredientId) {
+        this.filterIngredientId = filterIngredientId;
+    }
+
+    private void clearFilterIngredientId() {
+        setFilterIngredientId(NO_INGREDIENT_FILTER_VALUE);
+    }
+
     private void clearNewWarehouseRecord() {
         clearNewIngredientId();
         clearNewPortionId();
@@ -78,10 +90,13 @@ public class AdminWarehouseController extends AdminCRUDController<Warehouse> {
         }
         warehouseService.addIngredientToWarehouse(ingredient, portion, amount);
 
+        // To show full warehouse content list
+        clearFilterIngredientId();
+
         return warehouseService.findIngredientInWarehouse(ingredient, portion);
     }
 
-    private void saveWarehouseIngredient(Float amount) {
+    private void saveWarehouseIngredientAmount(Float amount) {
         Warehouse warehouse = getCurrentObject();
 
         if (amount == null) {
@@ -107,8 +122,21 @@ public class AdminWarehouseController extends AdminCRUDController<Warehouse> {
     }
 
     private void initWarehouseContentList() {
-        setWarehouseContent(warehouseService.findAllWarehouseIngredients());
+        setWarehouseContent((filterIngredientId > 0) ?
+                warehouseService.findIngredientInWarehouseById(filterIngredientId) :
+                warehouseService.findAllWarehouseIngredients());
     }
+
+    private boolean isIngredientAmountEditing() {
+        Warehouse warehouse = getCurrentObject();
+
+        return (warehouse != null) && (warehouse.getIngredient() != null);
+    }
+
+    private void finishIngredientAmountEditing() {
+        clearCurrentObject();
+    }
+
 
     @RequestMapping(value = ADMIN_WAREHOUSE_REQUEST_MAPPING_VALUE, method = RequestMethod.GET)
     public ModelAndView warehouseContentPage() {
@@ -124,27 +152,31 @@ public class AdminWarehouseController extends AdminCRUDController<Warehouse> {
     }
 
     @RequestMapping(value = ADMIN_WAREHOUSE_ACTION_REQUEST_MAPPING_VALUE, method = RequestMethod.POST)
-    public ModelAndView searchIngredient(@RequestParam(INGREDIENT_ID_PAR_NAME) int ingredientId,
-                                         @RequestParam(NEW_INGREDIENT_ID_PAR_NAME) int newIngredientId,
-                                         @RequestParam(PORTION_ID_PAR_NAME) int portionId,
-                                         @RequestParam(value = AMOUNT_PAR_NAME, required = false) Float amount,
-                                         @RequestParam(NEW_AMOUNT_PAR_NAME) Float newAmount,
-                                         @RequestParam(SUBMIT_BUTTON_PAR_NAME) String submitButtonValue) {
-        clearErrorMessage();
-
-        if (isSubmitSearch(submitButtonValue)) {
-            setWarehouseContent((ingredientId > 0) ?
-                            warehouseService.findIngredientInWarehouseById(ingredientId) :
-                            warehouseService.findAllWarehouseIngredients());
-        } else if (isSubmitAdd(submitButtonValue)) {
-            addWarehouseIngredient(newIngredientId, portionId, newAmount);
-        } else if (isSubmitSave(submitButtonValue)) {
-            saveWarehouseIngredient(amount);
+    public ModelAndView warehouseAction(@RequestParam(INGREDIENT_ID_PAR_NAME) int ingredientId,
+                                        @RequestParam(NEW_INGREDIENT_ID_PAR_NAME) int newIngredientId,
+                                        @RequestParam(PORTION_ID_PAR_NAME) int portionId,
+                                        @RequestParam(value = AMOUNT_PAR_NAME, required = false) Float amount,
+                                        @RequestParam(NEW_AMOUNT_PAR_NAME) Float newAmount,
+                                        @RequestParam(SUBMIT_BUTTON_PAR_NAME) String submitButtonValue) {
+        if (isSubmitSave(submitButtonValue)) {
+            saveWarehouseIngredientAmount(amount);
+        } else {
+            // If ingredient amount editing process is active and <amount> is entered - finish it confirming changes
+            if (isIngredientAmountEditing() && amount != null) {
+                saveWarehouseIngredientAmount(amount);
+            }
+            // Then try to perform another action
+            if (isSubmitSearch(submitButtonValue)) {
+                setFilterIngredientId(ingredientId);
+            } else if (isSubmitAdd(submitButtonValue)) {
+                addWarehouseIngredient(newIngredientId, portionId, newAmount);
+            }
         }
 
-        clearCurrentObject();
+        // Now there should be not ingredient amount editing process at all
+        finishIngredientAmountEditing();
 
-        return isSubmitSearch(submitButtonValue) ? modelAndView : returnToWarehouseContentPage();
+        return returnToWarehouseContentPage();
     }
 
     @RequestMapping(value = ADMIN_DELETE_WAREHOUSE_INGREDIENT_REQUEST_MAPPING_VALUE, method = RequestMethod.GET)
@@ -157,7 +189,7 @@ public class AdminWarehouseController extends AdminCRUDController<Warehouse> {
 
     @RequestMapping(value = ADMIN_EDIT_WAREHOUSE_INGREDIENT_REQUEST_MAPPING_VALUE, method = RequestMethod.GET)
     public ModelAndView editWarehouseIngredient(@PathVariable int ingredientId,
-                                                  @PathVariable int portionId) {
+                                                @PathVariable int portionId) {
         setCurrentObject(warehouseService.findIngredientInWarehouse(warehouseService.findIngredientById(ingredientId),
                 warehouseService.findPortionById(portionId)));
 
