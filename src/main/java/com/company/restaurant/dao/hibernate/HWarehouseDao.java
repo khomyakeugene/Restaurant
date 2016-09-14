@@ -101,12 +101,11 @@ public class HWarehouseDao extends HDaoAmountLinkEntity<Warehouse> implements Wa
     @Transactional
     @Override
     public void setIngredientInWarehouse(Ingredient ingredient, Portion portion, Float amount) {
-        Float additionalAmount = amount;
-        Warehouse warehouse = findIngredientInWarehouse(ingredient, portion);
-        if (warehouse != null) {
-            additionalAmount -= warehouse.getAmount();
-        }
-        addIngredientToWarehouse(ingredient, portion, additionalAmount);
+        Warehouse warehouse = new Warehouse();
+        warehouse.setIngredient(ingredient);
+        warehouse.setPortion(portion);
+
+        setAmountInWarehouse(warehouse, amount);
     }
 
     @Transactional

@@ -93,10 +93,13 @@ public class AdminWarehouseController extends AdminCRUDController<Warehouse> {
     }
 
     private List<Warehouse> sortWarehouseContent(List<Warehouse> warehouseContent) {
-        Collator uaCollator = Collator.getInstance(Locale.US);
+        Collator collator = Collator.getInstance(Locale.US);
 
-        return warehouseContent.stream().sorted((w1, w2) -> uaCollator.compare(w1.getIngredient().getName(),
-                w2.getIngredient().getName())).collect(Collectors.toList());
+        return warehouseContent.stream().sorted((w1, w2) -> {
+            int result = collator.compare(w1.getIngredient().getName(), w2.getIngredient().getName());
+            return (result == 0) ?
+                    collator.compare(w1.getPortion().getDescription(), w2.getPortion().getDescription()) : result;
+        }).collect(Collectors.toList());
     }
 
     private void setWarehouseContent(List<Warehouse> warehouseContent) {
