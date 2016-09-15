@@ -49,8 +49,6 @@ public class AdminCourseController extends AdminCRUDController<Course> {
     }
 
     private void initCourseCategoryEnvironment(Course course) {
-        // Current job position name - important to correct work of <form:select> in view
-        String courseCategoryName = course.getCourseCategory().getName();
         setCurrentObject(course);
     }
 
@@ -77,6 +75,8 @@ public class AdminCourseController extends AdminCRUDController<Course> {
         initCourseCategoryEnvironment(course);
         // Ingredient combo box list: ingredients which are new for this course
         initNewIngredientList(course);
+        // Clear new record parameters
+        clearNewIngredientRecord();
     }
 
     private void prepareCourseEnvironment() {
@@ -129,10 +129,14 @@ public class AdminCourseController extends AdminCRUDController<Course> {
                 getCurrentObject().getCourseId()));
     }
 
-    private void addCourseIngredient(
-            int courseIngredientId,
-            int portionId,
-            Float courseIngredientAmount) {
+    private void addCourseIngredient(int courseIngredientId,
+                                     int portionId,
+                                     Float courseIngredientAmount) {
+        // Important for the possible next attempt to add new warehouse record
+        storeNewIngredientId(courseIngredientId);
+        storeNewAmount(courseIngredientAmount);
+        storeNewPortionId(portionId);
+
         courseService.addCourseIngredient(getCurrentObject(),
                 warehouseService.findIngredientById(courseIngredientId),
                 warehouseService.findPortionById(portionId),

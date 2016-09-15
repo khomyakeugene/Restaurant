@@ -1,3 +1,4 @@
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: Yevhen
@@ -11,7 +12,9 @@
 <table>
     <tr>
         <td>Order time: </td>
-        <td style="font-weight: bolder">${order.orderDatetime}</td>
+        <td style="font-weight: bolder">
+            <fmt:formatDate pattern="dd/MM/yyyy HH:mm:ss" value="${order.orderDatetime}"/>
+        </td>
         <td>Order number: </td>
         <td style="font-weight: bolder">${order.orderNumber}</td>
     </tr>

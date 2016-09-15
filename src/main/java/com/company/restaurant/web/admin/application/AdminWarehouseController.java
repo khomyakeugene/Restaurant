@@ -57,7 +57,7 @@ public class AdminWarehouseController extends AdminCRUDController<Warehouse> {
         setFilterIngredientId(NO_INGREDIENT_FILTER_VALUE);
     }
 
-    private void clearNewWarehouseRecord() {
+    protected void clearNewIngredientRecord() {
         clearNewIngredientId();
         clearNewPortionId();
         clearNewAmount();
@@ -92,9 +92,6 @@ public class AdminWarehouseController extends AdminCRUDController<Warehouse> {
         Portion portion = warehouseService.findPortionById(portionId);
         if (portion == null) {
             throw new DataIntegrityException(PLEASE_SELECT_A_MEASURE_MSG);
-        }
-        if (amount == null) {
-            throw new DataIntegrityException(PLEASE_ENTER_AMOUNT_MSG);
         }
         warehouseService.addIngredientToWarehouse(ingredient, portion, amount);
 
@@ -151,7 +148,7 @@ public class AdminWarehouseController extends AdminCRUDController<Warehouse> {
 
         initWarehouseContentList();
         initWarehouseIngredientList();
-        clearNewWarehouseRecord();
+        clearNewIngredientRecord();
 
         modelAndView.setViewName(ADMIN_WAREHOUSE_PAGE_VIEW_NAME);
 

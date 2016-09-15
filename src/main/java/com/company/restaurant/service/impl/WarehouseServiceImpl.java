@@ -17,6 +17,10 @@ public class WarehouseServiceImpl extends Service implements WarehouseService {
     private IngredientDao ingredientDao;
     private PortionDao portionDao;
 
+    private void validateIngredientInWarehouse(int ingredientId, int portionId, Float amount) {
+        validateNotNullAmountPositiveness(amount);
+    }
+
     public void setWarehouseDao(WarehouseDao warehouseDao) {
         this.warehouseDao = warehouseDao;
     }
@@ -31,7 +35,7 @@ public class WarehouseServiceImpl extends Service implements WarehouseService {
 
     @Override
     public void addIngredientToWarehouse(int ingredientId, int portionId, Float amount) {
-        validateAmountPositiveness(amount);
+        validateIngredientInWarehouse(ingredientId, portionId, amount);
 
         warehouseDao.addIngredientToWarehouse(ingredientId, portionId, amount);
     }
@@ -58,14 +62,14 @@ public class WarehouseServiceImpl extends Service implements WarehouseService {
 
     @Override
     public void setIngredientInWarehouse(Ingredient ingredient, Portion portion, Float amount) {
-        validateAmountPositiveness(amount);
+        validateNotNullAmountPositiveness(amount);
 
         warehouseDao.setIngredientInWarehouse(ingredient, portion, amount);
     }
 
     @Override
     public void setAmountInWarehouse(Warehouse warehouse, Float amount) {
-        validateAmountPositiveness(amount);
+        validateNotNullAmountPositiveness(amount);
 
         warehouseDao.setAmountInWarehouse(warehouse, amount);
     }

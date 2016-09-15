@@ -8,10 +8,18 @@ import com.company.util.exception.DataIntegrityException;
  */
 public class Service {
     private static final String PROPERTY_SHOULD_HAVE_POSITIVE_VALUE_MSG = "%s should have positive value!";
-    private static final String amountPropertyName = "amount";
+    private static final String PROPERTY_CANNOT_BE_EMPTY_MSG = "%s cannot be empty!";
+    private static final String AMOUNT_PROPERTY_NAME = "amount";
 
     protected void throwDataIntegrityException(String message) {
         throw new DataIntegrityException(message);
+    }
+
+    protected void validateNotNullProperty(String propertyName, Float property) {
+        if (property == null) {
+            throwDataIntegrityException(Util.capitalize(String.format(PROPERTY_CANNOT_BE_EMPTY_MSG,
+                    propertyName)));
+        }
     }
 
     protected void validateFloatPropertyPositiveness(String propertyName, Float property) {
@@ -21,7 +29,16 @@ public class Service {
         }
     }
 
+    protected void validateNotNullFloatPropertyPositiveness(String propertyName, Float property) {
+        validateNotNullProperty(propertyName, property);
+        validateFloatPropertyPositiveness(propertyName, property);
+    }
+
     protected void validateAmountPositiveness(Float amount) {
-        validateFloatPropertyPositiveness(amountPropertyName, amount);
+        validateFloatPropertyPositiveness(AMOUNT_PROPERTY_NAME, amount);
+    }
+
+    protected void validateNotNullAmountPositiveness(Float amount) {
+        validateNotNullFloatPropertyPositiveness(AMOUNT_PROPERTY_NAME, amount);
     }
 }

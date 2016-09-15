@@ -12,16 +12,35 @@ import java.util.List;
 
 public class CourseServiceImpl extends Service implements CourseService {
     private static final String PORTION_TYPE_SHOULD_BE_GIVEN_MSG = "The portion type should be given!";
+    private static final String PLEASE_ENTER_AMOUNT_MSG = "Please, enter amount";
+    private static final String WEIGHT_PROPERTY_NAME = "weight";
+    private static final String COST_PROPERTY_NAME = "cost";
 
     private CourseCategoryDao courseCategoryDao;
     private CourseDao courseDao;
     private CourseIngredientDao courseIngredientDao;
+
+    private void validateWeight(Float weight) {
+        validateNotNullFloatPropertyPositiveness(WEIGHT_PROPERTY_NAME, weight);
+    }
+
+    private void validateCost(Float cost) {
+        validateNotNullFloatPropertyPositiveness(COST_PROPERTY_NAME, cost);
+    }
+
+    private void validateCourse(Course course) {
+        validateWeight(course.getWeight());
+        validateCost(course.getCost());
+    }
 
     private void validateCourseIngredient(Course course, Ingredient ingredient, Portion portion, Float amount) {
         validateAmountPositiveness(amount);
 
         if (amount != null && portion == null) {
             throwDataIntegrityException(PORTION_TYPE_SHOULD_BE_GIVEN_MSG);
+        }
+        if (amount == null && portion != null) {
+            throwDataIntegrityException(PLEASE_ENTER_AMOUNT_MSG);
         }
     }
 
@@ -72,11 +91,15 @@ public class CourseServiceImpl extends Service implements CourseService {
 
     @Override
     public Course addCourse(Course course) {
+        validateCourse(course);
+
         return courseDao.addCourse(course);
     }
 
     @Override
     public Course updCourse(Course course) {
+        validateCourse(course);
+
         return courseDao.updCourse(course);
     }
 

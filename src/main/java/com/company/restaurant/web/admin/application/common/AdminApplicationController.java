@@ -128,6 +128,12 @@ public class AdminApplicationController extends CommonDataController {
         storeNewAmount(NEW_AMOUNT_EMPTY_VALUE);
     }
 
+    protected void clearNewIngredientRecord() {
+        clearNewIngredientId();
+        clearNewPortionId();
+        clearNewAmount();
+    }
+
     private void initIngredientsList() {
         modelAndView.addObject(INGREDIENTS_VAR_NAME, warehouseService.findAllIngredients());
 

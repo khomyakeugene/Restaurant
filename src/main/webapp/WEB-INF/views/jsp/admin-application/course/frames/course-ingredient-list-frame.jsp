@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%--@elvariable id="course" type="com.company.restaurant.model.Course"--%>
+<%--@elvariable id="newAmount" type="Float"--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <div>
@@ -36,7 +37,7 @@
             <td><%@ include file="combo-box/course-ingredient-combo.jsp" %></td>
             <td>
                 <input type="number" step="0.001" class="input-control" style="text-align: right"
-                       id="courseIngredientAmount" name="courseIngredientAmount"
+                       id="courseIngredientAmount" name="courseIngredientAmount" value="${newAmount}"
                        placeholder="Enter amount">
             </td>
             <td><%@ include file="../../frames/combo-box/portion-combo.jsp" %></td>
