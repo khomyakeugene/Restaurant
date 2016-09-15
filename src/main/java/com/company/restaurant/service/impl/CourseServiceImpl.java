@@ -11,9 +11,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CourseServiceImpl extends Service implements CourseService {
+    private static final String PORTION_TYPE_SHOULD_BE_GIVEN_MSG = "The portion type should be given!";
+
     private CourseCategoryDao courseCategoryDao;
     private CourseDao courseDao;
     private CourseIngredientDao courseIngredientDao;
+
+    private void validateCourseIngredient(Course course, Ingredient ingredient, Portion portion, Float amount) {
+        validateAmountPositiveness(amount);
+
+        if (amount != null && portion == null) {
+            throwDataIntegrityException(PORTION_TYPE_SHOULD_BE_GIVEN_MSG);
+        }
+    }
 
     public void setCourseCategoryDao(CourseCategoryDao courseCategoryDao) {
         this.courseCategoryDao = courseCategoryDao;
@@ -107,6 +117,8 @@ public class CourseServiceImpl extends Service implements CourseService {
 
     @Override
     public CourseIngredient addCourseIngredient(Course course, Ingredient ingredient, Portion portion, Float amount) {
+        validateCourseIngredient(course, ingredient, portion, amount);
+
         return courseIngredientDao.addCourseIngredient(course, ingredient, portion, amount);
     }
 

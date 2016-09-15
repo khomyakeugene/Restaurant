@@ -13,6 +13,7 @@ import java.util.Set;
 public class EmployeeServiceImpl extends Service implements EmployeeService {
     private static final String OPERATION_IS_NOT_SUPPORTED_PATTERN =
             "<%s>: operation is not supported for <employee> with id <%d> (instance of <%s>)";
+    private static final String salaryPropertyName = "salary";
 
     private JobPositionDao jobPositionDao;
     private EmployeeDao employeeDao;
@@ -20,6 +21,16 @@ public class EmployeeServiceImpl extends Service implements EmployeeService {
     private void operationIsNotSupportedMessage(String message, Employee employee) {
         throwDataIntegrityException(String.format(OPERATION_IS_NOT_SUPPORTED_PATTERN, message, employee.getEmployeeId(),
                 employee.getClass().getSimpleName()));
+    }
+
+    private void validateSalary(Float salary) {
+        validateFloatPropertyPositiveness(salaryPropertyName, salary);
+    }
+
+    private void validateEmployee(Employee employee) {
+        if (employee != null) {
+            validateSalary(employee.getSalary());
+        }
     }
 
     public void setJobPositionDao(JobPositionDao jobPositionDao) {
@@ -65,6 +76,8 @@ public class EmployeeServiceImpl extends Service implements EmployeeService {
 
     @Override
     public Employee addEmployee(Employee employee) {
+        validateEmployee(employee);
+
         return employeeDao.addEmployee(employee);
     }
 
@@ -75,6 +88,8 @@ public class EmployeeServiceImpl extends Service implements EmployeeService {
 
     @Override
     public Employee updEmployee(Employee employee) {
+        validateEmployee(employee);
+
         return employeeDao.updEmployee(employee);
     }
 

@@ -31,6 +31,8 @@ public class WarehouseServiceImpl extends Service implements WarehouseService {
 
     @Override
     public void addIngredientToWarehouse(int ingredientId, int portionId, Float amount) {
+        validateAmountPositiveness(amount);
+
         warehouseDao.addIngredientToWarehouse(ingredientId, portionId, amount);
     }
 
@@ -56,11 +58,15 @@ public class WarehouseServiceImpl extends Service implements WarehouseService {
 
     @Override
     public void setIngredientInWarehouse(Ingredient ingredient, Portion portion, Float amount) {
+        validateAmountPositiveness(amount);
+
         warehouseDao.setIngredientInWarehouse(ingredient, portion, amount);
     }
 
     @Override
     public void setAmountInWarehouse(Warehouse warehouse, Float amount) {
+        validateAmountPositiveness(amount);
+
         warehouseDao.setAmountInWarehouse(warehouse, amount);
     }
 
