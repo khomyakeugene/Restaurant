@@ -4,7 +4,6 @@ import com.company.restaurant.model.Ingredient;
 import com.company.restaurant.model.Portion;
 import com.company.restaurant.model.Warehouse;
 import com.company.restaurant.web.admin.application.common.AdminCRUDController;
-import com.company.util.exception.DataIntegrityException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -97,11 +96,7 @@ public class AdminWarehouseController extends AdminCRUDController<Warehouse> {
 
     private void saveWarehouseIngredientAmount(Float amount) {
         Warehouse warehouse = getCurrentObject();
-
-        if (amount == null) {
-            warehouse.setAmount(null); // important for presentation empty value by JSP-view
-            throw new DataIntegrityException(PLEASE_ENTER_AMOUNT_MSG);
-        }
+        warehouse.setAmount(amount); // important for presentation value by JSP-view
 
         warehouseService.setAmountInWarehouse(warehouse, amount);
     }
