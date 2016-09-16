@@ -5,6 +5,7 @@ import com.company.restaurant.model.Course;
 import com.company.restaurant.model.Menu;
 import com.company.restaurant.service.MenuService;
 import com.company.restaurant.service.impl.common.Service;
+import com.company.util.exception.DataIntegrityException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,8 @@ import java.util.Set;
  * Created by Yevhen on 19.05.2016.
  */
 public class MenuServiceImpl extends Service implements MenuService {
+    private static final String SPECIFY_MENU_NAME_MSG = "Please, specify the menu name";
+
     private MenuDao menuDao;
 
     public void setMenuDao(MenuDao menuDao) {
@@ -22,6 +25,13 @@ public class MenuServiceImpl extends Service implements MenuService {
 
     @Override
     public Menu addMenu(String name) {
+        if (name != null) {
+            name = name.trim();
+        }
+        if (name == null || name.isEmpty()) {
+            throw new DataIntegrityException(SPECIFY_MENU_NAME_MSG);
+        }
+
         return menuDao.addMenu(name);
     }
 

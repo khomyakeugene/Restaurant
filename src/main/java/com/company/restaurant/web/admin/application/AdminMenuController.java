@@ -3,7 +3,6 @@ package com.company.restaurant.web.admin.application;
 import com.company.restaurant.model.Menu;
 import com.company.restaurant.service.MenuService;
 import com.company.restaurant.web.admin.application.common.AdminCRUDController;
-import com.company.util.exception.DataIntegrityException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,8 +37,6 @@ public class AdminMenuController extends AdminCRUDController<Menu> {
     private static final String MENU_NAME_PAR_NAME = "menuName";
     private static final String COURSE_ID_PAR_NAME = "courseId";
 
-    private static final String FILL_MENU_NAME_MESSAGE = "Please, fill the menu name field";
-
     private MenuService menuService;
 
     @Autowired
@@ -72,13 +69,6 @@ public class AdminMenuController extends AdminCRUDController<Menu> {
     }
 
     private Menu addMenu(String menuName) {
-        if (menuName != null) {
-            menuName = menuName.trim();
-        }
-        if (menuName == null || menuName.isEmpty()) {
-            throw new DataIntegrityException(FILL_MENU_NAME_MESSAGE);
-        }
-
         return setCurrentObject(menuService.addMenu(menuName));
     }
 
