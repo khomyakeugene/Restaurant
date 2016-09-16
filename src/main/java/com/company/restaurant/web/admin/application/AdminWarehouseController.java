@@ -86,13 +86,7 @@ public class AdminWarehouseController extends AdminCRUDController<Warehouse> {
         storeNewAmount(amount);
 
         Ingredient ingredient = warehouseService.findIngredientById(ingredientId);
-        if (ingredient == null) {
-            throw new DataIntegrityException(PLEASE_SELECT_AN_INGREDIENT_MSG);
-        }
         Portion portion = warehouseService.findPortionById(portionId);
-        if (portion == null) {
-            throw new DataIntegrityException(PLEASE_SELECT_A_MEASURE_MSG);
-        }
         warehouseService.addIngredientToWarehouse(ingredient, portion, amount);
 
         // To show full warehouse content list

@@ -8,6 +8,7 @@ import com.company.restaurant.model.Portion;
 import com.company.restaurant.model.Warehouse;
 import com.company.restaurant.service.WarehouseService;
 import com.company.restaurant.service.impl.common.Service;
+import com.company.util.exception.DataIntegrityException;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -19,6 +20,17 @@ public class WarehouseServiceImpl extends Service implements WarehouseService {
 
     private void validateIngredientInWarehouse(int ingredientId, int portionId, Float amount) {
         validateNotNullAmountPositiveness(amount);
+    }
+
+    private void validateIngredientInWarehouse(Ingredient ingredient, Portion portion, Float amount) {
+        if (ingredient == null) {
+            throw new DataIntegrityException(PLEASE_SPECIFY_AN_INGREDIENT_MSG);
+        }
+        if (portion == null) {
+            throw new DataIntegrityException(PLEASE_SPECIFY_A_PORTION_MSG);
+        }
+
+        validateIngredientInWarehouse(ingredient.getIngredientId(), portion.getPortionId(), amount);
     }
 
     public void setWarehouseDao(WarehouseDao warehouseDao) {
@@ -42,6 +54,8 @@ public class WarehouseServiceImpl extends Service implements WarehouseService {
 
     @Override
     public void addIngredientToWarehouse(Ingredient ingredient, Portion portion, Float amount) {
+        validateIngredientInWarehouse(ingredient, portion, amount);
+
         addIngredientToWarehouse(ingredient.getIngredientId(), portion.getPortionId(), amount);
     }
 

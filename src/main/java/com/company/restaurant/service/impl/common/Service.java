@@ -11,6 +11,10 @@ public class Service {
     private static final String PROPERTY_CANNOT_BE_EMPTY_MSG = "%s cannot be empty!";
     private static final String AMOUNT_PROPERTY_NAME = "amount";
 
+    protected static final String PLEASE_SPECIFY_AN_INGREDIENT_MSG = "Please, specify an ingredient";
+    protected static final String PLEASE_SPECIFY_A_PORTION_MSG = "Please, specify a portion";
+
+
     protected void throwDataIntegrityException(String message) {
         throw new DataIntegrityException(message);
     }
