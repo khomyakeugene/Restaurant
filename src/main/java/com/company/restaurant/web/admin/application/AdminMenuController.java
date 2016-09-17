@@ -117,7 +117,7 @@ public class AdminMenuController extends AdminCRUDController<Menu> {
 
         Menu currentMenu = getCurrentObject();
         if (currentMenu != null && menuService.findMenuById(currentMenu.getMenuId()) == null) {
-            setCurrentObject(null);
+            nullCurrentObject();
         }
 
         return returnToMenuListPage();
