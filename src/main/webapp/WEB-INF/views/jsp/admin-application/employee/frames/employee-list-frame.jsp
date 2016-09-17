@@ -8,7 +8,7 @@
 <%--<h3>Personnel</h3>--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<form action="/prepare-new-employee" method="post">
+<form action="${pageContext.request.contextPath}/prepare-new-employee" method="post">
     <%@ include file="../../frames/buttons/create-button-frame.jsp" %>
     <%@ include file="employee-table-frame.jsp" %>
 </form>

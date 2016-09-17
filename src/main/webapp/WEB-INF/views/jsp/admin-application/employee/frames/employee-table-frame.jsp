@@ -17,7 +17,7 @@
     </tr>
     <c:forEach items="${employees}" var="employee">
         <tr>
-            <td><b><a href="/employee/${employee.employeeId}"/>${employee.name}</b></td>
+            <td><b><a href="${pageContext.request.contextPath}/employee/${employee.employeeId}">${employee.name}</a></b></td>
             <td>${employee.jobPosition.name}</td>
             <td>${employee.phoneNumber}</td>
             <td style="text-align: right">${employee.salary}</td>

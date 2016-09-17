@@ -7,7 +7,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 
-<form:form method="GET" action="/search">
+<form:form method="GET" action="${pageContext.request.contextPath}/search">
     <div class="course-search-container">
         <div class="horizontal-part-holder">
             <div class="fifth">

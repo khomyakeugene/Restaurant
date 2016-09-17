@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<form action="/prepare-new-course" method="post">
+<form action="${pageContext.request.contextPath}/prepare-new-course" method="post">
     <%@ include file="../../frames/buttons/create-button-frame.jsp" %>
     <%@ include file="course-table-frame.jsp" %>
 </form>

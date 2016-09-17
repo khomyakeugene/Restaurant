@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<form action="/create-employee" method="post">
+<form action="${pageContext.request.contextPath}/create-employee" method="post">
     <%@ include file="employee-frame.jsp" %>
     <%@ include file="../../frames/buttons/create-cancel-buttons-frame.jsp" %>
 </form>

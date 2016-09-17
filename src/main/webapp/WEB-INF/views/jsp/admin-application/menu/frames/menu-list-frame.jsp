@@ -7,14 +7,14 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<form action="/edit-menus" method="post">
+<form action="${pageContext.request.contextPath}/edit-menus" method="post">
     <%@ include file="../../../frames/error/error-mesage-frame.jsp" %>
     <div class="horizontal-container ordinary-container">
         <div class="horizontal-part-holder ordinary-container">
             <div class="half">
                 <%@ include file="menu-table-frame.jsp" %>
             </div>
-            <div class="half">
+            <div class="half" style="width: 40%;">
                  <%@ include file="menu-courses-list-frame.jsp" %>
            </div>
         </div>

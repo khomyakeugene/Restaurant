@@ -27,12 +27,11 @@
         </tr>
         <c:forEach items="${menus}" var="menu">
             <tr>
-                <td><b><a href="/admin-menu/${menu.menuId}">${menu.name}</a></b></td>
+                <td><b><a href="${pageContext.request.contextPath}/admin-menu/${menu.menuId}">${menu.name}</a></b></td>
                 <td class="table-action" style="text-align: center">
-                    <a href="/admin-menu/delete-menu/${menu.menuId}"
+                    <a href="${pageContext.request.contextPath}/admin-menu/delete-menu/${menu.menuId}"
                        onclick="return confirm('Are you sure you want to delete the data?')"
-                    />
-                    delete
+                    >delete</a>
                 </td>
             </tr>
         </c:forEach>

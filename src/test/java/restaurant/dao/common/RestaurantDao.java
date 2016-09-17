@@ -26,7 +26,7 @@ public class RestaurantDao {
     protected static WarehouseDao warehouseDao;
     protected static CommonDataDao commonDataDao;
 
-    private static void initDataSource(String configLocation) throws Exception {
+    private static void initDataSource(String configLocation) {
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext(configLocation);
 
         menuDao = applicationContext.getBean(MenuDao.class);

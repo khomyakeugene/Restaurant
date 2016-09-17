@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<form action="/admin-search-orders" method="post">
+<form action="${pageContext.request.contextPath}/admin-search-orders" method="post">
     <%@ include file="order-history-search-frame.jsp" %>
     <div class="horizontal-container ordinary-container">
         <div class="horizontal-part-holder ordinary-container">

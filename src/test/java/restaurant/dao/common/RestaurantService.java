@@ -17,7 +17,7 @@ public class RestaurantService extends RestaurantDao {
     protected static WarehouseService warehouseService;
     protected static OrderService orderService;
 
-    private static void initServices(String configLocation) throws Exception {
+    private static void initServices(String configLocation) {
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext(configLocation);
 
         courseService = applicationContext.getBean(CourseService.class);

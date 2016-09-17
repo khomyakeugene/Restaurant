@@ -152,7 +152,7 @@
     padding: 0;
     float: left;
     display: table-cell;
-    width: 50%;
+    width: 45%;
 }
 .third {
     padding: 0;
@@ -171,7 +171,6 @@
     margin-left: auto;
     margin-right: auto;
 }
-.text-centre,
 .around-emblem-text {
     text-align: center;
     vertical-align: middle;
@@ -204,12 +203,6 @@
     display: table-cell;
     width: 59%;
 }
-.four-fifths {
-    padding: 0;
-    float: left;
-    display: table-cell;
-    width: 79%;
-}
 .input-label {
     margin: 0;
     font-weight: bold;
@@ -225,10 +218,6 @@
     margin: 15px;
     width: 95%;
 }
-.course-search-button {
-    margin: 15px;
-}
-
 .framed-div {
     border: 1px solid #000000;
     border-collapse: collapse;

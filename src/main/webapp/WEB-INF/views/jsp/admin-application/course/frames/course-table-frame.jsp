@@ -19,7 +19,7 @@
         </tr>
         <c:forEach items="${courses}" var="course">
             <tr>
-                <td><b><a href="/admin-course/${course.courseId}">${course.name}</a></b></td>
+                <td><b><a href="${pageContext.request.contextPath}/admin-course/${course.courseId}">${course.name}</a></b></td>
                 <td >${course.courseCategory.name}</td>
                 <td style="text-align: right">${course.weight}</td>
                 <td style="text-align: right">${course.cost}</td>

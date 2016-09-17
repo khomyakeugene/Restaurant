@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<form action="/warehouse-action" method="post">
+<form action="${pageContext.request.contextPath}/warehouse-action" method="post">
     <%@ include file="warehouse-search-frame.jsp" %>
     <%@ include file="warehouse-table-frame.jsp" %>
 </form>

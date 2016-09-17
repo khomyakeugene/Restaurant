@@ -24,7 +24,7 @@
         <tr>
             <td><fmt:formatDate pattern="dd/MM/yyyy HH:mm:ss" value="${order.orderDatetime}"/></td>
             <td>${order.state.name}</td>
-            <td><b><a href="/admin-order/${order.orderId}"/>${order.orderNumber}</b></td>
+            <td><b><a href="${pageContext.request.contextPath}/admin-order/${order.orderId}">${order.orderNumber}</a></b></td>
             <td>${order.table.number}</td>
             <td>${order.waiter.name}</td>
         </tr>

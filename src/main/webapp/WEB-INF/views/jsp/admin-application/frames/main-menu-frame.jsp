@@ -14,11 +14,10 @@
 
 <div class="main-menu ordinary-container">
     <ul>
-        <li><a href="/user-application-main">Main</a></li>
-        <li><a href="/admin-menu">Menu</a></li>
-        <li><a href="/admin-course-list">Course</a></li>
-        <li><a href="/admin-employee-list">Personnel</a></li>
-        <li><a href="/admin-warehouse">Warehouse</a></li>
-        <li><a href="/admin-order-history">Order history</a></li>
+        <li><a href="${pageContext.request.contextPath}/admin-menu">Menu</a></li>
+        <li><a href="${pageContext.request.contextPath}/admin-course-list">Course</a></li>
+        <li><a href="${pageContext.request.contextPath}/admin-employee-list">Personnel</a></li>
+        <li><a href="${pageContext.request.contextPath}/admin-warehouse">Warehouse</a></li>
+        <li><a href="${pageContext.request.contextPath}/admin-order-history">Order history</a></li>
     </ul>
 </div>

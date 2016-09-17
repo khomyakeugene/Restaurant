@@ -62,16 +62,16 @@
                     </c:when>
                     <c:otherwise>
                         <td>
-                            <a href="/warehouse/edit-warehouse-ingredient/${thisWarehouse.ingredient.id}/${thisWarehouse.portion.id}"/>
-                                ${thisWarehouse.ingredient.name}
+                            <a href="${pageContext.request.contextPath}/warehouse/edit-warehouse-ingredient/${thisWarehouse.ingredient.id}/${thisWarehouse.portion.id}">
+                            ${thisWarehouse.ingredient.name}
+                            </a>
                         </td>
                         <td style="text-align: right">${thisWarehouse.amount}</td>
                         <td style="text-align: left">${thisWarehouse.portion.description}</td>
                         <td class="table-action" style="text-align: center">
-                            <a href="/warehouse/delete-warehouse-ingredient/${thisWarehouse.ingredient.id}/${thisWarehouse.portion.id}"
+                            <a href="${pageContext.request.contextPath}/warehouse/delete-warehouse-ingredient/${thisWarehouse.ingredient.id}/${thisWarehouse.portion.id}"
                                onclick="return confirm('Are you sure you want to delete the data?')"
-                            />
-                            delete
+                            >delete</a>
                         </td>
                     </c:otherwise>
                 </c:choose>
