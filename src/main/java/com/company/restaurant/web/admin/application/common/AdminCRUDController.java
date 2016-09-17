@@ -19,13 +19,17 @@ public class AdminCRUDController<T> extends AdminApplicationController {
         crudModelHandler.clearCurrentObject();
     }
 
-    public T getCurrentObject() {
+    protected T getCurrentObject() {
         return crudModelHandler.getCurrentObject();
     }
 
-    public T setCurrentObject(T currentObject) {
-        crudModelHandler.setCurrentObject(currentObject);
+    protected T setCurrentObject(T object) {
+        crudModelHandler.setCurrentObject(object);
 
-        return currentObject;
+        return object;
+    }
+
+    protected void nullCurrentObject() {
+        setCurrentObject(null);
     }
 }
