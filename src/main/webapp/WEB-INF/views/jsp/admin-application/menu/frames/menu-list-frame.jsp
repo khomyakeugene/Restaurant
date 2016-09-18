@@ -9,14 +9,18 @@
 
 <form action="${pageContext.request.contextPath}/edit-menus" method="post">
     <%@ include file="../../../frames/error/error-mesage-frame.jsp" %>
-    <div class="horizontal-container ordinary-container">
-        <div class="horizontal-part-holder ordinary-container">
-            <div class="half">
-                <%@ include file="menu-table-frame.jsp" %>
-            </div>
-            <div class="half" style="width: 40%;">
-                 <%@ include file="menu-courses-list-frame.jsp" %>
-           </div>
-        </div>
-    </div>
+    <table style="width: 100%">
+        <tr style="vertical-align: top">
+            <td style="width: 50%">
+                <div>
+                    <%@ include file="menu-table-frame.jsp" %>
+                </div>
+            </td>
+            <td>
+                <div>
+                    <%@ include file="menu-courses-list-frame.jsp" %>
+                </div>
+            </td>
+        </tr>
+    </table>
 </form>
