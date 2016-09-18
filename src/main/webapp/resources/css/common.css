@@ -148,12 +148,6 @@
     width: 100%;
     display: table-cell;
 }
-.half {
-    padding: 0;
-    float: left;
-    display: table-cell;
-    width: 45%;
-}
 .third {
     padding: 0;
     float: left;
