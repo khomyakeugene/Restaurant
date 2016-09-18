@@ -18,7 +18,6 @@
                 <%@ include file="frames/employee-frame.jsp" %>
             </div>
         </td>
-
         <td>
             <div>
                 <%@ include file="frames/contacts-frame.jsp" %>
