@@ -9,14 +9,18 @@
 
 <form action="${pageContext.request.contextPath}/admin-search-orders" method="post">
     <%@ include file="order-history-search-frame.jsp" %>
-    <div class="horizontal-container ordinary-container">
-        <div class="horizontal-part-holder ordinary-container">
-            <div class="three-fifths">
-                <%@ include file="order-history-table-frame.jsp" %>
-            </div>
-            <div class="two-fifths">
-                <%@ include file="order-courses-list-frame.jsp" %>
-            </div>
-        </div>
-    </div>
+    <table class="ordinary-container" style="width: 100%">
+        <tr style="vertical-align: top">
+            <td style="width: 60%">
+                <div>
+                     <%@ include file="order-history-table-frame.jsp" %>
+               </div>
+            </td>
+            <td>
+                <div>
+                    <%@ include file="order-courses-list-frame.jsp" %>
+                </div>
+            </td>
+        </tr>
+    </table>
 </form>

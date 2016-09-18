@@ -8,10 +8,11 @@
 <%--@elvariable id="menu" type="com.company.restaurant.model.Menu"--%>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
-<table>
-    <tr>
-        <td>Menu name: </td>
-        <td style="font-weight: bolder">${menu.name}</td>
-    </tr>
-</table>
+<div class="ordinary-container">
+    <table>
+        <tr>
+            <td>Menu name: </td>
+            <td style="font-weight: bolder">${menu.name}</td>
+        </tr>
+    </table>
+</div>
