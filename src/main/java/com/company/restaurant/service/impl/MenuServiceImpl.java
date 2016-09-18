@@ -16,6 +16,8 @@ import java.util.Set;
  */
 public class MenuServiceImpl extends Service implements MenuService {
     private static final String SPECIFY_MENU_NAME_MSG = "Please, specify the menu name";
+    private static final String PLEASE_SPECIFY_A_MENU_MSG = "Please, specify a menu";
+    private static final String PLEASE_SPECIFY_A_COURSE_MSG = "Please, specify a course";
 
     private MenuDao menuDao;
 
@@ -80,6 +82,13 @@ public class MenuServiceImpl extends Service implements MenuService {
 
     @Override
     public void addCourseToMenu(Menu menu, Course course) {
+        if (menu == null) {
+            throw new DataIntegrityException(PLEASE_SPECIFY_A_MENU_MSG);
+        }
+        if (course == null) {
+            throw new DataIntegrityException(PLEASE_SPECIFY_A_COURSE_MSG);
+        }
+
         menuDao.addCourseToMenu(menu, course);
     }
 

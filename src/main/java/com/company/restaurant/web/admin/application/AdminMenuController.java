@@ -51,10 +51,9 @@ public class AdminMenuController extends AdminCRUDController<Menu> {
     private void initNewCourseList(Menu menu) {
         modelAndView.addObject(NEW_COURSES_VAR_NAME, (menu == null) ? new ArrayList<>() :
                 courseService.findAllCourses().stream().filter(course -> !menu.getCourses().stream().
-                        filter(menuCourse -> menuCourse.equals(course)).findAny().isPresent()).
+                        filter(menuCourse -> ((menuCourse != null) && menuCourse.equals(course))).findAny().isPresent()).
                         collect(Collectors.toList()));
     }
-
 
     private ModelAndView returnToMenuListPage() {
         return new ModelAndView(REDIRECT_PREFIX + ADMIN_MENU_REQUEST_MAPPING_VALUE);
