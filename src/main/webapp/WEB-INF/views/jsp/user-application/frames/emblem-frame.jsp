@@ -8,16 +8,22 @@
 <%--@elvariable id="restaurantName" type="com.company.restaurant.web.user.application.UserMainController"--%>
 <%--@elvariable id="restaurantEmblemImage" type="com.company.restaurant.web.user.application.UserMainController"--%>
 
-<div class="horizontal-container ordinary-container">
-    <div class="horizontal-part-holder">
-        <div class="third around-emblem-text">
-            Restaurant
-        </div>
-        <div class="third image-to-centre">
-            <img src="data:image/jpeg;base64,${restaurantEmblemImage}"/>
-        </div>
-        <div class="third around-emblem-text">
-            ${restaurantName}
-        </div>
-    </div>
-</div>
+<table class="ordinary-container" style="width: 100%">
+    <tr style="vertical-align: top">
+        <td style="width: 33%">
+            <div class="around-emblem-text">
+                Restaurant
+            </div>
+        </td>
+        <td style="width: 33%">
+            <div class="image-to-centre">
+                <img src="data:image/jpeg;base64,${restaurantEmblemImage}"/>
+            </div>
+        </td>
+        <td style="width: 33%">
+            <div class="around-emblem-text">
+                ${restaurantName}
+            </div>
+        </td>
+    </tr>
+</table>

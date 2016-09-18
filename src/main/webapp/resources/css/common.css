@@ -138,22 +138,6 @@
     font-family: Arial, serif;
 }
 
-.horizontal-container {
-    padding: 0;
-    width: 100%;
-    display: table;
-}
-.horizontal-part-holder {
-    float: left;
-    width: 100%;
-    display: table-cell;
-}
-.third {
-    padding: 0;
-    float: left;
-    display: table-cell;
-    width: 33%;
-}
 .image-to-centre img {
     display: block;
     margin-left: auto;
@@ -167,23 +151,6 @@
     font-size: 70px;
     font-weight: bold;
     line-height: 200px;
-}
-.course-search-container {
-    padding: 0;
-    width: 90%;
-    display: table;
-}
-.fifth {
-    padding: 0;
-    float: left;
-    display: table-cell;
-    width: 20%;
-}
-.three-fifths {
-    padding: 0;
-    float: left;
-    display: table-cell;
-    width: 59%;
 }
 .input-label {
     margin: 0;
