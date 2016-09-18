@@ -154,12 +154,6 @@
     display: table-cell;
     width: 33%;
 }
-.two-thirds {
-    padding: 0;
-    float: left;
-    display: table-cell;
-    width: 67%;
-}
 .image-to-centre img {
     display: block;
     margin-left: auto;
