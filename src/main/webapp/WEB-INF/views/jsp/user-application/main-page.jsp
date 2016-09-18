@@ -11,16 +11,20 @@
 <body>
 <%@ include file="frames/main-menu-emblem-frame.jsp" %>
 
-<div class="horizontal-container ordinary-container">
-    <div class="horizontal-part-holder ordinary-container">
-        <div class="two-thirds">
-            <%@ include file="frames/courses-frame.jsp" %>
-        </div>
-        <div class="third">
-            <%@ include file="frames/contacts-frame.jsp" %>
-        </div>
-    </div>
-</div>
+<table class="ordinary-container" style="width: 100%">
+    <tr style="vertical-align: top">
+        <td style="width: 66%">
+            <div>
+                <%@ include file="frames/courses-frame.jsp" %>
+            </div>
+        </td>
+        <td>
+            <div>
+                <%@ include file="frames/contacts-frame.jsp" %>
+            </div>
+        </td>
+    </tr>
+</table>
 
 </body>
 </html>
