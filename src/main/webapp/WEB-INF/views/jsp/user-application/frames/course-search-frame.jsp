@@ -8,22 +8,24 @@
 --%>
 
 <form:form method="GET" action="${pageContext.request.contextPath}/search">
-    <div class="course-search-container">
-        <div class="horizontal-part-holder">
-            <div class="fifth">
-                <label class="input-label" for="courseName"><h3>Course</h3></label>
-            </div>
-
-            <div class="three-fifths">
-                <input type="text" class="course-search-input-control" id="courseName"
-                       name="courseName" placeholder="Enter course name" required autofocus>
-            </div>
-
-            <div class="fifth">
+    <table class="ordinary-container" style="width: 100%">
+        <tr style="vertical-align: top">
+            <td style="width: 20%">
                 <div style="margin: 15px">
-                    <%@ include file="../../frames/buttons/search-button.jsp" %>
+                    <label class="input-label" for="courseName"><h3>Course</h3></label>
                 </div>
-            </div>
-        </div>
-    </div>
+            </td>
+            <td style="width: 60%">
+                <div>
+                    <input type="text" class="course-search-input-control" id="courseName"
+                           name="courseName" placeholder="Enter course name" required autofocus>
+                </div>
+            </td>
+            <td style="width: 20%">
+                <div style="margin: 15px">
+                     <%@ include file="../../frames/buttons/search-button.jsp" %>
+                 </div>
+            </td>
+        </tr>
+    </table>
 </form:form>
