@@ -91,6 +91,27 @@ public class AdminOrderHistoryController extends AdminCRUDController<Order> {
         return (value == null || value.isEmpty()) ? value : String.format("(%s)", value);
     }
 
+    private void addOrderDatePresentation(String value) {
+        modelAndView.addObject(ORDER_DATE_PRESENTATION_VAR_NAME, buildPresentationImage(value));
+    }
+
+    private void addWaiterPresentation(Employee waiter) {
+        modelAndView.addObject(ORDER_WAITER_NAME_PRESENTATION_VAR_NAME, (waiter == null) ? "" :
+                buildPresentationImage(waiter.getName()));
+    }
+
+    private void addTablePresentation(Table table) {
+        modelAndView.addObject(ORDER_TABLE_NUMBER_PRESENTATION_VAR_NAME, (table == null) ? "" :
+                buildPresentationImage(getTableDescription(table)));
+    }
+
+    private void initFilterData() {
+        addOrderDatePresentation(null);
+        addWaiterPresentation(null);
+        addTablePresentation(null);
+    }
+
+
     @RequestMapping(value = ADMIN_ORDER_HISTORY_REQUEST_MAPPING_VALUE, method = RequestMethod.GET)
     public ModelAndView ordersPage() {
         clearErrorMessage();
@@ -100,6 +121,7 @@ public class AdminOrderHistoryController extends AdminCRUDController<Order> {
         initOrderDatesList();
         initOrderWaiterList();
         initOrderTableList();
+        initFilterData();
 
         modelAndView.setViewName(ADMIN_ORDER_HISTORY_PAGE_VIEW_NAME);
 
@@ -118,11 +140,9 @@ public class AdminOrderHistoryController extends AdminCRUDController<Order> {
                 parseDateFromStringPresentation(orderDateString), waiterId, tableId));
 
         // Add variables to show filter conditions on the view (jsp-page)
-        modelAndView.addObject(ORDER_DATE_PRESENTATION_VAR_NAME, buildPresentationImage(orderDateString));
-        Employee waiter = employeeService.findEmployeeById(waiterId);
-        modelAndView.addObject(ORDER_WAITER_NAME_PRESENTATION_VAR_NAME, (waiter == null) ? "" : buildPresentationImage(waiter.getName()));
-        Table table = tableService.findTableById(tableId);
-        modelAndView.addObject(ORDER_TABLE_NUMBER_PRESENTATION_VAR_NAME, (table == null) ? "" : buildPresentationImage(getTableDescription(table)));
+        addOrderDatePresentation(orderDateString);
+        addWaiterPresentation(employeeService.findEmployeeById(waiterId));
+        addTablePresentation(tableService.findTableById(tableId));
 
         // Return to the current page (order history page)
         return modelAndView;
