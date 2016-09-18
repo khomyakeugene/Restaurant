@@ -11,65 +11,69 @@
 <%--@elvariable id="jobPositionName" type="String"--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<div class="horizontal-container ordinary-container">
-    <div class="horizontal-part-holder ordinary-container">
-        <div class="two-thirds">
-            <input type="hidden" name="employeeId" value="${employee.employeeId}"/>
-            <table class="admin-employee-data-table">
-                <tr>
-                    <td>
-                        <label class="input-label" for="employeeFirstName">First name:</label>
-                    </td>
-                    <td>
-                        <input type="text" class="input-control" id="employeeFirstName"
-                               name="employeeFirstName" placeholder="Enter first name"
-                               value="${employee.firstName}" required="required" autofocus>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label class="input-label" for="employeeSecondName">Last name:</label>
-                    </td>
-                    <td>
-                        <input type="text" class="input-control" id="employeeSecondName"
-                               name="employeeSecondName" placeholder="Enter last name"
-                               value="${employee.secondName}" required="required">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label class="input-label">Job position:</label>
-                    </td>
-                    <td>
-                        <%@ include file="../../frames/combo-box/job-position-combo.jsp" %>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label class="input-label" for="employeePhoneNumber">Phone number:</label>
-                    </td>
-                    <td>
-                        <input type="text" class="input-control" id="employeePhoneNumber"
-                               name="employeePhoneNumber" placeholder="Enter phone number"
-                               value="${employee.phoneNumber}"
-                               pattern="^\([0-9]{3}\)\s[0-9]{3}-[0-9]{4}$"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label class="input-label" for="employeeSalary">Salary:</label>
-                    </td>
-                    <td>
-                        <input type="number" step="0.01" class="input-control" id="employeeSalary"
-                               name="employeeSalary" placeholder="Enter salary"
-                               value="${employee.salary}">
-                    </td>
-                </tr>
-            </table>
-        </div>
+<table class="ordinary-container" style="width: 100%">
+    <tr style="vertical-align: top">
+        <td style="width: 66%">
+            <div>
+                <input type="hidden" name="employeeId" value="${employee.employeeId}"/>
+                <table class="admin-employee-data-table">
+                    <tr>
+                        <td>
+                            <label class="input-label" for="employeeFirstName">First name:</label>
+                        </td>
+                        <td>
+                            <input type="text" class="input-control" id="employeeFirstName"
+                                   name="employeeFirstName" placeholder="Enter first name"
+                                   value="${employee.firstName}" required="required" autofocus>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="input-label" for="employeeSecondName">Last name:</label>
+                        </td>
+                        <td>
+                            <input type="text" class="input-control" id="employeeSecondName"
+                                   name="employeeSecondName" placeholder="Enter last name"
+                                   value="${employee.secondName}" required="required">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="input-label">Job position:</label>
+                        </td>
+                        <td>
+                            <%@ include file="../../frames/combo-box/job-position-combo.jsp" %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="input-label" for="employeePhoneNumber">Phone number:</label>
+                        </td>
+                        <td>
+                            <input type="text" class="input-control" id="employeePhoneNumber"
+                                   name="employeePhoneNumber" placeholder="Enter phone number"
+                                   value="${employee.phoneNumber}"
+                                   pattern="^\([0-9]{3}\)\s[0-9]{3}-[0-9]{4}$"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="input-label" for="employeeSalary">Salary:</label>
+                        </td>
+                        <td>
+                            <input type="number" step="0.01" class="input-control" id="employeeSalary"
+                                   name="employeeSalary" placeholder="Enter salary"
+                                   value="${employee.salary}">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </td>
 
-        <div class="third">
-            <%@ include file="../../frames/photo/employee-photo.jsp" %>
-        </div>
-    </div>
-</div>
+        <td>
+            <div>
+                <%@ include file="../../frames/photo/employee-photo.jsp" %>
+            </div>
+        </td>
+    </tr>
+</table>

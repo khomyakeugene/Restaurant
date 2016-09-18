@@ -11,16 +11,20 @@
 <body>
 <%@ include file="/WEB-INF/views/jsp/user-application/frames/main-menu-frame.jsp" %>
 
-<div class="horizontal-container ordinary-container">
-    <div class="horizontal-part-holder ordinary-container">
-        <div class="two-thirds">
-            <%@ include file="/WEB-INF/views/jsp/user-application/frames/transport-map-frame.jsp" %>
-        </div>
-        <div class="third">
-            <%@ include file="/WEB-INF/views/jsp/user-application/frames/contacts-frame.jsp" %>
-        </div>
-    </div>
-</div>
+<table class="ordinary-container" style="width: 100%">
+    <tr style="vertical-align: top">
+        <td style="width: 66%">
+            <div>
+                <%@ include file="/WEB-INF/views/jsp/user-application/frames/transport-map-frame.jsp" %>
+            </div>
+        </td>
+        <td>
+            <div>
+                <%@ include file="/WEB-INF/views/jsp/user-application/frames/contacts-frame.jsp" %>
+            </div>
+        </td>
+    </tr>
+</table>
 
 </body>
 </html>
