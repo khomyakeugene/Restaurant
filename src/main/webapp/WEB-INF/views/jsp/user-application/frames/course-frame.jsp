@@ -9,40 +9,43 @@
 --%>
 <%--@elvariable id="course" type="com.company.restaurant.model.Course"--%>
 
-<div class="horizontal-container ordinary-container">
-    <div class="horizontal-part-holder ordinary-container">
-        <div class="two-thirds">
+<table class="ordinary-container" style="width: 100%">
+    <tr style="vertical-align: top">
+        <td style="width: 66%">
             <div>
                 <div>
-                    <h1>${course.name}</h1>
-                </div>
-                <div>
-                    <h3>Weight: ${course.weight} kg, Cost: ${course.cost} hrn</h3>
-                </div>
-                <div>
-                    <table class="ingredient-table">
-                        <tr>
-                            <th>Ingredient</th>
-                            <th style="text-align: right">Amount</th>
-                        </tr>
-                        <c:forEach items="${course.courseIngredients}" var="courseIngredient">
+                    <div>
+                        <h1>${course.name}</h1>
+                    </div>
+                    <div>
+                        <h3>Weight: ${course.weight} kg, Cost: ${course.cost} hrn</h3>
+                    </div>
+                    <div>
+                        <table class="ingredient-table">
                             <tr>
-                                <td><b>${courseIngredient.ingredient.name}</b></td>
-                                <td style="text-align: right">${courseIngredient.amount}
-                                                                ${courseIngredient.portion.description}</td>
+                                <th>Ingredient</th>
+                                <th style="text-align: right">Amount</th>
                             </tr>
-                        </c:forEach>
-                    </table>
+                            <c:forEach items="${course.courseIngredients}" var="courseIngredient">
+                                <tr>
+                                    <td><b>${courseIngredient.ingredient.name}</b></td>
+                                    <td style="text-align: right">${courseIngredient.amount}
+                                            ${courseIngredient.portion.description}</td>
+                                </tr>
+                            </c:forEach>
+                        </table>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <div class="third">
-            <div class="ordinary-container">
-                <img class="img" style="max-width: 100%"
-                     src="data:image/jpeg;base64,${course.base64EncodePhoto}" alt="No course photo"
-                    name="coursePhoto"/>
+        </td>
+        <td>
+            <div>
+                <div class="ordinary-container">
+                    <img class="img" style="max-width: 100%"
+                         src="data:image/jpeg;base64,${course.base64EncodePhoto}" alt="No course photo"
+                         name="coursePhoto"/>
+                </div>
             </div>
-        </div>
-    </div>
-</div>
+        </td>
+    </tr>
+</table>
