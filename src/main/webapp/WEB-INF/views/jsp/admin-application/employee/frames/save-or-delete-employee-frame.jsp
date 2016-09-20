@@ -9,5 +9,4 @@
 
 <form action="${pageContext.request.contextPath}/save-or-delete-employee" method="post">
     <%@ include file="employee-frame.jsp" %>
-    <%@ include file="../../frames/buttons/save-and-delete-buttons-frame.jsp" %>
 </form>

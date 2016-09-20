@@ -6,7 +6,6 @@ import com.company.restaurant.model.common.PhotoHolderObject;
  * Created by Yevhen on 19.05.2016.
  */
 public class Employee extends PhotoHolderObject {
-    private int employeeId;
     private String firstName;
     private String secondName;
     private String phoneNumber;
@@ -14,11 +13,11 @@ public class Employee extends PhotoHolderObject {
     private JobPosition jobPosition = new JobPosition();
 
     public int getEmployeeId() {
-        return employeeId;
+        return getId();
     }
 
     public void setEmployeeId(int employeeId) {
-        this.employeeId = employeeId;
+        setId(employeeId);
     }
 
     public String getFirstName() {
@@ -72,7 +71,7 @@ public class Employee extends PhotoHolderObject {
 
         Employee employee = (Employee) o;
 
-        return employeeId == employee.employeeId && (firstName != null ?
+        return getEmployeeId() == employee.getEmployeeId() && (firstName != null ?
                 firstName.equals(employee.firstName) :
                 employee.firstName == null && (secondName != null ?
                         secondName.equals(employee.secondName) :
@@ -88,7 +87,7 @@ public class Employee extends PhotoHolderObject {
 
     @Override
     public int hashCode() {
-        int result = employeeId;
+        int result = getEmployeeId();
         result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
         result = 31 * result + (secondName != null ? secondName.hashCode() : 0);
         result = 31 * result + (phoneNumber != null ? phoneNumber.hashCode() : 0);
@@ -100,7 +99,7 @@ public class Employee extends PhotoHolderObject {
     @Override
     public String toString() {
         return "Employee{" +
-                "employeeId=" + employeeId +
+                "employeeId=" + getEmployeeId() +
                 ", firstName='" + firstName + '\'' +
                 ", secondName='" + secondName + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +

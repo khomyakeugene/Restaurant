@@ -13,3 +13,6 @@
          src="data:image/jpeg;base64,${employee.base64EncodePhoto}" alt="No employee photo"
          name="employeePhoto"/>
 </div>
+<div>
+    <!--<%@ include file="../../frames/photo/FileUploadForm.jsp" %>-->
+</div>

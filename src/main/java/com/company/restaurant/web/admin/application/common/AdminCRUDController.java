@@ -1,11 +1,14 @@
 package com.company.restaurant.web.admin.application.common;
 
+import com.company.restaurant.model.common.SimpleObject;
 import com.company.restaurant.web.common.CRUDModelHandler;
 
 /**
  * Created by Yevhen on 08.09.2016.
  */
 public class AdminCRUDController<T> extends AdminApplicationController {
+    private static final String CURRENT_OBJECT_ID_VAR_NAME = "currentObjectId";
+
     private CRUDModelHandler<T> crudModelHandler;
 
     @Override
@@ -25,6 +28,12 @@ public class AdminCRUDController<T> extends AdminApplicationController {
 
     protected T setCurrentObject(T object) {
         crudModelHandler.setCurrentObject(object);
+
+        modelAndView.addObject(CURRENT_OBJECT_ID_VAR_NAME,
+                ((object != null) && (object instanceof SimpleObject)) ? ((SimpleObject) object).getId() : -1);
+
+        modelAndView.addObject(CURRENT_OBJECT_ID_VAR_NAME,
+                ((object != null) && (object instanceof SimpleObject)) ? ((SimpleObject) object).getId() : -1);
 
         return object;
     }

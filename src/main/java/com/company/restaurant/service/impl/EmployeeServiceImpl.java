@@ -13,6 +13,7 @@ import java.util.Set;
 public class EmployeeServiceImpl extends Service implements EmployeeService {
     private static final String OPERATION_IS_NOT_SUPPORTED_PATTERN =
             "<%s>: operation is not supported for <employee> with id <%d> (instance of <%s>)";
+    private static final String NAME_PROPERTY_NAME = "name";
     private static final String SALARY_PROPERTY_NAME = "salary";
 
     private JobPositionDao jobPositionDao;
@@ -23,12 +24,17 @@ public class EmployeeServiceImpl extends Service implements EmployeeService {
                 employee.getClass().getSimpleName()));
     }
 
+    private void validateName(String name) {
+        validateNotNullProperty(NAME_PROPERTY_NAME, name);
+    }
+
     private void validateSalary(Float salary) {
         validateFloatPropertyPositiveness(SALARY_PROPERTY_NAME, salary);
     }
 
     private void validateEmployee(Employee employee) {
         if (employee != null) {
+            validateName(employee.getName());
             validateSalary(employee.getSalary());
         }
     }

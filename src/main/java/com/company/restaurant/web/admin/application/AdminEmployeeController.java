@@ -16,12 +16,11 @@ import org.springframework.web.servlet.ModelAndView;
 public class AdminEmployeeController extends AdminCRUDController<Employee> {
     private static final String ADMIN_EMPLOYEE_LIST_PAGE_VIEW_NAME = "admin-application/employee/admin-employee-list-page";
     private static final String ADMIN_SAVE_OR_DELETE_EMPLOYEE_PAGE_VIEW_NAME = "admin-application/employee/admin-save-or-delete-employee-page";
-    private static final String ADMIN_CREATE_EMPLOYEE_PAGE_VIEW_NAME = "admin-application/employee/admin-create-employee-page";
     private static final String ADMIN_EMPLOYEE_LIST_REQUEST_MAPPING_VALUE = "/admin-employee-list";
     private static final String ADMIN_EMPLOYEE_REQUEST_MAPPING_VALUE = "/employee/{employeeId}";
     private static final String ADMIN_SAVE_OR_DELETE_EMPLOYEE_REQUEST_MAPPING_VALUE = "/save-or-delete-employee";
     private static final String ADMIN_PREPARE_NEW_EMPLOYEE_REQUEST_MAPPING_VALUE = "/prepare-new-employee";
-    private static final String ADMIN_CREATE_EMPLOYEE_REQUEST_MAPPING_VALUE = "/create-employee";
+    private static final String ADMIN_UPLOAD_EMPLOYEE_PHOTO_REQUEST_MAPPING_VALUE = "/upload-employee-photo";
 
     private static final String EMPLOYEES_VAR_NAME = "employees";
 
@@ -145,22 +144,15 @@ public class AdminEmployeeController extends AdminCRUDController<Employee> {
 
         prepareEmployeeEnvironment();
 
-        modelAndView.setViewName(ADMIN_CREATE_EMPLOYEE_PAGE_VIEW_NAME);
+        modelAndView.setViewName(ADMIN_SAVE_OR_DELETE_EMPLOYEE_PAGE_VIEW_NAME);
 
         return modelAndView;
     }
 
-    @RequestMapping(value = ADMIN_CREATE_EMPLOYEE_REQUEST_MAPPING_VALUE, method = RequestMethod.POST)
-    public ModelAndView createEmployee(@RequestParam(EMPLOYEE_FIRST_NAME_PAR_NAME) String employeeFirstName,
-                                       @RequestParam(EMPLOYEE_SECOND_NAME_PAR_NAME) String employeeSecondName,
-                                       @RequestParam(EMPLOYEE_JOB_POSITION_ID_PAR_NAME) int jobPositionId,
-                                       @RequestParam(EMPLOYEE_PHONE_NUMBER_PAR_NAME) String employeePhoneNumber,
-                                       @RequestParam(EMPLOYEE_SALARY_PAR_NAME) Float employeeSalary
-//                                     , @RequestParam(EMPLOYEE_PHOTO_VAR_NAME) byte[] employeePhoto,
-    ) {
-        saveEmployee(0, employeeFirstName, employeeSecondName, jobPositionId, employeePhoneNumber,
-                employeeSalary);
+    @RequestMapping(value = ADMIN_UPLOAD_EMPLOYEE_PHOTO_REQUEST_MAPPING_VALUE, method = RequestMethod.POST)
+    public ModelAndView uploadEmployeePhoto() {
+        System.out.println("uploadEmployeePhoto");
 
-        return new ModelAndView(REDIRECT_PREFIX + ADMIN_EMPLOYEE_LIST_REQUEST_MAPPING_VALUE);
+        return modelAndView;
     }
 }

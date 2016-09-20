@@ -10,7 +10,6 @@ import java.util.Set;
  * Created by Yevhen on 19.05.2016.
  */
 public class Course extends PhotoHolderObject implements Serializable {
-    private int courseId;
     private String name;
     private Float weight;
     private Float cost;
@@ -18,11 +17,11 @@ public class Course extends PhotoHolderObject implements Serializable {
     private Set<CourseIngredient> courseIngredients = new HashSet<>();
 
     public int getCourseId() {
-        return courseId;
+        return getId();
     }
 
     public void setCourseId(int courseId) {
-        this.courseId = courseId;
+        setId(courseId);
     }
 
     public String getName() {
@@ -72,7 +71,7 @@ public class Course extends PhotoHolderObject implements Serializable {
 
         Course course = (Course) o;
 
-        return courseId == course.courseId && (name != null ?
+        return getCourseId() == course.getCourseId() && (name != null ?
                 name.equals(course.name) : course.name == null && (weight != null ?
                 weight.equals(course.weight) : course.weight == null && (cost != null ?
                 cost.equals(course.cost) : course.cost == null && (courseCategory != null ?
@@ -82,7 +81,7 @@ public class Course extends PhotoHolderObject implements Serializable {
 
     @Override
     public int hashCode() {
-        int result = courseId;
+        int result = getCourseId();
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (weight != null ? weight.hashCode() : 0);
         result = 31 * result + (cost != null ? cost.hashCode() : 0);
@@ -93,7 +92,7 @@ public class Course extends PhotoHolderObject implements Serializable {
     @Override
     public String toString() {
         return "Course{" +
-                "courseId=" + courseId +
+                "courseId=" + getCourseId() +
                 ", name='" + name + '\'' +
                 ", weight=" + weight +
                 ", cost=" + cost +

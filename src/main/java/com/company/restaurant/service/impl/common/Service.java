@@ -14,15 +14,24 @@ public class Service {
     protected static final String PLEASE_SPECIFY_AN_INGREDIENT_MSG = "Please, specify an ingredient";
     protected static final String PLEASE_SPECIFY_A_PORTION_MSG = "Please, specify a portion";
 
-
     protected void throwDataIntegrityException(String message) {
         throw new DataIntegrityException(message);
     }
 
+    protected void throwPropertyCannotBeEmptyMsg(String propertyName) {
+        throwDataIntegrityException(Util.capitalize(String.format(PROPERTY_CANNOT_BE_EMPTY_MSG,
+                propertyName)));
+    }
+
+    protected void validateNotNullProperty(String propertyName, String property) {
+        if (property == null || property.trim().isEmpty()) {
+            throwPropertyCannotBeEmptyMsg(propertyName);
+        }
+    }
+
     protected void validateNotNullProperty(String propertyName, Float property) {
         if (property == null) {
-            throwDataIntegrityException(Util.capitalize(String.format(PROPERTY_CANNOT_BE_EMPTY_MSG,
-                    propertyName)));
+            throwPropertyCannotBeEmptyMsg(propertyName);
         }
     }
 
