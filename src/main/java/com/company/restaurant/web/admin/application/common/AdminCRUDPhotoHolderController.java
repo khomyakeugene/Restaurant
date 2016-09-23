@@ -10,7 +10,7 @@ import java.io.IOException;
  * Created by Yevhen on 23.09.2016.
  */
 public class AdminCRUDPhotoHolderController<T extends PhotoHolderObject> extends AdminCRUDController<T> {
-    protected ModelAndView photoFileUpload(MultipartFile file) {
+    protected ModelAndView uploadPhoto(MultipartFile file) {
         if (file != null) {
             try {
                 getCurrentObject().setPhoto(file.getBytes());

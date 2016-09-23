@@ -148,7 +148,7 @@ public class AdminCourseController extends AdminCRUDPhotoHolderController<Course
         // Store actual parameters JSP-view from in "current object" to show then actual values in JSP-view
         setCurrentObjectAttributes(courseName, courseCategoryId, courseWeight, courseCost);
 
-        return super.photoFileUpload(file);
+        return uploadPhoto(file);
     }
 
     @RequestMapping(value = ADMIN_COURSE_LIST_REQUEST_MAPPING_VALUE, method = RequestMethod.GET)
@@ -233,7 +233,6 @@ public class AdminCourseController extends AdminCRUDPhotoHolderController<Course
                                                 @RequestParam(COURSE_COST_PAR_NAME) Float courseCost) {
         return uploadCoursePhoto(file, courseName, courseCategoryId, courseWeight, courseCost);
     }
-
 
     @RequestMapping(value = ADMIN_SAVE_OR_DELETE_COURSE_REQUEST_MAPPING_VALUE, method = RequestMethod.POST)
     protected ModelAndView uploadExistingCoursePhoto(@RequestParam(FILE_PAR_NAME) MultipartFile file,

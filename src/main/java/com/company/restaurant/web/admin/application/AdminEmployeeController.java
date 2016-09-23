@@ -156,6 +156,6 @@ public class AdminEmployeeController extends AdminCRUDPhotoHolderController<Empl
                 employeePhoneNumber, employeeSalary);
 
         // Upload photo and return to current JSP
-        return super.photoFileUpload(file);
+        return uploadPhoto(file);
     }
 }
