@@ -17,8 +17,4 @@
             window.history.back();
         }
     </script>
-
-    <%--<button type="submit" class="button green" name="submitButtonValue" value="cancel">--%>
-        <%--Cancel--%>
-    <%--</button>--%>
 </div>

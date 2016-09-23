@@ -1,12 +1,13 @@
 package com.company.restaurant.web.admin.application;
 
 import com.company.restaurant.model.Course;
-import com.company.restaurant.web.admin.application.common.AdminCRUDController;
+import com.company.restaurant.web.admin.application.common.AdminCRUDPhotoHolderController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.stream.Collectors;
@@ -15,7 +16,7 @@ import java.util.stream.Collectors;
  * Created by Yevhen on 04.09.2016.
  */
 @Controller
-public class AdminCourseController extends AdminCRUDController<Course> {
+public class AdminCourseController extends AdminCRUDPhotoHolderController<Course> {
     private static final String ADMIN_COURSE_LIST_PAGE_VIEW_NAME = "admin-application/course/admin-course-list-page";
     private static final String ADMIN_COURSE_LIST_REQUEST_MAPPING_VALUE = "/admin-course-list";
     private static final String ADMIN_COURSE_REQUEST_MAPPING_PATTERN = "/admin-course/%d";
@@ -28,6 +29,7 @@ public class AdminCourseController extends AdminCRUDController<Course> {
     private static final String ADMIN_CREATE_COURSE_PAGE_VIEW_NAME = "admin-application/course/admin-create-course-page";
     private static final String ADMIN_PREPARE_NEW_COURSE_REQUEST_MAPPING_VALUE = "/prepare-new-course";
     private static final String ADMIN_CREATE_EMPLOYEE_REQUEST_MAPPING_VALUE = "/create-course";
+    private static final String ADMIN_UPLOAD_COURSE_PHOTO_REQUEST_MAPPING_VALUE = "/upload-course-photo";
 
     private static final String NEW_INGREDIENTS_VAR_NAME = "newIngredients";
 
@@ -77,6 +79,11 @@ public class AdminCourseController extends AdminCRUDController<Course> {
         initNewIngredientList(course);
         // Clear new record parameters
         clearNewIngredientRecord();
+
+        // Important to return to current object page (see method <toCurrentObjectPage>) and after possibly
+        // called <ErrorHandler> that next redirect to "current course JSP-page" to show error message and to have
+        // the possibility to correct editing parameters of "current object"
+        setCurrentObject(course);
     }
 
     private void prepareCourseEnvironment() {
@@ -88,20 +95,7 @@ public class AdminCourseController extends AdminCRUDController<Course> {
                               int courseCategoryId,
                               Float courseWeight,
                               Float courseCost) {
-        Course course = null;
-
-        // Temporarily: get "old" image from database - because I do not know how to manipulate with image
-        if (courseId > 0) {
-            course = courseService.findCourseById(courseId);
-        }
-        if (course == null) {
-            course = new Course();
-        }
-
-        // Important to return to current object page (see method <toCurrentObjectPage>) and after possibly
-        // called <ErrorHandler> that next redirect to "current course JSP-page" to show error message and to have
-        // the possibility to correct editing parameters of "current object"
-        setCurrentObject(course);
+        Course course = getCurrentObject();
 
         course.setCourseId(courseId);
         course.setName(courseName);
@@ -156,10 +150,8 @@ public class AdminCourseController extends AdminCRUDController<Course> {
     @RequestMapping(value = ADMIN_COURSE_REQUEST_MAPPING_VALUE, method = RequestMethod.GET)
     public ModelAndView course(@PathVariable int courseId) {
         clearErrorMessage();
-
         prepareCourseEnvironment(courseId);
 
-        setCurrentObject(courseService.findCourseById(courseId));
         modelAndView.setViewName(ADMIN_SAVE_OR_DELETE_COURSE_PAGE_VIEW_NAME);
 
         return modelAndView;
@@ -215,5 +207,10 @@ public class AdminCourseController extends AdminCRUDController<Course> {
         courseService.delCourseIngredient(courseId, ingredientId);
 
         return toCurrentObjectPage();
+    }
+
+    @RequestMapping(value = ADMIN_UPLOAD_COURSE_PHOTO_REQUEST_MAPPING_VALUE, method = RequestMethod.POST)
+    protected ModelAndView photoFileUpload(@RequestParam(FILE_PAR_NAME) MultipartFile file) {
+        return super.photoFileUpload(file);
     }
 }

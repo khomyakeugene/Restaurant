@@ -52,8 +52,6 @@ public class AdminApplicationController extends CommonDataController {
         ERROR_PAGE_VIEW_NAME = "admin-application/error";
     }
 
-    protected static final String PLEASE_ENTER_AMOUNT_MSG = "Please, enter amount";
-
     @Autowired
     public void setEmployeeService(EmployeeService employeeService) {
         this.employeeService = employeeService;

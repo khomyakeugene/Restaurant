@@ -3,11 +3,11 @@ package com.company.restaurant.service.impl;
 import com.company.restaurant.dao.TableDao;
 import com.company.restaurant.model.Table;
 import com.company.restaurant.service.TableService;
-import com.company.restaurant.service.impl.common.Service;
+import com.company.restaurant.service.impl.common.ObjectService;
 
 import java.util.List;
 
-public class TableServiceImpl extends Service implements TableService {
+public class TableServiceImpl extends ObjectService<Table> implements TableService {
     private TableDao tableDao;
 
     public void setTableDao(TableDao tableDao) {

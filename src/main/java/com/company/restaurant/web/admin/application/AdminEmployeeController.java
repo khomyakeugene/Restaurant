@@ -1,19 +1,20 @@
 package com.company.restaurant.web.admin.application;
 
 import com.company.restaurant.model.Employee;
-import com.company.restaurant.web.admin.application.common.AdminCRUDController;
+import com.company.restaurant.web.admin.application.common.AdminCRUDPhotoHolderController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Created by Yevhen on 04.09.2016.
  */
 @Controller
-public class AdminEmployeeController extends AdminCRUDController<Employee> {
+public class AdminEmployeeController extends AdminCRUDPhotoHolderController<Employee> {
     private static final String ADMIN_EMPLOYEE_LIST_PAGE_VIEW_NAME = "admin-application/employee/admin-employee-list-page";
     private static final String ADMIN_SAVE_OR_DELETE_EMPLOYEE_PAGE_VIEW_NAME = "admin-application/employee/admin-save-or-delete-employee-page";
     private static final String ADMIN_EMPLOYEE_LIST_REQUEST_MAPPING_VALUE = "/admin-employee-list";
@@ -30,7 +31,6 @@ public class AdminEmployeeController extends AdminCRUDController<Employee> {
     private static final String EMPLOYEE_JOB_POSITION_ID_PAR_NAME = "jobPositionId";
     private static final String EMPLOYEE_PHONE_NUMBER_PAR_NAME = "employeePhoneNumber";
     private static final String EMPLOYEE_SALARY_PAR_NAME = "employeeSalary";
-    //    private static final String EMPLOYEE_PHOTO_VAR_NAME = "employeePhoto";
 
     private static final String DEFAULT_JOB_POSITION_NAME_VALUE = "Waiter";
 
@@ -51,6 +51,8 @@ public class AdminEmployeeController extends AdminCRUDController<Employee> {
         } else {
             employee = newEmployee();
         }
+        // Important to possibly called <ErrorHandler> that next redirect to "current course JSP-page" to show
+        // error message and to have the possibility to correct editing parameters of "current object"
         setCurrentObject(employee);
     }
 
@@ -65,21 +67,8 @@ public class AdminEmployeeController extends AdminCRUDController<Employee> {
                                   int jobPositionId,
                                   String employeePhoneNumber,
                                   Float employeeSalary
-//                              , byte[] employeePhoto
     ) {
-        Employee employee = null;
-        // Temporarily: get "old" image from database - because I do not know how to manipulate with image
-        if (employeeId > 0) {
-            employee = employeeService.findEmployeeById(employeeId);
-
-        }
-        if (employee == null) {
-            employee = new Employee();
-        }
-
-        // Important to possibly called <ErrorHandler> that next redirect to "current course JSP-page" to show
-        // error message and to have the possibility to correct editing parameters of "current object"
-        setCurrentObject(employee);
+        Employee employee = getCurrentObject();
 
         employee.setEmployeeId(employeeId);
         employee.setFirstName(employeeFirstName);
@@ -87,7 +76,6 @@ public class AdminEmployeeController extends AdminCRUDController<Employee> {
         employee.setJobPosition(employeeService.findJobPositionById(jobPositionId));
         employee.setPhoneNumber(employeePhoneNumber);
         employee.setSalary(employeeSalary);
-//        employee.setPhoto(employeePhoto);
 
         return employeeService.updEmployee(employee);
     }
@@ -109,7 +97,6 @@ public class AdminEmployeeController extends AdminCRUDController<Employee> {
     @RequestMapping(value = ADMIN_EMPLOYEE_REQUEST_MAPPING_VALUE, method = RequestMethod.GET)
     public ModelAndView employee(@PathVariable int employeeId) {
         clearErrorMessage();
-
         prepareEmployeeEnvironment(employeeId);
 
         modelAndView.setViewName(ADMIN_SAVE_OR_DELETE_EMPLOYEE_PAGE_VIEW_NAME);
@@ -124,7 +111,6 @@ public class AdminEmployeeController extends AdminCRUDController<Employee> {
                                              @RequestParam(EMPLOYEE_JOB_POSITION_ID_PAR_NAME) int jobPositionId,
                                              @RequestParam(EMPLOYEE_PHONE_NUMBER_PAR_NAME) String employeePhoneNumber,
                                              @RequestParam(EMPLOYEE_SALARY_PAR_NAME) Float employeeSalary,
-//                                     @RequestParam(EMPLOYEE_PHOTO_VAR_NAME) byte[] employeePhoto,
                                              @RequestParam(SUBMIT_BUTTON_PAR_NAME) String submitButtonValue
     ) {
         if (isSubmitSave(submitButtonValue)) {
@@ -141,7 +127,6 @@ public class AdminEmployeeController extends AdminCRUDController<Employee> {
     @RequestMapping(value = ADMIN_PREPARE_NEW_EMPLOYEE_REQUEST_MAPPING_VALUE, method = RequestMethod.POST)
     public ModelAndView prepareNewEmployee() {
         clearErrorMessage();
-
         prepareEmployeeEnvironment();
 
         modelAndView.setViewName(ADMIN_SAVE_OR_DELETE_EMPLOYEE_PAGE_VIEW_NAME);
@@ -150,9 +135,15 @@ public class AdminEmployeeController extends AdminCRUDController<Employee> {
     }
 
     @RequestMapping(value = ADMIN_UPLOAD_EMPLOYEE_PHOTO_REQUEST_MAPPING_VALUE, method = RequestMethod.POST)
-    public ModelAndView uploadEmployeePhoto() {
-        System.out.println("uploadEmployeePhoto");
-
-        return modelAndView;
+    protected ModelAndView photoFileUpload(@RequestParam(FILE_PAR_NAME) MultipartFile file
+            /*,
+                                           @RequestParam(EMPLOYEE_FIRST_NAME_PAR_NAME) String employeeFirstName,
+                                           @RequestParam(EMPLOYEE_SECOND_NAME_PAR_NAME) String employeeSecondName,
+                                           @RequestParam(EMPLOYEE_JOB_POSITION_ID_PAR_NAME) int jobPositionId,
+                                           @RequestParam(EMPLOYEE_PHONE_NUMBER_PAR_NAME) String employeePhoneNumber,
+                                           @RequestParam(EMPLOYEE_SALARY_PAR_NAME) Float employeeSalary
+                                           */
+                                           ) {
+        return super.photoFileUpload(file);
     }
 }

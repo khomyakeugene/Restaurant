@@ -4,7 +4,7 @@ import com.company.restaurant.dao.OrderDao;
 import com.company.restaurant.model.Course;
 import com.company.restaurant.model.Order;
 import com.company.restaurant.service.OrderService;
-import com.company.restaurant.service.impl.common.Service;
+import com.company.restaurant.service.impl.common.ObjectService;
 import com.company.util.common.DatetimeFormatter;
 import com.company.util.exception.DataIntegrityException;
 
@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 /**
  * Created by Yevhen on 22.05.2016.
  */
-public class OrderServiceImpl extends Service implements OrderService {
+public class OrderServiceImpl extends ObjectService<Order> implements OrderService {
     private static final String IMPOSSIBLE_TO_DELETE_ORDER_PATTERN =
             "It is impossible to delete order in <%s> state (<order_id> = %d)!";
     private static final String IMPOSSIBLE_TO_ADD_COURSE_TO_ORDER_PATTERN =

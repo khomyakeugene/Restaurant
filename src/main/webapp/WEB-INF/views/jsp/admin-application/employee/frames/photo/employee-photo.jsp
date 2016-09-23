@@ -14,5 +14,5 @@
          name="employeePhoto"/>
 </div>
 <div>
-    <!--<%@ include file="../../frames/photo/FileUploadForm.jsp" %>-->
+    <%@ include file="employee-upload-form.jsp" %>
 </div>

@@ -18,7 +18,7 @@
 
         <td>
             <div>
-                <%@ include file="../../frames/photo/employee-photo.jsp" %>
+                <%@ include file="photo/employee-photo.jsp" %>
             </div>
         </td>
     </tr>

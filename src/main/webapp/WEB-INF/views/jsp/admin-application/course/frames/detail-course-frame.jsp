@@ -21,7 +21,7 @@
         </td>
         <td>
             <div>
-                <%@ include file="../../frames/photo/course-photo.jsp" %>
+                <%@ include file="photo/course-photo.jsp" %>
             </div>
         </td>
     </tr>
