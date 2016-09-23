@@ -28,8 +28,7 @@ public class AdminCourseController extends AdminCRUDPhotoHolderController<Course
     private static final String ADMIN_SAVE_OR_DELETE_COURSE_REQUEST_MAPPING_VALUE = "/save-or-delete-course";
     private static final String ADMIN_CREATE_COURSE_PAGE_VIEW_NAME = "admin-application/course/admin-create-course-page";
     private static final String ADMIN_PREPARE_NEW_COURSE_REQUEST_MAPPING_VALUE = "/prepare-new-course";
-    private static final String ADMIN_CREATE_EMPLOYEE_REQUEST_MAPPING_VALUE = "/create-course";
-    private static final String ADMIN_UPLOAD_COURSE_PHOTO_REQUEST_MAPPING_VALUE = "/upload-course-photo";
+    private static final String ADMIN_CREATE_COURSE_REQUEST_MAPPING_VALUE = "/create-course";
 
     private static final String NEW_INGREDIENTS_VAR_NAME = "newIngredients";
 
@@ -90,29 +89,33 @@ public class AdminCourseController extends AdminCRUDPhotoHolderController<Course
         prepareCourseEnvironment(0);
     }
 
-    private Course saveCourse(int courseId,
-                              String courseName,
-                              int courseCategoryId,
-                              Float courseWeight,
-                              Float courseCost) {
+    private void setCurrentObjectAttributes(String courseName,
+                                            int courseCategoryId,
+                                            Float courseWeight,
+                                            Float courseCost) {
         Course course = getCurrentObject();
 
-        course.setCourseId(courseId);
         course.setName(courseName);
         course.setCourseCategory(courseService.findCourseCategoryById(courseCategoryId));
         course.setWeight(courseWeight);
         course.setCost(courseCost);
+    }
 
-        return courseService.updCourse(course);
+    private Course saveCourse(String courseName,
+                              int courseCategoryId,
+                              Float courseWeight,
+                              Float courseCost) {
+        setCurrentObjectAttributes(courseName, courseCategoryId, courseWeight, courseCost);
+
+        return courseService.updCourse(getCurrentObject());
     }
 
     private Course createCourse(String courseName,
                                 int courseCategoryId,
                                 Float courseWeight,
                                 Float courseCost) {
-        return saveCourse(0, courseName, courseCategoryId, courseWeight, courseCost);
+        return saveCourse(courseName, courseCategoryId, courseWeight, courseCost);
     }
-
 
     private void deleteCourse(int courseId) {
         courseService.delCourse(courseId);
@@ -137,6 +140,17 @@ public class AdminCourseController extends AdminCRUDPhotoHolderController<Course
                 courseIngredientAmount);
     }
 
+    private ModelAndView uploadCoursePhoto(@RequestParam(FILE_PAR_NAME) MultipartFile file,
+                                           @RequestParam(COURSE_NAME_PAR_NAME) String courseName,
+                                           @RequestParam(COURSE_CATEGORY_ID_PAR_NAME) int courseCategoryId,
+                                           @RequestParam(COURSE_WEIGHT_PAR_NAME) Float courseWeight,
+                                           @RequestParam(COURSE_COST_PAR_NAME) Float courseCost) {
+        // Store actual parameters JSP-view from in "current object" to show then actual values in JSP-view
+        setCurrentObjectAttributes(courseName, courseCategoryId, courseWeight, courseCost);
+
+        return super.photoFileUpload(file);
+    }
+
     @RequestMapping(value = ADMIN_COURSE_LIST_REQUEST_MAPPING_VALUE, method = RequestMethod.GET)
     public ModelAndView courseListPage() {
         clearErrorMessage();
@@ -157,7 +171,8 @@ public class AdminCourseController extends AdminCRUDPhotoHolderController<Course
         return modelAndView;
     }
 
-    @RequestMapping(value = ADMIN_SAVE_OR_DELETE_COURSE_REQUEST_MAPPING_VALUE, method = RequestMethod.POST)
+    @RequestMapping(value = ADMIN_SAVE_OR_DELETE_COURSE_REQUEST_MAPPING_VALUE,
+            params = SUBMIT_BUTTON_PAR_NAME, method = RequestMethod.POST)
     public ModelAndView saveOrDeleteCourse(@RequestParam(COURSE_ID_PAR_NAME) int courseId,
                                            @RequestParam(COURSE_NAME_PAR_NAME) String courseName,
                                            @RequestParam(COURSE_CATEGORY_ID_PAR_NAME) int courseCategoryId,
@@ -169,14 +184,14 @@ public class AdminCourseController extends AdminCRUDPhotoHolderController<Course
                                            @RequestParam(SUBMIT_BUTTON_PAR_NAME) String submitButtonValue
     ) {
         if (isSubmitSave(submitButtonValue)) {
-            saveCourse(courseId, courseName, courseCategoryId, courseWeight, courseCost);
+            saveCourse(courseName, courseCategoryId, courseWeight, courseCost);
         } else if (isSubmitDelete(submitButtonValue)) {
             deleteCourse(courseId);
         } else if (isSubmitAdd(submitButtonValue)) {
             addCourseIngredient(courseIngredientId, portionId, courseIngredientAmount);
         }
 
-        return (isSubmitSave(submitButtonValue) || isSubmitDelete(submitButtonValue)) ?
+        return (((isSubmitSave(submitButtonValue) || isSubmitDelete(submitButtonValue))) && (courseId > 0)) ?
                 new ModelAndView(REDIRECT_PREFIX + ADMIN_COURSE_LIST_REQUEST_MAPPING_VALUE) :
                 toCurrentObjectPage();
     }
@@ -184,7 +199,6 @@ public class AdminCourseController extends AdminCRUDPhotoHolderController<Course
     @RequestMapping(value = ADMIN_PREPARE_NEW_COURSE_REQUEST_MAPPING_VALUE, method = RequestMethod.POST)
     public ModelAndView prepareNewCourse() {
         clearErrorMessage();
-
         prepareCourseEnvironment();
 
         modelAndView.setViewName(ADMIN_CREATE_COURSE_PAGE_VIEW_NAME);
@@ -192,11 +206,13 @@ public class AdminCourseController extends AdminCRUDPhotoHolderController<Course
         return modelAndView;
     }
 
-    @RequestMapping(value = ADMIN_CREATE_EMPLOYEE_REQUEST_MAPPING_VALUE, method = RequestMethod.POST)
-    public ModelAndView createEmployee(@RequestParam(COURSE_NAME_PAR_NAME) String courseName,
-                                       @RequestParam(COURSE_CATEGORY_ID_PAR_NAME) int courseCategoryId,
-                                       @RequestParam(COURSE_WEIGHT_PAR_NAME) Float courseWeight,
-                                       @RequestParam(COURSE_COST_PAR_NAME) Float courseCost) {
+    @RequestMapping(value = ADMIN_CREATE_COURSE_REQUEST_MAPPING_VALUE,
+            params = SUBMIT_BUTTON_PAR_NAME, method = RequestMethod.POST)
+    public ModelAndView createNewCourse(@RequestParam(COURSE_NAME_PAR_NAME) String courseName,
+                                        @RequestParam(COURSE_CATEGORY_ID_PAR_NAME) int courseCategoryId,
+                                        @RequestParam(COURSE_WEIGHT_PAR_NAME) Float courseWeight,
+                                        @RequestParam(COURSE_COST_PAR_NAME) Float courseCost,
+                                        @RequestParam(SUBMIT_BUTTON_PAR_NAME) String submitButtonValue) {
         createCourse(courseName, courseCategoryId, courseWeight, courseCost);
 
         return toCurrentObjectPage();
@@ -209,8 +225,22 @@ public class AdminCourseController extends AdminCRUDPhotoHolderController<Course
         return toCurrentObjectPage();
     }
 
-    @RequestMapping(value = ADMIN_UPLOAD_COURSE_PHOTO_REQUEST_MAPPING_VALUE, method = RequestMethod.POST)
-    protected ModelAndView photoFileUpload(@RequestParam(FILE_PAR_NAME) MultipartFile file) {
-        return super.photoFileUpload(file);
+    @RequestMapping(value = ADMIN_CREATE_COURSE_REQUEST_MAPPING_VALUE, method = RequestMethod.POST)
+    protected ModelAndView uploadNewCoursePhoto(@RequestParam(FILE_PAR_NAME) MultipartFile file,
+                                                @RequestParam(COURSE_NAME_PAR_NAME) String courseName,
+                                                @RequestParam(COURSE_CATEGORY_ID_PAR_NAME) int courseCategoryId,
+                                                @RequestParam(COURSE_WEIGHT_PAR_NAME) Float courseWeight,
+                                                @RequestParam(COURSE_COST_PAR_NAME) Float courseCost) {
+        return uploadCoursePhoto(file, courseName, courseCategoryId, courseWeight, courseCost);
+    }
+
+
+    @RequestMapping(value = ADMIN_SAVE_OR_DELETE_COURSE_REQUEST_MAPPING_VALUE, method = RequestMethod.POST)
+    protected ModelAndView uploadExistingCoursePhoto(@RequestParam(FILE_PAR_NAME) MultipartFile file,
+                                                     @RequestParam(COURSE_NAME_PAR_NAME) String courseName,
+                                                     @RequestParam(COURSE_CATEGORY_ID_PAR_NAME) int courseCategoryId,
+                                                     @RequestParam(COURSE_WEIGHT_PAR_NAME) Float courseWeight,
+                                                     @RequestParam(COURSE_COST_PAR_NAME) Float courseCost) {
+        return uploadCoursePhoto(file, courseName, courseCategoryId, courseWeight, courseCost);
     }
 }

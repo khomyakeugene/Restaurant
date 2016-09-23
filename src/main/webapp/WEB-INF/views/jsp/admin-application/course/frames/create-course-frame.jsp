@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<form action="${pageContext.request.contextPath}/create-course" method="post">
+<form action="${pageContext.request.contextPath}/create-course" method="post" enctype="multipart/form-data">
     <%@ include file="../../frames/buttons/create-cancel-buttons-frame.jsp" %>
 
     <table class="ordinary-container" style="width: 100%">

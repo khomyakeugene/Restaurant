@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<form action="${pageContext.request.contextPath}/save-or-delete-course" method="post">
+<form action="${pageContext.request.contextPath}/save-or-delete-course" method="post" enctype="multipart/form-data">
     <%@ include file="../../frames/buttons/save-and-delete-buttons-frame.jsp" %>
     <%@ include file="detail-course-frame.jsp" %>
 </form>

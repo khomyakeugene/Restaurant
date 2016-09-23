@@ -13,3 +13,6 @@
          src="data:image/jpeg;base64,${course.base64EncodePhoto}" alt="No course photo"
          name="coursePhoto"/>
 </div>
+<div>
+    <input type="file" id="file" name="file" class="button green" onchange="this.form.submit();"/>
+</div>
