@@ -7,18 +7,15 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<form action="${pageContext.request.contextPath}/save-or-delete-employee" method="post"
-      enctype="multipart/form-data">
-    <table style="width: 100%">
-        <tr>
-            <td>
-                <%@ include file="../../frames/buttons/save-and-delete-buttons-frame.jsp" %>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <%@ include file="employee-attributes-frame.jsp" %>
-            </td>
-        </tr>
-    </table>
-</form>
+<table style="width: 100%">
+    <tr>
+        <td>
+            <%@ include file="../../frames/buttons/save-and-delete-buttons-frame.jsp" %>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <%@ include file="employee-attributes-frame.jsp" %>
+        </td>
+    </tr>
+</table>

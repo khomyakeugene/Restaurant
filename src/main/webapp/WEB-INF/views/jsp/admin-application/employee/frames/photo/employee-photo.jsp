@@ -14,5 +14,5 @@
          name="employeePhoto"/>
 </div>
 <div>
-    <%@ include file="employee-upload-form.jsp" %>
+    <input type="file" id="file" name="file" class="button green" onchange="this.form.submit();"/>
 </div>

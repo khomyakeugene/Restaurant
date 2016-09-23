@@ -61,13 +61,12 @@ public class AdminEmployeeController extends AdminCRUDPhotoHolderController<Empl
 
     }
 
-    private Employee saveEmployee(int employeeId,
-                                  String employeeFirstName,
-                                  String employeeSecondName,
-                                  int jobPositionId,
-                                  String employeePhoneNumber,
-                                  Float employeeSalary
-    ) {
+    private void setCurrentObjectAttributes(int employeeId,
+                                            String employeeFirstName,
+                                            String employeeSecondName,
+                                            int jobPositionId,
+                                            String employeePhoneNumber,
+                                            Float employeeSalary) {
         Employee employee = getCurrentObject();
 
         employee.setEmployeeId(employeeId);
@@ -76,8 +75,18 @@ public class AdminEmployeeController extends AdminCRUDPhotoHolderController<Empl
         employee.setJobPosition(employeeService.findJobPositionById(jobPositionId));
         employee.setPhoneNumber(employeePhoneNumber);
         employee.setSalary(employeeSalary);
+    }
 
-        return employeeService.updEmployee(employee);
+    private Employee saveEmployee(int employeeId,
+                                  String employeeFirstName,
+                                  String employeeSecondName,
+                                  int jobPositionId,
+                                  String employeePhoneNumber,
+                                  Float employeeSalary) {
+        setCurrentObjectAttributes(employeeId, employeeFirstName, employeeSecondName, jobPositionId, employeePhoneNumber,
+                employeeSalary);
+
+        return employeeService.updEmployee(getCurrentObject());
     }
 
     private void deleteEmployee(int employeeId) {
@@ -104,7 +113,8 @@ public class AdminEmployeeController extends AdminCRUDPhotoHolderController<Empl
         return modelAndView;
     }
 
-    @RequestMapping(value = ADMIN_SAVE_OR_DELETE_EMPLOYEE_REQUEST_MAPPING_VALUE, method = RequestMethod.POST)
+    @RequestMapping(value = ADMIN_SAVE_OR_DELETE_EMPLOYEE_REQUEST_MAPPING_VALUE,
+            params = SUBMIT_BUTTON_PAR_NAME, method = RequestMethod.POST)
     public ModelAndView saveOrDeleteEmployee(@RequestParam(EMPLOYEE_ID_PAR_NAME) int employeeId,
                                              @RequestParam(EMPLOYEE_FIRST_NAME_PAR_NAME) String employeeFirstName,
                                              @RequestParam(EMPLOYEE_SECOND_NAME_PAR_NAME) String employeeSecondName,
@@ -134,16 +144,19 @@ public class AdminEmployeeController extends AdminCRUDPhotoHolderController<Empl
         return modelAndView;
     }
 
-    @RequestMapping(value = ADMIN_UPLOAD_EMPLOYEE_PHOTO_REQUEST_MAPPING_VALUE, method = RequestMethod.POST)
-    protected ModelAndView photoFileUpload(@RequestParam(FILE_PAR_NAME) MultipartFile file
-            /*,
-                                           @RequestParam(EMPLOYEE_FIRST_NAME_PAR_NAME) String employeeFirstName,
-                                           @RequestParam(EMPLOYEE_SECOND_NAME_PAR_NAME) String employeeSecondName,
-                                           @RequestParam(EMPLOYEE_JOB_POSITION_ID_PAR_NAME) int jobPositionId,
-                                           @RequestParam(EMPLOYEE_PHONE_NUMBER_PAR_NAME) String employeePhoneNumber,
-                                           @RequestParam(EMPLOYEE_SALARY_PAR_NAME) Float employeeSalary
-                                           */
-                                           ) {
+    @RequestMapping(value = ADMIN_SAVE_OR_DELETE_EMPLOYEE_REQUEST_MAPPING_VALUE, method = RequestMethod.POST)
+    public ModelAndView uploadEmployeePhoto(@RequestParam(FILE_PAR_NAME) MultipartFile file,
+                                            @RequestParam(EMPLOYEE_ID_PAR_NAME) int employeeId,
+                                            @RequestParam(EMPLOYEE_FIRST_NAME_PAR_NAME) String employeeFirstName,
+                                            @RequestParam(EMPLOYEE_SECOND_NAME_PAR_NAME) String employeeSecondName,
+                                            @RequestParam(EMPLOYEE_JOB_POSITION_ID_PAR_NAME) int jobPositionId,
+                                            @RequestParam(EMPLOYEE_PHONE_NUMBER_PAR_NAME) String employeePhoneNumber,
+                                            @RequestParam(EMPLOYEE_SALARY_PAR_NAME) Float employeeSalary) {
+        // Store actual parameters JSP-view from in "current object" to show then actual values in JSP-view
+        setCurrentObjectAttributes(employeeId, employeeFirstName, employeeSecondName, jobPositionId,
+                employeePhoneNumber, employeeSalary);
+
+        // Upload photo and return to current JSP
         return super.photoFileUpload(file);
     }
 }

@@ -8,19 +8,24 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<table class="ordinary-container" style="width: 100%">
-    <tr style="vertical-align: top">
-        <td style="width: 70%">
-            <div>
-                <%@ include file="employee-attributes-and-buttons-frame.jsp" %>
-            </div>
-        </td>
+<form action="${pageContext.request.contextPath}/save-or-delete-employee" method="post"
+      enctype="multipart/form-data">
+    <table class="ordinary-container" style="width: 100%">
+        <tr style="vertical-align: top">
+            <td style="width: 70%">
+                <div>
+                    <%@ include file="employee-attributes-and-buttons-frame.jsp" %>
+                </div>
+            </td>
 
-        <td>
-            <div>
-                <%@ include file="photo/employee-photo.jsp" %>
-            </div>
-        </td>
-    </tr>
-</table>
+            <td>
+                <div>
+                    <%@ include file="photo/employee-photo.jsp" %>
+                </div>
+            </td>
+        </tr>
+    </table>
+</form>
+
+
 
