@@ -68,7 +68,7 @@ public class Constraints {
         return constraintMessageMap.get(constraintName.toLowerCase());
     }
 
-    public static String transferExceptionToMessage(String exceptionMessage) {
+    private static String transferExceptionToMessage(String exceptionMessage) {
         String result = null;
 
         // Search known constraint name in <exceptionMessage>

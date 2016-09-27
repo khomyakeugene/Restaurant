@@ -18,7 +18,7 @@ public class Service {
         throw new DataIntegrityException(message);
     }
 
-    protected void throwPropertyCannotBeEmptyMsg(String propertyName) {
+    private void throwPropertyCannotBeEmptyMsg(String propertyName) {
         throwDataIntegrityException(Util.capitalize(String.format(PROPERTY_CANNOT_BE_EMPTY_MSG,
                 propertyName)));
     }
@@ -29,7 +29,7 @@ public class Service {
         }
     }
 
-    protected void validateNotNullProperty(String propertyName, Float property) {
+    private void validateNotNullProperty(String propertyName, Float property) {
         if (property == null) {
             throwPropertyCannotBeEmptyMsg(propertyName);
         }
