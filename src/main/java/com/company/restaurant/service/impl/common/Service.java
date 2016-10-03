@@ -29,16 +29,16 @@ public class Service {
         }
     }
 
-    private void validateNotNullProperty(String propertyName, Float property) {
-        if (property == null) {
-            throwPropertyCannotBeEmptyMsg(propertyName);
-        }
-    }
-
     protected void validateFloatPropertyPositiveness(String propertyName, Float property) {
         if (property != null && property <= 0.0) {
             throwDataIntegrityException(Util.capitalize(String.format(PROPERTY_SHOULD_HAVE_POSITIVE_VALUE_MSG,
                     propertyName)));
+        }
+    }
+
+    private void validateNotNullProperty(String propertyName, Float property) {
+        if (property == null) {
+            throwPropertyCannotBeEmptyMsg(propertyName);
         }
     }
 
