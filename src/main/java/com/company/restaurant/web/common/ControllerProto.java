@@ -21,7 +21,7 @@ public class ControllerProto {
 
     @PostConstruct
     protected void initModelAndViewData() {
-        // To be override in child classes ....
+        // To be overridden in child classes ....
     }
 
     protected void clearErrorMessage()  {
