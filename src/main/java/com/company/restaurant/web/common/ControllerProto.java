@@ -32,7 +32,7 @@ public class ControllerProto {
         return Base64.getEncoder().encodeToString(data);
     }
 
-    protected String getErrorViewName() {
+    private String getErrorViewName() {
         String currentViewName = modelAndView.getViewName();
 
         return (currentViewName == null) ? ERROR_PAGE_VIEW_NAME : currentViewName;
