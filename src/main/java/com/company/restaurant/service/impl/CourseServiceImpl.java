@@ -7,7 +7,6 @@ import com.company.restaurant.model.*;
 import com.company.restaurant.service.CourseService;
 import com.company.restaurant.service.impl.common.ObjectService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CourseServiceImpl extends ObjectService<Course> implements CourseService {
@@ -57,16 +56,6 @@ public class CourseServiceImpl extends ObjectService<Course> implements CourseSe
     }
 
     @Override
-    public CourseCategory addCourseCategory(String name) {
-        return courseCategoryDao.addCourseCategory(name);
-    }
-
-    @Override
-    public void delCourseCategory(String name) {
-        courseCategoryDao.delCourseCategory(name);
-    }
-
-    @Override
     public CourseCategory findCourseCategoryByName(String name) {
         return courseCategoryDao.findCourseCategoryByName(name);
     }
@@ -82,21 +71,6 @@ public class CourseServiceImpl extends ObjectService<Course> implements CourseSe
     }
 
     @Override
-    public List<String> findAllCourseCategoryNames() {
-        List<String> result = new ArrayList<>();
-        findAllCourseCategories().forEach(courseCategory -> result.add(courseCategory.getName()));
-
-        return result;
-    }
-
-    @Override
-    public Course addCourse(Course course) {
-        validateCourse(course);
-
-        return courseDao.addCourse(course);
-    }
-
-    @Override
     public Course updCourse(Course course) {
         validateCourse(course);
 
@@ -104,23 +78,8 @@ public class CourseServiceImpl extends ObjectService<Course> implements CourseSe
     }
 
     @Override
-    public void delCourse(Course course) {
-        courseDao.delCourse(course);
-    }
-
-    @Override
     public void delCourse(int courseId) {
         courseDao.delCourse(courseId);
-    }
-
-    @Override
-    public void delCourse(String name) {
-        courseDao.delCourse(name);
-    }
-
-    @Override
-    public Course findCourseByName(String name) {
-        return courseDao.findCourseByName(name);
     }
 
     @Override
@@ -143,11 +102,6 @@ public class CourseServiceImpl extends ObjectService<Course> implements CourseSe
         validateCourseIngredient(course, ingredient, portion, amount);
 
         return courseIngredientDao.addCourseIngredient(course, ingredient, portion, amount);
-    }
-
-    @Override
-    public void delCourseIngredient(Course course, Ingredient ingredient) {
-        courseIngredientDao.delCourseIngredient(course, ingredient);
     }
 
     @Override
