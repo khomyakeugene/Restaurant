@@ -21,16 +21,12 @@ public class GenericHolder<T> {
         return entityClass;
     }
 
-    public void setEntityClass(Class<T> entityClass) {
+    protected void setEntityClass(Class<T> entityClass) {
         this.entityClass = entityClass;
     }
 
     protected String getEntityName() {
         return getEntityClass().getName();
-    }
-
-    protected String getEntitySimpleName() {
-        return getEntityClass().getSimpleName();
     }
 
     protected T newObject() {
