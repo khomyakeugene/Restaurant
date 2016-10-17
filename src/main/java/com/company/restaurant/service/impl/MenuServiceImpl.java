@@ -7,9 +7,7 @@ import com.company.restaurant.service.MenuService;
 import com.company.restaurant.service.impl.common.ObjectService;
 import com.company.util.exception.DataIntegrityException;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by Yevhen on 19.05.2016.
@@ -38,23 +36,8 @@ public class MenuServiceImpl extends ObjectService<Menu> implements MenuService 
     }
 
     @Override
-    public void delMenu(String name) {
-        menuDao.delMenu(name);
-    }
-
-    @Override
     public void delMenu(int menuId) {
         menuDao.delMenu(menuId);
-    }
-
-    @Override
-    public void delMenu(Menu menu) {
-        menuDao.delMenu(menu);
-    }
-
-    @Override
-    public Menu findMenuByName(String name) {
-        return menuDao.findMenuByName(name);
     }
 
     @Override
@@ -65,19 +48,6 @@ public class MenuServiceImpl extends ObjectService<Menu> implements MenuService 
     @Override
     public List<Menu> findAllMenus() {
         return menuDao.findAllMenus();
-    }
-
-    @Override
-    public List<Menu> findMenusByNameFragment(String nameFragment) {
-        return menuDao.findMenusByNameFragment(nameFragment);
-    }
-
-    @Override
-    public List<String> findAllMenuNames() {
-        List<String> result = new ArrayList<>();
-        findAllMenus().forEach(m -> result.add(m.getName()));
-
-        return result;
     }
 
     @Override
@@ -97,13 +67,4 @@ public class MenuServiceImpl extends ObjectService<Menu> implements MenuService 
         menuDao.delCourseFromMenu(menu, course);
     }
 
-    @Override
-    public Set<Course> findMenuCourses(Menu menu) {
-        return menuDao.findMenuCourses(menu);
-    }
-
-    @Override
-    public Course findMenuCourseByCourseId(Menu menu, int courseId) {
-        return menuDao.findMenuCourseByCourseId(menu, courseId);
-    }
 }
