@@ -9,14 +9,6 @@ public class CookAndWaiter extends Employee {
     private CookProperty cookProperty = new CookProperty();
     private WaiterProperty waiterProperty = new WaiterProperty();
 
-    public CookProperty getCookProperty() {
-        return cookProperty;
-    }
-
-    public WaiterProperty getWaiterProperty() {
-        return waiterProperty;
-    }
-
     public Set<CookedCourse> getCookedCourses() {
         return cookProperty.getCookedCourses();
     }
