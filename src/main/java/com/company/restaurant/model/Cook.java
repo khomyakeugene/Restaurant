@@ -8,10 +8,6 @@ import java.util.Set;
 public class Cook extends Employee {
     private CookProperty cookProperty = new CookProperty();
 
-    public CookProperty getCookProperty() {
-        return cookProperty;
-    }
-
     public Set<CookedCourse> getCookedCourses() {
         return cookProperty.getCookedCourses();
     }
