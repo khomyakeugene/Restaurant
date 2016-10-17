@@ -24,7 +24,6 @@ import java.util.*;
 public abstract class HDaoEntity<T> extends GenericHolder<T> {
     private static final String NAME_ATTRIBUTE_NAME = "name";
 
-
     private SessionFactory sessionFactory;
     private boolean useCriteriaQuery;
 
