@@ -5,7 +5,6 @@ import com.company.util.common.ObjectService;
 import com.company.util.sql.SqlExpressions;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.TransientObjectException;
 import org.hibernate.metadata.ClassMetadata;
 import org.hibernate.persister.entity.AbstractEntityPersister;
 import org.hibernate.query.Query;
@@ -17,7 +16,6 @@ import javax.persistence.metamodel.EntityType;
 import javax.persistence.metamodel.SingularAttribute;
 import java.io.Serializable;
 import java.lang.reflect.Field;
-import java.lang.reflect.Type;
 import java.util.*;
 
 /**
@@ -64,47 +62,6 @@ public abstract class HDaoEntity<T> extends GenericHolder<T> {
 
     private T getFirstFromList(List<T> objects) {
         return (objects != null && objects.size() > 0) ? objects.get(0) : null;
-    }
-
-    protected boolean isPersistent(T object) {
-        Session session = getCurrentSession();
-        String entityName = object.getClass().getName();
-
-        try {
-            // Method <getIdentifier> could throw <TransientObjectException> if the instance is transient or
-            // associated with a different session
-            Serializable id = session.getIdentifier(object);
-            // Try to use session.get()
-            return (session.get(entityName, id) != null);
-        } catch (TransientObjectException e) {
-            // In the case of <TransientObjectException> try to directly use value of <identifier>-attribute
-            // (just for the "first level", without checking for superclasses of object.getClass())
-            try {
-                Field idField = object.getClass().getDeclaredField(getEntityIdAttributeName());
-                idField.setAccessible(true);
-                try {
-                    // It is important to give <id> of particular class for method session.get(), otherwise
-                    // <TypeMismatchException> with a message such "Provided id of the wrong type for
-                    // class com.company.restaurant.model.Employee. Expected: class java.lang.Integer,
-                    // got class java.lang.Long" should be generated
-                    Type idFieldType = idField.getType();
-                    // Check only for primitive types such "int" and "long"
-                    if (((Class) idFieldType).getName().equals(int.class.getName())) {
-                        return (session.get(entityName, idField.getInt(object)) != null);
-                    } else if (((Class) idFieldType).getName().equals(long.class.getName())) {
-                        return (session.get(entityName, idField.getLong(object)) != null);
-                    }
-                    // Intentionally do not check for other possible types
-                    return false;
-                } catch (IllegalAccessException | IllegalArgumentException e2) {
-                    // In this case just dare to suggest that <object> is not persistent
-                    return false;
-                }
-            } catch (NoSuchFieldException e1) {
-                // In this case just dare to suggest that <object> is not persistent
-                return false;
-            }
-        }
     }
 
     protected Session getCurrentSession() {
