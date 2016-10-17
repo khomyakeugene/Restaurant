@@ -40,12 +40,6 @@
         <property name="warehouseDao" ref="warehouseDao"/>
     </bean>
 
-    <bean class="com.company.restaurant.service.impl.KitchenServiceImpl" id="kitchenService">
-        <property name="disableCourseWithoutIngredients" value="false"/>
-        <property name="cookedCourseDao" ref="cookedCourseDao"/>
-        <property name="warehouseService" ref="warehouseService"/>
-    </bean>
-
     <bean class="com.company.restaurant.service.impl.CommonDataServiceImpl" id="commonDataService">
         <property name="commonDataDao" ref="commonDataDao"/>
     </bean>
