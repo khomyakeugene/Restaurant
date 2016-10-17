@@ -8,10 +8,6 @@ import java.util.Set;
 public class Waiter extends Employee {
     private WaiterProperty waiterProperty = new WaiterProperty();
 
-    public WaiterProperty getWaiterProperty() {
-        return waiterProperty;
-    }
-
     public Set<Order> getOrders() {
         return waiterProperty.getOrders();
     }
