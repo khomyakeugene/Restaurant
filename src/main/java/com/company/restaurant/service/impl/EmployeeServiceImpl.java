@@ -2,13 +2,12 @@ package com.company.restaurant.service.impl;
 
 import com.company.restaurant.dao.EmployeeDao;
 import com.company.restaurant.dao.JobPositionDao;
-import com.company.restaurant.model.*;
+import com.company.restaurant.model.Employee;
+import com.company.restaurant.model.JobPosition;
 import com.company.restaurant.service.EmployeeService;
 import com.company.restaurant.service.impl.common.ObjectService;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class EmployeeServiceImpl extends ObjectService<Employee> implements EmployeeService {
     private static final String OPERATION_IS_NOT_SUPPORTED_PATTERN =
@@ -48,16 +47,6 @@ public class EmployeeServiceImpl extends ObjectService<Employee> implements Empl
     }
 
     @Override
-    public JobPosition addJobPosition(String name) {
-        return jobPositionDao.addJobPosition(name);
-    }
-
-    @Override
-    public void delJobPosition(String name) {
-        jobPositionDao.delJobPosition(name);
-    }
-
-    @Override
     public JobPosition findJobPositionByName(String name) {
         return jobPositionDao.findJobPositionByName(name);
     }
@@ -70,26 +59,6 @@ public class EmployeeServiceImpl extends ObjectService<Employee> implements Empl
     @Override
     public List<JobPosition> findAllJobPositions() {
         return jobPositionDao.findAllJobPositions();
-    }
-
-    @Override
-    public List<String> findAllJobPositionNames() {
-        List<String> result = new ArrayList<>();
-        findAllJobPositions().forEach(jobPosition -> result.add(jobPosition.getName()));
-
-        return result;
-    }
-
-    @Override
-    public Employee addEmployee(Employee employee) {
-        validateEmployee(employee);
-
-        return employeeDao.addEmployee(employee);
-    }
-
-    @Override
-    public void delEmployee(Employee employee) {
-        employeeDao.delEmployee(employee);
     }
 
     @Override
@@ -110,64 +79,8 @@ public class EmployeeServiceImpl extends ObjectService<Employee> implements Empl
     }
 
     @Override
-    public List<String> findAllEmployeeNames() {
-        List<String> result = new ArrayList<>();
-        findAllEmployees().forEach(e -> result.add(String.format("%s %s", e.getFirstName(), e.getSecondName())));
-
-        return result;
-    }
-
-    @Override
-    public List<Employee> findEmployeeByFirstName(String firstName) {
-        return employeeDao.findEmployeeByFirstName(firstName);
-    }
-
-    @Override
-    public List<Employee> findEmployeeBySecondName(String secondName) {
-        return employeeDao.findEmployeeBySecondName(secondName);
-    }
-
-    @Override
-    public List<Employee> findEmployeeByFirstAndSecondName(String firstName, String secondName) {
-        return employeeDao.findEmployeeByFirstAndSecondName(firstName, secondName);
-    }
-
-    @Override
     public Employee findEmployeeById(int employeeId) {
         return employeeDao.findEmployeeById(employeeId);
     }
 
-    @Override
-    public Set<Order> getEmployeeOrders(Employee employee) {
-        Set<Order> result = null;
-
-        if (employee instanceof Waiter) {
-            result = ((Waiter) employee).getOrders();
-
-        } else if (employee instanceof CookAndWaiter) {
-            result = ((CookAndWaiter) employee).getOrders();
-
-        } else {
-            operationIsNotSupportedMessage("EmployeeServiceImpl.getEmployeeOrders", employee);
-        }
-
-        return result;
-    }
-
-    @Override
-    public Set<CookedCourse> getEmployeeCookedCourses(Employee employee) {
-        Set<CookedCourse> result = null;
-
-        if (employee instanceof Cook) {
-            result = ((Cook) employee).getCookedCourses();
-
-        } else if (employee instanceof CookAndWaiter) {
-            result = ((CookAndWaiter) employee).getCookedCourses();
-
-        } else {
-            operationIsNotSupportedMessage("EmployeeServiceImpl.getEmployeeCookedCourses", employee);
-        }
-
-        return result;
-    }
 }
