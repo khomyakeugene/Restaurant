@@ -9,7 +9,7 @@ import restaurant.service.common.RestaurantService;
 /**
  * Created by Yevhen on 17.08.2016.
  */
-public class RestaurantPrepareWarehouse extends RestaurantService {
+public class RestaurantPrepareWarehouseData extends RestaurantService {
     private static float AMOUNT_MULTIPLIER = 100.0f;
     private static int KG_PORTION_ID = 1001;
 
@@ -41,6 +41,8 @@ public class RestaurantPrepareWarehouse extends RestaurantService {
     @Test
     @Transactional
     public void initWarehouseContent() throws Exception {
+        System.out.println(getClass().getName() + ".initWarehouseContent ...");
+
         clearWarehouse();
         fillWarehouse();
     }

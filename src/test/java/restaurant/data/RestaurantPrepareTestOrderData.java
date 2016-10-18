@@ -49,6 +49,8 @@ public class RestaurantPrepareTestOrderData extends RestaurantService {
 
     @Test
     public void prepareOrders() {
+        System.out.println(getClass().getName() + ".prepareOrders ...");
+
         orderService.delAllOrders();
 
         for (int i = 0; i < ORDER_COUNT; i++) {

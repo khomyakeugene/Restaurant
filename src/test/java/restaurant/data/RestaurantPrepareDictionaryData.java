@@ -41,12 +41,16 @@ public class RestaurantPrepareDictionaryData extends RestaurantDao {
 
     @Test
     public void saveCommonDataImages() throws Exception {
+        System.out.println(getClass().getName() + ".saveCommonDataImages ...");
+
         // Emblem image
         AssertSaveCommonDataImage(CommonDataServiceImpl.EMBLEM_NAME, EMBLEM_FILENAME);
         // Restaurant schema image
         AssertSaveCommonDataImage(CommonDataServiceImpl.RESTAURANT_SCHEMA_NAME, RESTAURANT_SCHEMA_FILENAME);
         // Transport map
         AssertSaveCommonDataImage(CommonDataServiceImpl.TRANSPORT_MAP_NAME, TRANSPORT_MAP_FILENAME);
+
+        // throw new Exception("TEST: saveCommonDataImages()");
     }
 
     private boolean saveEmployeeImage(int employeeId, String imageFilename) {
@@ -64,6 +68,8 @@ public class RestaurantPrepareDictionaryData extends RestaurantDao {
 
     @Test
     public void saveEmployeeImages() throws Exception {
+        System.out.println(getClass().getName() + ".saveEmployeeImages ...");
+
         // Manager
         AssertSaveEmployeeImage(MANAGER_EMPLOYEE_ID, MANAGER_PHOTO_FILENAME);
         // Cook
@@ -87,6 +93,8 @@ public class RestaurantPrepareDictionaryData extends RestaurantDao {
 
     @Test
     public void saveCourseImages() throws Exception {
+        System.out.println(getClass().getName() + ".saveCourseImages ...");
+
         // Shopska salad
         AssertSaveCourseImage(SHOPSKA_SALAD_ID, SHOPSKA_SALAD_PHOTO_FILENAME);
         // Chicken with mushrooms
