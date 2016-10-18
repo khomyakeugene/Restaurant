@@ -17,13 +17,10 @@ public class StateGraphRules {
     private static final String IMPOSSIBLE_TO_DETERMINE_FINITE_STATE_PATTERN =
             "It is impossible to determine <finite state> of entity <%s> for <init state> = <%s> and operation <%s>!";
 
-    private static final String STATE_TYPE_OPEN = "A";
-    private static final String STATE_TYPE_CLOSED = "B";
     private static final String ACTION_TYPE_CREATION = "A";
     private static final String ACTION_TYPE_REMOVAL = "B";
     private static final String ACTION_TYPE_FILLING = "C";
     private static final String ACTION_TYPE_CLOSING = "D";
-    private static final String ACTION_TYPE_VIEWING = "E";
 
     private StateGraphDao stateGraphDao;
     private HashMap<String, List<StateGraph>> entityStateGraphMap = new HashMap<>();
