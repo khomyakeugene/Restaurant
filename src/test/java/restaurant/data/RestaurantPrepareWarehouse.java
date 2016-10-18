@@ -4,7 +4,7 @@ import com.company.restaurant.model.Course;
 import com.company.restaurant.model.Portion;
 import org.junit.Test;
 import org.springframework.transaction.annotation.Transactional;
-import restaurant.dao.common.RestaurantService;
+import restaurant.service.RestaurantService;
 
 /**
  * Created by Yevhen on 17.08.2016.

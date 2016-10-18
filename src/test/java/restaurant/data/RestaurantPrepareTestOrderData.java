@@ -3,8 +3,7 @@ package restaurant.data;
 import com.company.restaurant.model.Order;
 import org.junit.Test;
 import org.springframework.transaction.annotation.Transactional;
-import restaurant.dao.common.RestaurantDataGenerator;
-import restaurant.dao.common.RestaurantService;
+import restaurant.service.RestaurantService;
 
 import java.util.Random;
 

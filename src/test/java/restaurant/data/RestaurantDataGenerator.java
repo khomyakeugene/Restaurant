@@ -1,8 +1,9 @@
-package restaurant.dao.common;
+package restaurant.data;
 
 import com.company.restaurant.model.Course;
 import com.company.restaurant.model.Employee;
 import com.company.restaurant.model.Table;
+import restaurant.dao.common.RestaurantDao;
 
 import java.util.List;
 import java.util.Random;
