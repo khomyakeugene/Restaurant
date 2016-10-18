@@ -15,23 +15,8 @@ public class TableServiceImpl extends ObjectService<Table> implements TableServi
     }
 
     @Override
-    public Table addTable(Table table) {
-        return tableDao.addTable(table);
-    }
-
-    @Override
-    public void delTable(Table table) {
-        tableDao.delTable(table);
-    }
-
-    @Override
     public Table findTableById(int tableId) {
         return tableDao.findTableById(tableId);
-    }
-
-    @Override
-    public Table findTableByNumber(int number) {
-        return tableDao.findTableByNumber(number);
     }
 
     @Override
