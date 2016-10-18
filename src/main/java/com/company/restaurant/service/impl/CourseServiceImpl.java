@@ -5,11 +5,11 @@ import com.company.restaurant.dao.CourseDao;
 import com.company.restaurant.dao.CourseIngredientDao;
 import com.company.restaurant.model.*;
 import com.company.restaurant.service.CourseService;
-import com.company.restaurant.service.impl.common.ObjectService;
+import com.company.restaurant.service.impl.common.Service;
 
 import java.util.List;
 
-public class CourseServiceImpl extends ObjectService<Course> implements CourseService {
+public class CourseServiceImpl extends Service implements CourseService {
     private static final String PORTION_TYPE_SHOULD_BE_GIVEN_MSG = "The portion type should be given!";
     private static final String PLEASE_ENTER_AMOUNT_MSG = "Please, enter amount";
     private static final String WEIGHT_PROPERTY_NAME = "weight";

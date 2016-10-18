@@ -5,11 +5,11 @@ import com.company.restaurant.dao.JobPositionDao;
 import com.company.restaurant.model.Employee;
 import com.company.restaurant.model.JobPosition;
 import com.company.restaurant.service.EmployeeService;
-import com.company.restaurant.service.impl.common.ObjectService;
+import com.company.restaurant.service.impl.common.Service;
 
 import java.util.List;
 
-public class EmployeeServiceImpl extends ObjectService<Employee> implements EmployeeService {
+public class EmployeeServiceImpl extends Service implements EmployeeService {
     private static final String OPERATION_IS_NOT_SUPPORTED_PATTERN =
             "<%s>: operation is not supported for <employee> with id <%d> (instance of <%s>)";
     private static final String NAME_PROPERTY_NAME = "name";
