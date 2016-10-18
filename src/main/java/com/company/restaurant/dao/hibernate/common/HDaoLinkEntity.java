@@ -46,10 +46,6 @@ public abstract class HDaoLinkEntity<T extends LinkObject> extends HDaoEntity<T>
         return saveOrUpdate(newObject(firstId, secondId, linkData));
     }
 
-    protected T update(int firstId, int secondId, String linkData) {
-        return update(newObject(firstId, secondId, linkData));
-    }
-
     protected void delete(int firstId, int secondId) {
         // It is important to find <object> before <delete> - otherwise, hibernate-message such as
         // "org.hibernate.event.internal.DefaultDeleteEventListener deleteTransientEntity, INFO: HHH000114:
