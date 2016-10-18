@@ -17,23 +17,6 @@ public class HCommonDataDao extends HDaoEntity<CommonData> implements CommonData
         return save(commonData);
     }
 
-    @Transactional
-    @Override
-    public CommonData addCommonData(String name, String value, byte[] image) {
-        CommonData commonData = new CommonData();
-        commonData.setName(name);
-        commonData.setValue(value);
-        commonData.setImage(image);
-
-        return addCommonData(commonData);
-    }
-
-    @Transactional
-    @Override
-    public CommonData addCommonData(String name, String value) {
-        return addCommonData(name, value, null);
-    }
-
     private void updCommonDataValue(CommonData commonData, String value) {
         if (commonData != null) {
             commonData.setValue(value);
@@ -62,26 +45,8 @@ public class HCommonDataDao extends HDaoEntity<CommonData> implements CommonData
 
     @Transactional
     @Override
-    public void updCommonDataImage(int commonDataId, byte[] image) {
-        updCommonDataImage(findCommonDataById(commonDataId), image);
-    }
-
-    @Transactional
-    @Override
     public void updCommonDataImage(String name, byte[] image) {
         updCommonDataImage(findCommonDataByName(name), image);
-    }
-
-    @Transactional
-    @Override
-    public void delCommonData(CommonData commonData) {
-        delete(commonData);
-    }
-
-    @Transactional
-    @Override
-    public void delCommonData(int commonDataId) {
-        delete(commonDataId);
     }
 
     @Transactional
@@ -126,12 +91,6 @@ public class HCommonDataDao extends HDaoEntity<CommonData> implements CommonData
 
     private byte[] getCommonDataImage(CommonData commonData) {
         return (commonData == null) ? null : commonData.getImage();
-    }
-
-    @Transactional
-    @Override
-    public byte[] getCommonDataImage(int commonDataId) {
-        return getCommonDataImage(findCommonDataById(commonDataId));
     }
 
     @Transactional
