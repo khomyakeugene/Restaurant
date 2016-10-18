@@ -15,12 +15,13 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class AdminEmployeeController extends AdminCRUDPhotoHolderController<Employee> {
-    private static final String ADMIN_EMPLOYEE_LIST_PAGE_VIEW_NAME = "admin-application/employee/admin-employee-list-page";
-    private static final String ADMIN_SAVE_OR_DELETE_EMPLOYEE_PAGE_VIEW_NAME = "admin-application/employee/admin-save-or-delete-employee-page";
-    private static final String ADMIN_EMPLOYEE_LIST_REQUEST_MAPPING_VALUE = "/admin-employee-list";
-    private static final String ADMIN_EMPLOYEE_REQUEST_MAPPING_VALUE = "/employee/{employeeId}";
     private static final String ADMIN_SAVE_OR_DELETE_EMPLOYEE_REQUEST_MAPPING_VALUE = "/save-or-delete-employee";
     private static final String ADMIN_PREPARE_NEW_EMPLOYEE_REQUEST_MAPPING_VALUE = "/prepare-new-employee";
+    private static final String ADMIN_EMPLOYEE_LIST_REQUEST_MAPPING_VALUE = "/admin-employee-list";
+    private static final String ADMIN_EMPLOYEE_REQUEST_MAPPING_VALUE = "/employee/{employeeId}";
+
+    private static final String ADMIN_EMPLOYEE_LIST_PAGE_VIEW_NAME = "admin-application/employee/admin-employee-list-page";
+    private static final String ADMIN_SAVE_OR_DELETE_EMPLOYEE_PAGE_VIEW_NAME = "admin-application/employee/admin-save-or-delete-employee-page";
 
     private static final String EMPLOYEES_VAR_NAME = "employees";
 
