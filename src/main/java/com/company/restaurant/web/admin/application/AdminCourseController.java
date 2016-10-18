@@ -17,18 +17,19 @@ import java.util.stream.Collectors;
  */
 @Controller
 public class AdminCourseController extends AdminCRUDPhotoHolderController<Course> {
-    private static final String ADMIN_COURSE_LIST_PAGE_VIEW_NAME = "admin-application/course/admin-course-list-page";
     private static final String ADMIN_COURSE_LIST_REQUEST_MAPPING_VALUE = "/admin-course-list";
-    private static final String ADMIN_COURSE_REQUEST_MAPPING_PATTERN = "/admin-course/%d";
     private static final String ADMIN_COURSE_REQUEST_MAPPING_VALUE = "/admin-course/{courseId}";
+    private static final String ADMIN_COURSE_REQUEST_MAPPING_PATTERN = "/admin-course/%d";
     private static final String ADMIN_DELETE_COURSE_INGREDIENT_REQUEST_MAPPING_VALUE =
             "/admin-course/delete-course-ingredient/{courseId}/{ingredientId}";
-    private static final String ADMIN_SAVE_OR_DELETE_COURSE_PAGE_VIEW_NAME =
-            "admin-application/course/admin-save-or-delete-course-page";
     private static final String ADMIN_SAVE_OR_DELETE_COURSE_REQUEST_MAPPING_VALUE = "/save-or-delete-course";
-    private static final String ADMIN_CREATE_COURSE_PAGE_VIEW_NAME = "admin-application/course/admin-create-course-page";
     private static final String ADMIN_PREPARE_NEW_COURSE_REQUEST_MAPPING_VALUE = "/prepare-new-course";
     private static final String ADMIN_CREATE_COURSE_REQUEST_MAPPING_VALUE = "/create-course";
+
+    private static final String ADMIN_COURSE_LIST_PAGE_VIEW_NAME = "admin-application/course/admin-course-list-page";
+    private static final String ADMIN_SAVE_OR_DELETE_COURSE_PAGE_VIEW_NAME =
+            "admin-application/course/admin-save-or-delete-course-page";
+    private static final String ADMIN_CREATE_COURSE_PAGE_VIEW_NAME = "admin-application/course/admin-create-course-page";
 
     private static final String NEW_INGREDIENTS_VAR_NAME = "newIngredients";
 
