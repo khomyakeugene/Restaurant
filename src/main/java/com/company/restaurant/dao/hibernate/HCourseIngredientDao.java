@@ -11,8 +11,6 @@ import com.company.restaurant.model.Ingredient;
 import com.company.restaurant.model.Portion;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Set;
-
 /**
  * Created by Yevhen on 04.07.2016.
  */
@@ -33,12 +31,6 @@ public class HCourseIngredientDao extends HDaoEntity<CourseIngredient> implement
 
     public void setPortionDao(PortionDao portionDao) {
         this.portionDao = portionDao;
-    }
-
-    @Transactional
-    @Override
-    public Set<CourseIngredient> findCourseIngredients(Course course) {
-        return findObjectSetByAttributeValue(COURSE_ATTRIBUTE_NAME, course);
     }
 
     @Transactional
@@ -70,13 +62,6 @@ public class HCourseIngredientDao extends HDaoEntity<CourseIngredient> implement
         courseIngredient.setPortion(portionDao.findAllPortions().get(0));
 
         delete(courseIngredient);
-    }
-
-    @Transactional
-    @Override
-    public CourseIngredient addCourseIngredient(int courseId, int ingredientId, int portionId, Float amount) {
-        return addCourseIngredient(courseDao.findCourseById(courseId), ingredientDao.findIngredientById(ingredientId),
-                portionDao.findPortionById(portionId), amount);
     }
 
     @Transactional

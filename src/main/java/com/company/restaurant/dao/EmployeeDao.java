@@ -28,5 +28,4 @@ public interface EmployeeDao {
 
     List<Employee> findAllEmployees();
 
-    byte[] getEmployeePhoto(int employeeId);
 }

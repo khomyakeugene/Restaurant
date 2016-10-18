@@ -100,16 +100,4 @@ public class HEmployeeDao extends HDaoEntity<Employee> implements EmployeeDao {
         return findAllObjects();
     }
 
-    @Transactional
-    @Override
-    public byte[] getEmployeePhoto(int employeeId) {
-        byte[] result = null;
-
-        Employee employee = findEmployeeById(employeeId);
-        if (employee != null) {
-            result = employee.getPhoto();
-        }
-
-        return result;
-    }
 }
