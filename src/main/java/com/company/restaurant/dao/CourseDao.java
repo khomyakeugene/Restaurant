@@ -27,6 +27,4 @@ public interface CourseDao {
     List<Course> findAllCourses();
 
     List<Course> findCoursesByNameFragment(String nameFragment);
-
-    byte[] getCoursePhoto(int courseId);
 }
