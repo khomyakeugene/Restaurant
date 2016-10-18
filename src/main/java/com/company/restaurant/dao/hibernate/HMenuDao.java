@@ -33,12 +33,6 @@ public class HMenuDao extends HDaoEntityCourseCollecting<Menu> implements MenuDa
 
     @Transactional
     @Override
-    public void delMenu(Menu menu) {
-        delete(menu);
-    }
-
-    @Transactional
-    @Override
     public void delMenu(int menuId) {
         delete(menuId);
     }
@@ -59,12 +53,6 @@ public class HMenuDao extends HDaoEntityCourseCollecting<Menu> implements MenuDa
     @Override
     public List<Menu> findAllMenus() {
         return findAllObjects();
-    }
-
-    @Transactional
-    @Override
-    public List<Menu> findMenusByNameFragment(String nameFragment) {
-        return findObjectsByNameFragment(nameFragment);
     }
 
     @Transactional

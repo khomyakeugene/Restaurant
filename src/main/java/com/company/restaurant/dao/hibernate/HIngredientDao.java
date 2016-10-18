@@ -18,18 +18,6 @@ public class HIngredientDao extends HDaoEntity<Ingredient> implements Ingredient
 
     @Transactional
     @Override
-    public Ingredient addIngredient(String name) {
-        return save(name);
-    }
-
-    @Transactional
-    @Override
-    public void delIngredient(String name) {
-        delete(name);
-    }
-
-    @Transactional
-    @Override
     public List<Ingredient> findAllIngredients() {
         return findAllObjects();
     }

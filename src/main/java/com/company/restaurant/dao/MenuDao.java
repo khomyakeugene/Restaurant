@@ -14,8 +14,6 @@ public interface MenuDao {
 
     void delMenu(String name);
 
-    void delMenu(Menu menu);
-
     void delMenu(int menuId);
 
     Menu findMenuById(int menuId);
@@ -23,8 +21,6 @@ public interface MenuDao {
     Menu findMenuByName(String name);
 
     List<Menu> findAllMenus();
-
-    List<Menu> findMenusByNameFragment(String nameFragment);
 
     void addCourseToMenu(Menu menu, Course course);
 
