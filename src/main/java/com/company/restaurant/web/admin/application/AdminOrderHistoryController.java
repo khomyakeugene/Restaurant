@@ -24,6 +24,7 @@ public class AdminOrderHistoryController extends AdminCRUDController<Order> {
     private static final String ADMIN_ORDER_HISTORY_REQUEST_MAPPING_VALUE = "/admin-order-history";
     private static final String ADMIN_APPLICATION_COURSE_REQUEST_MAPPING_VALUE = "/admin-order/{orderId}";
     private static final String ADMIN_SEARCH_ORDERS_REQUEST_MAPPING_VALUE = "/admin-search-orders";
+
     private static final String ADMIN_ORDER_HISTORY_PAGE_VIEW_NAME = "admin-application/order-history/admin-order-history-page";
 
     private static final String ORDERS_VAR_NAME = "orders";
