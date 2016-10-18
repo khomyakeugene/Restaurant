@@ -15,18 +15,6 @@ public class HPortionDao extends HDaoEntity<Portion> implements PortionDao {
 
     @Transactional
     @Override
-    public Portion addPortion(Portion portion) {
-        return save(portion);
-    }
-
-    @Transactional
-    @Override
-    public void delPortion(Portion portion) {
-        delete(portion);
-    }
-
-    @Transactional
-    @Override
     public List<Portion> findAllPortions() {
         return findAllObjects();
     }
@@ -37,9 +25,4 @@ public class HPortionDao extends HDaoEntity<Portion> implements PortionDao {
         return findObjectById(portionId);
     }
 
-    @Transactional
-    @Override
-    public Portion findPortionByDescription(String description) {
-        return findObjectByAttributeValue(DESCRIPTION_ATTRIBUTE_NAME, description);
-    }
 }

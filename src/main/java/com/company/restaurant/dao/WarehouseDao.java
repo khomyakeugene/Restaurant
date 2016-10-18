@@ -20,8 +20,6 @@ public interface WarehouseDao {
 
     Warehouse findIngredientInWarehouse(Ingredient ingredient, Portion portion);
 
-    void setIngredientInWarehouse(Ingredient ingredient, Portion portion, Float amount);
-
     void setAmountInWarehouse(Warehouse warehouse, Float amount);
 
     List<Warehouse> findIngredientInWarehouseByName(String name);
