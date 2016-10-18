@@ -1,4 +1,4 @@
-package restaurant.dao;
+package restaurant.data;
 
 import com.company.restaurant.model.Order;
 import org.junit.Test;
@@ -8,8 +8,8 @@ import restaurant.dao.common.RestaurantService;
 
 import java.util.Random;
 
-import static restaurant.Util.addDays;
-import static restaurant.Util.getCurrentTimestamp;
+import static restaurant.util.Util.addDays;
+import static restaurant.util.Util.getCurrentTimestamp;
 
 /**
  * Created by Yevhen on 18.08.2016.

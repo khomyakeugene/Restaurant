@@ -2,9 +2,9 @@ package restaurant.dao;
 
 import com.company.restaurant.model.*;
 import org.junit.Test;
-import restaurant.ObjectService;
-import restaurant.Util;
 import restaurant.dao.common.RestaurantDao;
+import restaurant.util.ObjectService;
+import restaurant.util.Util;
 
 import java.util.List;
 import java.util.Set;

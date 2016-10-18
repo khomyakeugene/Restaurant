@@ -1,10 +1,10 @@
-package restaurant.dao;
+package restaurant.data;
 
 import com.company.restaurant.service.impl.CommonDataServiceImpl;
 import org.junit.Assert;
 import org.junit.Test;
-import restaurant.Util;
 import restaurant.dao.common.RestaurantDao;
+import restaurant.util.Util;
 
 public class RestaurantPrepareDictionaryData extends RestaurantDao {
     private final static String EMBLEM_FILENAME = "images/Hamster.png";

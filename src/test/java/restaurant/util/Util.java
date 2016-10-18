@@ -1,4 +1,4 @@
-package restaurant;
+package restaurant.util;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -118,7 +118,7 @@ public class Util {
         return new Timestamp((new Date()).getTime());
     }
 
-    public static Long dayToMiliseconds(int days){
+    private static Long dayToMiliseconds(int days){
         return (long) (days * 24 * 60 * 60 * 1000);
     }
 

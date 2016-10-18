@@ -1,4 +1,4 @@
-package restaurant.dao;
+package restaurant.data;
 
 import com.company.restaurant.model.Course;
 import com.company.restaurant.model.Portion;
