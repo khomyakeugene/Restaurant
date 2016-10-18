@@ -75,22 +75,10 @@ public class WarehouseServiceImpl extends Service implements WarehouseService {
     }
 
     @Override
-    public void setIngredientInWarehouse(Ingredient ingredient, Portion portion, Float amount) {
-        validateNotNullAmountPositiveness(amount);
-
-        warehouseDao.setIngredientInWarehouse(ingredient, portion, amount);
-    }
-
-    @Override
     public void setAmountInWarehouse(Warehouse warehouse, Float amount) {
         validateNotNullAmountPositiveness(amount);
 
         warehouseDao.setAmountInWarehouse(warehouse, amount);
-    }
-
-    @Override
-    public List<Warehouse> findIngredientInWarehouseByName(String name) {
-        return warehouseDao.findIngredientInWarehouseByName(name);
     }
 
     @Override
@@ -104,11 +92,6 @@ public class WarehouseServiceImpl extends Service implements WarehouseService {
     }
 
     @Override
-    public List<Warehouse> findAllElapsingWarehouseIngredients(float limit) {
-        return warehouseDao.findAllElapsingWarehouseIngredients(limit);
-    }
-
-    @Override
     public List<Ingredient> findAllIngredients() {
         return ingredientDao.findAllIngredients();
     }
@@ -119,11 +102,6 @@ public class WarehouseServiceImpl extends Service implements WarehouseService {
     }
 
     @Override
-    public Ingredient findIngredientByName(String name) {
-        return ingredientDao.findIngredientByName(name);
-    }
-
-    @Override
     public List<Portion> findAllPortions() {
         return portionDao.findAllPortions();
     }
@@ -131,11 +109,6 @@ public class WarehouseServiceImpl extends Service implements WarehouseService {
     @Override
     public Portion findPortionById(int portionId) {
         return portionDao.findPortionById(portionId);
-    }
-
-    @Override
-    public Portion findPortionByDescription(String description) {
-        return portionDao.findPortionByDescription(description);
     }
 
     @Override

@@ -20,29 +20,19 @@ public interface WarehouseService {
 
     Warehouse findIngredientInWarehouse(Ingredient ingredient, Portion portion);
 
-    void setIngredientInWarehouse(Ingredient ingredient, Portion portion, Float amount);
-
     void setAmountInWarehouse(Warehouse warehouse, Float amount);
-
-    List<Warehouse> findIngredientInWarehouseByName(String name);
 
     List<Warehouse> findIngredientInWarehouseById(int ingredientId);
 
     List<Warehouse> findAllWarehouseIngredients();
 
-    List<Warehouse> findAllElapsingWarehouseIngredients(float limit);
-
     List<Ingredient> findAllIngredients();
 
     Ingredient findIngredientById(int ingredientId);
 
-    Ingredient findIngredientByName(String name);
-
     List<Portion> findAllPortions();
 
     Portion findPortionById(int portionId);
-
-    Portion findPortionByDescription(String description);
 
     void clearWarehouse();
 }
