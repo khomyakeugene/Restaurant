@@ -1,9 +1,11 @@
 package restaurant.data;
 
 import com.company.restaurant.model.Order;
+import com.company.restaurant.model.State;
 import org.junit.Test;
 import org.springframework.transaction.annotation.Transactional;
-import restaurant.service.RestaurantService;
+import restaurant.data.common.RestaurantDataGenerator;
+import restaurant.service.common.RestaurantService;
 
 import java.util.Random;
 
@@ -22,20 +24,22 @@ public class RestaurantPrepareTestOrderData extends RestaurantService {
 
     @Transactional
     private void prepareOrder(Integer orderNumber) {
+        State orderCreationState = orderService.orderCreationState();
+
         Order order = new Order();
         order.setOrderNumber(orderNumber.toString());
         order.setWaiter(RestaurantDataGenerator.getRandomEmployee());
         order.setTable(RestaurantDataGenerator.getRandomTable());
-        order.setState(stateDao.findStateByType("A"));
-        order = orderDao.addOrder(order);
+        order.setState(orderCreationState);
+        order = orderService.addOrder(order);
 
         // Only through update it is possible to change "default-current" field value
         order.setOrderDatetime(addDays(getCurrentTimestamp(), random.nextInt(MAX_DAY_DELTA)));
-        order = orderDao.updOrder(order);
+        order = orderService.updOrder(order);
 
         int courseCount = random.nextInt(MAX_COURSER_COUNT) + 1;
         for (int i = 0; i < courseCount; i++) {
-            orderDao.addCourseToOrder(order, RestaurantDataGenerator.getRandomCourse());
+            orderService.addCourseToOrder(order, RestaurantDataGenerator.getRandomCourse());
         }
 
         if (random.nextBoolean()) {

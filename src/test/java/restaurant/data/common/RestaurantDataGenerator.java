@@ -1,4 +1,4 @@
-package restaurant.data;
+package restaurant.data.common;
 
 import com.company.restaurant.model.Course;
 import com.company.restaurant.model.Employee;

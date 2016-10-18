@@ -1,12 +1,13 @@
 package com.company.restaurant.service.impl;
 
 import com.company.restaurant.dao.OrderDao;
+import com.company.restaurant.dao.StateDao;
 import com.company.restaurant.model.Course;
 import com.company.restaurant.model.Order;
+import com.company.restaurant.model.State;
 import com.company.restaurant.service.OrderService;
 import com.company.restaurant.service.impl.common.ObjectService;
 import com.company.util.common.DatetimeFormatter;
-import com.company.util.exception.DataIntegrityException;
 
 import java.util.Date;
 import java.util.List;
@@ -26,17 +27,22 @@ public class OrderServiceImpl extends ObjectService<Order> implements OrderServi
             "It is impossible to delete course from order in <%s> state (<order_id> = %d)!";
 
     private OrderDao orderDao;
+    private StateDao stateDao;
     private StateGraphRules stateGraphRules;
 
     public void setOrderDao(OrderDao orderDao) {
         this.orderDao = orderDao;
     }
 
+    public void setStateDao(StateDao stateDao) {
+        this.stateDao = stateDao;
+    }
+
     public void setStateGraphRules(StateGraphRules stateGraphRules) {
         this.stateGraphRules = stateGraphRules;
     }
 
-    private String orderCreationState() {
+    private String orderCreationStateType() {
         return stateGraphRules.creationState(orderDao.orderEntityName());
     }
 
@@ -58,20 +64,20 @@ public class OrderServiceImpl extends ObjectService<Order> implements OrderServi
     }
 
     @Override
+    public State orderCreationState() {
+        return stateDao.findStateByType(orderCreationStateType());
+    }
+
+    @Override
     public Order addOrder(Order order) {
-        order.getState().setType(orderCreationState());
+        order.getState().setType(orderCreationStateType());
 
         return orderDao.addOrder(order);
     }
 
     @Override
-    public void delOrder(Order order) {
-        if (orderDeletedState(order) != null) {
-            orderDao.delOrder(order);
-        } else {
-            throw new DataIntegrityException(String.format(
-                    IMPOSSIBLE_TO_DELETE_ORDER_PATTERN, order, order.getOrderId()));
-        }
+    public Order updOrder(Order order) {
+        return orderDao.updOrder(order);
     }
 
     @Override
@@ -95,21 +101,6 @@ public class OrderServiceImpl extends ObjectService<Order> implements OrderServi
     }
 
     @Override
-    public List<Order> findAllOrders(String stateType) {
-        return orderDao.findAllOrders(stateType);
-    }
-
-    @Override
-    public List<Order> findAllOpenOrders() {
-        return findAllOrders(orderCreationState());
-    }
-
-    @Override
-    public List<Order> findAllClosedOrders() {
-        return findAllOrders(orderClosedState());
-    }
-
-    @Override
     public String addCourseToOrder(Order order, Course course) {
         String result = null;
 
@@ -129,50 +120,12 @@ public class OrderServiceImpl extends ObjectService<Order> implements OrderServi
     }
 
     @Override
-    public String takeCourseFromOrder(Order order, Course course) {
-        String result = null;
-
-        try {
-            if (isFillingActionEnabled(order)) {
-                orderDao.takeCourseFromOrder(order, course);
-            } else {
-                throwDataIntegrityException(String.format(
-                        IMPOSSIBLE_TO_DEL_COURSE_FROM_ORDER_PATTERN, order.getState().getName(), order.getOrderId()));
-            }
-        } catch (Exception e) {
-            result = e.getMessage();
-        }
-
-        return result;
-    }
-
-    @Override
-    public List<Course> findOrderCourses(Order order) {
-        return orderDao.findOrderCourses(order);
-    }
-
-    @Override
-    public List<Order> findOrderByNumber(String orderNumber) {
-        return orderDao.findOrderByNumber(orderNumber);
-    }
-
-    @Override
     public List<Order> findOrdersByFilter(Date orderDate, int waiterId, int tableId) {
         return findAllOrders().stream().filter(order ->
                 (((orderDate == null) || (DatetimeFormatter.getDateOnly(order.getOrderDatetime()).equals(orderDate))) &&
                         ((waiterId <= 0) || (order.getWaiter().getEmployeeId() == waiterId)) &&
                         ((tableId <= 0) || (order.getTable().getTableId() == tableId)))).
                 collect(Collectors.toList());
-    }
-
-    @Override
-    public Course findOrderCourseByCourseId(Order order, int courseId) {
-        return orderDao.findOrderCourseByCourseId(order, courseId);
-    }
-
-    @Override
-    public Order updOrderState(Order order, String stateType) {
-        return orderDao.updOrderState(order, stateType);
     }
 
     @Override

@@ -4,7 +4,7 @@ import com.company.restaurant.model.Course;
 import com.company.restaurant.model.Portion;
 import org.junit.Test;
 import org.springframework.transaction.annotation.Transactional;
-import restaurant.service.RestaurantService;
+import restaurant.service.common.RestaurantService;
 
 /**
  * Created by Yevhen on 17.08.2016.
@@ -23,7 +23,7 @@ public class RestaurantPrepareWarehouse extends RestaurantService {
             course.getCourseIngredients().forEach(ci -> {
                 Portion portion = ci.getPortion();
                 if (portion == null) {
-                    portion = portionDao.findPortionById(KG_PORTION_ID);
+                    portion = warehouseService.findPortionById(KG_PORTION_ID);
                 }
 
                 Float amount = ci.getAmount();
@@ -40,7 +40,7 @@ public class RestaurantPrepareWarehouse extends RestaurantService {
 
     @Test
     @Transactional
-    public void initWarehouseContent() {
+    public void initWarehouseContent() throws Exception {
         clearWarehouse();
         fillWarehouse();
     }
