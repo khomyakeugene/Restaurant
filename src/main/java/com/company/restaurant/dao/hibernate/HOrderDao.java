@@ -66,12 +66,6 @@ public class HOrderDao extends HDaoEntityCourseCollecting<Order> implements Orde
 
     @Transactional
     @Override
-    public List<Order> findOrderByNumber(String orderNumber) {
-        return findObjectsByAttributeValue(ORDER_NUMBER_ATTRIBUTE_NAME, orderNumber);
-    }
-
-    @Transactional
-    @Override
     public List<Order> findAllOrders() {
         return findAllObjects();
     }
