@@ -21,13 +21,14 @@ import java.util.stream.Collectors;
  */
 @Controller
 public class AdminWarehouseController extends AdminCRUDController<Warehouse> {
-    private static final String ADMIN_WAREHOUSE_PAGE_VIEW_NAME = "admin-application/warehouse/admin-warehouse-page";
     private static final String ADMIN_WAREHOUSE_REQUEST_MAPPING_VALUE = "/admin-warehouse";
     private static final String ADMIN_WAREHOUSE_ACTION_REQUEST_MAPPING_VALUE = "/warehouse-action";
     private static final String ADMIN_DELETE_WAREHOUSE_INGREDIENT_REQUEST_MAPPING_VALUE =
             "/warehouse/delete-warehouse-ingredient/{ingredientId}/{portionId}";
     private static final String ADMIN_EDIT_WAREHOUSE_INGREDIENT_REQUEST_MAPPING_VALUE =
             "/warehouse/edit-warehouse-ingredient/{ingredientId}/{portionId}";
+
+    private static final String ADMIN_WAREHOUSE_PAGE_VIEW_NAME = "admin-application/warehouse/admin-warehouse-page";
 
     private static final String WAREHOUSE_CONTENT_VAR_NAME = "warehouseContent";
     private static final String WAREHOUSE_INGREDIENTS_VAR_NAME = "warehouseIngredients";
