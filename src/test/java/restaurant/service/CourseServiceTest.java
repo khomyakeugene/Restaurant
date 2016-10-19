@@ -5,6 +5,7 @@ import com.company.restaurant.model.CourseCategory;
 import com.company.restaurant.model.Ingredient;
 import com.company.restaurant.model.Portion;
 import org.junit.Test;
+import org.springframework.transaction.annotation.Transactional;
 import restaurant.service.common.RestaurantService;
 import restaurant.util.Util;
 
@@ -42,8 +43,8 @@ public class CourseServiceTest extends RestaurantService {
         }
     }
 
-    @Test//(timeout = 2000)
-    //@Transactional
+    @Test(timeout = 2000)
+    @Transactional
     public void addUpdDelFindCoursesTest() throws Exception {
         Portion kgPortion = getKgPortion();
         List<Ingredient> ingredients = warehouseService.findAllIngredients();

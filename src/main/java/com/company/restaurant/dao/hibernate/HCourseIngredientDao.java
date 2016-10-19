@@ -52,7 +52,7 @@ public class HCourseIngredientDao extends HDaoEntity<CourseIngredient> implement
         courseIngredient.setCourse(course);
         courseIngredient.setIngredient(ingredient);
 
-        // Have not precisely investigated this issue, but witout <Portion> there could be generated exception such as
+        // Have not precisely investigated this issue, but without <Portion> there could be generated exception such as
         // "org.hibernate.TransientObjectException: object references an unsaved transient instance -
         // save the transient instance beforeQuery flushing: com.company.restaurant.model.Portion"
         // And again, cannot understand why, but
