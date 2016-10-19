@@ -18,7 +18,7 @@ import static org.junit.Assert.assertTrue;
  * Created by Yevhen on 19.10.2016.
  */
 public class OrderServiceTest extends RestaurantService {
-    static Order closedOrder;
+    private static Order closedOrder;
 
     private static void prepareClosedOrder() throws Exception {
         Order order = new Order();
@@ -33,9 +33,7 @@ public class OrderServiceTest extends RestaurantService {
     }
 
     private static void clearClosedOrder() throws Exception {
-        closedOrder.setState(orderService.orderCreationState());
-        orderService.updOrder(closedOrder);
-        orderService.delOrder(closedOrder);
+        orderDao.delOrder(closedOrder);
     }
 
     @BeforeClass
@@ -79,7 +77,7 @@ public class OrderServiceTest extends RestaurantService {
         orderService.delOrder(closedOrder);
     }
 
-    @Test(timeout = 2000, expected = DataIntegrityException.class)
+    @Test(expected = DataIntegrityException.class)
     public void changeClosedOrderTest() throws Exception {
         orderService.addCourseToOrder(closedOrder, RestaurantDataGenerator.getRandomCourse());
     }

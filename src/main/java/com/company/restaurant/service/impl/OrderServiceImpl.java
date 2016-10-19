@@ -68,8 +68,7 @@ public class OrderServiceImpl extends Service implements OrderService {
         return stateGraphRules.isFillingActionEnabled(orderDao.orderEntityName(), order.getState().getType());
     }
 
-    @Override
-    public State orderCreationState() {
+    private State orderCreationState() {
         return stateDao.findStateByType(orderCreationStateType());
     }
 
@@ -118,22 +117,14 @@ public class OrderServiceImpl extends Service implements OrderService {
     }
 
     @Override
-    public String addCourseToOrder(Order order, Course course) {
-        String result = null;
-
-        try {
-            if (isFillingActionEnabled(order)) {
-                orderDao.addCourseToOrder(order, course);
-            } else {
-                // Perhaps, to raise exception seems to be unnecessary and excessive, but let use such a "mechanism"!
-                throwDataIntegrityException(String.format(
-                        IMPOSSIBLE_TO_ADD_COURSE_TO_ORDER_PATTERN, order.getState().getName(), order.getOrderId()));
-            }
-        } catch (Exception e) {
-            result = e.getMessage();
+    public void addCourseToOrder(Order order, Course course) {
+        if (isFillingActionEnabled(order)) {
+            orderDao.addCourseToOrder(order, course);
+        } else {
+            // Perhaps, to raise exception seems to be unnecessary and excessive, but let use such a "mechanism"!
+            throwDataIntegrityException(String.format(
+                    IMPOSSIBLE_TO_ADD_COURSE_TO_ORDER_PATTERN, order.getState().getName(), order.getOrderId()));
         }
-
-        return result;
     }
 
     @Override
