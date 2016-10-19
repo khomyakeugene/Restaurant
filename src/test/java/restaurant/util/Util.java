@@ -47,7 +47,7 @@ public class Util {
         return random.nextInt(DEFAULT_UPPER_BOUND);
     }
 
-    private static String getRandomString(int length) {
+    public static String getRandomString(int length) {
         char[] chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".toCharArray();
 
         StringBuilder sb = new StringBuilder();

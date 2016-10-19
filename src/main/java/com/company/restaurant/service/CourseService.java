@@ -8,7 +8,6 @@ import java.util.List;
  * Created by Yevhen on 17.06.2016.
  */
 public interface CourseService {
-
     CourseCategory findCourseCategoryByName(String name);
 
     CourseCategory findCourseCategoryById(int CourseCategoryId);

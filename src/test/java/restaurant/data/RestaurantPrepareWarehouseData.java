@@ -11,7 +11,6 @@ import restaurant.service.common.RestaurantService;
  */
 public class RestaurantPrepareWarehouseData extends RestaurantService {
     private static float AMOUNT_MULTIPLIER = 100.0f;
-    private static int KG_PORTION_ID = 1001;
 
     private void clearWarehouse() {
         warehouseService.clearWarehouse();
@@ -19,11 +18,13 @@ public class RestaurantPrepareWarehouseData extends RestaurantService {
 
     @Transactional
     private void fillWarehouse() {
+        Portion kgPortion = getKgPortion();
+
         for (Course course : courseService.findAllCourses()) {
             course.getCourseIngredients().forEach(ci -> {
                 Portion portion = ci.getPortion();
                 if (portion == null) {
-                    portion = warehouseService.findPortionById(KG_PORTION_ID);
+                    portion = kgPortion;
                 }
 
                 Float amount = ci.getAmount();
