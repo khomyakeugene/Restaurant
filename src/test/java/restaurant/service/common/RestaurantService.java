@@ -1,10 +1,7 @@
 package restaurant.service.common;
 
 import com.company.restaurant.model.Portion;
-import com.company.restaurant.service.CourseService;
-import com.company.restaurant.service.EmployeeService;
-import com.company.restaurant.service.OrderService;
-import com.company.restaurant.service.WarehouseService;
+import com.company.restaurant.service.*;
 import org.junit.BeforeClass;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -20,6 +17,7 @@ public class RestaurantService extends RestaurantDao {
 
     protected static EmployeeService employeeService;
     protected static CourseService courseService;
+    protected static MenuService menuService;
     protected static WarehouseService warehouseService;
     protected static OrderService orderService;
 
@@ -29,6 +27,7 @@ public class RestaurantService extends RestaurantDao {
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext(configLocation);
 
         employeeService = applicationContext.getBean(EmployeeService.class);
+        menuService = applicationContext.getBean(MenuService.class);
         courseService = applicationContext.getBean(CourseService.class);
         warehouseService = applicationContext.getBean(WarehouseService.class);
         orderService = applicationContext.getBean(OrderService.class);

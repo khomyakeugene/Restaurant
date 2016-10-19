@@ -4,7 +4,7 @@ import com.company.restaurant.model.Order;
 import com.company.restaurant.model.State;
 import org.junit.Test;
 import org.springframework.transaction.annotation.Transactional;
-import restaurant.data.common.RestaurantDataGenerator;
+import restaurant.service.common.RestaurantDataGenerator;
 import restaurant.service.common.RestaurantService;
 
 import java.util.Random;
