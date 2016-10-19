@@ -6,6 +6,7 @@ import com.company.restaurant.model.Ingredient;
 import com.company.restaurant.model.Portion;
 import org.junit.Test;
 import org.springframework.transaction.annotation.Transactional;
+import restaurant.service.common.RestaurantDataGenerator;
 import restaurant.service.common.RestaurantService;
 import restaurant.util.Util;
 
@@ -65,37 +66,40 @@ public class CourseServiceTest extends RestaurantService {
 
                 courseService.delCourseIngredient(course.getCourseId(), newIngredient.getIngredientId());
                 assertTrue(courseService.findCourseById(course.getCourseId()).getCourseIngredients().size() == ingredientsCount);
+                break;
             }
 
-            // Add / upd / del course
-            do {
-                String newCourseName = Util.getRandomString(course.getName().length());
-                if (courseService.findCoursesByNameFragment(newCourseName).size() == 0) {
-                    String courseName = course.getName();
-                    // Change current course name ...
-                    course.setName(newCourseName);
-                    Course newCourse = courseService.updCourse(course);
-                    assertTrue(courseService.findAllCourses().size() == coursesCount);
-                    assertTrue(courseService.findCoursesByNameFragment(newCourse.getName()).size() == 1);
-                    // ... and restore it
-                    newCourse.setName(courseName);
-                    newCourse = courseService.updCourse(newCourse);
-                    assertTrue(courseService.findAllCourses().size() == coursesCount);
-                    assertTrue(courseService.findCoursesByNameFragment(newCourse.getName()).size() == 1);
-
-                    // Save / delete new course
-                    course.setId(0);
-                    course.setName(newCourseName);
-                    newCourse = courseService.updCourse(course);
-                    assertTrue(courseService.findAllCourses().size() == (coursesCount + 1));
-                    assertTrue(courseService.findCoursesByNameFragment(newCourseName).size() == 1);
-
-                    courseService.delCourse(newCourse.getCourseId());
-                    assertTrue(courseService.findAllCourses().size() == coursesCount);
-                    assertTrue(courseService.findCoursesByNameFragment(newCourseName).size() == 0);
-                    break;
-                }
-            } while (true);
         }
+
+        // Add / upd / del course
+        Course course = RestaurantDataGenerator.getRandomCourse();
+        do {
+            String newCourseName = Util.getRandomString(course.getName().length());
+            if (courseService.findCoursesByNameFragment(newCourseName).size() == 0) {
+                String courseName = course.getName();
+                // Change current course name ...
+                course.setName(newCourseName);
+                Course newCourse = courseService.updCourse(course);
+                assertTrue(courseService.findAllCourses().size() == coursesCount);
+                assertTrue(courseService.findCoursesByNameFragment(newCourse.getName()).size() == 1);
+                // ... and restore it
+                newCourse.setName(courseName);
+                newCourse = courseService.updCourse(newCourse);
+                assertTrue(courseService.findAllCourses().size() == coursesCount);
+                assertTrue(courseService.findCoursesByNameFragment(newCourse.getName()).size() == 1);
+
+                // Save / delete new course
+                course.setId(0);
+                course.setName(newCourseName);
+                newCourse = courseService.updCourse(course);
+                assertTrue(courseService.findAllCourses().size() == (coursesCount + 1));
+                assertTrue(courseService.findCoursesByNameFragment(newCourseName).size() == 1);
+
+                courseService.delCourse(newCourse.getCourseId());
+                assertTrue(courseService.findAllCourses().size() == coursesCount);
+                assertTrue(courseService.findCoursesByNameFragment(newCourseName).size() == 0);
+                break;
+            }
+        } while (true);
     }
 }
