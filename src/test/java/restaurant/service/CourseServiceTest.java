@@ -26,8 +26,8 @@ public class CourseServiceTest extends RestaurantService {
         }
 
         Optional<Ingredient> ingredientOptional = allIngredients.stream().filter(ingredient -> !course.getCourseIngredients().stream().
-                        filter(courseIngredient -> courseIngredient.getIngredient().equals(ingredient)).
-                        findAny().isPresent()).findFirst();
+                filter(courseIngredient -> courseIngredient.getIngredient().equals(ingredient)).
+                findAny().isPresent()).findFirst();
         return ingredientOptional.isPresent() ? ingredientOptional.get() : null;
     }
 
@@ -60,9 +60,10 @@ public class CourseServiceTest extends RestaurantService {
             if (newIngredient != null) {
                 int ingredientsCount = course.getCourseIngredients().size();
                 courseService.addCourseIngredient(course, newIngredient, kgPortion, TEST_AMOUNT);
-                assertTrue(course.getCourseIngredients().size() == (ingredientsCount + 1));
+                assertTrue(courseService.findCourseById(course.getCourseId()).getCourseIngredients().size() == (ingredientsCount + 1));
+
                 courseService.delCourseIngredient(course.getCourseId(), newIngredient.getIngredientId());
-                assertTrue(course.getCourseIngredients().size() == ingredientsCount);
+                assertTrue(courseService.findCourseById(course.getCourseId()).getCourseIngredients().size() == ingredientsCount);
             }
 
             // Add / upd / del course
@@ -93,7 +94,7 @@ public class CourseServiceTest extends RestaurantService {
                     assertTrue(courseService.findCoursesByNameFragment(newCourseName).size() == 0);
                     break;
                 }
-            } while(true);
+            } while (true);
         }
     }
 }
