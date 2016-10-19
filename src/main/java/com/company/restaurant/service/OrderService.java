@@ -29,5 +29,7 @@ public interface OrderService {
 
     void addCourseToOrder(Order order, Course course);
 
+    void delCourseFromOrder(Order order, Course course);
+
     Set<Date> getOrderDates();
 }

@@ -128,6 +128,16 @@ public class OrderServiceImpl extends Service implements OrderService {
     }
 
     @Override
+    public void delCourseFromOrder(Order order, Course course) {
+        if (isFillingActionEnabled(order)) {
+            orderDao.delCourseFromOrder(order, course);
+        } else {
+            throwDataIntegrityException(String.format(
+                    IMPOSSIBLE_TO_DEL_COURSE_FROM_ORDER_PATTERN, order.getState().getName(), order.getOrderId()));
+        }
+    }
+
+    @Override
     public List<Order> findOrdersByFilter(Date orderDate, int waiterId, int tableId) {
         return findAllOrders().stream().filter(order ->
                 (((orderDate == null) || (DatetimeFormatter.getDateOnly(order.getOrderDatetime()).equals(orderDate))) &&

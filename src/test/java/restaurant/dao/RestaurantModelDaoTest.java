@@ -253,9 +253,9 @@ public class RestaurantModelDaoTest extends RestaurantDao {
 
         assertTrue(course1.equals(orderDao.findOrderCourseByCourseId(order, course1.getCourseId())));
 
-        orderDao.takeCourseFromOrder(order, course1);
-        orderDao.takeCourseFromOrder(order, course1);
-        orderDao.takeCourseFromOrder(order, course2);
+        orderDao.delCourseFromOrder(order, course1);
+        orderDao.delCourseFromOrder(order, course1);
+        orderDao.delCourseFromOrder(order, course2);
 
         assertTrue(orderDao.findOrderCourseByCourseId(order, course1.getCourseId()) == null);
 

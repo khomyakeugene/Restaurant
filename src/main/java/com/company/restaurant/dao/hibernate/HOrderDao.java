@@ -97,7 +97,7 @@ public class HOrderDao extends HDaoEntityCourseCollecting<Order> implements Orde
 
     @Transactional
     @Override
-    public void takeCourseFromOrder(Order order, Course course) {
+    public void delCourseFromOrder(Order order, Course course) {
         while (order.getCourses().remove(course));
 
         update(order);
