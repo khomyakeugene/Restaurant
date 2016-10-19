@@ -8,6 +8,7 @@ import com.company.restaurant.model.State;
 import com.company.restaurant.service.OrderService;
 import com.company.restaurant.service.impl.common.Service;
 import com.company.util.common.DatetimeFormatter;
+import com.company.util.exception.DataIntegrityException;
 
 import java.util.Date;
 import java.util.List;
@@ -46,13 +47,17 @@ public class OrderServiceImpl extends Service implements OrderService {
         return stateGraphRules.creationState(orderDao.orderEntityName());
     }
 
-    private String orderClosedState(Order order) {
+    private String orderClosedStateType(Order order) {
         return stateGraphRules.closedState(orderDao.orderEntityName(), (order == null) ? null :
                 order.getState().getType());
     }
 
-    private String orderClosedState() {
-        return orderClosedState(null);
+    private String orderClosedStateType() {
+        return orderClosedStateType(null);
+    }
+
+    private State orderClosedState(Order order) {
+        return stateDao.findStateByType(orderClosedStateType(order));
     }
 
     private String orderDeletedState(Order order) {
@@ -70,7 +75,7 @@ public class OrderServiceImpl extends Service implements OrderService {
 
     @Override
     public Order addOrder(Order order) {
-        order.getState().setType(orderCreationStateType());
+        order.setState(orderCreationState());
 
         return orderDao.addOrder(order);
     }
@@ -78,6 +83,16 @@ public class OrderServiceImpl extends Service implements OrderService {
     @Override
     public Order updOrder(Order order) {
         return orderDao.updOrder(order);
+    }
+
+    @Override
+    public void delOrder(Order order) {
+        if (orderDeletedState(order) != null) {
+            orderDao.delOrder(order);
+        } else {
+            throw new DataIntegrityException(String.format(
+                    IMPOSSIBLE_TO_DELETE_ORDER_PATTERN, order, order.getOrderId()));
+        }
     }
 
     @Override
@@ -92,7 +107,9 @@ public class OrderServiceImpl extends Service implements OrderService {
 
     @Override
     public Order closeOrder(Order order) {
-        return orderDao.updOrderState(order, orderClosedState(order));
+        order.setState(orderClosedState(order));
+
+        return updOrder(order);
     }
 
     @Override

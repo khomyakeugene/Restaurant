@@ -1,7 +1,6 @@
 package restaurant.data;
 
 import com.company.restaurant.model.Order;
-import com.company.restaurant.model.State;
 import org.junit.Test;
 import org.springframework.transaction.annotation.Transactional;
 import restaurant.service.common.RestaurantDataGenerator;
@@ -24,13 +23,10 @@ public class RestaurantPrepareTestOrderData extends RestaurantService {
 
     @Transactional
     private void prepareOrder(Integer orderNumber) {
-        State orderCreationState = orderService.orderCreationState();
-
         Order order = new Order();
         order.setOrderNumber(orderNumber.toString());
         order.setWaiter(RestaurantDataGenerator.getRandomEmployee());
         order.setTable(RestaurantDataGenerator.getRandomTable());
-        order.setState(orderCreationState);
         order = orderService.addOrder(order);
 
         // Only through update it is possible to change "default-current" field value

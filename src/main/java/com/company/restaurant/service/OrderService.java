@@ -18,6 +18,8 @@ public interface OrderService {
 
     Order updOrder(Order order);
 
+    void delOrder(Order order);
+
     void delAllOrders();
 
     Order findOrderById(int orderId);

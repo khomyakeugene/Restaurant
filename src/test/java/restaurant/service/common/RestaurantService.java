@@ -23,6 +23,14 @@ public class RestaurantService extends RestaurantDao {
 
     private Portion kgPortion;
 
+    protected Portion getKgPortion() {
+        if (kgPortion == null) {
+            kgPortion = warehouseService.findPortionById(KG_PORTION_ID);
+        }
+
+        return kgPortion;
+    }
+
     private static void initServices(String configLocation) {
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext(configLocation);
 
@@ -37,17 +45,13 @@ public class RestaurantService extends RestaurantDao {
         initServices(SERVICE_CONTEXT_NAME);
     }
 
-    @BeforeClass
-    public static void setUpClass() throws Exception {
+    protected static void initContext() throws Exception  {
         initDaoContext();
         initServiceContext();
     }
 
-    protected Portion getKgPortion() {
-        if (kgPortion == null) {
-            kgPortion = warehouseService.findPortionById(KG_PORTION_ID);
-        }
-
-        return kgPortion;
+    @BeforeClass
+    public static void setUpClass() throws Exception {
+        initContext();
     }
 }
