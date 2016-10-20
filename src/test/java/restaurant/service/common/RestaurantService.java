@@ -20,6 +20,7 @@ public class RestaurantService extends RestaurantDao {
     protected static MenuService menuService;
     protected static WarehouseService warehouseService;
     protected static OrderService orderService;
+    protected static TableService tableService;
 
     private Portion kgPortion;
 
@@ -39,6 +40,7 @@ public class RestaurantService extends RestaurantDao {
         courseService = applicationContext.getBean(CourseService.class);
         warehouseService = applicationContext.getBean(WarehouseService.class);
         orderService = applicationContext.getBean(OrderService.class);
+        tableService = applicationContext.getBean(TableService.class);
     }
 
     private static void initServiceContext() throws Exception {
