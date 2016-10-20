@@ -274,6 +274,8 @@ public class RestaurantServiceTest extends RestaurantService {
         assertTrue(warehouseService.findIngredientInWarehouse(warehouse.getIngredient(), warehouse.getPortion()).equals(warehouse));
 
         Ingredient ingredient = warehouse.getIngredient();
+        assertTrue(warehouseService.findIngredientById(ingredient.getIngredientId()).equals(ingredient));
+
         Portion portion = warehouse.getPortion();
         Float amount = warehouse.getAmount();
         Float newAmount = Util.getRandomFloat();
@@ -303,17 +305,30 @@ public class RestaurantServiceTest extends RestaurantService {
     }
 
     @Test(timeout = 2000)
+    public void findPortionTest() throws Exception {
+        for (Portion portion : warehouseService.findAllPortions()) {
+            assertTrue(warehouseService.findPortionById(portion.getPortionId()).equals(portion));
+        }
+    }
+
+    @Test(timeout = 2000)
     @Transactional
     public void addFindDelWarehouseTest() throws Exception {
         List<Warehouse> warehouseList = warehouseService.findAllWarehouseIngredients();
         int warehouseSize = warehouseList.size();
 
-        // Test changing of existing warehouse ingredients
         if (warehouseSize > 0 ) {
             changeAmountInWarehouseTest(warehouseList.get(random.nextInt(warehouseSize)));
+
+            warehouseService.clearWarehouse();
+            assertTrue(warehouseService.findAllWarehouseIngredients().size() == 0);
+
+            for (Warehouse warehouse : warehouseList) {
+                warehouseService.addIngredientToWarehouse(warehouse.getIngredient(), warehouse.getPortion(), warehouse.getAmount());
+            }
+            assertTrue(warehouseService.findAllWarehouseIngredients().size() == warehouseSize);
         }
 
-        // Test with till non-warehouse ingredients
         List<Ingredient> nonWarehouseIngredients = getNonWarehouseIngredientList();
         if (nonWarehouseIngredients.size() > 0) {
             Ingredient ingredient = nonWarehouseIngredients.get(0);
@@ -331,23 +346,7 @@ public class RestaurantServiceTest extends RestaurantService {
 
             warehouseService.takeIngredientFromWarehouse(ingredient, portion, amount);
             assertTrue(warehouseService.findIngredientInWarehouse(ingredient, portion) == null);
+            assertTrue(warehouseService.findAllWarehouseIngredients().size() == warehouseSize);
         }
     }
-
-    @Test
-    public void findIngredientById() throws Exception {
-
-    }
-
-    @Test
-    public void findAllPortions() throws Exception {
-
-    }
-
-    @Test
-    public void findPortionById() throws Exception {
-
-    }
-
-
 }
