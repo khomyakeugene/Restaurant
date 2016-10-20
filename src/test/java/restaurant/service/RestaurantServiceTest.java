@@ -12,6 +12,8 @@ import restaurant.util.Util;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
+import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertTrue;
 
@@ -19,20 +21,32 @@ import static org.junit.Assert.assertTrue;
  * Created by Yevhen on 18.10.2016.
  */
 public class RestaurantServiceTest extends RestaurantService {
-    private static final Float TEST_AMOUNT = 1.0f;
-
     private List<Ingredient> allIngredients;
     private static Order closedOrder;
 
-    private Ingredient getFirstNewIngredient(Course course) {
+    private Random random = new Random();
+
+    private List<Ingredient> getAllIngredients() {
         if (allIngredients == null) {
             allIngredients = warehouseService.findAllIngredients();
         }
 
-        Optional<Ingredient> ingredientOptional = allIngredients.stream().filter(ingredient -> !course.getCourseIngredients().stream().
+        return allIngredients;
+    }
+
+    private Ingredient getFirstNewIngredient(Course course) {
+        Optional<Ingredient> ingredientOptional = getAllIngredients().stream().filter(ingredient -> !course.getCourseIngredients().stream().
                 filter(courseIngredient -> courseIngredient.getIngredient().equals(ingredient)).
                 findAny().isPresent()).findFirst();
         return ingredientOptional.isPresent() ? ingredientOptional.get() : null;
+    }
+
+    private List<Ingredient> getNonWarehouseIngredientList() {
+        List<Warehouse> allWarehouseIngredients = warehouseService.findAllWarehouseIngredients();
+
+        return getAllIngredients().stream().filter(ingredient -> !allWarehouseIngredients.stream().
+                filter(warehouse -> warehouse.getIngredient().equals(ingredient)).
+                findAny().isPresent()).collect(Collectors.toList());
     }
 
     private static void prepareClosedOrder() throws Exception {
@@ -98,7 +112,7 @@ public class RestaurantServiceTest extends RestaurantService {
             Ingredient newIngredient = getFirstNewIngredient(course);
             if (newIngredient != null) {
                 int ingredientsCount = course.getCourseIngredients().size();
-                courseService.addCourseIngredient(course, newIngredient, kgPortion, TEST_AMOUNT);
+                courseService.addCourseIngredient(course, newIngredient, kgPortion, Util.getRandomFloat());
                 assertTrue(courseService.findCourseById(course.getCourseId()).getCourseIngredients().size() == (ingredientsCount + 1));
 
                 courseService.delCourseIngredient(course.getCourseId(), newIngredient.getIngredientId());
@@ -200,7 +214,7 @@ public class RestaurantServiceTest extends RestaurantService {
                 Course course = RestaurantDataGenerator.getRandomCourse();
                 menuService.addCourseToMenu(newMenu, course);
                 assertTrue(newMenu.getCourses().size() == 1);
-                menuService.delCourseFromMenu(newMenu,course);
+                menuService.delCourseFromMenu(newMenu, course);
                 assertTrue(newMenu.getCourses().size() == 0);
 
                 menuService.delMenu(newMenu.getMenuId());
@@ -230,6 +244,8 @@ public class RestaurantServiceTest extends RestaurantService {
         Course course = RestaurantDataGenerator.getRandomCourse();
         orderService.addCourseToOrder(order, course);
         assertTrue(order.getCourses().size() == 1);
+        orderService.delCourseFromOrder(order, course);
+        assertTrue(order.getCourses().size() == 0);
 
         orderDao.delOrder(order);
         assertTrue(orderService.findAllOrders().size() == orderCount);
@@ -251,4 +267,87 @@ public class RestaurantServiceTest extends RestaurantService {
             assertTrue(tableService.findTableById(table.getTableId()).equals(table));
         }
     }
+
+    // -------------------------------------------------------------
+    @Transactional
+    private void changeAmountInWarehouseTest(Warehouse warehouse) throws Exception {
+        assertTrue(warehouseService.findIngredientInWarehouse(warehouse.getIngredient(), warehouse.getPortion()).equals(warehouse));
+
+        Ingredient ingredient = warehouse.getIngredient();
+        Portion portion = warehouse.getPortion();
+        Float amount = warehouse.getAmount();
+        Float newAmount = Util.getRandomFloat();
+
+        warehouseService.setAmountInWarehouse(warehouse, newAmount);
+        Warehouse newWarehouse = warehouseService.findIngredientInWarehouse(ingredient, portion);
+        assertTrue((newWarehouse != null) && newWarehouse.getAmount().equals(newAmount));
+        warehouseService.setAmountInWarehouse(warehouse, newAmount);
+        warehouseService.setAmountInWarehouse(warehouse, amount);
+        newWarehouse = warehouseService.findIngredientInWarehouse(ingredient, portion);
+        assertTrue((newWarehouse != null) && newWarehouse.getAmount().equals(amount));
+
+        Float addAmount = Util.getRandomFloat();
+        warehouseService.addIngredientToWarehouse(ingredient, portion, addAmount);
+        newWarehouse = warehouseService.findIngredientInWarehouse(ingredient, portion);
+        assertTrue((newWarehouse != null) && newWarehouse.getAmount().equals(amount + addAmount));
+        warehouseService.addIngredientToWarehouse(ingredient.getIngredientId(), portion.getPortionId(), addAmount);
+        newWarehouse = warehouseService.findIngredientInWarehouse(ingredient, portion);
+        assertTrue((newWarehouse != null) && newWarehouse.getAmount().equals(amount + addAmount + addAmount));
+
+        warehouseService.takeIngredientFromWarehouse(ingredient, portion, addAmount);
+        newWarehouse = warehouseService.findIngredientInWarehouse(ingredient, portion);
+        assertTrue((newWarehouse != null) && newWarehouse.getAmount().equals(amount + addAmount));
+        warehouseService.takeIngredientFromWarehouse(ingredient.getIngredientId(), portion.getPortionId(), addAmount);
+        newWarehouse = warehouseService.findIngredientInWarehouse(ingredient, portion);
+        assertTrue((newWarehouse != null) && newWarehouse.getAmount().equals(amount));
+    }
+
+    @Test(timeout = 2000)
+    @Transactional
+    public void addFindDelWarehouseTest() throws Exception {
+        List<Warehouse> warehouseList = warehouseService.findAllWarehouseIngredients();
+        int warehouseSize = warehouseList.size();
+
+        // Test changing of existing warehouse ingredients
+        if (warehouseSize > 0 ) {
+            changeAmountInWarehouseTest(warehouseList.get(random.nextInt(warehouseSize)));
+        }
+
+        // Test with till non-warehouse ingredients
+        List<Ingredient> nonWarehouseIngredients = getNonWarehouseIngredientList();
+        if (nonWarehouseIngredients.size() > 0) {
+            Ingredient ingredient = nonWarehouseIngredients.get(0);
+            Portion portion = getKgPortion();
+            Float amount = Util.getRandomFloat();
+
+            warehouseService.addIngredientToWarehouse(ingredient, portion, amount);
+            assertTrue(warehouseService.findAllWarehouseIngredients().size() == (warehouseSize + 1));
+            Warehouse warehouse = warehouseService.findIngredientInWarehouse(ingredient, portion);
+            assertTrue((warehouse != null) && warehouse.getAmount().equals(amount));
+
+            if (warehouseSize == 0) {
+                changeAmountInWarehouseTest(warehouse);
+            }
+
+            warehouseService.takeIngredientFromWarehouse(ingredient, portion, amount);
+            assertTrue(warehouseService.findIngredientInWarehouse(ingredient, portion) == null);
+        }
+    }
+
+    @Test
+    public void findIngredientById() throws Exception {
+
+    }
+
+    @Test
+    public void findAllPortions() throws Exception {
+
+    }
+
+    @Test
+    public void findPortionById() throws Exception {
+
+    }
+
+
 }
