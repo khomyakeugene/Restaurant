@@ -1,8 +1,6 @@
 package com.company.restaurant.dao.hibernate;
 
-import com.company.restaurant.dao.CourseDao;
 import com.company.restaurant.dao.CourseIngredientDao;
-import com.company.restaurant.dao.IngredientDao;
 import com.company.restaurant.dao.PortionDao;
 import com.company.restaurant.dao.hibernate.common.HDaoEntity;
 import com.company.restaurant.model.Course;
@@ -15,19 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
  * Created by Yevhen on 04.07.2016.
  */
 public class HCourseIngredientDao extends HDaoEntity<CourseIngredient> implements CourseIngredientDao {
-    private static final String COURSE_ATTRIBUTE_NAME = "course";
-
-    private CourseDao courseDao;
-    private IngredientDao ingredientDao;
     private PortionDao portionDao;
-
-    public void setCourseDao(CourseDao courseDao) {
-        this.courseDao = courseDao;
-    }
-
-    public void setIngredientDao(IngredientDao ingredientDao) {
-        this.ingredientDao = ingredientDao;
-    }
 
     public void setPortionDao(PortionDao portionDao) {
         this.portionDao = portionDao;

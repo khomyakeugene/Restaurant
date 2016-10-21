@@ -90,10 +90,4 @@ public class HCourseDao extends HDaoEntity<Course> implements CourseDao {
 
     }
 
-    @Transactional
-    @Override
-    public void delCourseIngredient(int courseId, int ingredientId) {
-
-    }
-
 }
