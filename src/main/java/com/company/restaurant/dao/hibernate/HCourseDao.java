@@ -3,6 +3,9 @@ package com.company.restaurant.dao.hibernate;
 import com.company.restaurant.dao.CourseDao;
 import com.company.restaurant.dao.hibernate.common.HDaoEntity;
 import com.company.restaurant.model.Course;
+import com.company.restaurant.model.CourseIngredient;
+import com.company.restaurant.model.Ingredient;
+import com.company.restaurant.model.Portion;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -73,6 +76,24 @@ public class HCourseDao extends HDaoEntity<Course> implements CourseDao {
     @Override
     public List<Course> findCoursesByNameFragment(String nameFragment) {
         return findObjectsByNameFragment(nameFragment);
+    }
+
+    @Transactional
+    @Override
+    public CourseIngredient addCourseIngredient(Course course, Ingredient ingredient, Portion portion, Float amount) {
+        return null;
+    }
+
+    @Transactional
+    @Override
+    public void delCourseIngredient(Course course, Ingredient ingredient) {
+
+    }
+
+    @Transactional
+    @Override
+    public void delCourseIngredient(int courseId, int ingredientId) {
+
     }
 
 }

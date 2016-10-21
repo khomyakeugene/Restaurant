@@ -27,6 +27,7 @@
         <property name="courseCategoryDao" ref="courseCategoryDao"/>
         <property name="courseDao" ref="courseDao"/>
         <property name="courseIngredientDao" ref="courseIngredientDao"/>
+        <property name="ingredientDao" ref="ingredientDao"/>
     </bean>
 
     <bean class="com.company.restaurant.service.impl.OrderServiceImpl" id="orderService">

@@ -1,6 +1,9 @@
 package com.company.restaurant.dao;
 
 import com.company.restaurant.model.Course;
+import com.company.restaurant.model.CourseIngredient;
+import com.company.restaurant.model.Ingredient;
+import com.company.restaurant.model.Portion;
 
 import java.util.List;
 
@@ -27,4 +30,10 @@ public interface CourseDao {
     List<Course> findAllCourses();
 
     List<Course> findCoursesByNameFragment(String nameFragment);
+
+    CourseIngredient addCourseIngredient(Course course, Ingredient ingredient, Portion portion, Float amount);
+
+    void delCourseIngredient(Course course, Ingredient ingredient);
+
+    void delCourseIngredient(int courseId, int ingredientId);
 }

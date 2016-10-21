@@ -64,9 +64,4 @@ public class HCourseIngredientDao extends HDaoEntity<CourseIngredient> implement
         delete(courseIngredient);
     }
 
-    @Transactional
-    @Override
-    public void delCourseIngredient(int courseId, int ingredientId) {
-        delCourseIngredient(courseDao.findCourseById(courseId), ingredientDao.findIngredientById(ingredientId));
-    }
 }

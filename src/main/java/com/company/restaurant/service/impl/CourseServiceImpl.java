@@ -3,6 +3,7 @@ package com.company.restaurant.service.impl;
 import com.company.restaurant.dao.CourseCategoryDao;
 import com.company.restaurant.dao.CourseDao;
 import com.company.restaurant.dao.CourseIngredientDao;
+import com.company.restaurant.dao.IngredientDao;
 import com.company.restaurant.model.*;
 import com.company.restaurant.service.CourseService;
 import com.company.restaurant.service.impl.common.Service;
@@ -18,6 +19,7 @@ public class CourseServiceImpl extends Service implements CourseService {
     private CourseCategoryDao courseCategoryDao;
     private CourseDao courseDao;
     private CourseIngredientDao courseIngredientDao;
+    private IngredientDao ingredientDao;
 
     private void validateWeight(Float weight) {
         validateNotNullFloatPropertyPositiveness(WEIGHT_PROPERTY_NAME, weight);
@@ -53,6 +55,10 @@ public class CourseServiceImpl extends Service implements CourseService {
 
     public void setCourseIngredientDao(CourseIngredientDao courseIngredientDao) {
         this.courseIngredientDao = courseIngredientDao;
+    }
+
+    public void setIngredientDao(IngredientDao ingredientDao) {
+        this.ingredientDao = ingredientDao;
     }
 
     @Override
@@ -106,6 +112,6 @@ public class CourseServiceImpl extends Service implements CourseService {
 
     @Override
     public void delCourseIngredient(int courseId, int ingredientId) {
-        courseIngredientDao.delCourseIngredient(courseId, ingredientId);
+        courseIngredientDao.delCourseIngredient(courseDao.findCourseById(courseId), ingredientDao.findIngredientById(ingredientId));
     }
 }

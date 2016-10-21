@@ -12,6 +12,4 @@ public interface CourseIngredientDao {
     CourseIngredient addCourseIngredient(Course course, Ingredient ingredient, Portion portion, Float amount);
 
     void delCourseIngredient(Course course, Ingredient ingredient);
-
-    void delCourseIngredient(int courseId, int ingredientId);
 }
