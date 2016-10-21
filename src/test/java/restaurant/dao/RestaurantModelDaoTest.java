@@ -97,7 +97,7 @@ public class RestaurantModelDaoTest extends RestaurantDao {
         courseCategoryDao.delCourseCategory(name);
     }
 
-    @Test//(timeout = 2000)
+    @Test(timeout = 2000)
     public void addFindDelCourseTest() throws Exception {
         CourseCategory courseCategory = new CourseCategory();
         courseCategory.setId(courseCategoryId());
@@ -115,7 +115,13 @@ public class RestaurantModelDaoTest extends RestaurantDao {
 
         courseDao.delCourse(name);
         assertTrue(courseDao.findCourseByName(name) == null);
+
         // Test delete by "the whole object"
+        course = new Course();
+        course.setName(name);
+        course.setWeight(Util.getRandomFloat());
+        course.setCost(Util.getRandomFloat());
+        course.setCourseCategory(courseCategory);
         course = courseDao.addCourse(course);
         assertTrue(course.equals(courseDao.findCourseByName(name)));
         courseDao.delCourse(course);

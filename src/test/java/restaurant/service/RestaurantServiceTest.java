@@ -95,7 +95,7 @@ public class RestaurantServiceTest extends RestaurantService {
         }
     }
 
-    @Test//(timeout = 2000)
+    @Test(timeout = 2000)
     @Transactional
     public void addUpdDelFindCoursesTest() throws Exception {
         Portion kgPortion = getKgPortion();
@@ -139,13 +139,16 @@ public class RestaurantServiceTest extends RestaurantService {
                 assertTrue(courseService.findAllCourses().size() == coursesCount);
                 assertTrue(courseService.findCoursesByNameFragment(newCourse.getName()).size() == 1);
 
-                // Save / delete new course
-                course.setId(0);
-                course.setName(newCourseName);
-                newCourse = courseService.updCourse(course);
+                // Add new course
+                newCourse = new Course();
+                newCourse.setName(newCourseName);
+                newCourse.setCourseCategory(courseService.findAllCourseCategories().get(0));
+                newCourse.setWeight(Util.getRandomFloat());
+                newCourse.setCost(Util.getRandomFloat());
+                newCourse = courseService.updCourse(newCourse);
                 assertTrue(courseService.findAllCourses().size() == (coursesCount + 1));
                 assertTrue(courseService.findCoursesByNameFragment(newCourseName).size() == 1);
-
+                // Delete new course
                 courseService.delCourse(newCourse.getCourseId());
                 assertTrue(courseService.findAllCourses().size() == coursesCount);
                 assertTrue(courseService.findCoursesByNameFragment(newCourseName).size() == 0);

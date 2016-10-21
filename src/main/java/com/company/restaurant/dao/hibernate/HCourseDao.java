@@ -1,7 +1,6 @@
 package com.company.restaurant.dao.hibernate;
 
 import com.company.restaurant.dao.CourseDao;
-import com.company.restaurant.dao.CourseIngredientDao;
 import com.company.restaurant.dao.hibernate.common.HDaoEntity;
 import com.company.restaurant.model.Course;
 import com.company.restaurant.model.CourseIngredient;
@@ -10,17 +9,12 @@ import com.company.restaurant.model.Portion;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by Yevhen on 11.06.2016.
  */
 public class HCourseDao extends HDaoEntity<Course> implements CourseDao {
-    private CourseIngredientDao courseIngredientDao;
-
-    public void setCourseIngredientDao(CourseIngredientDao courseIngredientDao) {
-        this.courseIngredientDao = courseIngredientDao;
-    }
-
     @Transactional
     @Override
     public Course addCourse(Course course) {
@@ -97,14 +91,22 @@ public class HCourseDao extends HDaoEntity<Course> implements CourseDao {
         course.getCourseIngredients().add(courseIngredient);
 
         return update(course);
-
-        // return courseIngredientDao.addCourseIngredient(course, ingredient, portion, amount);
     }
 
     @Transactional
     @Override
     public void delCourseIngredient(Course course, Ingredient ingredient) {
-        courseIngredientDao.delCourseIngredient(course, ingredient);
-    }
+        if (course != null && ingredient != null) {
+            int courseId = course.getCourseId();
+            int ingredientId = ingredient.getIngredientId();
 
+            Optional<CourseIngredient> courseIngredientOptional = course.getCourseIngredients().stream().
+                    filter(courseIngredient -> ((courseIngredient.getCourse().getCourseId() == courseId) &&
+                            (courseIngredient.getIngredient().getIngredientId() == ingredientId))).findFirst();
+            if (courseIngredientOptional.isPresent()) {
+                course.getCourseIngredients().remove(courseIngredientOptional.get());
+                update(course);
+            }
+        }
+    }
 }

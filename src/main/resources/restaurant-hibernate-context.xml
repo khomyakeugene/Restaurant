@@ -86,15 +86,8 @@
         <property name="useCriteriaQuery" value="true"/>
     </bean>
 
-    <bean class="com.company.restaurant.dao.hibernate.HCourseIngredientDao" id="courseIngredientDao">
-        <property name="sessionFactory" ref="sessionFactory"/>
-        <property name="portionDao" ref="portionDao"/>
-        <property name="useCriteriaQuery" value="false"/>
-    </bean>
-
     <bean class="com.company.restaurant.dao.hibernate.HCourseDao" id="courseDao">
         <property name="sessionFactory" ref="sessionFactory"/>
-        <property name="courseIngredientDao" ref="courseIngredientDao"/>
         <property name="useCriteriaQuery" value="false"/>
     </bean>
 
