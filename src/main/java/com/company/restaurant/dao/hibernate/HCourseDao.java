@@ -87,8 +87,18 @@ public class HCourseDao extends HDaoEntity<Course> implements CourseDao {
 
     @Transactional
     @Override
-    public CourseIngredient addCourseIngredient(Course course, Ingredient ingredient, Portion portion, Float amount) {
-        return courseIngredientDao.addCourseIngredient(course, ingredient, portion, amount);
+    public Course addCourseIngredient(Course course, Ingredient ingredient, Portion portion, Float amount) {
+        CourseIngredient courseIngredient = new CourseIngredient();
+        courseIngredient.setCourse(course);
+        courseIngredient.setIngredient(ingredient);
+        courseIngredient.setPortion(portion);
+        courseIngredient.setAmount(amount);
+
+        course.getCourseIngredients().add(courseIngredient);
+
+        return update(course);
+
+        // return courseIngredientDao.addCourseIngredient(course, ingredient, portion, amount);
     }
 
     @Transactional

@@ -3,7 +3,10 @@ package com.company.restaurant.service.impl;
 import com.company.restaurant.dao.CourseCategoryDao;
 import com.company.restaurant.dao.CourseDao;
 import com.company.restaurant.dao.IngredientDao;
-import com.company.restaurant.model.*;
+import com.company.restaurant.model.Course;
+import com.company.restaurant.model.CourseCategory;
+import com.company.restaurant.model.Ingredient;
+import com.company.restaurant.model.Portion;
 import com.company.restaurant.service.CourseService;
 import com.company.restaurant.service.impl.common.Service;
 
@@ -98,7 +101,7 @@ public class CourseServiceImpl extends Service implements CourseService {
     }
 
     @Override
-    public CourseIngredient addCourseIngredient(Course course, Ingredient ingredient, Portion portion, Float amount) {
+    public Course addCourseIngredient(Course course, Ingredient ingredient, Portion portion, Float amount) {
         validateCourseIngredient(course, ingredient, portion, amount);
 
         return courseDao.addCourseIngredient(course, ingredient, portion, amount);

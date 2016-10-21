@@ -95,7 +95,7 @@ public class RestaurantServiceTest extends RestaurantService {
         }
     }
 
-    @Test(timeout = 2000)
+    @Test//(timeout = 2000)
     @Transactional
     public void addUpdDelFindCoursesTest() throws Exception {
         Portion kgPortion = getKgPortion();

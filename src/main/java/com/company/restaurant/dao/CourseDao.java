@@ -1,7 +1,6 @@
 package com.company.restaurant.dao;
 
 import com.company.restaurant.model.Course;
-import com.company.restaurant.model.CourseIngredient;
 import com.company.restaurant.model.Ingredient;
 import com.company.restaurant.model.Portion;
 
@@ -31,7 +30,7 @@ public interface CourseDao {
 
     List<Course> findCoursesByNameFragment(String nameFragment);
 
-    CourseIngredient addCourseIngredient(Course course, Ingredient ingredient, Portion portion, Float amount);
+    Course addCourseIngredient(Course course, Ingredient ingredient, Portion portion, Float amount);
 
     void delCourseIngredient(Course course, Ingredient ingredient);
 }
