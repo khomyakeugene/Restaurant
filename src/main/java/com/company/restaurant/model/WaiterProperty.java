@@ -15,6 +15,21 @@ public class WaiterProperty {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof WaiterProperty)) return false;
+
+        WaiterProperty that = (WaiterProperty) o;
+
+        return (orders == null && that.orders == null) ||
+                (orders != null) && (that.orders != null) &&
+                        (orders.size() == that.orders.size()) &&
+                        !orders.stream().filter(order -> !that.orders.stream().
+                                filter(thatOrder -> (thatOrder.getOrderId() == order.getOrderId())).
+                                findAny().isPresent()).findAny().isPresent();
+    }
+
+    @Override
     public String toString() {
         return "WaiterProperty{" +
                 "orders=" + orders +

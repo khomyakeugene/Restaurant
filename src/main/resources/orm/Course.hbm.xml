@@ -25,11 +25,24 @@
         <many-to-one name="courseCategory" column="course_category_id"
                      class="com.company.restaurant.model.CourseCategory" lazy="false" not-null="true"/>
 
-        <set name="courseIngredients" table="course_ingredient" lazy="false" inverse="true">
+        <set name="courseIngredients" table="course_ingredient" lazy="false" inverse="true" fetch="select" cascade="all">
             <key>
                 <column name="course_id" not-null="true"/>
             </key>
             <one-to-many class="com.company.restaurant.model.CourseIngredient"/>
         </set>
+
+
+        <!--<set name="courseIngredients" table="v_course_ingredient_link" inverse="true" lazy="false"-->
+             <!--fetch="select" cascade="all">-->
+            <!--<key>-->
+                <!--<column name="this_course_id" not-null="true"/>-->
+            <!--</key>-->
+            <!--<many-to-many entity-name="com.company.restaurant.model.CourseIngredient">-->
+                <!--<column name="course_id" not-null="true"/>-->
+                <!--<column name="ingredient_id" not-null="true"/>-->
+            <!--</many-to-many>-->
+        <!--</set>-->
+
     </class>
 </hibernate-mapping>
