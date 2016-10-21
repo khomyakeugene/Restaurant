@@ -1,6 +1,7 @@
 package com.company.restaurant.dao.hibernate;
 
 import com.company.restaurant.dao.CourseDao;
+import com.company.restaurant.dao.CourseIngredientDao;
 import com.company.restaurant.dao.hibernate.common.HDaoEntity;
 import com.company.restaurant.model.Course;
 import com.company.restaurant.model.CourseIngredient;
@@ -14,6 +15,12 @@ import java.util.List;
  * Created by Yevhen on 11.06.2016.
  */
 public class HCourseDao extends HDaoEntity<Course> implements CourseDao {
+    private CourseIngredientDao courseIngredientDao;
+
+    public void setCourseIngredientDao(CourseIngredientDao courseIngredientDao) {
+        this.courseIngredientDao = courseIngredientDao;
+    }
+
     @Transactional
     @Override
     public Course addCourse(Course course) {
@@ -81,13 +88,13 @@ public class HCourseDao extends HDaoEntity<Course> implements CourseDao {
     @Transactional
     @Override
     public CourseIngredient addCourseIngredient(Course course, Ingredient ingredient, Portion portion, Float amount) {
-        return null;
+        return courseIngredientDao.addCourseIngredient(course, ingredient, portion, amount);
     }
 
     @Transactional
     @Override
     public void delCourseIngredient(Course course, Ingredient ingredient) {
-
+        courseIngredientDao.delCourseIngredient(course, ingredient);
     }
 
 }

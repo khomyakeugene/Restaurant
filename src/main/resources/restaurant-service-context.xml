@@ -26,7 +26,6 @@
     <bean class="com.company.restaurant.service.impl.CourseServiceImpl" id="courseService">
         <property name="courseCategoryDao" ref="courseCategoryDao"/>
         <property name="courseDao" ref="courseDao"/>
-        <property name="courseIngredientDao" ref="courseIngredientDao"/>
         <property name="ingredientDao" ref="ingredientDao"/>
     </bean>
 

@@ -2,7 +2,6 @@ package com.company.restaurant.service.impl;
 
 import com.company.restaurant.dao.CourseCategoryDao;
 import com.company.restaurant.dao.CourseDao;
-import com.company.restaurant.dao.CourseIngredientDao;
 import com.company.restaurant.dao.IngredientDao;
 import com.company.restaurant.model.*;
 import com.company.restaurant.service.CourseService;
@@ -18,7 +17,6 @@ public class CourseServiceImpl extends Service implements CourseService {
 
     private CourseCategoryDao courseCategoryDao;
     private CourseDao courseDao;
-    private CourseIngredientDao courseIngredientDao;
     private IngredientDao ingredientDao;
 
     private void validateWeight(Float weight) {
@@ -51,10 +49,6 @@ public class CourseServiceImpl extends Service implements CourseService {
 
     public void setCourseDao(CourseDao courseDao) {
         this.courseDao = courseDao;
-    }
-
-    public void setCourseIngredientDao(CourseIngredientDao courseIngredientDao) {
-        this.courseIngredientDao = courseIngredientDao;
     }
 
     public void setIngredientDao(IngredientDao ingredientDao) {
@@ -107,11 +101,11 @@ public class CourseServiceImpl extends Service implements CourseService {
     public CourseIngredient addCourseIngredient(Course course, Ingredient ingredient, Portion portion, Float amount) {
         validateCourseIngredient(course, ingredient, portion, amount);
 
-        return courseIngredientDao.addCourseIngredient(course, ingredient, portion, amount);
+        return courseDao.addCourseIngredient(course, ingredient, portion, amount);
     }
 
     @Override
     public void delCourseIngredient(int courseId, int ingredientId) {
-        courseIngredientDao.delCourseIngredient(courseDao.findCourseById(courseId), ingredientDao.findIngredientById(ingredientId));
+        courseDao.delCourseIngredient(courseDao.findCourseById(courseId), ingredientDao.findIngredientById(ingredientId));
     }
 }
