@@ -49,7 +49,7 @@ public class RestaurantServiceTest extends RestaurantService {
                 findAny().isPresent()).collect(Collectors.toList());
     }
 
-    private static void prepareClosedOrder() throws Exception {
+    private static void prepareClosedOrder() {
         Order order = new Order();
         order.setOrderNumber(Integer.toString(Util.getRandomInteger()));
         order.setWaiter(RestaurantDataGenerator.getRandomEmployee());
@@ -61,7 +61,7 @@ public class RestaurantServiceTest extends RestaurantService {
         closedOrder = orderService.closeOrder(order);
     }
 
-    private static void clearClosedOrder() throws Exception {
+    private static void clearClosedOrder() {
         orderDao.delOrder(closedOrder);
     }
 
@@ -98,9 +98,6 @@ public class RestaurantServiceTest extends RestaurantService {
     @Test(timeout = 2000)
     @Transactional
     public void addUpdDelFindCoursesTest() throws Exception {
-        Portion kgPortion = getKgPortion();
-        List<Ingredient> ingredients = warehouseService.findAllIngredients();
-
         List<Course> courses = courseService.findAllCourses();
         int coursesCount = courses.size();
         assertTrue(coursesCount > 0);
@@ -111,8 +108,9 @@ public class RestaurantServiceTest extends RestaurantService {
             // Add / del course ingredient
             Ingredient newIngredient = getFirstNewIngredient(course);
             if (newIngredient != null) {
+                Portion portion = getKgPortion();
                 int ingredientsCount = course.getCourseIngredients().size();
-                courseService.addCourseIngredient(course, newIngredient, kgPortion, Util.getRandomFloat());
+                courseService.addCourseIngredient(course, newIngredient, portion, Util.getRandomFloat());
                 assertTrue(courseService.findCourseById(course.getCourseId()).getCourseIngredients().size() == (ingredientsCount + 1));
 
                 courseService.delCourseIngredient(course.getCourseId(), newIngredient.getIngredientId());
@@ -273,7 +271,7 @@ public class RestaurantServiceTest extends RestaurantService {
 
     // -------------------------------------------------------------
     @Transactional
-    private void changeAmountInWarehouseTest(Warehouse warehouse) throws Exception {
+    private void changeAmountInWarehouseTest(Warehouse warehouse) {
         assertTrue(warehouseService.findIngredientInWarehouse(warehouse.getIngredient(), warehouse.getPortion()).equals(warehouse));
 
         Ingredient ingredient = warehouse.getIngredient();

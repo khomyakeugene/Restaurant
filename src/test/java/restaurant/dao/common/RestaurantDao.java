@@ -45,7 +45,7 @@ public class RestaurantDao {
         commonDataDao = applicationContext.getBean(CommonDataDao.class);
     }
 
-    protected static void initDaoContext() throws Exception {
+    protected static void initDaoContext() {
         initDataSource(DAO_CONTEXT_NAME);
     }
 

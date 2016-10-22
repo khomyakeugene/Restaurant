@@ -43,7 +43,7 @@ public class RestaurantService extends RestaurantDao {
         tableService = applicationContext.getBean(TableService.class);
     }
 
-    private static void initServiceContext() throws Exception {
+    private static void initServiceContext() {
         initServices(SERVICE_CONTEXT_NAME);
     }
 

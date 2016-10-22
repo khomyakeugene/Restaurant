@@ -212,8 +212,7 @@ public class AdminCourseController extends AdminCRUDPhotoHolderController<Course
     public ModelAndView createNewCourse(@RequestParam(COURSE_NAME_PAR_NAME) String courseName,
                                         @RequestParam(COURSE_CATEGORY_ID_PAR_NAME) int courseCategoryId,
                                         @RequestParam(COURSE_WEIGHT_PAR_NAME) Float courseWeight,
-                                        @RequestParam(COURSE_COST_PAR_NAME) Float courseCost,
-                                        @RequestParam(SUBMIT_BUTTON_PAR_NAME) String submitButtonValue) {
+                                        @RequestParam(COURSE_COST_PAR_NAME) Float courseCost) {
         createCourse(courseName, courseCategoryId, courseWeight, courseCost);
 
         return toCurrentObjectPage();
