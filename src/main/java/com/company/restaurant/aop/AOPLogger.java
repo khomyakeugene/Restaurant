@@ -1,10 +1,5 @@
 package com.company.restaurant.aop;
 
-/**
- * Created by Yevhen on 24.10.2016.
- */
-
-
 import com.company.util.common.Util;
 import org.apache.log4j.Logger;
 import org.aspectj.lang.JoinPoint;
@@ -12,6 +7,10 @@ import org.aspectj.lang.Signature;
 import org.aspectj.lang.reflect.MethodSignature;
 
 import java.util.Arrays;
+
+/**
+ * Created by Yevhen on 24.10.2016.
+ */
 
 public class AOPLogger {
     private static final String MESSAGE_EXECUTION_NANO_TIME_PATTERN = "%s (execution time: %d micro seconds)";

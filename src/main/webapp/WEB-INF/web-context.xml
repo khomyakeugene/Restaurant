@@ -20,17 +20,6 @@
         <property name="maxUploadSize" value="10000000"/>
     </bean>
 
-    <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"
-          id="messageConverter"/>
-
-    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter" id="requestMappingHandlerAdapter">
-        <property name="messageConverters">
-            <list>
-                <ref bean="messageConverter"/>
-            </list>
-        </property>
-    </bean>
-
     <mvc:annotation-driven/>
     <mvc:resources mapping="/resources/**" location="/resources/"/>
 </beans>
