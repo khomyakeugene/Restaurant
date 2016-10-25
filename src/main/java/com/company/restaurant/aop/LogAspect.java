@@ -14,13 +14,15 @@ import java.util.HashMap;
 public class LogAspect {
     private static final String RESOURCE_LOG_EXCLUDE_MASK =
             "!(execution(* get*(..)) || execution(* set*(..)))";
-    private static final String RESOURCE_LOG_APPLICATION_MASK =
-            "(execution (* com.company.restaurant..*(..)))";
+    private static final String RESOURCE_LOG_SERVICE_MASK =
+            "(execution (* com.company.restaurant.service..*(..)))";
+    private static final String RESOURCE_LOG_WEB_MASK =
+            "(execution (* com.company.restaurant.web..*(..)))";
     private static final String RESOURCE_LOG_ALL_MASK =
             "(execution (* com.company..*(..)))" + " && " + RESOURCE_LOG_EXCLUDE_MASK;
-    private static final String RESOURCE_LOG_INFO_MASK = "(" +
-            RESOURCE_LOG_APPLICATION_MASK +
-            ") && " + RESOURCE_LOG_EXCLUDE_MASK;
+
+    private static final String RESOURCE_LOG_INFO_MASK =
+            "(" + RESOURCE_LOG_SERVICE_MASK + " || " + RESOURCE_LOG_WEB_MASK + ") && " + RESOURCE_LOG_EXCLUDE_MASK;
     private static final String RESOURCE_LOG_DEBUG_MASK = RESOURCE_LOG_ALL_MASK + "&& !(" + RESOURCE_LOG_INFO_MASK + ")";
 
     private HashMap<String, Long> executionTimeMap = new HashMap<>();
