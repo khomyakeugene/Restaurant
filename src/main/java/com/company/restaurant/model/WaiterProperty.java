@@ -31,8 +31,6 @@ public class WaiterProperty {
 
     @Override
     public String toString() {
-        return "WaiterProperty{" +
-                "orders=" + orders +
-                '}';
+        return "WaiterProperty{orders=" + orders + "}";
     }
 }

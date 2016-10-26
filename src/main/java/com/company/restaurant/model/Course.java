@@ -96,7 +96,6 @@ public class Course extends PhotoHolderObject implements Serializable {
                 ", name='" + name + '\'' +
                 ", weight=" + weight +
                 ", cost=" + cost +
-                ", courseCategory=" + courseCategory +
-                '}';
+                ", courseCategory=" + courseCategory + "}";
     }
 }

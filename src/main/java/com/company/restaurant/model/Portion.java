@@ -85,7 +85,6 @@ public class Portion extends SimpleObject implements Serializable {
                 ", amount=" + amount +
                 ", description='" + description + '\'' +
                 ", portionType=" + portionType +
-                ", measuringType=" + measuringType +
-                '}';
+                ", measuringType=" + measuringType + "}";
     }
 }

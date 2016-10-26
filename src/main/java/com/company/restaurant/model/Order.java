@@ -113,7 +113,6 @@ public class Order extends SimpleObject implements CourseCollecting {
                 ", orderDatetime=" + orderDatetime +
                 ", state=" + state +
                 ", courses=" + courses +
-                ", table=" + table +
-                '}';
+                ", table=" + table + "}";
     }
 }

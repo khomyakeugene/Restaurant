@@ -104,7 +104,6 @@ public class Employee extends PhotoHolderObject {
                 ", secondName='" + secondName + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", salary=" + salary +
-                ", jobPosition=" + jobPosition +
-                '}';
+                ", jobPosition=" + jobPosition + "}";
     }
 }

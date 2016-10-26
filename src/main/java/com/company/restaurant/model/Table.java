@@ -52,9 +52,6 @@ public class Table extends SimpleDic {
 
     @Override
     public String toString() {
-        return "Table{" +
-                super.toString() +
-                " description='" + description + '\'' +
-                '}';
+        return "Table{" + super.toString() + ", description='" + description + '\'' + "}";
     }
 }

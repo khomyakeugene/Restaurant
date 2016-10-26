@@ -85,7 +85,6 @@ public class CookedCourse extends SimpleObject {
                 "cookedCourseId=" + getCookedCourseId() +
                 ", cookDatetime=" + cookDatetime +
                 ", weight=" + weight +
-                ", course=" + course +
-                '}';
+                ", course=" + course + "}";
     }
 }

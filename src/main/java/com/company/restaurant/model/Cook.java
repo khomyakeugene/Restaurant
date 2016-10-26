@@ -36,9 +36,6 @@ public class Cook extends Employee {
 
     @Override
     public String toString() {
-        return "Cook{" +
-                super.toString() + "\n" +
-                "cookProperty=" + cookProperty +
-                '}';
+        return "Cook{" + super.toString() + ", cookProperty=" + cookProperty + "}";
     }
 }

@@ -7,3 +7,5 @@ import com.company.restaurant.model.common.SimpleDic;
  */
 public class JobPosition extends SimpleDic {
 }
+
+

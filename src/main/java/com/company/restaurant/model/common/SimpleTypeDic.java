@@ -44,9 +44,6 @@ public class SimpleTypeDic {
 
     @Override
     public String toString() {
-        return "SimpleTypeDic{" +
-                "type='" + type + '\'' +
-                ", name='" + name + '\'' +
-                '}';
+        return "SimpleTypeDic{type='" + type + '\'' + ", name='" + name + '\'' + "}";
     }
 }

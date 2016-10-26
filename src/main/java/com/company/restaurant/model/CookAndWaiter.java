@@ -49,10 +49,7 @@ public class CookAndWaiter extends Employee {
 
     @Override
     public String toString() {
-        return "CookAndWaiter{" +
-                super.toString() + "\n" +
-                "cookProperty=" + cookProperty +
-                ", waiterProperty=" + waiterProperty +
-                '}';
+        return "CookAndWaiter{" + super.toString() + ", cookProperty=" + cookProperty + ", waiterProperty=" +
+                waiterProperty + "}";
     }
 }

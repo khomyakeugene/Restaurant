@@ -36,9 +36,6 @@ public class Waiter extends Employee {
 
     @Override
     public String toString() {
-        return "Waiter{" +
-                super.toString() + "\n" +
-                "waiterProperty=" + waiterProperty +
-                '}';
+        return "Waiter{" + super.toString() + ", waiterProperty=" + waiterProperty + "}";
     }
 }

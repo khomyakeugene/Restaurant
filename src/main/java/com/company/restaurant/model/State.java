@@ -16,8 +16,6 @@ public class State extends SimpleTypeDic {
 
     @Override
     public String toString() {
-        return "State{" +
-                super.toString() +
-                "}";
+        return "State{" + super.toString() + "}";
     }
 }

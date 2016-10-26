@@ -58,7 +58,6 @@ public class Warehouse extends FloatLinkObject {
     public String toString() {
         return "Warehouse{" +
                 "ingredient=" + ingredient +
-                ", portion=" + portion +
-                '}';
+                ", portion=" + portion + "}";
     }
 }

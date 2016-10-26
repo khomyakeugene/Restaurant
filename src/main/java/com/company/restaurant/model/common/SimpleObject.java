@@ -32,6 +32,6 @@ public class SimpleObject {
 
     @Override
     public String toString() {
-        return "SimpleObject{" + "id=" + id + '}';
+        return "SimpleObject{" + "id=" + id + "}";
     }
 }

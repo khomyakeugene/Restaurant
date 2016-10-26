@@ -19,8 +19,6 @@ public class CookProperty {
 
     @Override
     public String toString() {
-        return "CookProperty{" +
-                "cookedCourses=" + cookedCourses +
-                '}';
+        return "CookProperty{cookedCourses=" + cookedCourses + "}";
     }
 }

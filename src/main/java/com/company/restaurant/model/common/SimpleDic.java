@@ -37,9 +37,6 @@ public class SimpleDic extends SimpleObject implements Serializable {
 
     @Override
     public String toString() {
-        return "SimpleDic{" +
-                super.toString() + "\n" +
-                "name='" + name + '\'' +
-                '}';
+        return "SimpleDic{" + super.toString() + ", name='" + name + '\'' + "}";
     }
 }

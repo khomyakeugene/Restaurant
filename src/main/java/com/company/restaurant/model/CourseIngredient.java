@@ -73,7 +73,6 @@ public class CourseIngredient implements Serializable {
                 "course=" + course +
                 ", ingredient=" + ingredient +
                 ", portion=" + portion +
-                ", amount=" + amount +
-                '}';
+                ", amount=" + amount + "}";
     }
 }

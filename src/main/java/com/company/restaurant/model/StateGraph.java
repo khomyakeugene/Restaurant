@@ -87,7 +87,6 @@ public class StateGraph implements Serializable {
                 ", finiteStateType='" + finiteStateType + '\'' +
                 ", actionType='" + actionType + '\'' +
                 ", entityName='" + entityName + '\'' +
-                ", comment='" + comment + '\'' +
-                '}';
+                ", comment='" + comment + '\'' + "}";
     }
 }
