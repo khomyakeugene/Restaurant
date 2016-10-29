@@ -30,12 +30,12 @@ public class LogAspect {
     private Long lastMethodExecutionTime;
 
     @Before(RESOURCE_LOG_ALL_MASK)
-    public void onBefore(JoinPoint joinPoint) throws Throwable {
+    public void onBefore() throws Throwable {
         executionTimeDeque.push(Util.getNanoTime());
     }
 
     @After(RESOURCE_LOG_ALL_MASK)
-    public void onAfter(JoinPoint joinPoint) throws Throwable {
+    public void onAfter() throws Throwable {
         try {
             lastMethodExecutionTime = Util.getNanoTime() - executionTimeDeque.pop();
         } catch (NoSuchElementException e) {
