@@ -97,7 +97,7 @@ public class RestaurantModelDaoTest extends RestaurantDao {
         courseCategoryDao.delCourseCategory(name);
     }
 
-    @Test(timeout = 2000)
+    @Test(timeout = 5000)
     public void addFindDelCourseTest() throws Exception {
         CourseCategory courseCategory = new CourseCategory();
         courseCategory.setId(courseCategoryId());

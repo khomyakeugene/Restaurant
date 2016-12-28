@@ -16,7 +16,9 @@ import javax.persistence.metamodel.EntityType;
 import javax.persistence.metamodel.SingularAttribute;
 import java.io.Serializable;
 import java.lang.reflect.Field;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by Yevhen on 09.06.2016.
@@ -262,15 +264,6 @@ public abstract class HDaoEntity<T> extends GenericHolder<T> {
         return useCriteriaQuery ? criteriaFindObjectsByAttributeValue(attributeName, value) :
                 hqlFindObjectsByAttributeValue(attributeName, value);
     }
-
-
-    protected Set<T> findObjectSetByAttributeValue(String attributeName, com.company.restaurant.model.Course value) {
-        HashSet<T> result = new HashSet<>();
-        result.addAll(findObjectsByAttributeValue(attributeName, value));
-
-        return result;
-    }
-
 
     protected T findObjectByAttributeValue(String attributeName, Serializable value) {
         return getFirstFromList(findObjectsByAttributeValue(attributeName, value));
