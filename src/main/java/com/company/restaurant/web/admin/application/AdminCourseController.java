@@ -57,9 +57,9 @@ public class AdminCourseController extends AdminCRUDPhotoHolderController<Course
     private void initNewIngredientList(Course course) {
         // Ingredients which are new for this course
         modelAndView.addObject(NEW_INGREDIENTS_VAR_NAME, warehouseService.findAllIngredients().stream().
-                filter(ingredient -> !course.getCourseIngredients().stream().
-                        filter(courseIngredient -> courseIngredient.getIngredient().equals(ingredient)).
-                        findAny().isPresent()).collect(Collectors.toList()));
+                filter(ingredient -> course.getCourseIngredients().stream().
+                        noneMatch(courseIngredient -> courseIngredient.getIngredient().equals(ingredient))).
+                            collect(Collectors.toList()));
     }
 
     private void prepareCourseEnvironment(int courseId) {
