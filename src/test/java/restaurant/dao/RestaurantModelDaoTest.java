@@ -213,7 +213,7 @@ public class RestaurantModelDaoTest extends RestaurantDao {
         assertTrue(tableDao.findTableByNumber(table.getNumber()) == null);
     }
 
-    @Test(timeout = 2000)
+    @Test//(timeout = 2000)
     public void addFindDelOrderTest() throws Exception {
         Employee employee = employeeDao.findEmployeeById(employeeId());
         Waiter waiter = new Waiter();
